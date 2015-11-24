@@ -1,0 +1,45 @@
+filebeat:
+  prospectors:
+    - paths:
+      <%- @paths.each do |log_path| -%>
+      - <%= log_path %>
+      <%- end -%>
+      <%- if @encoding -%>
+      encoding: <%= @encoding -%>
+      <%- end %>
+      <%- if @fields.length > 0 -%>
+      fields:
+        <%- @fields.each do |k, v| -%>
+        <%= k %>: <%= v %>
+        <%- end -%>
+      <%- end -%>
+      fields_under_root: <%= @fields_under_root %>
+      <%- if @input_type -%>
+      input_type: <%= @input_type -%>
+      <%- end %>
+      <%- if @ignore_older -%>
+      ignore_older: <%= @ignore_older -%>
+      <%- end %>
+      <%- if @document_type -%>
+      document_type: <%= @document_type -%>
+      <%- end %>
+      <%- if @scan_frequency -%>
+      scan_frequency: <%= @scan_frequency -%>
+      <%- end %>
+      <%- if @harvester_buffer_size -%>
+      harvester_buffer_size: <%= @harvester_buffer_size -%>
+      <%- end %>
+      tail_files: <%= @tail_files %>
+      force_close_files: <%= @force_close_files %>
+      <%- if @backoff -%>
+      backoff: <%= @backoff -%>
+      <%- end %>
+      <%- if @max_backoff -%>
+      max_backoff: <%= @max_backoff -%>
+      <%- end %>
+      <%- if @backoff_factor -%>
+      backoff_factor: <%= @backoff_factor -%>
+      <%- end %>
+      <%- if @partial_line_waiting -%>
+      partial_line_waiting: <%= @partial_line_waiting -%>
+      <%- end %>

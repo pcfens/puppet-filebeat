@@ -1,0 +1,15 @@
+---
+language: ruby
+cache: bundler
+bundler_args: --without development
+script:
+    - "bundle exec rake validate && bundle exec rake lint && bundle exec rake spec SPEC_OPTS='--format documentation'"
+rvm:
+  - 1.9.3
+  - 2.0.0
+env:
+  - PUPPET_VERSION="~> 3.5.0"
+  - PUPPET_VERSION="~> 3.7.5"
+  - PUPPET_VERSION="~> 4.3.0"
+notifications:
+  email: false

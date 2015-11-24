@@ -1,0 +1,22 @@
+### Filebeat configuration managed by Puppet ###
+
+filebeat:
+  spool_size: <%= @spool_size %>
+  idle_timeout: <%= @idle_timeout %>
+  registry_file: <%= @registry_file %>
+  config_dir: <%= @config_dir %>
+
+<%- if @outputs -%>
+output:
+<%= YAML.dump(@outputs).sub(/.*?\n/, '') %>
+<%- end -%>
+
+<%- if @shipper and @shipper.length > 0 -%>
+shipper:
+<%= YAML.dump(@shipper).sub(/.*?\n/, '') %>
+<%- end -%>
+
+<%- if @logging and @logging.length > 0 -%>
+logging:
+<%= YAML.dump(@logging).sub(/.*?\n/, '') %>
+<%- end -%>
