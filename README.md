@@ -1,4 +1,6 @@
-# filebeat
+# puppet-filebeat
+
+[![Build Status](https://travis-ci.org/pcfens/puppet-filebeat.svg?branch=master)](https://travis-ci.org/pcfens/puppet-filebeat)
 
 #### Table of Contents
 
