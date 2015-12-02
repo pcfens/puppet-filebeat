@@ -15,7 +15,7 @@ describe 'filebeat::prospector', :type => :define do
         :paths => [
           '/var/log/apache2/*.log',
         ],
-        :document_type => 'apache',
+        :log_type => 'apache',
       }
     end
 
