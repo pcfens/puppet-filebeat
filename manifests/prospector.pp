@@ -6,7 +6,7 @@ define filebeat::prospector (
   $fields                = {},
   $fields_under_root     = false,
   $ignore_older          = '24h',
-  $document_type         = 'log',
+  $log_type              = 'log',
   $scan_frequency        = '10s',
   $harvester_buffer_size = 16384,
   $tail_files            = false,

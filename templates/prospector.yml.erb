@@ -20,8 +20,8 @@ filebeat:
       <%- if @ignore_older -%>
       ignore_older: <%= @ignore_older -%>
       <%- end %>
-      <%- if @document_type -%>
-      document_type: <%= @document_type -%>
+      <%- if @log_type -%>
+      document_type: <%= @log_type -%>
       <%- end %>
       <%- if @scan_frequency -%>
       scan_frequency: <%= @scan_frequency -%>
