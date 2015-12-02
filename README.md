@@ -10,9 +10,8 @@
     * [Setup requirements](#setup-requirements)
     * [Beginning with filebeat](#beginning-with-filebeat)
 3. [Usage - Configuration options and additional functionality](#usage)
-4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+4. [Limitations - OS compatibility, etc.](#limitations)
+5. [Development - Guide for contributing to the module](#development)
 
 ## Description
 
@@ -76,10 +75,6 @@ class { 'filebeat':
 ```
 
 [Shipper](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html#configuration-shipper) and [logging](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html#configuration-logging) options can be configured the same way, and are documented on the [elastic website](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html).
-
-## Reference
-
-TODO
 
 ## Limitations
 
