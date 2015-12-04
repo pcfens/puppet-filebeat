@@ -31,6 +31,42 @@ describe 'filebeat', :type => :class do
         'source' => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
       }
     )}
+
+    describe 'with an output defined' do
+      let :params do
+        {
+          :outputs => {
+            'logstash' => {
+              'hosts' => [
+                'localhost:5044',
+              ],
+            },
+          },
+        }
+      end
+
+      it { is_expected.to contain_file('filebeat.yml').with(
+        :path => '/etc/filebeat/filebeat.yml',
+        :mode => '0644',
+        :content => '### Filebeat configuration managed by Puppet ###
+
+filebeat:
+  spool_size: 1024
+  idle_timeout: 5s
+  registry_file: .filebeat
+  config_dir: /etc/filebeat/conf.d
+
+output:
+
+  logstash:
+    hosts:
+      - "localhost:5044"
+
+',
+      )}
+
+    end
+
   end
 
   describe 'on a RHEL system' do

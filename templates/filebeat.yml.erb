@@ -8,15 +8,15 @@ filebeat:
 
 <%- if @outputs -%>
 output:
-<%= YAML.dump(@outputs).sub(/.*?\n/, '') %>
+<%= YAML.dump(@outputs).gsub(/---|\s\n/, "---" => '', " \n" => "\n" ) -%>
 <%- end -%>
 
 <%- if @shipper and @shipper.length > 0 -%>
 shipper:
-<%= YAML.dump(@shipper).sub(/.*?\n/, '') %>
+<%= YAML.dump(@shipper).gsub(/---|\s\n/, "---" => '', " \n" => "\n" ) -%>
 <%- end -%>
 
 <%- if @logging and @logging.length > 0 -%>
 logging:
-<%= YAML.dump(@logging).sub(/.*?\n/, '') %>
+<%= YAML.dump(@logging).gsub(/---|\s\n/, "---" => '', " \n" => "\n" ) -%>
 <%- end -%>
