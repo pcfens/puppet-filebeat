@@ -16,7 +16,6 @@ group :development, :unit_tests do
   gem 'simplecov',               :require => false
   gem 'puppet_facts',            :require => false
   gem 'json',                    :require => false
-  gem 'puppet-strings', :git => 'https://github.com/puppetlabs/puppetlabs-strings.git'
   gem 'metadata-json-lint',      :require => false
 end
 
