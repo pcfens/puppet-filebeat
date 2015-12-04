@@ -1,22 +1,22 @@
 ### Filebeat configuration managed by Puppet ###
 
 filebeat:
-  spool_size: <%= @spool_size %>
-  idle_timeout: <%= @idle_timeout %>
-  registry_file: <%= @registry_file %>
-  config_dir: <%= @config_dir %>
+  spool_size: <%= scope['filebeat::spool_size'] %>
+  idle_timeout: <%= scope['filebeat::idle_timeout'] %>
+  registry_file: <%= scope['filebeat::registry_file'] %>
+  config_dir: <%= scope['filebeat::config_dir'] %>
 
-<%- if @outputs -%>
+<%- if scope['filebeat::outputs'] and scope['filebeat::outputs'].length > 0-%>
 output:
-<%= YAML.dump(@outputs).gsub(/---|\s\n/, "---" => '', " \n" => "\n" ) -%>
+<%= YAML.dump(scope['filebeat::outputs']).gsub(/---|\s\n/, "---" => '', " \n" => "\n" ) -%>
 <%- end -%>
 
-<%- if @shipper and @shipper.length > 0 -%>
+<%- if scope['filebeat::shipper'] and scope['filebeat::shipper'].length > 0 -%>
 shipper:
-<%= YAML.dump(@shipper).gsub(/---|\s\n/, "---" => '', " \n" => "\n" ) -%>
+<%= YAML.dump(scope['filebeat::shipper']).gsub(/---|\s\n/, "---" => '', " \n" => "\n" ) -%>
 <%- end -%>
 
-<%- if @logging and @logging.length > 0 -%>
+<%- if scope['filebeat::logging'] and scope['filebeat::logging'].length > 0 -%>
 logging:
 <%= YAML.dump(@logging).gsub(/---|\s\n/, "---" => '', " \n" => "\n" ) -%>
 <%- end -%>
