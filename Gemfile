@@ -17,6 +17,8 @@ group :development, :unit_tests do
   gem 'puppet_facts',            :require => false
   gem 'json',                    :require => false
   gem 'metadata-json-lint',      :require => false
+  gem 'beaker-rspec',            :require => false
+  gem 'pry',                     :require => false
 end
 
 if facterversion = ENV['FACTER_GEM_VERSION']
