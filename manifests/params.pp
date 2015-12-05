@@ -7,6 +7,7 @@ class filebeat::params {
   $idle_timeout   = '5s'
   $registry_file  = '.filebeat'
   $config_dir     = '/etc/filebeat/conf.d'
+  $purge_conf_dir = true
   $outputs        = {}
   $shipper        = {}
   $logging        = {}

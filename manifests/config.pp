@@ -28,10 +28,12 @@ class filebeat::config {
   }
 
   file {'filebeat-config-dir':
-    ensure => directory,
-    path   => $filebeat::config_dir,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
+    ensure  => directory,
+    path    => $filebeat::config_dir,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    recurse => $filebeat::purge_conf_dir,
+    purge   => $filebeat::purge_conf_dir,
   }
 }
