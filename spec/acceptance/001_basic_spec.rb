@@ -34,7 +34,7 @@ describe "filebeat class:" do
       expect(apply_manifest(pp, :catch_failures => true).exit_code).to be_zero
       sleep 5
     end
-logstash
+
     describe service(service_name) do
       it { should be_enabled }
       it { should be_running }
