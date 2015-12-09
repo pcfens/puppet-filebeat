@@ -5,6 +5,7 @@ describe 'filebeat', :type => :class do
     {
       :osfamily => 'Debian',
       :lsbdistid => 'Ubuntu',
+      :puppetversion => ENV['PUPPET_GEM_VERSION'],
     }
   end
 
@@ -39,6 +40,7 @@ describe 'filebeat', :type => :class do
     let :facts do
       {
         :osfamily => 'RedHat',
+        :puppetversion => ENV['PUPPET_GEM_VERSION'],
       }
     end
 
