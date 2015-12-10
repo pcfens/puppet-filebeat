@@ -1,2 +1,2 @@
 ### Filebeat configuration managed by Puppet ###
-<%= YAML.dump(@filebeat_config).gsub(/---|\s\n/,  "---" => "",  " \n" => "\n") -%>
+<%= @filebeat_config.to_yaml().gsub(/---|\s\n/,  "---" => "",  " \n" => "\n") -%>
