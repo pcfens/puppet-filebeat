@@ -42,7 +42,7 @@ class filebeat::repo {
       }
     }
     default: {
-      fail("\"${module_name}\" provides no repository information for OSfamily \"${::osfamily}\"")
+      fail($fail_message)
     }
   }
 }

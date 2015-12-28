@@ -46,17 +46,37 @@ class filebeat (
   validate_string($idle_timeout, $registry_file, $config_dir, $package_ensure)
 
   anchor { 'filebeat::begin': } ->
-  class { 'filebeat::package': } ->
   class { 'filebeat::config': } ->
   class { 'filebeat::service': } ->
   anchor { 'filebeat::end':}
 
-  if $manage_repo {
-    include filebeat::repo
+  case $::kernel {
+    'Linux'  : {
+      include win_filebeat::package
+      if $manage_repo {
+        include win_filebeat::repo
 
-    Anchor['filebeat::begin'] ->
-    Class['filebeat::repo'] ->
-    Class['filebeat::package']
+        Anchor['win_filebeat::begin'] ->
+        Class['win_filebeat::repo'] ->
+        Class['win_filebeat::package'] ->
+        Class['win_filebeat::config']
+      }
+      else {
+        Anchor['win_filebeat::begin'] ->
+        Class['win_filebeat::package'] ->
+        Class['win_filebeat::config']
+      }
+    }
+    'Windows' : {
+      include win_filebeat::install
+
+      Anchor['win_filebeat::begin'] ->
+      Class['win_filebeat::install'] ->
+      Class['win_filebeat::config']
+    }
+    default: {
+      fail($filebeat::fail_message)
+    }
   }
 
   if !empty($prospectors) {

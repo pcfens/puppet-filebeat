@@ -17,23 +17,46 @@ class filebeat::config {
     default => 'filebeat.yml.erb',
   }
 
-  file {'filebeat.yml':
-    ensure  => file,
-    path    => '/etc/filebeat/filebeat.yml',
-    content => template("${module_name}/${template_file}"),
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    notify  => Service['filebeat'],
-  }
+  case $::kernel {
+    'Linux'   : {
+      file {'filebeat.yml':
+        ensure  => file,
+        path    => '/etc/filebeat/filebeat.yml',
+        content => template("${module_name}/${template_file}"),
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        notify  => Service['filebeat'],
+      }
 
-  file {'filebeat-config-dir':
-    ensure  => directory,
-    path    => $filebeat::config_dir,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    recurse => $filebeat::purge_conf_dir,
-    purge   => $filebeat::purge_conf_dir,
+      file {'filebeat-config-dir':
+        ensure  => directory,
+        path    => $win_filebeat::config_dir,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0755',
+        recurse => $win_filebeat::purge_conf_dir,
+        purge   => $win_filebeat::purge_conf_dir,
+      }
+    } # end Linux
+
+    'Windows' : {
+      file {'filebeat.yml':
+        ensure  => file,
+        path    => 'C:/Program Files/Filebeat/filebeat.yml',
+        content => template("${module_name}/${template_file}"),
+        notify  => Service['filebeat'],
+      }
+
+      file {'filebeat-config-dir':
+        ensure  => directory,
+        path    => $win_filebeat::config_dir,
+        recurse => $win_filebeat::purge_conf_dir,
+        purge   => $win_filebeat::purge_conf_dir,
+      }
+    } # end Windows
+    default : {
+      fail($filebeat::fail_message)
+    }
   }
 }
