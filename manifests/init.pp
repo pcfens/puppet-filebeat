@@ -52,27 +52,27 @@ class filebeat (
 
   case $::kernel {
     'Linux'  : {
-      include win_filebeat::package
+      include filebeat::package
       if $manage_repo {
-        include win_filebeat::repo
+        include filebeat::repo
 
-        Anchor['win_filebeat::begin'] ->
-        Class['win_filebeat::repo'] ->
-        Class['win_filebeat::package'] ->
-        Class['win_filebeat::config']
+        Anchor['filebeat::begin'] ->
+        Class['filebeat::repo'] ->
+        Class['filebeat::package'] ->
+        Class['filebeat::config']
       }
       else {
-        Anchor['win_filebeat::begin'] ->
-        Class['win_filebeat::package'] ->
-        Class['win_filebeat::config']
+        Anchor['filebeat::begin'] ->
+        Class['filebeat::package'] ->
+        Class['filebeat::config']
       }
     }
     'Windows' : {
-      include win_filebeat::install
+      include filebeat::install
 
-      Anchor['win_filebeat::begin'] ->
-      Class['win_filebeat::install'] ->
-      Class['win_filebeat::config']
+      Anchor['filebeat::begin'] ->
+      Class['filebeat::install'] ->
+      Class['filebeat::config']
     }
     default: {
       fail($filebeat::fail_message)
