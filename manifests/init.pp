@@ -48,7 +48,7 @@ class filebeat (
   anchor { 'filebeat::begin': } ->
   class { 'filebeat::config': } ->
   class { 'filebeat::service': } ->
-  anchor { 'filebeat::end':}
+  anchor { 'filebeat::end': }
 
   case $::kernel {
     'Linux'  : {

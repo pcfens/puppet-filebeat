@@ -6,7 +6,6 @@ class filebeat::params {
   $spool_size     = 1024
   $idle_timeout   = '5s'
   $registry_file  = '.filebeat'
-  $config_dir     = '/etc/filebeat/conf.d'
   $purge_conf_dir = true
   $outputs        = {}
   $shipper        = {}
@@ -26,7 +25,7 @@ class filebeat::params {
       $tmp_dir      = 'C:/Temp'
     }
     
-    default   : {
+    default : {
       fail($fail_message)
     }
   }
