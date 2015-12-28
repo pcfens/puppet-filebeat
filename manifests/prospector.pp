@@ -38,7 +38,7 @@ define filebeat::prospector (
       }
     }
     default : {
-      fail($fail_message)
+      fail($filebeat::fail_message)
     }
   }
 }
