@@ -31,12 +31,12 @@ class filebeat::config {
 
       file {'filebeat-config-dir':
         ensure  => directory,
-        path    => $win_filebeat::config_dir,
+        path    => $filebeat::config_dir,
         owner   => 'root',
         group   => 'root',
         mode    => '0755',
-        recurse => $win_filebeat::purge_conf_dir,
-        purge   => $win_filebeat::purge_conf_dir,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
       }
     } # end Linux
 
@@ -50,9 +50,9 @@ class filebeat::config {
 
       file {'filebeat-config-dir':
         ensure  => directory,
-        path    => $win_filebeat::config_dir,
-        recurse => $win_filebeat::purge_conf_dir,
-        purge   => $win_filebeat::purge_conf_dir,
+        path    => $filebeat::config_dir,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
       }
     } # end Windows
     default : {

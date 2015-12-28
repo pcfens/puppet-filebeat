@@ -21,7 +21,7 @@ define filebeat::prospector (
     'Linux' : {
       file { "filebeat-${name}":
         ensure  => $ensure,
-        path    => "${win_filebeat::config_dir}/${name}.yml",
+        path    => "${filebeat::config_dir}/${name}.yml",
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
@@ -32,7 +32,7 @@ define filebeat::prospector (
     'Windows' : {
       file { "filebeat-${name}":
         ensure  => $ensure,
-        path    => "${win_filebeat::config_dir}/${name}.yml",
+        path    => "${filebeat::config_dir}/${name}.yml",
         content => template("${module_name}/prospector.yml.erb"),
         notify  => Service['filebeat'],
       }
