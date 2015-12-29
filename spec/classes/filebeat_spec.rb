@@ -40,6 +40,7 @@ describe 'filebeat', :type => :class do
   describe 'on a RHEL system' do
     let :facts do
       {
+        :kernel => 'Linux',
         :osfamily => 'RedHat',
         :puppetversion => ENV['PUPPET_GEM_VERSION'],
       }
