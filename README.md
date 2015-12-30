@@ -81,6 +81,9 @@ class { 'filebeat':
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
 directly to elasticsearch).
 
+Only filebeat versions after 1.0.0-rc1 are supported. 1.0.0-rc1 and older don't
+support YAML like the ruby template can easily generate.
+
 ## Development
 
 Pull requests and bug reports are welcome. If you're sending a pull request, please consider

@@ -11,4 +11,5 @@ class filebeat::params {
   $outputs        = {}
   $shipper        = {}
   $logging        = {}
+  $conf_template  = "${module_name}/filebeat.yml.erb"
 }

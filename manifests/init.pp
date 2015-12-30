@@ -38,12 +38,17 @@ class filebeat (
   $outputs        = $filebeat::params::outputs,
   $shipper        = $filebeat::params::shipper,
   $logging        = $filebeat::params::logging,
+  $conf_template  = $filebeat::params::conf_template,
   $prospectors    = {},
 ) inherits filebeat::params {
 
   validate_bool($manage_repo)
   validate_hash($outputs, $logging, $prospectors)
   validate_string($idle_timeout, $registry_file, $config_dir, $package_ensure)
+
+  if $package_ensure == '1.0.0-beta4' or $package_ensure == '1.0.0-rc1' {
+    fail('Filebeat versions 1.0.0-rc1 and before are unsupported because they don\'t parse normal YAML headers')
+  }
 
   anchor { 'filebeat::begin': } ->
   class { 'filebeat::package': } ->
