@@ -76,6 +76,26 @@ class { 'filebeat':
 
 [Shipper](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html#configuration-shipper) and [logging](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html#configuration-logging) options can be configured the same way, and are documented on the [elastic website](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html).
 
+### Adding a prospector
+
+Prospectors are processes that ship log files to elasticsearch or logstash. They can
+be defined as a hash added to the class declaration (also used for automatically creating
+prospectors using hiera), or as their own defined resources.
+
+At a minimum, the `paths` parameter must be set to an array of files or blobs that should
+be shipped. `log_type` is what logstash views as the type parameter if you'd like to
+apply conditional filters.
+
+```puppet
+filebeat::prospector { 'syslogs':
+  paths    => [
+    '/var/log/auth.log',
+    '/var/log/syslog',
+  ],
+  log_type => 'syslog-beat',
+}
+```
+
 ## Limitations
 
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
