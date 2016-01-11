@@ -54,7 +54,6 @@ describe 'filebeat', :type => :class do
     let :facts do
       {
         :kernel => 'Windows',
-        :puppetversion => ENV['PUPPET_GEM_VERSION'],
       }
     end
 
