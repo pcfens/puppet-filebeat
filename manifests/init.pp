@@ -51,17 +51,37 @@ class filebeat (
   }
 
   anchor { 'filebeat::begin': } ->
-  class { 'filebeat::package': } ->
   class { 'filebeat::config': } ->
   class { 'filebeat::service': } ->
-  anchor { 'filebeat::end':}
+  anchor { 'filebeat::end': }
 
-  if $manage_repo {
-    include filebeat::repo
+  case $::kernel {
+    'Linux'  : {
+      include filebeat::package
+      if $manage_repo {
+        include filebeat::repo
 
-    Anchor['filebeat::begin'] ->
-    Class['filebeat::repo'] ->
-    Class['filebeat::package']
+        Anchor['filebeat::begin'] ->
+        Class['filebeat::repo'] ->
+        Class['filebeat::package'] ->
+        Class['filebeat::config']
+      }
+      else {
+        Anchor['filebeat::begin'] ->
+        Class['filebeat::package'] ->
+        Class['filebeat::config']
+      }
+    }
+    'Windows' : {
+      include filebeat::install
+
+      Anchor['filebeat::begin'] ->
+      Class['filebeat::install'] ->
+      Class['filebeat::config']
+    }
+    default: {
+      fail($filebeat::fail_message)
+    }
   }
 
   if !empty($prospectors) {
