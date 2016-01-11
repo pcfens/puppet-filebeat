@@ -1,5 +1,4 @@
 class filebeat::config {
-
   $filebeat_config = {
     'filebeat' => {
       'spool_size'    => $filebeat::spool_size,
@@ -52,7 +51,7 @@ class filebeat::config {
     } # end Windows
 
     default : {
-      fail($filebeat::fail_message)
+      fail($filebeat::kernel_fail_message)
     }
   }
 }

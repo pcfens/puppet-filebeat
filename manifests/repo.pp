@@ -42,7 +42,7 @@ class filebeat::repo {
       }
     }
     default: {
-      fail($filebeat::fail_message)
+      fail($filebeat::kernel_fail_message)
     }
   }
 }

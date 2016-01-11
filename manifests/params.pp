@@ -12,22 +12,25 @@ class filebeat::params {
   $logging        = {}
   $conf_template  = "${module_name}/filebeat.yml.erb"
 
-  $fail_message     = "${::kernel} is not yet supported by filebeat."
-
   case $::kernel {
     'Linux'   : {
-      $config_dir = '/etc/filebeat/conf.d'
+      $config_dir      = '/etc/filebeat/conf.d'
+
+      # These parameters are ignored if/until tarball installs are supported in Linux
+      $tmp_dir         = '/tmp'
+      $install_dir     = undef
+      $download_url    = undef
     }
 
     'Windows' : {
-      $config_dir   = 'C:/Program Files/Filebeat/conf.d'
-      $download_url = 'https://download.elastic.co/beats/filebeat/filebeat-1.0.1-windows.zip'
-      $install_dir  = 'C:/Program Files'
-      $tmp_dir      = 'C:/Temp'
+      $config_dir      = 'C:/Program Files/Filebeat/conf.d'
+      $download_url    = 'https://download.elastic.co/beats/filebeat/filebeat-1.0.1-windows.zip'
+      $install_dir     = 'C:/Program Files'
+      $tmp_dir         = 'C:/Temp'
     }
 
     default : {
-      fail($fail_message)
+      fail($filebeat::kernel_fail_message)
     }
   }
 }
