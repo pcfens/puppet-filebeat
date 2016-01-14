@@ -10,10 +10,11 @@ class filebeat::install::windows {
     ensure => directory
   }
 
-  remote_file {"${filebeat::tmp_dir}/${filebeat::filename}.zip":
-    ensure  => present,
-    source  => $filebeat::download_url,
-    require => File[$filebeat::tmp_dir],
+  remote_file {"${filebeat::tmp_dir}/${filename}.zip":
+    ensure      => present,
+    source      => $filebeat::download_url,
+    require     => File[$filebeat::tmp_dir],
+    verify_peer => false,
   }
 
   exec { "unzip ${filename}":
@@ -22,7 +23,7 @@ class filebeat::install::windows {
     provider => powershell,
     require  => [
       File[$filebeat::install_dir],
-      Remote_file["${filebeat::tmp_dir}/${filebeat::filename}.zip"],
+      Remote_file["${filebeat::tmp_dir}/${filename}.zip"],
     ],
   }
 
