@@ -23,7 +23,11 @@ describe "filebeat class:" do
             log_type => 'system',
             paths    => [
               '/var/log/dmesg',
-            ]
+            ],
+            fields   => {
+              service => 'system',
+              file    => 'dmesg',
+            }
           }
         }
       }"
