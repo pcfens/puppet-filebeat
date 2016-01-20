@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'filebeat', :type => :class do
   let :facts do
     {
+      :kernel => 'Linux',
       :osfamily => 'Debian',
       :lsbdistid => 'Ubuntu',
     }
@@ -38,6 +39,7 @@ describe 'filebeat', :type => :class do
   describe 'on a RHEL system' do
     let :facts do
       {
+        :kernel => 'Linux',
         :osfamily => 'RedHat',
       }
     end
@@ -47,6 +49,24 @@ describe 'filebeat', :type => :class do
       :gpgkey  => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
     ) }
   end
+
+  describe 'on a Windows system' do
+    let :facts do
+      {
+        :kernel => 'Windows',
+      }
+    end
+
+    it { is_expected.to contain_file('filebeat.yml').with(
+      :path => 'C:/Program Files/Filebeat/filebeat.yml',
+    )}
+    it { is_expected.to contain_file('filebeat-config-dir').with(
+      :ensure => 'directory',
+      :path   => 'C:/Program Files/Filebeat/conf.d',
+      :recurse => true,
+    )}
+  end
+
 
   describe 'on a Solaris system' do
     let :facts do

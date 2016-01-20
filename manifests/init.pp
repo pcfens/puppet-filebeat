@@ -24,6 +24,10 @@
 # @param outputs [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 # @param shipper [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 # @param logging [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
+# @param conf_template [String] The configuration template to use to generate the main filebeat.yml config file
+# @param download_url [String] The URL of the zip file that should be downloaded to install filebeat (windows only)
+# @param install_dir [String] Where filebeat should be installed (windows only)
+# @param tmp_dir [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 class filebeat (
   $package_ensure = $filebeat::params::package_ensure,
@@ -39,8 +43,13 @@ class filebeat (
   $shipper        = $filebeat::params::shipper,
   $logging        = $filebeat::params::logging,
   $conf_template  = $filebeat::params::conf_template,
+  $download_url   = $filebeat::params::download_url,
+  $install_dir    = $filebeat::params::install_dir,
+  $tmp_dir        = $filebeat::params::tmp_dir,
   $prospectors    = {},
 ) inherits filebeat::params {
+
+  $kernel_fail_message = "${::kernel} is not supported by filebeat."
 
   validate_bool($manage_repo)
   validate_hash($outputs, $logging, $prospectors)
@@ -51,18 +60,10 @@ class filebeat (
   }
 
   anchor { 'filebeat::begin': } ->
-  class { 'filebeat::package': } ->
+  class { 'filebeat::install': } ->
   class { 'filebeat::config': } ->
   class { 'filebeat::service': } ->
-  anchor { 'filebeat::end':}
-
-  if $manage_repo {
-    include filebeat::repo
-
-    Anchor['filebeat::begin'] ->
-    Class['filebeat::repo'] ->
-    Class['filebeat::package']
-  }
+  anchor { 'filebeat::end': }
 
   if !empty($prospectors) {
     create_resources('filebeat::prospector', $prospectors)

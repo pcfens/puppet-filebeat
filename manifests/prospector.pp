@@ -16,13 +16,29 @@ define filebeat::prospector (
   $partial_line_waiting  = '5s',
   $force_close_files     = false,
 ) {
-  file { "filebeat-${name}":
-    ensure  => $ensure,
-    path    => "${filebeat::config_dir}/${name}.yml",
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template("${module_name}/prospector.yml.erb"),
-    notify  => Service['filebeat'],
+
+  case $::kernel {
+    'Linux' : {
+      file { "filebeat-${name}":
+        ensure  => $ensure,
+        path    => "${filebeat::config_dir}/${name}.yml",
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0644',
+        content => template("${module_name}/prospector.yml.erb"),
+        notify  => Service['filebeat'],
+      }
+    }
+    'Windows' : {
+      file { "filebeat-${name}":
+        ensure  => $ensure,
+        path    => "${filebeat::config_dir}/${name}.yml",
+        content => template("${module_name}/prospector.yml.erb"),
+        notify  => Service['filebeat'],
+      }
+    }
+    default : {
+      fail($filebeat::kernel_fail_message)
+    }
   }
 }
