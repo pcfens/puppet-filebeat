@@ -24,7 +24,7 @@ define filebeat::prospector (
         path    => "${filebeat::config_dir}/${name}.yml",
         owner   => 'root',
         group   => 'root',
-        mode    => '0644',
+        mode    => $::filebeat::config_file_mode,
         content => template("${module_name}/prospector.yml.erb"),
         notify  => Service['filebeat'],
       }

@@ -129,6 +129,8 @@ Installs and configures filebeat.
 - `idle_timeout`: [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 - `registry_file`: [String] The registry file used to store positions, absolute or relative to working directory (default .filebeat)
 - `config_dir`: [String] The directory where prospectors should be defined (default: /etc/filebeat/conf.d)
+- `config_dir_mode`: [String] The permissions mode set on the configuration directory (default: 0755)
+- `config_file_mode`: [String] The permissions mode set on configuration files (default: 0644)
 - `purge_conf_dir`: [Boolean] Should files in the prospector configuration directory not managed by puppet be automatically purged
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)

@@ -6,10 +6,13 @@ class filebeat::params {
   $spool_size     = 1024
   $idle_timeout   = '5s'
   $registry_file  = '.filebeat'
+  $config_dir_mode = '0755'
+  $config_file_mode = '0644'
   $purge_conf_dir = true
   $outputs        = {}
   $shipper        = {}
   $logging        = {}
+  $run_options    = {}
   $conf_template  = "${module_name}/filebeat.yml.erb"
 
   case $::kernel {

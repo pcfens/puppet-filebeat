@@ -1,14 +1,15 @@
 class filebeat::config {
   $filebeat_config = {
-    'filebeat' => {
+    'filebeat'   => {
       'spool_size'    => $filebeat::spool_size,
       'idle_timeout'  => $filebeat::idle_timeout,
       'registry_file' => $filebeat::registry_file,
       'config_dir'    => $filebeat::config_dir,
     },
-    'output'   => $filebeat::outputs,
-    'shipper'  => $filebeat::shipper,
-    'logging'  => $filebeat::logging,
+    'output'     => $filebeat::outputs,
+    'shipper'    => $filebeat::shipper,
+    'logging'    => $filebeat::logging,
+    'runoptions' => $filebeat::run_options,
   }
 
   case $::kernel {
@@ -19,7 +20,7 @@ class filebeat::config {
         content => template("${module_name}/filebeat.yml.erb"),
         owner   => 'root',
         group   => 'root',
-        mode    => '0644',
+        mode    => $filebeat::config_file_mode,
         notify  => Service['filebeat'],
       }
 
@@ -28,7 +29,7 @@ class filebeat::config {
         path    => $filebeat::config_dir,
         owner   => 'root',
         group   => 'root',
-        mode    => '0755',
+        mode    => $filebeat::config_dir_mode,
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
       }

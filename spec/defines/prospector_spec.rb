@@ -1,6 +1,17 @@
 require 'spec_helper'
 
 describe 'filebeat::prospector', :type => :define do
+  let :pre_condition do
+    'class { "filebeat":
+        outputs => {
+          "logstash" => {
+            "hosts" => [
+              "localhost:5044",
+            ],
+          },
+        },
+      }'
+  end
   let :title do
     'apache-logs'
   end
@@ -9,13 +20,14 @@ describe 'filebeat::prospector', :type => :define do
     it { expect { should raise_error(Puppet::Error) } }
   end
 
-  context 'When deploying on Linux system' do
+  context 'On Linux' do
     let :facts do {
       :kernel => 'Linux',
+      :osfamily => 'Linux',
     }
     end
 
-    context 'with file blobs set on Linux' do
+    context 'with file blobs set' do
       let :params do
         {
           :paths => [
@@ -26,7 +38,7 @@ describe 'filebeat::prospector', :type => :define do
       end
 
       it { is_expected.to contain_file('filebeat-apache-logs').with(
-        :path => '/apache-logs.yml',
+        :path => '/etc/filebeat/conf.d/apache-logs.yml',
         :mode => '0644',
         :content => 'filebeat:
   prospectors:
@@ -46,17 +58,17 @@ describe 'filebeat::prospector', :type => :define do
       backoff_factor: 2
       partial_line_waiting: 5s
 ',
-    )}
+      )}
     end
   end
 
-  context 'When deploying on Windows system' do
+  context 'On Windows' do
     let :facts do {
       :kernel => 'Windows',
     }
     end
 
-    context 'with file blobs set on Linux' do
+    context 'with file blobs set' do
       let :params do
         {
           :paths => [
@@ -67,7 +79,7 @@ describe 'filebeat::prospector', :type => :define do
       end
 
       it { is_expected.to contain_file('filebeat-apache-logs').with(
-        :path => '/apache-logs.yml',
+        :path => 'C:/Program Files/Filebeat/conf.d/apache-logs.yml',
         :content => 'filebeat:
   prospectors:
     - paths:
@@ -86,7 +98,7 @@ describe 'filebeat::prospector', :type => :define do
       backoff_factor: 2
       partial_line_waiting: 5s
 ',
-    )}
+      )}
     end
   end
 end
