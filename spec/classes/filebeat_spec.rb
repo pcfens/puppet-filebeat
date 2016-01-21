@@ -14,12 +14,12 @@ describe 'filebeat', :type => :class do
     it { is_expected.to contain_package('filebeat') }
     it { is_expected.to contain_file('filebeat.yml').with(
       :path => '/etc/filebeat/filebeat.yml',
-      :mode => '0644',
+      :mode => '0640',
     )}
     it { is_expected.to contain_file('filebeat-config-dir').with(
       :ensure => 'directory',
       :path   => '/etc/filebeat/conf.d',
-      :mode   => '0755',
+      :mode   => '0750',
       :recurse => true,
     )}
     it { is_expected.to contain_service('filebeat').with(

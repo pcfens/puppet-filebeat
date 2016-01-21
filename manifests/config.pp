@@ -19,7 +19,7 @@ class filebeat::config {
         content => template("${module_name}/filebeat.yml.erb"),
         owner   => 'root',
         group   => 'root',
-        mode    => '0644',
+        mode    => '0640',
         notify  => Service['filebeat'],
       }
 
@@ -28,7 +28,7 @@ class filebeat::config {
         path    => $filebeat::config_dir,
         owner   => 'root',
         group   => 'root',
-        mode    => '0755',
+        mode    => '0750',
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
       }
