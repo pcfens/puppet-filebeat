@@ -27,7 +27,7 @@ describe 'filebeat::prospector', :type => :define do
 
       it { is_expected.to contain_file('filebeat-apache-logs').with(
         :path => '/apache-logs.yml',
-        :mode => '0644',
+        :mode => '0640',
         :content => 'filebeat:
   prospectors:
     - paths:
