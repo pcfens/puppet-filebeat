@@ -2,7 +2,18 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.4.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.4.1...HEAD)
+
+## [v0.4.1](https://github.com/pcfens/puppet-filebeat/tree/v0.4.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.4.0...v0.4.1)
+
+**Fixed Bugs**
+- Fix links in documentation to match the updated documentation
+
+**New Features**
+- Change repository resource names to beats (e.g. apt::source['beats'], etc.),
+  and only declare them if they haven't already been declared. This way we only
+  have one module for all beats modules managed through puppet.
 
 ## [v0.4.0](https://github.com/pcfens/puppet-filebeat/tree/v0.4.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.3.1...v0.4.0)
