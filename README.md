@@ -43,7 +43,7 @@ The only required parameter, other than which files to ship, is the `outputs` pa
 
 All of the default values in filebeat follow the upstream defaults (at the time of writing).
 
-To ship files to [elasticsearch](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html#_elasticsearch_output):
+To ship files to [elasticsearch](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html#elasticsearch-output):
 ```puppet
 class { 'filebeat':
   outputs => {
@@ -62,7 +62,7 @@ class { 'filebeat':
 
 ```
 
-To ship log files through [logstash](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html#logstash-output):
+To ship log files through [logstash](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html#logstash-output):
 ```puppet
 class { 'filebeat':
   outputs => {
@@ -78,7 +78,7 @@ class { 'filebeat':
 
 ```
 
-[Shipper](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html#configuration-shipper) and [logging](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html#configuration-logging) options can be configured the same way, and are documented on the [elastic website](https://www.elastic.co/guide/en/beats/libbeat/1.0.0/configuration.html).
+[Shipper](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html#configuration-shipper) and [logging](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html#configuration-logging) options can be configured the same way, and are documented on the [elastic website](https://www.elastic.co/guide/en/beats/filebeat/current/index.html).
 
 ### Adding a prospector
 
