@@ -26,7 +26,7 @@ describe 'filebeat', :type => :class do
       :enable => true,
       :ensure => 'running',
     )}
-    it { is_expected.to contain_apt__source('filebeat').with(
+    it { is_expected.to contain_apt__source('beats').with(
       :location => 'http://packages.elastic.co/beats/apt',
       :key      => {
         'id'     => '46095ACC8548582C1A2699A9D27D666CD88E42B4',
@@ -44,7 +44,7 @@ describe 'filebeat', :type => :class do
       }
     end
 
-    it { is_expected.to contain_yumrepo('filebeat').with(
+    it { is_expected.to contain_yumrepo('beats').with(
       :baseurl => 'https://packages.elastic.co/beats/yum/el/$basearch',
       :gpgkey  => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
     ) }
