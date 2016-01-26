@@ -6,8 +6,7 @@ define filebeat::prospector (
   $fields                = {},
   $fields_under_root     = false,
   $ignore_older          = '24h',
-  $log_type              = undef,
-  $document_type         = 'log',
+  $log_type              = 'log',
   $scan_frequency        = '10s',
   $harvester_buffer_size = 16384,
   $tail_files            = false,
@@ -17,13 +16,6 @@ define filebeat::prospector (
   $partial_line_waiting  = '5s',
   $force_close_files     = false,
 ) {
-
-  if $log_type {
-    warning('log_type is deprecated, and will be removed prior to a v1.0 release so parameters match the filebeat documentation - use document_type instead')
-    $real_document_type = $log_type
-  } else {
-    $real_document_type = $document_type
-  }
 
   case $::kernel {
     'Linux' : {
