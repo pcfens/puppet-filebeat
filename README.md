@@ -100,6 +100,12 @@ filebeat::prospector { 'syslogs':
 }
 ```
 
+#### Multiline Logs
+
+Filebeat prospectors (versions >= 1.1) can handle multiline log entries. The `multiline`
+parameter accepts a hash containing `pattern`, `negate`, `match`, `max_lines`, and `timeout`
+as documented in the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/1.1/filebeat-configuration-details.html#multiline).
+
 ## Reference
  - [**Public Classes**](#public-classes)
     - [Class: filebeat](#class-filebeat)
@@ -183,6 +189,7 @@ to fully understand what these parameters do.
 **Parameters for `filebeat::prospector`**
   - `ensure`: The ensure parameter on the prospector configuration file. (default: present)
   - `paths`: [Array] The paths, or blobs that should be handled by the prospector. (required)
+  - `exclude_files`: [Array] Files that match any regex in the list are excluded from filebeat (default: [])
   - `encoding`: [String] The file encoding. (default: plain)
   - `input_type`: [String] log or stdin - where filebeat reads the log from (default:log)
   - `fields`: [Hash] Optional fields to add information to the output (default: {})
@@ -201,6 +208,13 @@ to fully understand what these parameters do.
   - `partial_line_waiting`: [String] How long should the prospector wait before shipping a file with
     a potentially incomplete last line (default: 5s)
   - `force_close_files`: [Boolean] Should filebeat forcibly close a file when renamed (default: false)
+  - `include_lines`: [Array] A list of regular expressions to match the lines that you want to include.
+    Ignored if empty (default: [])
+  - `exclude_lines`: [Array] A list of regular expressions to match the files that you want to exclude.
+    Ignored if empty (default: [])
+  - `max_bytes`: [Integer] The maximum number of bytes that a single log message can have (default: 10485760)
+  - `multiline`: [Hash] Options that control how Filebeat handles log messages that span multiple lines.
+    [See above](#multiline-logs). (default: {})
 
 
 ## Limitations

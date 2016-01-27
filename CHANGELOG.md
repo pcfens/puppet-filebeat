@@ -7,6 +7,11 @@ Changelog
 - For prospectors, deprecate `log_type` in favor of `doc_type` to better
   match the actual configuration parameter. (`document_type` is not used because
   it causes errors when running with a puppet master)
+  [\#9](https://github.com/pcfens/puppet-filebeat/issues/9)
+
+**New Features**
+- Add support for `exclude_files`, `exclude_lines`, `include_lines`, and `multiline`.
+  [\#10](https://github.com/pcfens/puppet-filebeat/issues/10), [\#11](https://github.com/pcfens/puppet-filebeat/issues/11)
 
 ## [v0.4.1](https://github.com/pcfens/puppet-filebeat/tree/v0.4.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.4.0...v0.4.1)

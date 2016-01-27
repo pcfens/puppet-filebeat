@@ -1,6 +1,7 @@
 define filebeat::prospector (
   $ensure                = present,
   $paths                 = [],
+  $exclude_files         = [],
   $encoding              = 'plain',
   $input_type            = 'log',
   $fields                = {},
@@ -16,6 +17,10 @@ define filebeat::prospector (
   $backoff_factor        = 2,
   $partial_line_waiting  = '5s',
   $force_close_files     = false,
+  $include_lines         = [],
+  $exclude_lines         = [],
+  $max_bytes             = '10485760',
+  $multiline             = {},
 ) {
 
   if $log_type {
