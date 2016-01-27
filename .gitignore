@@ -8,3 +8,5 @@ coverage/
 .idea/
 *.iml
 *.swp
+log
+retrospec

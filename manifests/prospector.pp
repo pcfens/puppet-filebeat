@@ -39,10 +39,7 @@ define filebeat::prospector (
   $backoff_factor        = 2,
   $partial_line_waiting  = '5s',
   $force_close_files     = false,
-  $spool_size            = 1024,
   $publish_async         = false,
-  $idle_timeout          = '5s',
-  $registry_file         = '.filebeat',
 ) {
 
   if $log_type {

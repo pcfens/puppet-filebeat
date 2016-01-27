@@ -70,15 +70,4 @@ filebeat:
       <%- if @partial_line_waiting -%>
       partial_line_waiting: <%= @partial_line_waiting -%>
       <%- end %>
-      <%- if @spool_size -%>
-      spool_size: <%= @spool_size -%>
-      <%- end %>
-      <%- if @publish_async -%>
-      publish_async: <%= @publish_async -%>
-      <%- end %>
-      <%- if @idle_timeout -%>
-      idle_timeout: <%= @idle_timeout -%>
-      <%- end %>
-      <%- if @registry_file -%>
-      registry_file: <%= @registry_file -%>
-      <%- end %>
+      publish_async: <%= @publish_async %>

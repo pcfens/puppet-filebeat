@@ -204,10 +204,7 @@ to fully understand what these parameters do.
   - `partial_line_waiting`: [String] How long should the prospector wait before shipping a file with
     a potentially incomplete last line (default: 5s)
   - `force_close_files`: [Boolean] Should filebeat forcibly close a file when renamed (default: false)
-  - `spool_size`: [Integer] The event count spool threshold which then forces a network flush (default: 1024)
   - `publish_async`: [Boolean] If enabled, the publisher pipeline in filebeat operates in async mode preparing a new batch of lines while waiting for ACK (default: False)
-  - `idle_timeout`: [String] A duration string that specifies how often the spooler is flushed (default: 5s)
-  - `registry_file`: [String] The name of the registry file (default: 5s)
 
 
 ## Limitations
