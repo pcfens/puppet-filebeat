@@ -51,12 +51,67 @@ describe 'filebeat::prospector', :type => :define do
       document_type: apache
       scan_frequency: 10s
       harvester_buffer_size: 16384
+      max_bytes: 10485760
       tail_files: false
       force_close_files: false
       backoff: 1s
       max_backoff: 10s
       backoff_factor: 2
       partial_line_waiting: 5s
+      publish_async: false
+',
+      )}
+    end
+
+    context 'with java app optionals set' do
+      let (:params) do
+        {
+          :paths => [
+            '/var/log/app/some.log',
+          ],
+          :log_type => 'app',
+          :exclude_lines => [
+            'DEBUG',
+          ],
+          :include_lines => [
+            'ERROR',
+            'WARN',
+          ],
+          :exclude_files => [
+            '.gz',
+          ],
+        }
+      end
+
+      it { is_expected.to contain_file('filebeat-apache-logs').with(
+        :path => '/etc/filebeat/conf.d/apache-logs.yml',
+        :mode => '0644',
+        :content => 'filebeat:
+  prospectors:
+    - paths:
+      - /var/log/app/some.log
+      encoding: plain
+      exclude_lines:
+        - DEBUG
+      include_lines:
+        - ERROR
+        - WARN
+      exclude_files:
+        - .gz
+      fields_under_root: false
+      input_type: log
+      ignore_older: 24h
+      document_type: app
+      scan_frequency: 10s
+      harvester_buffer_size: 16384
+      max_bytes: 10485760
+      tail_files: false
+      force_close_files: false
+      backoff: 1s
+      max_backoff: 10s
+      backoff_factor: 2
+      partial_line_waiting: 5s
+      publish_async: false
 ',
       )}
     end
@@ -91,12 +146,14 @@ describe 'filebeat::prospector', :type => :define do
       document_type: apache
       scan_frequency: 10s
       harvester_buffer_size: 16384
+      max_bytes: 10485760
       tail_files: false
       force_close_files: false
       backoff: 1s
       max_backoff: 10s
       backoff_factor: 2
       partial_line_waiting: 5s
+      publish_async: false
 ',
       )}
     end
