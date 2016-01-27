@@ -4,6 +4,10 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.4.1...HEAD)
 
+- For prospectors, deprecate `log_type` in favor of `doc_type` to better
+  match the actual configuration parameter. (`document_type` is not used because
+  it causes errors when running with a puppet master)
+
 ## [v0.4.1](https://github.com/pcfens/puppet-filebeat/tree/v0.4.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.4.0...v0.4.1)
 
