@@ -23,6 +23,9 @@ define filebeat::prospector (
   $multiline             = {},
 ) {
 
+  validate_hash($fields, $multiline)
+  validate_array($paths, $exclude_files, $include_lines, $exclude_lines)
+
   if $log_type {
     warning('log_type is deprecated, and will be removed prior to a v1.0 release so parameters match the filebeat documentation - use doc_type instead')
     $real_doc_type = $log_type
