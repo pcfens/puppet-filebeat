@@ -7,6 +7,24 @@ filebeat:
       <%- if @encoding -%>
       encoding: <%= @encoding -%>
       <%- end %>
+      <%- if @exclude_lines.length > 0 -%>
+      exclude_lines:
+        <%- @exclude_lines.each do |line| -%>
+        - <%= line %>
+        <%- end -%>
+      <%- end -%>
+      <%- if @include_lines.length > 0 -%>
+      include_lines:
+        <%- @include_lines.each do |line| -%>
+        - <%= line %>
+        <%- end -%>
+      <%- end -%>
+      <%- if @exclude_files.length > 0 -%>
+      exclude_files:
+        <%- @exclude_files.each do |file| -%>
+        - <%= file %>
+        <%- end -%>
+      <%- end -%>
       <%- if @fields.length > 0 -%>
       fields:
         <%- @fields.each_pair do |k, v| -%>
@@ -29,6 +47,15 @@ filebeat:
       <%- if @harvester_buffer_size -%>
       harvester_buffer_size: <%= @harvester_buffer_size -%>
       <%- end %>
+      <%- if @max_bytes -%>
+      max_bytes: <%= @max_bytes -%>
+      <%- end %>
+      <%- if @multiline.length > 0 -%>
+      multiline:
+        <%- @multiline.each_pair do |k, v| -%>
+        <%= k %>: <%= v %>
+        <%- end -%>
+      <%- end -%>
       tail_files: <%= @tail_files %>
       force_close_files: <%= @force_close_files %>
       <%- if @backoff -%>
@@ -42,4 +69,16 @@ filebeat:
       <%- end %>
       <%- if @partial_line_waiting -%>
       partial_line_waiting: <%= @partial_line_waiting -%>
+      <%- end %>
+      <%- if @spool_size -%>
+      spool_size: <%= @spool_size -%>
+      <%- end %>
+      <%- if @publish_async -%>
+      publish_async: <%= @publish_async -%>
+      <%- end %>
+      <%- if @idle_timeout -%>
+      idle_timeout: <%= @idle_timeout -%>
+      <%- end %>
+      <%- if @registry_file -%>
+      registry_file: <%= @registry_file -%>
       <%- end %>

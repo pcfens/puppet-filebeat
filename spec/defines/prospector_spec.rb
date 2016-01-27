@@ -51,12 +51,82 @@ describe 'filebeat::prospector', :type => :define do
       document_type: apache
       scan_frequency: 10s
       harvester_buffer_size: 16384
+      max_bytes: 10485760
       tail_files: false
       force_close_files: false
       backoff: 1s
       max_backoff: 10s
       backoff_factor: 2
       partial_line_waiting: 5s
+      spool_size: 1024
+      publish_async: false
+      idle_timeout: 5s
+      registry_file: .filebeat
+',
+      )}
+    end
+
+    context 'with java app optionals set' do
+      let :params do
+        {
+          :paths => [
+            '/var/log/java_app/some.log',
+          ],
+          :log_type => 'java_app',
+          :exclude_lines => [
+            '^DEBUG'
+          ],
+          :include_lines => [
+            '^ERROR',
+            '^WARN'
+          ],
+          :exclude_files => [
+            '.gz$'
+          ],
+          :multiline => {
+            :pattern => '^\[',
+            :negate => 'true',
+            :match => 'after'
+          }
+        }
+      end
+
+      it { is_expected.to contain_file('filebeat-apache-logs').with(
+        :path => '/etc/filebeat/conf.d/java_app-logs.yml',
+        :mode => '0644',
+        :content => 'filebeat:
+  prospectors:
+    - paths:
+      - /var/log/apache2/*.log
+      encoding: plain
+      exclude_lines:
+        - ^DEBUG
+      include_lines:
+        - ^ERROR
+        - ^WARN
+      exclude_files:
+        - .gz$
+      fields_under_root: false
+      input_type: log
+      ignore_older: 24h
+      document_type: apache
+      scan_frequency: 10s
+      harvester_buffer_size: 16384
+      max_bytes: 10485760
+      multiline:
+        pattern: ^\[
+        negate: true
+        match:after
+      tail_files: false
+      force_close_files: false
+      backoff: 1s
+      max_backoff: 10s
+      backoff_factor: 2
+      partial_line_waiting: 5s
+      spool_size: 1024
+      publish_async: false
+      idle_timeout: 5s
+      registry_file: .filebeat
 ',
       )}
     end
@@ -91,12 +161,17 @@ describe 'filebeat::prospector', :type => :define do
       document_type: apache
       scan_frequency: 10s
       harvester_buffer_size: 16384
+      max_bytes: 10485760
       tail_files: false
       force_close_files: false
       backoff: 1s
       max_backoff: 10s
       backoff_factor: 2
       partial_line_waiting: 5s
+      spool_size: 1024
+      publish_async: false
+      idle_timeout: 5s
+      registry_file: .filebeat
 ',
       )}
     end

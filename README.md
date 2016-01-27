@@ -185,12 +185,17 @@ to fully understand what these parameters do.
   - `paths`: [Array] The paths, or blobs that should be handled by the prospector. (required)
   - `encoding`: [String] The file encoding. (default: plain)
   - `input_type`: [String] log or stdin - where filebeat reads the log from (default:log)
+  - `exclude_lines`: [Array] A list of regular expressions to match the lines that you want to exclude. (optional - default: [])
+  - `include_lines`: [Array] A list of regular expressions to match the lines that you want to include. (optional - default: [])
+  - `exclude_files`: [Array] A list of regular expressions to match the files that you want to exclude. (optional - default: [])
   - `fields`: [Hash] Optional fields to add information to the output (default: {})
   - `fields_under_root`: [Boolean] Should the `fields` parameter fields be stored at the top level of indexed documents.
   - `ignore_older`: [String] Files older than this field will be ignored by filebeat (default: 24h)
-  - `log_type`: [String] The type parameter to send to logstash (optional - default: log)
+  - `log_type`: [String] The type, equivalent to document_type, parameter to send to logstash. (optional - default: log)
   - `scan_frequency`: [String] How often should the prospector check for new files (default: 10s)
   - `harvester_buffer_size`: [Integer] The buffer size the harvester uses when fetching the file (default: 16384)
+  - `max_bytes`: [Integer] The maximum number of bytes that a single log message can have (default: 10485760)
+  - `multiline`: [Hash] Options that control how Filebeat deals with log messages that span multiple lines (default: {})
   - `tail_files`: [Boolean] If true, filebeat starts reading new files at the end instead of the beginning (default: false)
   - `backoff`: [String] How long filebeat should wait between scanning a file after reaching EOF (default: 1s)
   - `max_backoff`: [String] The maximum wait time to scan a file for new lines to ship (default: 10s)
@@ -199,6 +204,10 @@ to fully understand what these parameters do.
   - `partial_line_waiting`: [String] How long should the prospector wait before shipping a file with
     a potentially incomplete last line (default: 5s)
   - `force_close_files`: [Boolean] Should filebeat forcibly close a file when renamed (default: false)
+  - `spool_size`: [Integer] The event count spool threshold which then forces a network flush (default: 1024)
+  - `publish_async`: [Boolean] If enabled, the publisher pipeline in filebeat operates in async mode preparing a new batch of lines while waiting for ACK (default: False)
+  - `idle_timeout`: [String] A duration string that specifies how often the spooler is flushed (default: 5s)
+  - `registry_file`: [String] The name of the registry file (default: 5s)
 
 
 ## Limitations
