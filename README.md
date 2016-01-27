@@ -188,7 +188,9 @@ to fully understand what these parameters do.
   - `fields`: [Hash] Optional fields to add information to the output (default: {})
   - `fields_under_root`: [Boolean] Should the `fields` parameter fields be stored at the top level of indexed documents.
   - `ignore_older`: [String] Files older than this field will be ignored by filebeat (default: 24h)
-  - `log_type`: [String] The type parameter to send to logstash (optional - default: log)
+  - `log_type`: [String] (Deprecated - use `doc_type`) The document_type setting (optional - default: log)
+  - `doc_type`: [String] The event type to used for published lines, used as type field in logstash
+    and elasticsearch (optional - default: log)
   - `scan_frequency`: [String] How often should the prospector check for new files (default: 10s)
   - `harvester_buffer_size`: [Integer] The buffer size the harvester uses when fetching the file (default: 16384)
   - `tail_files`: [Boolean] If true, filebeat starts reading new files at the end instead of the beginning (default: false)
