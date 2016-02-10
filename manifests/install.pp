@@ -1,17 +1,23 @@
 class filebeat::install {
+  anchor { 'filebeat::install::begin': }
+
   case $::kernel {
     'Linux':   {
-      contain filebeat::install::linux
+      class{ 'filebeat::install::linux': }
+      Anchor['filebeat::install::begin'] -> Class['filebeat::install::linux'] -> Anchor['filebeat::install::end']
       if $::filebeat::manage_repo {
-        contain filebeat::repo
+        class { 'filebeat::repo': }
         Class['filebeat::repo'] -> Class['filebeat::install::linux']
       }
     }
     'Windows': {
-      contain filebeat::install::windows
+      class{'filebeat::install::windows':}
+      Anchor['filebeat::install::begin'] -> Class['filebeat::install::windows'] -> Anchor['filebeat::install::end']
     }
     default:   {
       fail($filebeat::kernel_fail_message)
     }
   }
+
+  anchor { 'filebeat::install::end': }
 }
