@@ -2,8 +2,18 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.2...HEAD)
 
+## [v0.5.2](https://github.com/pcfens/puppet-filebeat/tree/v0.5.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.1...v0.5.2)
+
+- Use the anchor pattern instead of contain so that older versions of puppet
+  are supported [\#12](https://github.com/pcfens/puppet-filebeat/pull/12)
+
+## [v0.5.1](https://github.com/pcfens/puppet-filebeat/tree/v0.5.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.0...v0.5.1)
+
+- Update metadata to reflect which versions of puppet are supported.
 
 ## [v0.5.0](https://github.com/pcfens/puppet-filebeat/tree/v0.5.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.4.1...v0.5.0)
