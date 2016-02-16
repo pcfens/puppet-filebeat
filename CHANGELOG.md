@@ -2,18 +2,18 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.4...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.5...HEAD)
+
+## [v0.5.4](https://github.com/pcfens/puppet-filebeat/tree/v0.5.5)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.4...v0.5.5)
+
+- `rotate_every_kb` and `number_of_files` parameters in file outputs should be
+  explicitly integers to keep filebeat happy. [\#13](https://github.com/pcfens/puppet-filebeat/issues/13)
 
 ## [v0.5.4](https://github.com/pcfens/puppet-filebeat/tree/v0.5.4)
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.3...v0.5.4)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.2...v0.5.4)
 
 - Fix template regression in v0.5.3
-
-## [v0.5.3](https://github.com/pcfens/puppet-filebeat/tree/v0.5.3)
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.2...v0.5.3)
-
-- `rotate_every_kb` and `number_of_files` parameters in file outputs should
-  be explictly integers to keep filebeat happy. [\#13](https://github.com/pcfens/puppet-filebeat/issues/13)
 
 ## [v0.5.2](https://github.com/pcfens/puppet-filebeat/tree/v0.5.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.1...v0.5.2)
