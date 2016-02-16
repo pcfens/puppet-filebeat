@@ -1,3 +1,9 @@
 <%- @filebeat_config['filebeat']['spool_size'] = Integer(@filebeat_config['filebeat']['spool_size']) -%>
+<%- if @filebeat_config['output']['file']['rotate_every_kb'] -%>
+<%- @filebeat_config['output']['file']['rotate_every_kb'] = Integer(@filebeat_config['output']['file']['rotate_every_kb']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['file']['number_of_files'] -%>
+<%- @filebeat_config['output']['file']['number_of_files'] = Integer(@filebeat_config['output']['file']['number_of_files']) -%>
+<%- end -%>
 ### Filebeat configuration managed by Puppet ###
 <%= @filebeat_config.to_yaml() %>
