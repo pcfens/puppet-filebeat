@@ -4,7 +4,7 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.5...HEAD)
 
-## [v0.5.4](https://github.com/pcfens/puppet-filebeat/tree/v0.5.5)
+## [v0.5.5](https://github.com/pcfens/puppet-filebeat/tree/v0.5.5)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.4...v0.5.5)
 
 - `rotate_every_kb` and `number_of_files` parameters in file outputs should be
