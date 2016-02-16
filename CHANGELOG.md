@@ -2,7 +2,13 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.2...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.3...HEAD)
+
+## [v0.5.2](https://github.com/pcfens/puppet-filebeat/tree/v0.5.3)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.2...v0.5.3)
+
+- `rotate_every_kb` and `number_of_files` parameters in file outputs should
+  be explictly integers to keep filebeat happy. [\#13](https://github.com/pcfens/puppet-filebeat/issues/13)
 
 ## [v0.5.2](https://github.com/pcfens/puppet-filebeat/tree/v0.5.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.1...v0.5.2)
