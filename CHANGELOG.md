@@ -4,6 +4,8 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.5...HEAD)
 
+- Configuration files should use the `conf_template` parameter [\#14](https://github.com/pcfens/puppet-filebeat/pull/14)
+
 ## [v0.5.5](https://github.com/pcfens/puppet-filebeat/tree/v0.5.5)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.4...v0.5.5)
 
