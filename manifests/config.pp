@@ -17,7 +17,7 @@ class filebeat::config {
       file {'filebeat.yml':
         ensure  => file,
         path    => '/etc/filebeat/filebeat.yml',
-        content => template("${module_name}/filebeat.yml.erb"),
+        content => template("${filebeat::conf_template}"),
         owner   => 'root',
         group   => 'root',
         mode    => $filebeat::config_file_mode,
@@ -39,7 +39,7 @@ class filebeat::config {
       file {'filebeat.yml':
         ensure  => file,
         path    => 'C:/Program Files/Filebeat/filebeat.yml',
-        content => template("${module_name}/filebeat.yml.erb"),
+        content => template("${filebeat::conf_template}"),
         notify  => Service['filebeat'],
       }
 
