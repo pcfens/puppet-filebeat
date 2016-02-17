@@ -16,7 +16,7 @@
 <%- if @filebeat_config['shipper']['refresh_topology_freq'] -%>
 <%- @filebeat_config['shipper']['refresh_topology_freq'] = Integer(@filebeat_config['shipper']['refresh_topology_freq']) -%>
 <%- end -%>
-<%- if @filebeat_config['shipper']['refresh_topology_freq'] -%>
+<%- if @filebeat_config['shipper']['topology_expire'] -%>
 <%- @filebeat_config['shipper']['topology_expire'] = Integer(@filebeat_config['shipper']['topology_expire']) -%>
 <%- end -%>
 <%- if @filebeat_config['shipper']['queue_size'] -%>
