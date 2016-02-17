@@ -13,10 +13,28 @@ describe "filebeat class:" do
       class { 'filebeat':
         outputs => {
           'logstash' => {
+            'bulk_max_size' => 1024,
             'hosts' => [
               'localhost:5044',
             ],
           },
+          'file'     => {
+            'path' => '/tmp',
+            'filename' => 'filebeat',
+            'rotate_every_kb' => 10240,
+            'number_of_files' => 2,
+          },
+        },
+        shipper => {
+          refresh_topology_freq => 10,
+          topology_expire => 15,
+          queue_size => 1000,
+        },
+        logging => {
+          files => {
+            rotateeverybytes => 10485760,
+            keepfiles => 7,
+          }
         },
         prospectors => {
           'system-logs' => {
