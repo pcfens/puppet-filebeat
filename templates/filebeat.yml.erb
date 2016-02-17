@@ -7,5 +7,29 @@
 <%- @filebeat_config['output']['file']['number_of_files'] = Integer(@filebeat_config['output']['file']['number_of_files']) -%>
 <%- end -%>
 <%- end -%>
+<%- if @filebeat_config['output']['logstash'] -%>
+<%- if @filebeat_config['output']['logstash']['bulk_max_size'] -%>
+<%- @filebeat_config['output']['logstash']['bulk_max_size'] = Integer(@filebeat_config['output']['logstash']['bulk_max_size']) -%>
+<%- end -%>
+<%- end -%>
+<%- if @filebeat_config['shipper'] -%>
+<%- if @filebeat_config['shipper']['refresh_topology_freq'] -%>
+<%- @filebeat_config['shipper']['refresh_topology_freq'] = Integer(@filebeat_config['shipper']['refresh_topology_freq']) -%>
+<%- end -%>
+<%- if @filebeat_config['shipper']['refresh_topology_freq'] -%>
+<%- @filebeat_config['shipper']['topology_expire'] = Integer(@filebeat_config['shipper']['topology_expire']) -%>
+<%- end -%>
+<%- if @filebeat_config['shipper']['queue_size'] -%>
+<%- @filebeat_config['shipper']['queue_size'] = Integer(@filebeat_config['shipper']['queue_size']) -%>
+<%- end -%>
+<%- end -%>
+<%- if @filebeat_config['logging']['files'] -%>
+<%- if @filebeat_config['logging']['files']['rotateeverybytes'] -%>
+<%- @filebeat_config['logging']['files']['rotateeverybytes'] = Integer(@filebeat_config['logging']['files']['rotateeverybytes']) -%>
+<%- end -%>
+<%- if @filebeat_config['logging']['files']['keepfiles'] -%>
+<%- @filebeat_config['logging']['files']['keepfiles'] = Integer(@filebeat_config['logging']['files']['keepfiles']) -%>
+<%- end -%>
+<%- end -%>
 ### Filebeat configuration managed by Puppet ###
 <%= @filebeat_config.to_yaml() %>
