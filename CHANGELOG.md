@@ -2,7 +2,15 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.6...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.7...HEAD)
+
+## [v0.5.7](https://github.com/pcfens/puppet-filebeat/tree/v0.5.7)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.6...v0.5.7)
+
+**Fixed Bugs**
+- Some configuration parameters should be rendered as integers, not strings
+  [\#15](https://github.com/pcfens/puppet-filebeat/pull/15)
+
 
 ## [v0.5.6](https://github.com/pcfens/puppet-filebeat/tree/v0.5.6)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.5...v0.5.6)
