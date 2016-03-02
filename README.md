@@ -87,7 +87,7 @@ be defined as a hash added to the class declaration (also used for automatically
 prospectors using hiera), or as their own defined resources.
 
 At a minimum, the `paths` parameter must be set to an array of files or blobs that should
-be shipped. `log_type` is what logstash views as the type parameter if you'd like to
+be shipped. `doc_type` is what logstash views as the type parameter if you'd like to
 apply conditional filters.
 
 ```puppet
@@ -96,7 +96,7 @@ filebeat::prospector { 'syslogs':
     '/var/log/auth.log',
     '/var/log/syslog',
   ],
-  log_type => 'syslog-beat',
+  doc_type => 'syslog-beat',
 }
 ```
 
@@ -195,7 +195,7 @@ to fully understand what these parameters do.
   - `fields`: [Hash] Optional fields to add information to the output (default: {})
   - `fields_under_root`: [Boolean] Should the `fields` parameter fields be stored at the top level of indexed documents.
   - `ignore_older`: [String] Files older than this field will be ignored by filebeat (default: 24h)
-  - `log_type`: [String] (Deprecated - use `doc_type`) The document_type setting (optional - default: log)
+  - `log_type`: [String] \(Deprecated - use `doc_type`\) The document_type setting (optional - default: log)
   - `doc_type`: [String] The event type to used for published lines, used as type field in logstash
     and elasticsearch (optional - default: log)
   - `scan_frequency`: [String] How often should the prospector check for new files (default: 10s)
