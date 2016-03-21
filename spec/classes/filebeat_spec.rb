@@ -25,6 +25,7 @@ describe 'filebeat', :type => :class do
     it { is_expected.to contain_service('filebeat').with(
       :enable => true,
       :ensure => 'running',
+      :provider => nil, # Provider should use the resource default
     )}
     it { is_expected.to contain_apt__source('beats').with(
       :location => 'http://packages.elastic.co/beats/apt',
@@ -48,6 +49,13 @@ describe 'filebeat', :type => :class do
       :baseurl => 'https://packages.elastic.co/beats/yum/el/$basearch',
       :gpgkey  => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
     ) }
+
+    it { is_expected.to contain_service('filebeat').with(
+      :enable => true,
+      :ensure => 'running',
+      :provider => 'redhat',
+    )}
+
   end
 
   describe 'on a Windows system' do
@@ -64,6 +72,11 @@ describe 'filebeat', :type => :class do
       :ensure => 'directory',
       :path   => 'C:/Program Files/Filebeat/conf.d',
       :recurse => true,
+    )}
+    it { is_expected.to contain_service('filebeat').with(
+      :enable => true,
+      :ensure => 'running',
+      :provider => nil, # Provider should use the resource default
     )}
   end
 
