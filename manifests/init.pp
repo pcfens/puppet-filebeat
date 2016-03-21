@@ -36,6 +36,7 @@ class filebeat (
   $manage_repo      = $filebeat::params::manage_repo,
   $service_ensure   = $filebeat::params::service_ensure,
   $service_enable   = $filebeat::params::service_enable,
+  $service_provider = $filebeat::params::service_provider,
   $spool_size       = $filebeat::params::spool_size,
   $idle_timeout     = $filebeat::params::idle_timeout,
   $registry_file    = $filebeat::params::registry_file,
