@@ -23,13 +23,22 @@ class filebeat::params {
       $tmp_dir         = '/tmp'
       $install_dir     = undef
       $download_url    = undef
+      case $::osfamily {
+        'RedHat': {
+          $service_provider = 'redhat'
+        }
+        default: {
+          $service_provider = undef
+        }
+      }
     }
 
     'Windows' : {
-      $config_dir      = 'C:/Program Files/Filebeat/conf.d'
-      $download_url    = 'https://download.elastic.co/beats/filebeat/filebeat-1.0.1-windows.zip'
-      $install_dir     = 'C:/Program Files'
-      $tmp_dir         = 'C:/Temp'
+      $config_dir       = 'C:/Program Files/Filebeat/conf.d'
+      $download_url     = 'https://download.elastic.co/beats/filebeat/filebeat-1.0.1-windows.zip'
+      $install_dir      = 'C:/Program Files'
+      $tmp_dir          = 'C:/Temp'
+      $service_provider = undef
     }
 
     default : {
