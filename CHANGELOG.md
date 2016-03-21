@@ -2,7 +2,17 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.7...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.8...HEAD)
+
+## [v0.5.8](https://github.com/pcfens/puppet-filebeat/tree/v0.5.8)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.7...v0.5.8)
+
+**Fixed Bugs**
+- `doc_type` is now used in the documentation instead of the deprecated `log_type`
+  [\#17](https://github.com/pcfens/puppet-filebeat/pull/17)
+- RedHat based systems should be using the redhat service provider.
+  [\#18](https://github.com/pcfens/puppet-filebeat/pull/18)
+
 
 ## [v0.5.7](https://github.com/pcfens/puppet-filebeat/tree/v0.5.7)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.6...v0.5.7)
