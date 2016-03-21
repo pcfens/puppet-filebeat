@@ -131,6 +131,7 @@ Installs and configures filebeat.
 - `manage_repo`: [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 - `service_ensure`: [String] The ensure parameter on the filebeat service (default: running)
 - `service_enable`: [String] The enable parameter on the filebeat service (default: true)
+- `service_provider`: [String] The provier parameter on the filebeat service (default: on RedHat based systems use redhat, otherwise undefined)
 - `spool_size`: [Integer] How large the spool should grow before being flushed to the network (default: 1024)
 - `idle_timeout`: [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 - `registry_file`: [String] The registry file used to store positions, absolute or relative to working directory (default .filebeat)
