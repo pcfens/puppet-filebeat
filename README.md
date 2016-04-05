@@ -195,7 +195,10 @@ to fully understand what these parameters do.
   - `input_type`: [String] log or stdin - where filebeat reads the log from (default:log)
   - `fields`: [Hash] Optional fields to add information to the output (default: {})
   - `fields_under_root`: [Boolean] Should the `fields` parameter fields be stored at the top level of indexed documents.
-  - `ignore_older`: [String] Files older than this field will be ignored by filebeat (default: 24h)
+  - `ignore_older`: [String] Files older than this field will be ignored by filebeat (default: 24h in filebeat < 1.2.0, infinite in filebeat >= 1.2.0)
+  - `close_older`: [String] Files that haven't been modified since `close_older`, they'll be closed. New
+  modifications will be read when files are scanned again according to `scan_frequency`. Introduced in
+  filebeat 1.2.0 (default: 1h)
   - `log_type`: [String] \(Deprecated - use `doc_type`\) The document_type setting (optional - default: log)
   - `doc_type`: [String] The event type to used for published lines, used as type field in logstash
     and elasticsearch (optional - default: log)

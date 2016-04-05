@@ -26,6 +26,9 @@ filebeat:
       <%- if @ignore_older -%>
       ignore_older: <%= @ignore_older %>
       <%- end -%>
+      <%- if @close_older -%>
+      close_older: <%= @close_older %>
+      <%- end -%>
       <%- if @real_doc_type -%>
       document_type: <%= @real_doc_type %>
       <%- end -%>
