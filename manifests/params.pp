@@ -14,7 +14,12 @@ class filebeat::params {
   $shipper        = {}
   $logging        = {}
   $run_options    = {}
-  $conf_template  = "${module_name}/filebeat.yml.erb"
+
+  if versioncmp('1.9.1', $::rubyversion) > 0 {
+    $conf_template = "${module_name}/filebeat.yml.ruby18.erb"
+  } else {
+    $conf_template = "${module_name}/filebeat.yml.erb"
+  }
 
   case $::kernel {
     'Linux'   : {

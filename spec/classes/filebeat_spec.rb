@@ -6,6 +6,7 @@ describe 'filebeat', :type => :class do
       :kernel => 'Linux',
       :osfamily => 'Debian',
       :lsbdistid => 'Ubuntu',
+      :rubyversion => '1.9.3',
     }
   end
 
@@ -42,6 +43,7 @@ describe 'filebeat', :type => :class do
       {
         :kernel => 'Linux',
         :osfamily => 'RedHat',
+        :rubyversion => '1.8.7',
       }
     end
 
@@ -62,6 +64,7 @@ describe 'filebeat', :type => :class do
     let :facts do
       {
         :kernel => 'Windows',
+        :rubyversion => '1.9.3',
       }
     end
 

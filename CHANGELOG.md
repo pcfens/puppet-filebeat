@@ -6,6 +6,8 @@ Changelog
 
 - Add the `close_older` parameter to support the option of the same name in filebeat 1.2.0
 - Add support for the `publish_async` parameter.
+- Added limited, but improved support for Ruby versions pre-1.9.1 by fixing the hash sort issue
+[\#20](https://github.com/pcfens/puppet-filebeat/issues/20)
 
 ## [v0.5.8](https://github.com/pcfens/puppet-filebeat/tree/v0.5.8)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.7...v0.5.8)
