@@ -15,7 +15,7 @@
     - [Private Classes](#private-classes)
     - [Public Defines](#public-defines)
 5. [Limitations - OS compatibility, etc.](#limitations)
-    - [Pre-1.9.1 Ruby](#pre-1.9.1-ruby)
+    - [Pre-1.9.1 Ruby](#pre-191-ruby)
 6. [Development - Guide for contributing to the module](#development)
 
 ## Description
