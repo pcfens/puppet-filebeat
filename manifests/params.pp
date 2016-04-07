@@ -5,6 +5,7 @@ class filebeat::params {
   $service_enable = true
   $spool_size     = 1024
   $idle_timeout   = '5s'
+  $publish_async  = false
   $registry_file  = '.filebeat'
   $config_dir_mode = '0755'
   $config_file_mode = '0644'

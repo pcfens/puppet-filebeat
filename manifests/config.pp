@@ -4,6 +4,7 @@ class filebeat::config {
       'spool_size'    => $filebeat::spool_size,
       'idle_timeout'  => $filebeat::idle_timeout,
       'registry_file' => $filebeat::registry_file,
+      'publish_async' => $filebeat::publish_async,
       'config_dir'    => $filebeat::config_dir,
     },
     'output'     => $filebeat::outputs,
