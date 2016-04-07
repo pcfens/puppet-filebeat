@@ -134,6 +134,7 @@ Installs and configures filebeat.
 - `service_provider`: [String] The provier parameter on the filebeat service (default: on RedHat based systems use redhat, otherwise undefined)
 - `spool_size`: [Integer] How large the spool should grow before being flushed to the network (default: 1024)
 - `idle_timeout`: [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
+- `publish_async`: [Boolean] If set to true filebeat will publish while preparing the next batch of lines to transmit (defualt: false)
 - `registry_file`: [String] The registry file used to store positions, absolute or relative to working directory (default .filebeat)
 - `config_dir`: [String] The directory where prospectors should be defined (default: /etc/filebeat/conf.d)
 - `config_dir_mode`: [String] The permissions mode set on the configuration directory (default: 0755)
