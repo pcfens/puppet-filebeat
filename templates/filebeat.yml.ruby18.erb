@@ -199,14 +199,6 @@
     <%- if @filebeat_config['shipper']['queue_size'] != nil -%>
     queue_size: <%= @filebeat_config['shipper']['queue_size'] %>
     <%- end -%>
-
-    <%- if @filebeat_config['shipper']['geoip']['paths'] != nil -%>
-    geoip:
-      paths:
-    <%- @filebeat_config['shipper']['geoip']['paths'].each do |path| -%>
-      - <%= path %>
-    <%- end -%>
-    <%- end -%>
   <%- end -%>
 
   <%- unless @filebeat_config['logging'].empty? -%>
