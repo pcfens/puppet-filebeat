@@ -7,9 +7,22 @@
 <%- @filebeat_config['output']['file']['number_of_files'] = Integer(@filebeat_config['output']['file']['number_of_files']) -%>
 <%- end -%>
 <%- end -%>
+<%- if @filebeat_config['output']['elasticsearch'] -%>
+<%- if @filebeat_config['output']['elasticsearch']['port'] != nil -%>
+<%- @filebeat_config['output']['elasticsearch']['port'] = Integer(@filebeat_config['output']['elasticsearch']['port']) -%>
+<%- end -%>
+<%- end -%>
 <%- if @filebeat_config['output']['logstash'] -%>
 <%- if @filebeat_config['output']['logstash']['bulk_max_size'] -%>
 <%- @filebeat_config['output']['logstash']['bulk_max_size'] = Integer(@filebeat_config['output']['logstash']['bulk_max_size']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['logstash']['port'] != nil -%>
+<%- @filebeat_config['output']['logstash']['port'] = Integer(@filebeat_config['output']['logstash']['port']) -%>
+<%- end -%>
+<%- end -%>
+<%- if @filebeat_config['output']['redis'] -%>
+<%- if @filebeat_config['output']['redis']['port'] != nil -%>
+<%- @filebeat_config['output']['redis']['port'] = Integer(@filebeat_config['output']['redis']['port']) -%>
 <%- end -%>
 <%- end -%>
 <%- if @filebeat_config['shipper'] -%>
