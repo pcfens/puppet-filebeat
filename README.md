@@ -15,6 +15,7 @@
     - [Private Classes](#private-classes)
     - [Public Defines](#public-defines)
 5. [Limitations - OS compatibility, etc.](#limitations)
+    - [Pre-1.9.1 Ruby](#pre-191-ruby)
 6. [Development - Guide for contributing to the module](#development)
 
 ## Description
@@ -223,12 +224,25 @@ to fully understand what these parameters do.
 
 
 ## Limitations
-
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
 directly to elasticsearch).
 
 Only filebeat versions after 1.0.0-rc1 are supported. 1.0.0-rc1 and older don't
 support YAML like the ruby template can easily generate.
+
+### Pre-1.9.1 Ruby
+If you're on a system running a Ruby pre-1.9.1, hashes aren't sorted consistently, causing puppet runs to
+not be idempotent. To fix this, a limited template is used if the rubyversion is pre-1.9.1.
+The limited template only supports elasticsearch, logstash, file, and console outputs, and not all options
+may be supported (there is no warning when an option is omitted). Unlike with newer rubies, as new versions
+of filebeat are released, this template may not work until it's updated, even if you're using an updated
+configuration hash.
+
+If you don't care about keeping puppet idempotent, this can be overridden by setting the `conf_template`
+parameter to 'filebeat/filebeat.yml.erb'.
+
+See [templates/filebeat.yml.ruby18.erb](https://github.com/pcfens/puppet-filebeat/blob/master/templates/filebeat.yml.ruby18.erb)
+for the all of the details.
 
 ## Development
 
