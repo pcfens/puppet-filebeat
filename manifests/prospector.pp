@@ -57,7 +57,7 @@ define filebeat::prospector (
   }
 
   case $::kernel {
-    'Linux' : {
+    'Linux', 'OpenBSD' : {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
         default => $filebeat::major_version ? {
@@ -69,7 +69,7 @@ define filebeat::prospector (
         ensure       => $ensure,
         path         => "${filebeat::config_dir}/${name}.yml",
         owner        => 'root',
-        group        => 'root',
+        group        => '0',
         mode         => $::filebeat::config_file_mode,
         content      => template("${module_name}/${prospector_template}"),
         validate_cmd => $validate_cmd,

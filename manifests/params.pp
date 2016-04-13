@@ -38,13 +38,23 @@ class filebeat::params {
   # }
   #
 
-  # Archlinux has a proper package in the official repos
-  # we shouldn't manage the repo on it
+  # Archlinux and OpenBSD have proper packages in the official repos
+  # we shouldn't manage the repo on them
   case $facts['os']['family'] {
     'Archlinux': {
       $manage_repo = false
       $filebeat_path = '/usr/bin/filebeat'
       $major_version = '6'
+    }
+    'OpenBSD': {
+      $manage_repo = false
+      $filebeat_path = '/usr/local/bin/filebeat'
+      # lint:ignore:only_variable_string
+      $major_version = versioncmp('6.3', "${::kernelversion}") < 0 ? {
+      # lint:endignore
+        true    => '6',
+        default => '5'
+      }
     }
     default: {
       $manage_repo = true
@@ -62,7 +72,6 @@ class filebeat::params {
       $config_dir_owner  = 'root'
       $config_dir_group  = 'root'
       $registry_file     = '/var/lib/filebeat/registry'
-
       # These parameters are ignored if/until tarball installs are supported in Linux
       $tmp_dir         = '/tmp'
       $install_dir     = undef
@@ -86,6 +95,21 @@ class filebeat::params {
       $config_dir_owner  = 'root'
       $config_dir_group  = 'wheel'
       $registry_file     = '/var/lib/filebeat/registry'
+      $tmp_dir           = '/tmp'
+      $service_provider  = undef
+      $install_dir       = undef
+      $url_arch          = undef
+    }
+
+    'OpenBSD': {
+      $package_ensure    = present
+      $config_file       = '/etc/filebeat/filebeat.yml'
+      $config_dir        = '/etc/filebeat/conf.d'
+      $config_file_owner = 'root'
+      $config_file_group = 'wheel'
+      $config_dir_owner  = 'root'
+      $config_dir_group  = 'wheel'
+      $registry_file     = '/var/db/filebeat/.filebeat'
       $tmp_dir           = '/tmp'
       $service_provider  = undef
       $install_dir       = undef

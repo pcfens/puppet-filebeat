@@ -23,6 +23,10 @@ class filebeat::install {
       }
       Anchor['filebeat::install::begin'] -> Class['filebeat::install::freebsd'] -> Anchor['filebeat::install::end']
     }
+    'OpenBSD': {
+      class{'filebeat::install::openbsd':}
+      Anchor['filebeat::install::begin'] -> Class['filebeat::install::openbsd'] -> Anchor['filebeat::install::end']
+    }
     'Windows': {
       class{'::filebeat::install::windows':
         notify => Class['filebeat::service'],
