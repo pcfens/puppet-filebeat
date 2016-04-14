@@ -4,6 +4,9 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.0...HEAD)
 
+**Fixed Bugs**
+- Fix typo in Ruby 1.8 template [\#23](https://github.com/pcfens/puppet-filebeat/issues/23)
+
 ## [v0.6.0](https://github.com/pcfens/puppet-filebeat/tree/v0.6.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.5.8...v0.6.0)
 

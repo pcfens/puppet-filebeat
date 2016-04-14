@@ -78,7 +78,7 @@
         <%- if @filebeat_config['output']['elasticsearch']['tls']['certificate'] != nil -%>
         certificate: "<%= @filebeat_config['output']['elasticsearch']['tls']['certificate'] %>"
         <%- end -%>
-        <%- if @filebeat_config['output']['elasticsearch']['tls']['certifcate_key'] != nil -%>
+        <%- if @filebeat_config['output']['elasticsearch']['tls']['certificate_key'] != nil -%>
         certificate_key: "<%= @filebeat_config['output']['elasticsearch']['tls']['certificate_key'] %>"
         <%- end -%>
         <%- if @filebeat_config['output']['elasticsearch']['tls']['insecure'] != nil -%>
