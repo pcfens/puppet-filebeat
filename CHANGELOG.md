@@ -2,7 +2,15 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.2...HEAD)
+
+## [v0.6.2](https://github.com/pcfens/puppet-filebeat/tree/v0.6.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.1...v0.6.2)
+
+**Fixed Bugs**
+- Fix the other certificate_key typo in Ruby 1.8 template
+[\#23](https://github.com/pcfens/puppet-filebeat/issues/23)
+
 
 ## [v0.6.1](https://github.com/pcfens/puppet-filebeat/tree/v0.6.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.0...v0.6.1)
