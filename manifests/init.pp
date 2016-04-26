@@ -16,7 +16,7 @@
 # @param manage_repo [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 # @param service_ensure [String] The ensure parameter on the filebeat service (default: running)
 # @param service_enable [String] The enable parameter on the filebeat service (default: true)
-# @param spool_size [Integer] How large the spool should grow before being flushed to the network (default: 1024)
+# @param spool_size [Integer] How large the spool should grow before being flushed to the network (default: 2048)
 # @param idle_timeout [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 # @param publish_async [Boolean] If set to true filebeat will publish while preparing the next batch of lines to send (defualt: false)
 # @param registry_file [String] The registry file used to store positions, absolute or relative to working directory (default .filebeat)

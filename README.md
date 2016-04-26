@@ -133,7 +133,7 @@ Installs and configures filebeat.
 - `service_ensure`: [String] The ensure parameter on the filebeat service (default: running)
 - `service_enable`: [String] The enable parameter on the filebeat service (default: true)
 - `service_provider`: [String] The provier parameter on the filebeat service (default: on RedHat based systems use redhat, otherwise undefined)
-- `spool_size`: [Integer] How large the spool should grow before being flushed to the network (default: 1024)
+- `spool_size`: [Integer] How large the spool should grow before being flushed to the network (default: 2048)
 - `idle_timeout`: [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 - `publish_async`: [Boolean] If set to true filebeat will publish while preparing the next batch of lines to transmit (defualt: false)
 - `registry_file`: [String] The registry file used to store positions, absolute or relative to working directory (default .filebeat)
