@@ -3,7 +3,7 @@ class filebeat::params {
   $manage_repo    = true
   $service_ensure = running
   $service_enable = true
-  $spool_size     = 1024
+  $spool_size     = 2048
   $idle_timeout   = '5s'
   $publish_async  = false
   $registry_file  = '.filebeat'
