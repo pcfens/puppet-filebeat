@@ -19,7 +19,7 @@ class filebeat::repo {
     'RedHat', 'Linux': {
       if !defined(Yumrepo['beats']){
         yumrepo { 'beats':
-          descr    => 'elasticsearch repo',
+          descr    => 'elastic beats repo',
           baseurl  => 'https://packages.elastic.co/beats/yum/el/$basearch',
           gpgcheck => 1,
           gpgkey   => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
@@ -31,14 +31,14 @@ class filebeat::repo {
       exec { 'topbeat_suse_import_gpg':
         command => 'rpmkeys --import http://packages.elastic.co/GPG-KEY-elasticsearch',
         unless  => 'test $(rpm -qa gpg-pubkey | grep -i "D88E42B4" | wc -l) -eq 1 ',
-        notify  => [ Zypprepo['elasticsearch'] ],
+        notify  => [ Zypprepo['beats'] ],
       }
       if !defined(Zypprepo['beats']){
         zypprepo { 'beats':
           baseurl     => 'https://packages.elastic.co/beats/yum/el/$basearch',
           enabled     => 1,
           autorefresh => 1,
-          name        => 'elasticsearch',
+          name        => 'beats',
           gpgcheck    => 1,
           gpgkey      => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
           type        => 'yum',
