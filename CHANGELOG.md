@@ -2,7 +2,14 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.2...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.3...HEAD)
+
+## [v0.6.3](https://github.com/pcfens/puppet-filebeat/tree/v0.6.3)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.2...v0.6.3)
+
+**Fixed Bugs**
+- Spool size default should match upstream [\#24](https://github.com/pcfens/puppet-filebeat/pull/24)
+- Repository names now match notification parameters Part of [\#25](https://github.com/pcfens/puppet-filebeat/pull/25)
 
 ## [v0.6.2](https://github.com/pcfens/puppet-filebeat/tree/v0.6.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.1...v0.6.2)
