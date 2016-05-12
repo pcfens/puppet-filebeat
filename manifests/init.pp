@@ -32,35 +32,44 @@
 # @param install_dir [String] Where filebeat should be installed (windows only)
 # @param tmp_dir [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
+# @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
 class filebeat (
-  $package_ensure   = $filebeat::params::package_ensure,
-  $manage_repo      = $filebeat::params::manage_repo,
-  $service_ensure   = $filebeat::params::service_ensure,
-  $service_enable   = $filebeat::params::service_enable,
-  $service_provider = $filebeat::params::service_provider,
-  $spool_size       = $filebeat::params::spool_size,
-  $idle_timeout     = $filebeat::params::idle_timeout,
-  $publish_async    = $filebeat::params::publish_async,
-  $registry_file    = $filebeat::params::registry_file,
-  $config_dir       = $filebeat::params::config_dir,
-  $config_dir_mode  = $filebeat::params::config_dir_mode,
-  $config_file_mode = $filebeat::params::config_file_mode,
-  $purge_conf_dir   = $filebeat::params::purge_conf_dir,
-  $outputs          = $filebeat::params::outputs,
-  $shipper          = $filebeat::params::shipper,
-  $logging          = $filebeat::params::logging,
-  $run_options      = $filebeat::params::run_options,
-  $conf_template    = $filebeat::params::conf_template,
-  $download_url     = $filebeat::params::download_url,
-  $install_dir      = $filebeat::params::install_dir,
-  $tmp_dir          = $filebeat::params::tmp_dir,
-  $prospectors      = {},
+  $package_ensure    = $filebeat::params::package_ensure,
+  $manage_repo       = $filebeat::params::manage_repo,
+  $service_ensure    = $filebeat::params::service_ensure,
+  $service_enable    = $filebeat::params::service_enable,
+  $service_provider  = $filebeat::params::service_provider,
+  $spool_size        = $filebeat::params::spool_size,
+  $idle_timeout      = $filebeat::params::idle_timeout,
+  $publish_async     = $filebeat::params::publish_async,
+  $registry_file     = $filebeat::params::registry_file,
+  $config_dir        = $filebeat::params::config_dir,
+  $config_dir_mode   = $filebeat::params::config_dir_mode,
+  $config_file_mode  = $filebeat::params::config_file_mode,
+  $purge_conf_dir    = $filebeat::params::purge_conf_dir,
+  $outputs           = $filebeat::params::outputs,
+  $shipper           = $filebeat::params::shipper,
+  $logging           = $filebeat::params::logging,
+  $run_options       = $filebeat::params::run_options,
+  $conf_template     = $filebeat::params::conf_template,
+  $download_url      = $filebeat::params::download_url,
+  $install_dir       = $filebeat::params::install_dir,
+  $tmp_dir           = $filebeat::params::tmp_dir,
+  $prospectors       = {},
+  $prospectors_merge = false,
 ) inherits filebeat::params {
 
   $kernel_fail_message = "${::kernel} is not supported by filebeat."
 
-  validate_bool($manage_repo)
-  validate_hash($outputs, $logging, $prospectors)
+  validate_bool($manage_repo, $prospectors_merge)
+
+  if $prospectors_merge {
+    $prospectors_final = hiera_hash('filebeat::prospectors', $prospectors)
+  } else {
+    $prospectors_final = $prospectors
+  }
+
+  validate_hash($outputs, $logging, $prospectors_final)
   validate_string($idle_timeout, $registry_file, $config_dir, $package_ensure)
 
   if $package_ensure == '1.0.0-beta4' or $package_ensure == '1.0.0-rc1' {
@@ -73,7 +82,7 @@ class filebeat (
   class { 'filebeat::service': } ->
   anchor { 'filebeat::end': }
 
-  if !empty($prospectors) {
-    create_resources('filebeat::prospector', $prospectors)
+  if !empty($prospectors_final) {
+    create_resources('filebeat::prospector', $prospectors_final)
   }
 }
