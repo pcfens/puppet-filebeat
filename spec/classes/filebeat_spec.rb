@@ -6,6 +6,7 @@ describe 'filebeat', :type => :class do
       :kernel => 'Linux',
       :osfamily => 'Debian',
       :lsbdistid => 'Ubuntu',
+      :lsbdistrelease => '16.04',
       :rubyversion => '1.9.3',
     }
   end
