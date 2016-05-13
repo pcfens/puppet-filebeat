@@ -48,6 +48,8 @@ describe 'filebeat::prospector', :type => :define do
       encoding: plain
       fields_under_root: false
       input_type: log
+      ignore_older: 0
+      close_older: 1h
       document_type: apache
       scan_frequency: 10s
       harvester_buffer_size: 16384
@@ -97,6 +99,8 @@ describe 'filebeat::prospector', :type => :define do
       encoding: plain
       fields_under_root: false
       input_type: log
+      ignore_older: 0
+      close_older: 1h
       document_type: java_app
       scan_frequency: 10s
       harvester_buffer_size: 16384
@@ -146,6 +150,8 @@ describe 'filebeat::prospector', :type => :define do
       encoding: plain
       fields_under_root: false
       input_type: log
+      ignore_older: 0
+      close_older: 1h
       document_type: apache
       scan_frequency: 10s
       harvester_buffer_size: 16384
