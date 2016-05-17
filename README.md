@@ -107,6 +107,17 @@ Filebeat prospectors (versions >= 1.1) can handle multiline log entries. The `mu
 parameter accepts a hash containing `pattern`, `negate`, `match`, `max_lines`, and `timeout`
 as documented in the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/1.1/filebeat-configuration-details.html#multiline).
 
+### Prospectors in Hiera
+
+Prospectors can be declared in hiera using the `prospectors` parameter. By default, hiera will not merge
+prospector declarations down the hiera hierarchy. To change the behavior in puppet 3 use the `prospectors_merge`
+parameter. In puppet 4, you can use `prospectors_merge`, but can also use the
+[lookup_options](https://docs.puppet.com/puppet/latest/reference/lookup_quick.html#setting-lookupoptions-in-data)
+flag.
+
+When `prospectors_merge` is set to true, `prospectors` will be replaced by the output of
+`hiera_hash('filebeat::prospectors')`.
+
 ## Reference
  - [**Public Classes**](#public-classes)
     - [Class: filebeat](#class-filebeat)
@@ -149,6 +160,7 @@ Installs and configures filebeat.
 - `install_dir`: [String] Where filebeat should be installed (windows only)
 - `tmp_dir`: [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
 - `prospectors`: [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
+- `prospectors_merge`: [Boolean] If true, `hiera_hash()` will be used to build the the `prospectors` parameter (default: false)
 
 ### Private Classes
 
