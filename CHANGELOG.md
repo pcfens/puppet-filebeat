@@ -4,6 +4,12 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.3...HEAD)
 
+- Setting the `prospectors_merge` parameter to true will create prospectors across multiple hiera levels
+  using `hiera_hash()` [\#25](https://github.com/pcfens/puppet-filebeat/pull/25)
+
+**Fixed Bugs**
+- SLES repository and metaparameters didn't match [\#25](https://github.com/pcfens/puppet-filebeat/pull/25)
+
 ## [v0.6.3](https://github.com/pcfens/puppet-filebeat/tree/v0.6.3)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.2...v0.6.3)
 
