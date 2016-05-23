@@ -13,7 +13,7 @@
     - [Adding a prospector](#adding-a-prospector)
       - [Multiline Logs](#multiline-logs)
     - [Prospectors in hiera](#prospectors-in-hiera)
-    - [Usage on Windows](#filebeat-on-windows)
+    - [Usage on Windows](#usage-on-windows)
 4. [Reference](#reference)
     - [Public Classes](#public-classes)
     - [Private Classes](#private-classes)
