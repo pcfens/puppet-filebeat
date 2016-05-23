@@ -118,6 +118,13 @@ flag.
 When `prospectors_merge` is set to true, `prospectors` will be replaced by the output of
 `hiera_hash('filebeat::prospectors')`.
 
+### Filebeat on Windows
+
+When installing on Windows, this module will download the windows version of Filebeat from
+[elastic](https://www.elastic.co/downloads/beats/filebeat) to `C:\Temp` by default. The directory
+can be overridden using the `tmp_dir` parameter. `tmp_dir` is not managed by this module,
+but is expected to exist as a directory that puppet can write to.
+
 ## Reference
  - [**Public Classes**](#public-classes)
     - [Class: filebeat](#class-filebeat)

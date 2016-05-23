@@ -2,10 +2,6 @@ class filebeat::install::windows {
   $filename = regsubst($filebeat::download_url, '^https.*\/([^\/]+)\.[^.].*', '\1')
   $foldername = 'Filebeat'
 
-  file { $filebeat::tmp_dir:
-    ensure => directory
-  }
-
   file { $filebeat::install_dir:
     ensure => directory
   }
@@ -13,7 +9,6 @@ class filebeat::install::windows {
   remote_file {"${filebeat::tmp_dir}/${filename}.zip":
     ensure      => present,
     source      => $filebeat::download_url,
-    require     => File[$filebeat::tmp_dir],
     verify_peer => false,
   }
 
