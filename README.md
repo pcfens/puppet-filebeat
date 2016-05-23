@@ -10,6 +10,10 @@
     - [Setup requirements](#setup-requirements)
     - [Beginning with filebeat](#beginning-with-filebeat)
 3. [Usage - Configuration options and additional functionality](#usage)
+    - [Adding a prospector](#adding-a-prospector)
+      - [Multiline Logs](#multiline-logs)
+    - [Prospectors in hiera](#prospectors-in-hiera)
+    - [Usage on Windows](#filebeat-on-windows)
 4. [Reference](#reference)
     - [Public Classes](#public-classes)
     - [Private Classes](#private-classes)
@@ -118,7 +122,7 @@ flag.
 When `prospectors_merge` is set to true, `prospectors` will be replaced by the output of
 `hiera_hash('filebeat::prospectors')`.
 
-### Filebeat on Windows
+### Usage on Windows
 
 When installing on Windows, this module will download the windows version of Filebeat from
 [elastic](https://www.elastic.co/downloads/beats/filebeat) to `C:\Temp` by default. The directory
@@ -248,6 +252,10 @@ directly to elasticsearch).
 
 Only filebeat versions after 1.0.0-rc1 are supported. 1.0.0-rc1 and older don't
 support YAML like the ruby template can easily generate.
+
+When installing on Windows, there's an expectation that `C:\Temp` already exists, or an alternative
+location specified in the `tmp_dir` parameter exists and is writable by puppet. The temp directory
+is used to store the downloaded installer only.
 
 ### Pre-1.9.1 Ruby
 If you're on a system running a Ruby pre-1.9.1, hashes aren't sorted consistently, causing puppet runs to
