@@ -41,7 +41,7 @@ class filebeat::params {
 
     'Windows' : {
       $config_dir       = 'C:/Program Files/Filebeat/conf.d'
-      $download_url     = 'https://download.elastic.co/beats/filebeat/filebeat-1.0.1-windows.zip'
+      $download_url     = 'https://download.elastic.co/beats/filebeat/filebeat-1.2.3-windows.zip'
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Temp'
       $service_provider = undef

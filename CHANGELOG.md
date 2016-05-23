@@ -8,6 +8,7 @@ Changelog
   using `hiera_hash()` [\#25](https://github.com/pcfens/puppet-filebeat/pull/25)
 - No longer manage the windows temp directory where the Filebeat download is kept. The assumption is made
   that the directory exists and is writable by puppet.
+- Update the default windows download to Filebeat version 1.2.3
 
 **Fixed Bugs**
 - SLES repository and metaparameters didn't match [\#25](https://github.com/pcfens/puppet-filebeat/pull/25)
