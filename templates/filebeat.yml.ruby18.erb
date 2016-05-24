@@ -154,6 +154,36 @@
         <%- end -%>
       <%- end -%>
     <%- end -%>
+    <%- if @filebeat_config['output']['redis'] != nil -%>
+    redis:
+      <%- if @filebeat_config['output']['redis']['host'] != nil -%>
+      host: "<%= @filebeat_config['output']['redis']['host'] %>"
+      <%- end -%>
+      <%- if @filebeat_config['output']['redis']['port'] != nil -%>
+      port: <%= @filebeat_config['output']['redis']['port'] %>
+      <%- end -%>
+      <%- if @filebeat_config['output']['redis']['save_topology'] != nil -%>
+      save_topology: <%= @filebeat_config['output']['redis']['save_topology'] %>
+      <%- end -%>
+      <%- if @filebeat_config['output']['redis']['index'] != nil -%>
+      index: "<%= @filebeat_config['output']['redis']['index'] %>"
+      <%- end -%>
+      <%- if @filebeat_config['output']['redis']['db'] != nil -%>
+      db: <%= @filebeat_config['output']['redis']['db'] %>
+      <%- end -%>
+      <%- if @filebeat_config['output']['redis']['db_topology'] != nil -%>
+      db_topology: <%= @filebeat_config['output']['redis']['db_topology'] %>
+      <%- end -%>
+      <%- if @filebeat_config['output']['redis']['password'] != nil -%>
+      password: "<%= @filebeat_config['output']['redis']['password'] %>"
+      <%- end -%>
+      <%- if @filebeat_config['output']['redis']['timeout'] != nil -%>
+      timeout: <%= @filebeat_config['output']['redis']['timeout'] %>
+      <%- end -%>
+      <%- if @filebeat_config['output']['redis']['reconnect_interval'] != nil -%>
+      reconnect_interval: <%= @filebeat_config['output']['redis']['reconnect_interval'] %>
+      <%- end -%>
+    <%- end -%>
     <%- if @filebeat_config['output']['file'] != nil -%>
     file:
       <%- if @filebeat_config['output']['file']['path'] != nil -%>
