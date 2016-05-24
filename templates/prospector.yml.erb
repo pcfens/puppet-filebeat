@@ -76,12 +76,12 @@ filebeat:
       <%- if @include_lines.length > 0 -%>
       include_lines:
         <%- @include_lines.each do |include_line| -%>
-        - <%= include_line %>
+        - "<%= include_line %>"
         <%- end -%>
       <%- end -%>
       <%- if @exclude_lines.length > 0 -%>
       exclude_lines:
         <%- @exclude_lines.each do |exclude_line| -%>
-        - <%= exclude_line %>
+        - "<%= exclude_line %>"
         <%- end -%>
       <%- end -%>
