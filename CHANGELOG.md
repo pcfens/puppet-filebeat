@@ -10,6 +10,7 @@ Changelog
   that the directory exists and is writable by puppet.
 - Update the default windows download to Filebeat version 1.2.3
 - Add redis output to the Ruby 1.8 template
+- Wrap include_lines and exclude_lines array elements in quotes
 
 **Fixed Bugs**
 - SLES repository and metaparameters didn't match [\#25](https://github.com/pcfens/puppet-filebeat/pull/25)
