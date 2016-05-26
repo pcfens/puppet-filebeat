@@ -2,7 +2,10 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.3...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.0...HEAD)
+
+## [v0.7.0](https://github.com/pcfens/puppet-filebeat/tree/v0.7.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.3...v0.7.0)
 
 - Setting the `prospectors_merge` parameter to true will create prospectors across multiple hiera levels
   using `hiera_hash()` [\#25](https://github.com/pcfens/puppet-filebeat/pull/25)
@@ -10,7 +13,7 @@ Changelog
   that the directory exists and is writable by puppet.
 - Update the default windows download to Filebeat version 1.2.3
 - Add redis output to the Ruby 1.8 template
-- Wrap include_lines and exclude_lines array elements in quotes
+- Wrap include_lines and exclude_lines array elements in quotes [\#28](https://github.com/pcfens/puppet-filebeat/issues/28)
 
 **Fixed Bugs**
 - SLES repository and metaparameters didn't match [\#25](https://github.com/pcfens/puppet-filebeat/pull/25)
