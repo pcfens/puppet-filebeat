@@ -113,10 +113,10 @@ describe 'filebeat::prospector', :type => :define do
         negate: true
         match: after
       include_lines:
-        - ^ERROR
-        - ^WARN
+        - "^ERROR"
+        - "^WARN"
       exclude_lines:
-        - ^DEBUG
+        - "^DEBUG"
 ',
       )}
     end
