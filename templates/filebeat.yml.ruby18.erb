@@ -14,6 +14,9 @@
       <%- @filebeat_config['output']['elasticsearch']['hosts'].each do |host| -%>
         - <%= host %>
       <%- end -%>
+      <%- if @filebeat_config['output']['elasticsearch']['port'] != nil -%>
+      port: <%= @filebeat_config['output']['elasticsearch']['port'] %>
+      <%- end -%>
       <%- if @filebeat_config['output']['elasticsearch']['protocol'] != nil -%>
       protocol: "<%= @filebeat_config['output']['elasticsearch']['protocol'] %>"
       <%- end -%>
@@ -109,6 +112,9 @@
       hosts:
       <%- @filebeat_config['output']['logstash']['hosts'].each do |host| -%>
         - <%= host %>
+      <%- end -%>
+      <%- if @filebeat_config['output']['logstash']['port'] != nil -%>
+      port: <%= @filebeat_config['output']['logstash']['port'] %>
       <%- end -%>
       <%- if @filebeat_config['output']['logstash']['worker'] != nil -%>
       worker: <%= @filebeat_config['output']['logstash']['worker'] %>

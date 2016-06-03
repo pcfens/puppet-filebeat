@@ -4,6 +4,10 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.0...HEAD)
 
+**Fixed Bugs**
+- Add elasticsearch and logstash port setting to Ruby 1.8 template
+  [\#29](https://github.com/pcfens/puppet-filebeat/issues/29)
+
 ## [v0.7.0](https://github.com/pcfens/puppet-filebeat/tree/v0.7.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.6.3...v0.7.0)
 
