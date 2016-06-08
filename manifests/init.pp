@@ -43,6 +43,7 @@ class filebeat (
   $idle_timeout      = $filebeat::params::idle_timeout,
   $publish_async     = $filebeat::params::publish_async,
   $registry_file     = $filebeat::params::registry_file,
+  $config_file       = $filebeat::params::config_file,
   $config_dir        = $filebeat::params::config_dir,
   $config_dir_mode   = $filebeat::params::config_dir_mode,
   $config_file_mode  = $filebeat::params::config_file_mode,
@@ -67,6 +68,10 @@ class filebeat (
     $prospectors_final = hiera_hash('filebeat::prospectors', $prospectors)
   } else {
     $prospectors_final = $prospectors
+  }
+
+  if $config_file != $filebeat::params::config_file {
+    warning('You\'ve specified a non-standard config_file location - filebeat may fail to start unless you\'re doing something to fix this')
   }
 
   validate_hash($outputs, $logging, $prospectors_final)

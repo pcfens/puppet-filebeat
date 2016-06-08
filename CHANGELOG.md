@@ -4,6 +4,8 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.0...HEAD)
 
+- Allow the config file to be written to an alternate location. Be sure and read limitations before you use this.
+
 **Fixed Bugs**
 - Add elasticsearch and logstash port setting to Ruby 1.8 template
   [\#29](https://github.com/pcfens/puppet-filebeat/issues/29)

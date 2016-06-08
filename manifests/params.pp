@@ -23,6 +23,7 @@ class filebeat::params {
 
   case $::kernel {
     'Linux'   : {
+      $config_file     = '/etc/filebeat/filebeat.yml'
       $config_dir      = '/etc/filebeat/conf.d'
 
       # These parameters are ignored if/until tarball installs are supported in Linux
@@ -40,6 +41,7 @@ class filebeat::params {
     }
 
     'Windows' : {
+      $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
       $config_dir       = 'C:/Program Files/Filebeat/conf.d'
       $download_url     = 'https://download.elastic.co/beats/filebeat/filebeat-1.2.3-windows.zip'
       $install_dir      = 'C:/Program Files'

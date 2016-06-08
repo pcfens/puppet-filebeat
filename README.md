@@ -20,6 +20,7 @@
     - [Public Defines](#public-defines)
 5. [Limitations - OS compatibility, etc.](#limitations)
     - [Pre-1.9.1 Ruby](#pre-191-ruby)
+    - [Using config_file](#using-config_file)
 6. [Development - Guide for contributing to the module](#development)
 
 ## Description
@@ -159,6 +160,9 @@ Installs and configures filebeat.
 - `idle_timeout`: [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 - `publish_async`: [Boolean] If set to true filebeat will publish while preparing the next batch of lines to transmit (defualt: false)
 - `registry_file`: [String] The registry file used to store positions, absolute or relative to working directory (default .filebeat)
+- `config_file`: [String] Where the configuration file managed by this module should be placed. If you think
+  you might want to use this, read the [limitations](#using-config_file) first. Defaults to the location
+  that filebeat expects for your operating system.
 - `config_dir`: [String] The directory where prospectors should be defined (default: /etc/filebeat/conf.d)
 - `config_dir_mode`: [String] The permissions mode set on the configuration directory (default: 0755)
 - `config_file_mode`: [String] The permissions mode set on configuration files (default: 0644)
@@ -270,6 +274,25 @@ parameter to 'filebeat/filebeat.yml.erb'.
 
 See [templates/filebeat.yml.ruby18.erb](https://github.com/pcfens/puppet-filebeat/blob/master/templates/filebeat.yml.ruby18.erb)
 for the all of the details.
+
+### Using config_file
+There are a few very specific use cases where you don't want this module to directly manage the filebeat
+configuration file, but you still want the configuration file on the system at a different location.
+Setting `config_file` will write the filebeat configuration file to an alternate location, but it will not
+update the init script. If you don't also manage the correct file (/etc/filebeat/filebeat.yml on Linux,
+C:/Program Files/Filebeat/filebeat.yml on Windows) then filebeat won't be able to start.
+
+If you're copying the alternate config file location into the real location you'll need to include some
+metaparameters like
+```puppet
+file { '/etc/filebeat/filebeat.yml':
+  ensure  => file,
+  source  => 'file:///etc/filebeat/filebeat.special',
+  require => File['filebeat.yml'],
+  notify  => Service['filebeat'],
+}
+```
+to ensure that services are managed like you might expect.
 
 ## Development
 
