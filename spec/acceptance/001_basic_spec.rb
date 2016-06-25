@@ -1,15 +1,15 @@
 require 'spec_helper_acceptance'
 
-describe "filebeat class:" do
+describe "filebeat class" do
 
   package_name = 'filebeat'
   service_name = 'filebeat'
   pid_file     = '/var/run/filebeat.pid'
 
-  describe "default parameters" do
+  context 'default parameters' do
 
-    it 'should run successfully' do
-      pp = "
+    let(:pp) do
+      <<-EOS
       class { 'filebeat':
         outputs => {
           'logstash' => {
@@ -48,14 +48,11 @@ describe "filebeat class:" do
             }
           }
         }
-      }"
-
-      # Run it twice and test for idempotency
-      apply_manifest(pp, :catch_failures => true)
-      sleep 5
-      expect(apply_manifest(pp, :catch_failures => true).exit_code).to be_zero
-      sleep 5
+      }
+      EOS
     end
+
+    it_behaves_like "an idempotent resource"
 
     describe service(service_name) do
       it { should be_enabled }
@@ -70,11 +67,5 @@ describe "filebeat class:" do
       it { should be_file }
       its(:content) { should match /[0-9]+/ }
     end
-
-    it 'Show all running filebeat processes' do
-      shell('ps auxfw | grep filebeat | grep -v grep')
-    end
-
   end
-
 end
