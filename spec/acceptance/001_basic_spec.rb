@@ -4,7 +4,6 @@ describe "filebeat class" do
 
   package_name = 'filebeat'
   service_name = 'filebeat'
-  pid_file     = '/var/run/filebeat.pid'
 
   context 'default parameters' do
 
@@ -61,11 +60,6 @@ describe "filebeat class" do
 
     describe package(package_name) do
       it { should be_installed }
-    end
-
-    describe file(pid_file) do
-      it { should be_file }
-      its(:content) { should match /[0-9]+/ }
     end
   end
 end
