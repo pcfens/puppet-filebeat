@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe 'filebeat', :type => :class do
+
   let :facts do
     {
       :kernel => 'Linux',
@@ -12,7 +13,6 @@ describe 'filebeat', :type => :class do
   end
 
   context 'defaults' do
-    it { is_expected.to contain_filebeat__params }
     it { is_expected.to contain_package('filebeat') }
     it { is_expected.to contain_file('filebeat.yml').with(
       :path => '/etc/filebeat/filebeat.yml',
