@@ -2,7 +2,13 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.2...HEAD)
+
+## [v0.7.2](https://github.com/pcfens/puppet-filebeat/tree/v0.7.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.1...v0.7.2)
+
+- Wrap regular expressions in single quotes [\#31](https://github.com/pcfens/puppet-filebeat/pull/31) and [\#35](https://github.com/pcfens/puppet-filebeat/pull/35)
+- Use the default Windows temporary folder (C:\Windows\Temp) by default [\33](https://github.com/pcfens/puppet-filebeat/pull/33)
 
 ## [v0.7.1](https://github.com/pcfens/puppet-filebeat/tree/v0.7.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.0...v0.7.1)
