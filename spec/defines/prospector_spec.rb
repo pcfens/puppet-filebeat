@@ -109,7 +109,7 @@ describe 'filebeat::prospector', :type => :define do
       partial_line_waiting: 5s
       max_bytes: 10485760
       multiline:
-        pattern: ^\[
+        pattern: \'^\[\'
         negate: true
         match: after
       include_lines:
