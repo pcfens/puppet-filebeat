@@ -58,7 +58,7 @@ filebeat:
       <%- if @multiline.length > 0 -%>
       multiline:
         <%- if @multiline['pattern'] -%>
-        pattern: <%= @multiline['pattern'] %>
+        pattern: '<%= @multiline['pattern'] %>'
         <%- end -%>
         <%- if @multiline['negate'] -%>
         negate: <%= @multiline['negate'] %>
