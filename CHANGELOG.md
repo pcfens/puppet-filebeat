@@ -2,10 +2,14 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.3...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.4...HEAD)
 
-## [v0.7.3](https://github.com/pcfens/puppet-filebeat/tree/v0.7.3)
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.2...v0.7.3)
+## [v0.7.4](https://github.com/pcfens/puppet-filebeat/tree/v0.7.4)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.2...v0.7.4)
+
+Version 0.7.3 was never released even though it is tagged.
+
+- Fixed some testing issues that were caused by changes to external resources
 
 **Fixed Bugs**
 - Some redis configuration options were not generated as integers [\#38](https://github.com/pcfens/puppet-filebeat/issues/38)
