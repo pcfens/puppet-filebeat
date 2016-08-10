@@ -2,7 +2,13 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.2...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.3...HEAD)
+
+## [v0.7.3](https://github.com/pcfens/puppet-filebeat/tree/v0.7.3)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.2...v0.7.3)
+
+**Fixed Bugs**
+- Some redis configuration options were not generated as integers [\#38](https://github.com/pcfens/puppet-filebeat/issues/38)
 
 ## [v0.7.2](https://github.com/pcfens/puppet-filebeat/tree/v0.7.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.1...v0.7.2)
