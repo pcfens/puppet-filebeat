@@ -29,6 +29,10 @@ group :system_tests do
   gem 'beaker-hostgenerator',          *location_for(ENV['BEAKER_HOSTGENERATOR_VERSION'])
 end
 
+# json_pure 2.0.2 added a requirement on ruby >= 2. We pin to json_pure 2.0.1
+# if using ruby 1.x
+gem 'json_pure', '<=2.0.1', :require => false if RUBY_VERSION =~ /^1\./
+
 if facterversion = ENV['FACTER_GEM_VERSION']
   gem 'facter', facterversion, :require => false
 else
