@@ -24,6 +24,18 @@
 <%- if @filebeat_config['output']['redis']['port'] -%>
 <%- @filebeat_config['output']['redis']['port'] = Integer(@filebeat_config['output']['redis']['port']) -%>
 <%- end -%>
+<%- if @filebeat_config['output']['redis']['db'] -%>
+<%- @filebeat_config['output']['redis']['db'] = Integer(@filebeat_config['output']['redis']['db']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['redis']['db_topology'] -%>
+<%- @filebeat_config['output']['redis']['db_topology'] = Integer(@filebeat_config['output']['redis']['db_topology']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['redis']['timeout'] -%>
+<%- @filebeat_config['output']['redis']['timeout'] = Integer(@filebeat_config['output']['redis']['timeout']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['redis']['reconnect_interval'] -%>
+<%- @filebeat_config['output']['redis']['reconnect_interval'] = Integer(@filebeat_config['output']['redis']['reconnect_interval']) -%>
+<%- end -%>
 <%- end -%>
 <%- if @filebeat_config['shipper'] -%>
 <%- if @filebeat_config['shipper']['refresh_topology_freq'] -%>
