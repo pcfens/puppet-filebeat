@@ -16,6 +16,7 @@
 # @param manage_repo [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 # @param service_ensure [String] The ensure parameter on the filebeat service (default: running)
 # @param service_enable [String] The enable parameter on the filebeat service (default: true)
+# @param version [String] Which version of filebeat is running (default: 1.2)
 # @param spool_size [Integer] How large the spool should grow before being flushed to the network (default: 2048)
 # @param idle_timeout [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 # @param publish_async [Boolean] If set to true filebeat will publish while preparing the next batch of lines to send (defualt: false)
@@ -34,33 +35,52 @@
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 # @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
 class filebeat (
-  $package_ensure    = $filebeat::params::package_ensure,
-  $manage_repo       = $filebeat::params::manage_repo,
-  $service_ensure    = $filebeat::params::service_ensure,
-  $service_enable    = $filebeat::params::service_enable,
-  $service_provider  = $filebeat::params::service_provider,
-  $spool_size        = $filebeat::params::spool_size,
-  $idle_timeout      = $filebeat::params::idle_timeout,
-  $publish_async     = $filebeat::params::publish_async,
-  $registry_file     = $filebeat::params::registry_file,
-  $config_file       = $filebeat::params::config_file,
-  $config_dir        = $filebeat::params::config_dir,
-  $config_dir_mode   = $filebeat::params::config_dir_mode,
-  $config_file_mode  = $filebeat::params::config_file_mode,
-  $purge_conf_dir    = $filebeat::params::purge_conf_dir,
-  $outputs           = $filebeat::params::outputs,
-  $shipper           = $filebeat::params::shipper,
-  $logging           = $filebeat::params::logging,
-  $run_options       = $filebeat::params::run_options,
-  $conf_template     = $filebeat::params::conf_template,
-  $download_url      = $filebeat::params::download_url,
-  $install_dir       = $filebeat::params::install_dir,
-  $tmp_dir           = $filebeat::params::tmp_dir,
-  $prospectors       = {},
-  $prospectors_merge = false,
+  $package_ensure        = $filebeat::params::package_ensure,
+  $manage_repo           = $filebeat::params::manage_repo,
+  $service_ensure        = $filebeat::params::service_ensure,
+  $service_enable        = $filebeat::params::service_enable,
+  $service_provider      = $filebeat::params::service_provider,
+  $version               = $filebeat::params::version,
+  $beat_name             = $filebeat::params::beat_name,
+  $tags                  = $filebeat::params::tags,
+  $fields                = $filebeat::params::fields,
+  $fields_under_root     = $filebeat::params::fields_under_root,
+  $ignore_outgoing       = $filebeat::params::ignore_outgoing,
+  $refresh_topology_freq = $filebeat::params::refresh_topology_freq,
+  $topology_expire       = $filebeat::params::topology_expire,
+  $queue_size            = $filebeat::params::queue_size,
+  $max_procs             = $filebeat::params::max_procs,
+  $spool_size            = $filebeat::params::spool_size,
+  $idle_timeout          = $filebeat::params::idle_timeout,
+  $publish_async         = $filebeat::params::publish_async,
+  $registry_file         = $filebeat::params::registry_file,
+  $config_file           = $filebeat::params::config_file,
+  $config_dir            = $filebeat::params::config_dir,
+  $config_dir_mode       = $filebeat::params::config_dir_mode,
+  $config_file_mode      = $filebeat::params::config_file_mode,
+  $purge_conf_dir        = $filebeat::params::purge_conf_dir,
+  $outputs               = $filebeat::params::outputs,
+  $shipper               = $filebeat::params::shipper,
+  $logging               = $filebeat::params::logging,
+  $run_options           = $filebeat::params::run_options,
+  $download_url          = $filebeat::params::download_url,
+  $install_dir           = $filebeat::params::install_dir,
+  $tmp_dir               = $filebeat::params::tmp_dir,
+  $prospectors           = {},
+  $prospectors_merge     = false,
 ) inherits filebeat::params {
 
   $kernel_fail_message = "${::kernel} is not supported by filebeat."
+
+  if versioncmp('1.9.1', $::rubyversion) > 0 {
+    $conf_template = "${module_name}/filebeat.yml.ruby18.erb"
+  } else {
+    if versioncmp($version, '5') < 0 {
+      $conf_template = "${module_name}/filebeat.yml.v1.erb"
+    } else {
+      $conf_template = "${module_name}/filebeat.yml.erb"
+    }
+  }
 
   validate_bool($manage_repo, $prospectors_merge)
 
