@@ -4,14 +4,35 @@ filebeat:
       <%- @paths.each do |log_path| -%>
       - <%= log_path %>
       <%- end -%>
+      <%- if @input_type -%>
+      input_type: <%= @input_type %>
+      <%- end -%>
+      <%- if @encoding -%>
+      encoding: <%= @encoding %>
+      <%- end -%>
+      <%- if @exclude_lines.length > 0 -%>
+      exclude_lines:
+        <%- @exclude_lines.each do |exclude_line| -%>
+        - '<%= exclude_line %>'
+        <%- end -%>
+      <%- end -%>
+      <%- if @include_lines.length > 0 -%>
+      include_lines:
+        <%- @include_lines.each do |include_line| -%>
+        - '<%= include_line %>'
+        <%- end -%>
+      <%- end -%>
       <%- if @exclude_files.length > 0 -%>
       exclude_files:
         <%- @exclude_files.each do |exclude_file| -%>
         - <%= exclude_file %>
         <%- end -%>
       <%- end -%>
-      <%- if @encoding -%>
-      encoding: <%= @encoding %>
+      <%- if @tags.length > 0 -%>
+      tags:
+        <%- @tags.each do |tag| -%>
+        - <%= tag %>
+        <%- end -%>
       <%- end -%>
       <%- if @fields.length > 0 -%>
       fields:
@@ -20,40 +41,53 @@ filebeat:
         <%- end -%>
       <%- end -%>
       fields_under_root: <%= @fields_under_root %>
-      <%- if @input_type -%>
-      input_type: <%= @input_type %>
-      <%- end -%>
       <%- if @ignore_older -%>
       ignore_older: <%= @ignore_older %>
       <%- end -%>
-      <%- if @close_older -%>
-      close_older: <%= @close_older %>
+      <%- if @close_inactive -%>
+      close_inactive: <%= @close_inactive %>
       <%- end -%>
-      <%- if @real_doc_type -%>
-      document_type: <%= @real_doc_type %>
+      <%- if @close_renamed -%>
+      close_renamed: <%= @close_renamed %>
+      <%- end -%>
+      <%- if @close_removed -%>
+      close_removed: <%= @close_removed %>
+      <%- end -%>
+      <%- if @close_eof -%>
+      close_eof: <%= @close_eof %>
+      <%- end -%>
+      <%- if @clean_inactive -%>
+      clean_inactive: <%= @clean_inactive %>
+      <%- end -%>
+      <%- if @clean_removed -%>
+      clean_removed: <%= @clean_removed %>
       <%- end -%>
       <%- if @scan_frequency -%>
       scan_frequency: <%= @scan_frequency %>
       <%- end -%>
+      <%- if @real_doc_type -%>
+      document_type: <%= @real_doc_type %>
+      <%- end -%>
       <%- if @harvester_buffer_size -%>
       harvester_buffer_size: <%= @harvester_buffer_size %>
       <%- end -%>
-      tail_files: <%= @tail_files %>
-      force_close_files: <%= @force_close_files %>
-      <%- if @backoff -%>
-      backoff: <%= @backoff %>
-      <%- end -%>
-      <%- if @max_backoff -%>
-      max_backoff: <%= @max_backoff %>
-      <%- end -%>
-      <%- if @backoff_factor -%>
-      backoff_factor: <%= @backoff_factor %>
-      <%- end -%>
-      <%- if @partial_line_waiting -%>
-      partial_line_waiting: <%= @partial_line_waiting %>
-      <%- end -%>
       <%- if @max_bytes -%>
       max_bytes: <%= @max_bytes %>
+      <%- end -%>
+      <%- if @json.length > 0 -%>
+      json:
+        <%- if @json['message_key'] -%>
+        message_key: '<%= @json['message_key'] %>'
+        <%- end -%>
+        <%- if @json['keys_under_root'] -%>
+        keys_under_root: '<%= @json['keys_under_root'] %>'
+        <%- end -%>
+        <%- if @json['overwrite_keys'] -%>
+        overwrite_keys: '<%= @json['overwrite_keys'] %>'
+        <%- end -%>
+        <%- if @json['add_error_key'] -%>
+        add_error_key: '<%= @json['add_error_key'] %>'
+        <%- end -%>
       <%- end -%>
       <%- if @multiline.length > 0 -%>
       multiline:
@@ -73,15 +107,13 @@ filebeat:
         timeout: <%= @multiline['timeout'] %>
         <%- end -%>
       <%- end -%>
-      <%- if @include_lines.length > 0 -%>
-      include_lines:
-        <%- @include_lines.each do |include_line| -%>
-        - '<%= include_line %>'
-        <%- end -%>
+      tail_files: <%= @tail_files %>
+      <%- if @backoff -%>
+      backoff: <%= @backoff %>
       <%- end -%>
-      <%- if @exclude_lines.length > 0 -%>
-      exclude_lines:
-        <%- @exclude_lines.each do |exclude_line| -%>
-        - '<%= exclude_line %>'
-        <%- end -%>
+      <%- if @max_backoff -%>
+      max_backoff: <%= @max_backoff %>
+      <%- end -%>
+      <%- if @backoff_factor -%>
+      backoff_factor: <%= @backoff_factor %>
       <%- end -%>

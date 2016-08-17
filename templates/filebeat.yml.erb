@@ -1,3 +1,18 @@
+<%- if @filebeat_config['refresh_topology_freq'] -%>
+<%- @filebeat_config['refresh_topology_freq'] = Integer(@filebeat_config['refresh_topology_freq']) -%>
+<%- end -%>
+<%- if @filebeat_config['topology_expire'] -%>
+<%- @filebeat_config['topology_expire'] = Integer(@filebeat_config['topology_expire']) -%>
+<%- end -%>
+<%- if @filebeat_config['queue_size'] -%>
+<%- @filebeat_config['queue_size'] = Integer(@filebeat_config['queue_size']) -%>
+<%- end -%>
+<%- if @filebeat_config['bulk_queue_size'] -%>
+<%- @filebeat_config['bulk_queue_size'] = Integer(@filebeat_config['bulk_queue_size']) -%>
+<%- end -%>
+<%- if @filebeat_config['max_procs'] -%>
+<%- @filebeat_config['max_procs'] = Integer(@filebeat_config['max_procs']) -%>
+<%- end -%>
 <%- @filebeat_config['filebeat']['spool_size'] = Integer(@filebeat_config['filebeat']['spool_size']) -%>
 <%- if @filebeat_config['output']['file'] -%>
 <%- if @filebeat_config['output']['file']['rotate_every_kb'] -%>
@@ -8,16 +23,49 @@
 <%- end -%>
 <%- end -%>
 <%- if @filebeat_config['output']['elasticsearch'] -%>
+<%- if @filebeat_config['output']['elasticsearch']['compression_level'] -%>
+<%- @filebeat_config['output']['elasticsearch']['compression_level'] = Integer(@filebeat_config['output']['elasticsearch']['compression_level']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['elasticsearch']['worker'] -%>
+<%- @filebeat_config['output']['elasticsearch']['worker'] = Integer(@filebeat_config['output']['elasticsearch']['worker']) -%>
+<%- end -%>
 <%- if @filebeat_config['output']['elasticsearch']['port'] -%>
 <%- @filebeat_config['output']['elasticsearch']['port'] = Integer(@filebeat_config['output']['elasticsearch']['port']) -%>
 <%- end -%>
+<%- if @filebeat_config['output']['elasticsearch']['max_retries'] -%>
+<%- @filebeat_config['output']['elasticsearch']['max_retries'] = Integer(@filebeat_config['output']['elasticsearch']['max_retries']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['elasticsearch']['bulk_max_size'] -%>
+<%- @filebeat_config['output']['elasticsearch']['bulk_max_size'] = Integer(@filebeat_config['output']['elasticsearch']['bulk_max_size']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['elasticsearch']['timeout'] -%>
+<%- @filebeat_config['output']['elasticsearch']['timeout'] = Integer(@filebeat_config['output']['elasticsearch']['timeout']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['elasticsearch']['flush_interval'] -%>
+<%- @filebeat_config['output']['elasticsearch']['flush_interval'] = Integer(@filebeat_config['output']['elasticsearch']['flush_interval']) -%>
+<%- end -%>
 <%- end -%>
 <%- if @filebeat_config['output']['logstash'] -%>
-<%- if @filebeat_config['output']['logstash']['bulk_max_size'] -%>
-<%- @filebeat_config['output']['logstash']['bulk_max_size'] = Integer(@filebeat_config['output']['logstash']['bulk_max_size']) -%>
+<%- if @filebeat_config['output']['logstash']['compression_level'] -%>
+<%- @filebeat_config['output']['logstash']['compression_level'] = Integer(@filebeat_config['output']['logstash']['compression_level']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['logstash']['worker'] -%>
+<%- @filebeat_config['output']['logstash']['worker'] = Integer(@filebeat_config['output']['logstash']['worker']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['logstash']['pipelining'] -%>
+<%- @filebeat_config['output']['logstash']['pipelining'] = Integer(@filebeat_config['output']['logstash']['pipelining']) -%>
 <%- end -%>
 <%- if @filebeat_config['output']['logstash']['port'] -%>
 <%- @filebeat_config['output']['logstash']['port'] = Integer(@filebeat_config['output']['logstash']['port']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['logstash']['timeout'] -%>
+<%- @filebeat_config['output']['logstash']['timeout'] = Integer(@filebeat_config['output']['logstash']['timeout']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['logstash']['max_retries'] -%>
+<%- @filebeat_config['output']['logstash']['max_retries'] = Integer(@filebeat_config['output']['logstash']['max_retries']) -%>
+<%- end -%>
+<%- if @filebeat_config['output']['logstash']['bulk_max_size'] -%>
+<%- @filebeat_config['output']['logstash']['bulk_max_size'] = Integer(@filebeat_config['output']['logstash']['bulk_max_size']) -%>
 <%- end -%>
 <%- end -%>
 <%- if @filebeat_config['output']['redis'] -%>
@@ -30,22 +78,17 @@
 <%- if @filebeat_config['output']['redis']['db_topology'] -%>
 <%- @filebeat_config['output']['redis']['db_topology'] = Integer(@filebeat_config['output']['redis']['db_topology']) -%>
 <%- end -%>
+<%- if @filebeat_config['output']['redis']['worker'] -%>
+<%- @filebeat_config['output']['redis']['worker'] = Integer(@filebeat_config['output']['redis']['worker']) -%>
+<%- end -%>
 <%- if @filebeat_config['output']['redis']['timeout'] -%>
 <%- @filebeat_config['output']['redis']['timeout'] = Integer(@filebeat_config['output']['redis']['timeout']) -%>
 <%- end -%>
-<%- if @filebeat_config['output']['redis']['reconnect_interval'] -%>
-<%- @filebeat_config['output']['redis']['reconnect_interval'] = Integer(@filebeat_config['output']['redis']['reconnect_interval']) -%>
+<%- if @filebeat_config['output']['redis']['max_retries'] -%>
+<%- @filebeat_config['output']['redis']['max_retries'] = Integer(@filebeat_config['output']['redis']['max_retries']) -%>
 <%- end -%>
-<%- end -%>
-<%- if @filebeat_config['shipper'] -%>
-<%- if @filebeat_config['shipper']['refresh_topology_freq'] -%>
-<%- @filebeat_config['shipper']['refresh_topology_freq'] = Integer(@filebeat_config['shipper']['refresh_topology_freq']) -%>
-<%- end -%>
-<%- if @filebeat_config['shipper']['topology_expire'] -%>
-<%- @filebeat_config['shipper']['topology_expire'] = Integer(@filebeat_config['shipper']['topology_expire']) -%>
-<%- end -%>
-<%- if @filebeat_config['shipper']['queue_size'] -%>
-<%- @filebeat_config['shipper']['queue_size'] = Integer(@filebeat_config['shipper']['queue_size']) -%>
+<%- if @filebeat_config['output']['redis']['bulk_max_size'] -%>
+<%- @filebeat_config['output']['redis']['bulk_max_size'] = Integer(@filebeat_config['output']['redis']['bulk_max_size']) -%>
 <%- end -%>
 <%- end -%>
 <%- if @filebeat_config['logging']['files'] -%>
@@ -57,4 +100,4 @@
 <%- end -%>
 <%- end -%>
 ### Filebeat configuration managed by Puppet ###
-<%= @filebeat_config.to_yaml() %>
+<%= @filebeat_config.reject { |k, v| v.nil? || (v.respond_to?(:empty?) && v.empty?) }.to_yaml() %>

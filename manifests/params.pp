@@ -1,25 +1,29 @@
 class filebeat::params {
-  $package_ensure = present
-  $manage_repo    = true
-  $service_ensure = running
-  $service_enable = true
-  $spool_size     = 2048
-  $idle_timeout   = '5s'
-  $publish_async  = false
-  $registry_file  = '.filebeat'
-  $config_dir_mode = '0755'
-  $config_file_mode = '0644'
-  $purge_conf_dir = true
-  $outputs        = {}
-  $shipper        = {}
-  $logging        = {}
-  $run_options    = {}
-
-  if versioncmp('1.9.1', $::rubyversion) > 0 {
-    $conf_template = "${module_name}/filebeat.yml.ruby18.erb"
-  } else {
-    $conf_template = "${module_name}/filebeat.yml.erb"
-  }
+  $package_ensure        = present
+  $manage_repo           = true
+  $service_ensure        = running
+  $service_enable        = true
+  $version               = '1.2'
+  $spool_size            = 2048
+  $idle_timeout          = '5s'
+  $publish_async         = false
+  $registry_file         = '.filebeat'
+  $beat_name             = $hostname
+  $tags                  = []
+  $fields                = []
+  $fields_under_root     = false
+  $ignore_outgoing       = false
+  $refresh_topology_freq = 10
+  $topology_expire       = 15
+  $queue_size            = 1000
+  $max_procs             = undef
+  $config_dir_mode       = '0755'
+  $config_file_mode      = '0644'
+  $purge_conf_dir        = true
+  $outputs               = {}
+  $shipper               = {}
+  $logging               = {}
+  $run_options           = {}
 
   case $::kernel {
     'Linux'   : {
