@@ -56,7 +56,6 @@ describe 'filebeat::prospector', :type => :define do
       backoff: 1s
       max_backoff: 10s
       backoff_factor: 2
-      partial_line_waiting: 5s
       max_bytes: 10485760
 ',
       )}
@@ -106,7 +105,6 @@ describe 'filebeat::prospector', :type => :define do
       backoff: 1s
       max_backoff: 10s
       backoff_factor: 2
-      partial_line_waiting: 5s
       max_bytes: 10485760
       multiline:
         pattern: \'^\[\'
@@ -156,7 +154,6 @@ describe 'filebeat::prospector', :type => :define do
       backoff: 1s
       max_backoff: 10s
       backoff_factor: 2
-      partial_line_waiting: 5s
       max_bytes: 10485760
 ',
       )}

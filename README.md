@@ -238,8 +238,6 @@ to fully understand what these parameters do.
   - `max_backoff`: [String] The maximum wait time to scan a file for new lines to ship (default: 10s)
   - `backoff_factor`: [Integer] `backoff` is multiplied by this parameter until `max_backoff` is reached to
     determine the actual backoff (default: 2)
-  - `partial_line_waiting`: [String] How long should the prospector wait before shipping a file with
-    a potentially incomplete last line (default: 5s)
   - `force_close_files`: [Boolean] Should filebeat forcibly close a file when renamed (default: false)
   - `include_lines`: [Array] A list of regular expressions to match the lines that you want to include.
     Ignored if empty (default: [])
