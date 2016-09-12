@@ -49,9 +49,6 @@ filebeat:
       <%- if @backoff_factor -%>
       backoff_factor: <%= @backoff_factor %>
       <%- end -%>
-      <%- if @partial_line_waiting -%>
-      partial_line_waiting: <%= @partial_line_waiting %>
-      <%- end -%>
       <%- if @max_bytes -%>
       max_bytes: <%= @max_bytes %>
       <%- end -%>

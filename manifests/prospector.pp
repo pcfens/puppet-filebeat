@@ -16,7 +16,6 @@ define filebeat::prospector (
   $backoff               = '1s',
   $max_backoff           = '10s',
   $backoff_factor        = 2,
-  $partial_line_waiting  = '5s',
   $force_close_files     = false,
   $include_lines         = [],
   $exclude_lines         = [],
