@@ -6,7 +6,6 @@ class filebeat::params {
   $spool_size     = 2048
   $idle_timeout   = '5s'
   $publish_async  = false
-  $registry_file  = '.filebeat'
   $config_dir_mode = '0755'
   $config_file_mode = '0644'
   $purge_conf_dir = true
@@ -25,6 +24,7 @@ class filebeat::params {
     'Linux'   : {
       $config_file     = '/etc/filebeat/filebeat.yml'
       $config_dir      = '/etc/filebeat/conf.d'
+      $registry_file   = '/var/lib/filebeat/registry'
 
       # These parameters are ignored if/until tarball installs are supported in Linux
       $tmp_dir         = '/tmp'
@@ -43,6 +43,7 @@ class filebeat::params {
     'Windows' : {
       $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
       $config_dir       = 'C:/Program Files/Filebeat/conf.d'
+      $registry_file    = 'C:/ProgramData/filebeat/registry'
       $download_url     = 'https://download.elastic.co/beats/filebeat/filebeat-1.2.3-windows.zip'
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'
