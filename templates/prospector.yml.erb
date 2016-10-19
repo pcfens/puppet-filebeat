@@ -29,8 +29,8 @@ filebeat:
       <%- if @close_older -%>
       close_older: <%= @close_older %>
       <%- end -%>
-      <%- if @real_doc_type -%>
-      document_type: <%= @real_doc_type %>
+      <%- if @doc_type -%>
+      document_type: <%= @doc_type %>
       <%- end -%>
       <%- if @scan_frequency -%>
       scan_frequency: <%= @scan_frequency %>
