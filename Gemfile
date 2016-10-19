@@ -17,7 +17,6 @@ gem 'json',                      :require => false
   gem 'puppetlabs_spec_helper',    :require => false
   gem 'rspec-puppet', '>= 2.3.2',  :require => false
   gem 'simplecov',                 :require => false
-  gem 'parallel_tests',            :require => false
 end
 
 group :system_tests do
