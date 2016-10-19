@@ -37,7 +37,7 @@ describe "filebeat class" do
         },
         prospectors => {
           'system-logs' => {
-            log_type => 'system',
+            doc_type => 'system',
             paths    => [
               '/var/log/dmesg',
             ],
