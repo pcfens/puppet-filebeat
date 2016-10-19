@@ -6,10 +6,17 @@ class filebeat::params {
   $spool_size     = 2048
   $idle_timeout   = '5s'
   $publish_async  = false
+  $shutdown_timeout  = 0
+  $beat_name         = $::fqdn
+  $tags              = []
+  $queue_size        = 1000
+  $max_procs         = undef
   $registry_file  = '.filebeat'
   $config_dir_mode = '0755'
   $config_file_mode = '0644'
   $purge_conf_dir = true
+  $fields         = {}
+  $fields_under_root = false
   $outputs        = {}
   $shipper        = {}
   $logging        = {}

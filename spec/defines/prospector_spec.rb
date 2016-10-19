@@ -24,7 +24,7 @@ describe 'filebeat::prospector', :type => :define do
     let :facts do {
       :kernel => 'Linux',
       :osfamily => 'Linux',
-      :rubyversion => '1.9.3',
+      :rubyversion => '2.3.1',
     }
     end
 
@@ -123,7 +123,7 @@ describe 'filebeat::prospector', :type => :define do
   context 'On Windows' do
     let :facts do {
       :kernel => 'Windows',
-      :rubyversion => '1.9.3',
+      :rubyversion => '2.3.1',
     }
     end
 

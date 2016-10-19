@@ -8,7 +8,7 @@ describe 'filebeat', :type => :class do
       :osfamily => 'Debian',
       :lsbdistid => 'Ubuntu',
       :lsbdistrelease => '16.04',
-      :rubyversion => '1.9.3',
+      :rubyversion => '2.3.1',
       :puppetversion   => Puppet.version
     }
   end
@@ -45,7 +45,7 @@ describe 'filebeat', :type => :class do
       {
         :kernel => 'Linux',
         :osfamily => 'RedHat',
-        :rubyversion => '1.8.7',
+        :rubyversion => '2.3.1',
         :puppetversion   => Puppet.version
       }
     end
@@ -67,7 +67,7 @@ describe 'filebeat', :type => :class do
     let :facts do
       {
         :kernel => 'Windows',
-        :rubyversion => '1.9.3',
+        :rubyversion => '2.3.1',
         :puppetversion   => Puppet.version
       }
     end

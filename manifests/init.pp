@@ -56,6 +56,15 @@ class filebeat (
   $download_url      = $filebeat::params::download_url,
   $install_dir       = $filebeat::params::install_dir,
   $tmp_dir           = $filebeat::params::tmp_dir,
+  #### v5 only ####
+  $shutdown_timeout  = $filebeat::params::shutdown_timeout,
+  $beat_name         = $filebeat::params::beat_name,
+  $tags              = $filebeat::params::tags,
+  $queue_size        = $filebeat::params::queue_size,
+  $max_procs         = $filebeat::params::max_procs,
+  $fields            = $filebeat::params::fields,
+  $fields_under_root = $filebeat::params::fields_under_root,
+  #### End v5 onlly ####
   $prospectors       = {},
   $prospectors_merge = false,
 ) inherits filebeat::params {
