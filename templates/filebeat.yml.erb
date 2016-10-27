@@ -19,6 +19,9 @@
 <%- if @filebeat_config['output']['logstash']['port'] -%>
 <%- @filebeat_config['output']['logstash']['port'] = Integer(@filebeat_config['output']['logstash']['port']) -%>
 <%- end -%>
+<%- if @filebeat_config['output']['logstash']['timeout'] -%>
+<%- @filebeat_config['output']['logstash']['timeout'] = Integer(@filebeat_config['output']['logstash']['timeout']) -%>
+<%- end -%>
 <%- end -%>
 <%- if @filebeat_config['output']['redis'] -%>
 <%- if @filebeat_config['output']['redis']['port'] -%>
