@@ -25,6 +25,7 @@ describe 'filebeat::prospector', :type => :define do
       :kernel => 'Linux',
       :osfamily => 'Linux',
       :rubyversion => '2.3.1',
+      :filebeat_version => '1',
     }
     end
 
@@ -124,6 +125,7 @@ describe 'filebeat::prospector', :type => :define do
     let :facts do {
       :kernel => 'Windows',
       :rubyversion => '2.3.1',
+      :filebeat_version => '1',
     }
     end
 

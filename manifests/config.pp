@@ -26,7 +26,7 @@ class filebeat::config {
       file {'filebeat.yml':
         ensure  => file,
         path    => $filebeat::config_file,
-        content => template($filebeat::conf_template),
+        content => template($filebeat::real_conf_template),
         owner   => 'root',
         group   => 'root',
         mode    => $filebeat::config_file_mode,
@@ -48,7 +48,7 @@ class filebeat::config {
       file {'filebeat.yml':
         ensure  => file,
         path    => $filebeat::config_file,
-        content => template($filebeat::conf_template),
+        content => template($filebeat::real_conf_template),
         notify  => Service['filebeat'],
       }
 

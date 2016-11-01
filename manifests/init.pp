@@ -34,6 +34,7 @@
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 # @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
 class filebeat (
+  $major_version     = undef,
   $package_ensure    = $filebeat::params::package_ensure,
   $manage_repo       = $filebeat::params::manage_repo,
   $service_ensure    = $filebeat::params::service_ensure,
@@ -52,7 +53,7 @@ class filebeat (
   $shipper           = $filebeat::params::shipper,
   $logging           = $filebeat::params::logging,
   $run_options       = $filebeat::params::run_options,
-  $conf_template     = $filebeat::params::conf_template,
+  $conf_template     = undef,
   $download_url      = $filebeat::params::download_url,
   $install_dir       = $filebeat::params::install_dir,
   $tmp_dir           = $filebeat::params::tmp_dir,
@@ -69,9 +70,34 @@ class filebeat (
   $prospectors_merge = false,
 ) inherits filebeat::params {
 
+  notice("Filebeat ${::filebeat_version}")
+
   $kernel_fail_message = "${::kernel} is not supported by filebeat."
 
   validate_bool($manage_repo, $prospectors_merge)
+
+  if $major_version == undef and $::filebeat_version == undef {
+    $real_version = '5'
+  } elsif $major_version == undef and versioncmp($::filebeat_version, '5.0.0') >= 0 {
+    $real_version = '5'
+  } elsif $major_version == undef and versioncmp($::filebeat_version, '5.0.0') < 0 {
+    $real_version = '1'
+  } else {
+    $real_version = $major_version
+  }
+
+  if $conf_template != undef {
+    $real_conf_template = $conf_template
+  } elsif $real_version == '1' {
+    if versioncmp('1.9.1', $::rubyversion) > 0 {
+      $real_conf_template = "${module_name}/filebeat.yml.ruby18.erb"
+    } else {
+      $real_conf_template = "${module_name}/filebeat.yml.erb"
+    }
+  } elsif $real_version =='5' {
+    $real_conf_template = "${module_name}/filebeat5.yml.erb"
+  }
+
 
   if $prospectors_merge {
     $prospectors_final = hiera_hash('filebeat::prospectors', $prospectors)

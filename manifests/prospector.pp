@@ -25,6 +25,11 @@ define filebeat::prospector (
   validate_hash($fields, $multiline)
   validate_array($paths, $exclude_files, $include_lines, $exclude_lines)
 
+  $prospector_template = $filebeat::real_version ? {
+    '5' => 'prospector5.yml.erb',
+    '1' => 'prospector.yml.erb',
+  }
+
   case $::kernel {
     'Linux' : {
       file { "filebeat-${name}":
@@ -33,7 +38,7 @@ define filebeat::prospector (
         owner   => 'root',
         group   => 'root',
         mode    => $::filebeat::config_file_mode,
-        content => template("${module_name}/prospector.yml.erb"),
+        content => template("${module_name}/${prospector_template}"),
         notify  => Service['filebeat'],
       }
     }
@@ -41,7 +46,7 @@ define filebeat::prospector (
       file { "filebeat-${name}":
         ensure  => $ensure,
         path    => "${filebeat::config_dir}/${name}.yml",
-        content => template("${module_name}/prospector.yml.erb"),
+        content => template("${module_name}/${prospector_template}"),
         notify  => Service['filebeat'],
       }
     }
