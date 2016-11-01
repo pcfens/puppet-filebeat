@@ -12,6 +12,7 @@
 #   },
 # }
 #
+# @param major_version [String] The major version of filebeat to install. Should be either undef, 1, or 5. (default 5 if 1 not already installed)
 # @param package_ensure [String] The ensure parameter for the filebeat package (default: present)
 # @param manage_repo [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 # @param service_ensure [String] The ensure parameter on the filebeat service (default: running)
@@ -31,6 +32,13 @@
 # @param download_url [String] The URL of the zip file that should be downloaded to install filebeat (windows only)
 # @param install_dir [String] Where filebeat should be installed (windows only)
 # @param tmp_dir [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
+# @param shutdown_timeout [String] How long filebeat waits on shutdown for the publisher to finish sending events
+# @param beat_name [String] The name of the beat shipper (default: hostname)
+# @param tags [Array] A list of tags that will be included with each published transaction
+# @param queue_size [String] The internal queue size for events in the pipeline
+# @param max_procs [Number] The maximum number of CPUs that can be simultaneously used
+# @param fields [Hash] Optional fields that should be added to each event output
+# @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 # @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
 class filebeat (

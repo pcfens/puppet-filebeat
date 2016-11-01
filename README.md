@@ -151,6 +151,7 @@ but is expected to exist as a directory that puppet can write to.
 Installs and configures filebeat.
 
 **Parameters within `filebeat`**
+- `major_version`: [String] The major version of filebeat to install. Should be either undef, 1, or 5. (default 5 if 1 not already installed)
 - `package_ensure`: [String] The ensure parameter for the filebeat package (default: present)
 - `manage_repo`: [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 - `service_ensure`: [String] The ensure parameter on the filebeat service (default: running)
@@ -174,6 +175,13 @@ Installs and configures filebeat.
 - `download_url`: [String] The URL of the zip file that should be downloaded to install filebeat (windows only)
 - `install_dir`: [String] Where filebeat should be installed (windows only)
 - `tmp_dir`: [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
+- `shutdown_timeout`: [String] How long filebeat waits on shutdown for the publisher to finish sending events
+- `beat_name`: [String] The name of the beat shipper (default: hostname)
+- `tags`: [Array] A list of tags that will be included with each published transaction
+- `queue_size`: [String] The internal queue size for events in the pipeline
+- `max_procs`: [Number] The maximum number of CPUs that can be simultaneously used
+- `fields`: [Hash] Optional fields that should be added to each event output
+- `fields_under_root`: [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 - `prospectors`: [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 - `prospectors_merge`: [Boolean] If true, `hiera_hash()` will be used to build the the `prospectors` parameter (default: false)
 
