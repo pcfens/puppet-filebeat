@@ -78,8 +78,6 @@ class filebeat (
   $prospectors_merge = false,
 ) inherits filebeat::params {
 
-  notice("Filebeat ${::filebeat_version}")
-
   $kernel_fail_message = "${::kernel} is not supported by filebeat."
 
   validate_bool($manage_repo, $prospectors_merge)

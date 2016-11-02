@@ -12,6 +12,14 @@ class filebeat::repo {
   case $::osfamily {
     'Debian': {
       include ::apt
+
+      # Install apt-transport-https if it's not already managed elsewhere
+      if !defined(Package['apt-transport-https']){
+        package { 'apt-transport-https':
+          ensure => present,
+          before => Class['apt::update'],
+        }
+      }
       Class['apt::update'] -> Package['filebeat']
 
       if !defined(Apt::Source['beats']){
