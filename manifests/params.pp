@@ -21,6 +21,7 @@ class filebeat::params {
   $shipper        = {}
   $logging        = {}
   $run_options    = {}
+  $use_generic_template = false
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {

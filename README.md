@@ -186,6 +186,8 @@ Installs and configures filebeat.
 - `download_url`: [String] The URL of the zip file that should be downloaded to install filebeat (windows only)
 - `install_dir`: [String] Where filebeat should be installed (windows only)
 - `tmp_dir`: [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
+- `use_generic_template`: [Boolean] Use a more generic version of the configuration template. The generic template is more
+  future proof (if types are correct), but looks very different than the example file (default: false)
 - `shutdown_timeout`: [String] How long filebeat waits on shutdown for the publisher to finish sending events
 - `beat_name`: [String] The name of the beat shipper (default: hostname)
 - `tags`: [Array] A list of tags that will be included with each published transaction
