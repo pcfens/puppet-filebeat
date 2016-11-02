@@ -142,6 +142,7 @@ output.elasticsearch:
     <%- if @filebeat_config['output']['elasticsearch']['template']['versions']['2.x']['path'] != nil -%>
     versions.2x.path: "<%= @filebeat_config['output']['elasticsearch']['template']['versions']['2.x']['path'] %>"
     <%- end -%>
+    <%- end -%>
   <%- end -%>
   <%- if @filebeat_config['output']['elasticsearch']['ssl'] != nil -%>
   ssl:
@@ -562,6 +563,5 @@ logging.files:
   <%- end -%>
   <%- if @filebeat_config['logging']['files']['keepfiles'] != nil -%>
   keepfiles: <%= @filebeat_config['logging']['files']['keepfiles'] %>
-  <%- end -%>
   <%- end -%>
 <%- end -%>
