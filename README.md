@@ -7,6 +7,7 @@
 1. [Description](#description)
 2. [Setup - The basics of getting started with filebeat](#setup)
     - [What filebeat affects](#what-filebeat-affects)
+    - [Upgrading to Filebeat 5.x](#upgrading-to-filebeat-5x)
     - [Setup requirements](#setup-requirements)
     - [Beginning with filebeat](#beginning-with-filebeat)
 3. [Usage - Configuration options and additional functionality](#usage)
@@ -33,6 +34,16 @@ The `filebeat` module installs and configures the [filebeat log shipper](https:/
 
 By default `filebeat` adds a software repository to your system, and installs filebeat along
 with required configurations.
+
+### Upgrading to Filebeat 5.x
+
+If you use this module on a system with filebeat 1.x installed, and you keep your current parameters
+nothing will change. Setting `major_version` to '5' will modify the configuration template and update
+package repositories, but won't update the package itself. To update the package set the
+`package_ensure` parameter to at least 5.0.0.
+
+Windows users should set `major_version` to 5 and update the `download_url` parameter to the correct
+[download](https://www.elastic.co/downloads/beats/filebeat).
 
 ### Setup Requirements
 
