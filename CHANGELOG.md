@@ -4,6 +4,19 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.4...HEAD)
 
+**Enhancements**
+- Add support for Filebeat v5.
+
+If you use this module on a system with filebeat 1.x installed, and you keep your current parameters
+nothing will change. Setting `major_version` to '5' will modify the configuration template and update
+package repositories, but won't update the package itself. To update the package set the
+`package_ensure` parameter to at least 5.0.0.
+
+- Add a parameter `use_generic_template` that uses a more generic version of the configuration
+  template. The generic template is more future proof (if types are correct), but looks
+  very different than the example file.
+
+
 ## [v0.7.4](https://github.com/pcfens/puppet-filebeat/tree/v0.7.4)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.2...v0.7.4)
 

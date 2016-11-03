@@ -1,16 +1,24 @@
 class filebeat::config {
   $filebeat_config = {
-    'filebeat'   => {
-      'spool_size'    => $filebeat::spool_size,
-      'idle_timeout'  => $filebeat::idle_timeout,
-      'registry_file' => $filebeat::registry_file,
-      'publish_async' => $filebeat::publish_async,
-      'config_dir'    => $filebeat::config_dir,
+    'shutdown_timeout'  => $filebeat::shutdown_timeout,
+    'beat_name'         => $filebeat::beat_name,
+    'tags'              => $filebeat::tags,
+    'queue_size'        => $filebeat::queue_size,
+    'max_procs'         => $filebeat::max_procs,
+    'fields'            => $filebeat::fields,
+    'fields_under_root' => $filebeat::fields_under_root,
+    'filebeat'          => {
+      'spool_size'       => $filebeat::spool_size,
+      'idle_timeout'     => $filebeat::idle_timeout,
+      'registry_file'    => $filebeat::registry_file,
+      'publish_async'    => $filebeat::publish_async,
+      'config_dir'       => $filebeat::config_dir,
+      'shutdown_timeout' => $filebeat::shutdown_timeout,
     },
-    'output'     => $filebeat::outputs,
-    'shipper'    => $filebeat::shipper,
-    'logging'    => $filebeat::logging,
-    'runoptions' => $filebeat::run_options,
+    'output'            => $filebeat::outputs,
+    'shipper'           => $filebeat::shipper,
+    'logging'           => $filebeat::logging,
+    'runoptions'        => $filebeat::run_options,
   }
 
   case $::kernel {
@@ -18,7 +26,7 @@ class filebeat::config {
       file {'filebeat.yml':
         ensure  => file,
         path    => $filebeat::config_file,
-        content => template($filebeat::conf_template),
+        content => template($filebeat::real_conf_template),
         owner   => 'root',
         group   => 'root',
         mode    => $filebeat::config_file_mode,
@@ -40,7 +48,7 @@ class filebeat::config {
       file {'filebeat.yml':
         ensure  => file,
         path    => $filebeat::config_file,
-        content => template($filebeat::conf_template),
+        content => template($filebeat::real_conf_template),
         notify  => Service['filebeat'],
       }
 

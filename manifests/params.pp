@@ -6,21 +6,30 @@ class filebeat::params {
   $spool_size     = 2048
   $idle_timeout   = '5s'
   $publish_async  = false
+  $shutdown_timeout  = 0
+  $beat_name         = $::fqdn
+  $tags              = []
+  $queue_size        = 1000
+  $max_procs         = undef
   $registry_file  = '.filebeat'
   $config_dir_mode = '0755'
   $config_file_mode = '0644'
   $purge_conf_dir = true
+  $fields         = {}
+  $fields_under_root = false
   $outputs        = {}
   $shipper        = {}
   $logging        = {}
   $run_options    = {}
+  $use_generic_template = false
 
-  if versioncmp('1.9.1', $::rubyversion) > 0 {
-    $conf_template = "${module_name}/filebeat.yml.ruby18.erb"
-  } else {
-    $conf_template = "${module_name}/filebeat.yml.erb"
-  }
-
+  # These are irrelevant as long as the template is set based on the major_version parameter
+  # if versioncmp('1.9.1', $::rubyversion) > 0 {
+  #   $conf_template = "${module_name}/filebeat.yml.ruby18.erb"
+  # } else {
+  #   $conf_template = "${module_name}/filebeat.yml.erb"
+  # }
+  #
   case $::kernel {
     'Linux'   : {
       $config_file     = '/etc/filebeat/filebeat.yml'
