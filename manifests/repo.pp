@@ -13,15 +13,6 @@ class filebeat::repo {
     'Debian': {
       include ::apt
 
-      # Install apt-transport-https if it's not already managed elsewhere
-      if !defined(Package['apt-transport-https']){
-        package { 'apt-transport-https':
-          ensure => present,
-          before => Class['apt::update'],
-        }
-      }
-      Class['apt::update'] -> Package['filebeat']
-
       if !defined(Apt::Source['beats']){
         apt::source { 'beats':
           location => $debian_repo_url,
@@ -33,6 +24,8 @@ class filebeat::repo {
           },
         }
       }
+
+      Exec['apt_update'] -> Package['filebeat']
     }
     'RedHat', 'Linux': {
       if !defined(Yumrepo['beats']){
