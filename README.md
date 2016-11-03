@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.org/pcfens/puppet-filebeat.svg?branch=master)](https://travis-ci.org/pcfens/puppet-filebeat)
 
+## Warning
+
+Version 0.8.0 adds support for filebeat version 5. You may notice some changes to your configuration files.
+
+The changelog has more information.
+
 #### Table of Contents
 
 1. [Description](#description)
