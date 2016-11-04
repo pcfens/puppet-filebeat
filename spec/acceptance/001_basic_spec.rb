@@ -9,10 +9,12 @@ describe "filebeat class" do
 
     let(:pp) do
       <<-EOS
-      include ::apt
+      if $::osfamily == Debian {
+        include ::apt
 
-      package { 'apt-transport-https':
-        ensure => present,
+        package { 'apt-transport-https':
+          ensure => present,
+        }
       }
 
       class { 'filebeat':
