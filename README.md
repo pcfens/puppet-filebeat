@@ -51,6 +51,9 @@ package repositories, but won't update the package itself. To update the package
 Windows users should set `major_version` to 5 and update the `download_url` parameter to the correct
 [download](https://www.elastic.co/downloads/beats/filebeat).
 
+If you're on a Debian based system, you need to make sure that the apt-transport-https package
+is installed if you want this module to manage the repository for you (it does by default).
+
 ### Setup Requirements
 
 The `filebeat` module depends on [`puppetlabs/stdlib`](https://forge.puppetlabs.com/puppetlabs/stdlib), and on
@@ -285,6 +288,10 @@ support YAML like the ruby template can easily generate.
 When installing on Windows, there's an expectation that `C:\Temp` already exists, or an alternative
 location specified in the `tmp_dir` parameter exists and is writable by puppet. The temp directory
 is used to store the downloaded installer only.
+
+### Debian Systems
+
+Filebeat 5.x and newer requires apt-transport-https, but this module won't install it for you.
 
 ### Pre-1.9.1 Ruby
 If you're on a system running a Ruby pre-1.9.1, hashes aren't sorted consistently, causing puppet runs to
