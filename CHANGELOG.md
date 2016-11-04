@@ -4,6 +4,12 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.4...HEAD)
 
+## [v0.8.1](https://github.com/pcfens/puppet-filebeat/tree/v0.8.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.0...v0.8.1)
+
+- Don't manage the apt-transport-https package on Debian systems [\49](https://github.com/pcfens/puppet-filebeat/pull/49)
+- undefined values shouldn't be rendered by the filebeat5 template [\50](https://github.com/pcfens/puppet-filebeat/pull/50)
+
 ## [v0.8.0](https://github.com/pcfens/puppet-filebeat/tree/v0.8.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.4...v0.8.0)
 
