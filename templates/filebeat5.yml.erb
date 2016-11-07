@@ -228,12 +228,6 @@ output.logstash:
     <%- if @filebeat_config['output']['logstash']['ssl']['verification_mode'] != nil -%>
     verification_mode: <%= @filebeat_config['output']['logstash']['ssl']['verification_mode'] %>
     <%- end -%>
-    <%- if @filebeat_config['output']['logstash']['ssl']['supported_protocols'] != nil -%>
-    supported_protocols:
-    <%- @filebeat_config['output']['logstash']['ssl']['supported_protocols'].each do |protocol| -%>
-      - <%= protocol %>
-    <%- end -%>
-    <%- end -%>
     <%- if @filebeat_config['output']['logstash']['ssl']['certificate_authorities'] != nil -%>
     certificate_authorities:
     <%- @filebeat_config['output']['logstash']['ssl']['certificate_authorities'].each do |ca| -%>
