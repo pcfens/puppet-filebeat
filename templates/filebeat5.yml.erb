@@ -218,8 +218,8 @@ output.logstash:
   <%- if @filebeat_config['output']['logstash']['proxy_use_local_resolver'] != nil -%>
   proxy_use_local_resolver: <%= @filebeat_config['output']['logstash']['proxy_use_local_resolver'] %>
   <%- end -%>
-
   <%- if @filebeat_config['output']['logstash']['ssl'] != nil -%>
+  ssl:
     <%- if @filebeat_config['output']['logstash']['ssl']['enabled'] == false -%>
     enabled: false
     <%- else -%>
