@@ -10,7 +10,7 @@ filebeat.shutdown_timeout: <%= @filebeat_config['filebeat']['shutdown_timeout'] 
 #================================ General =====================================
 
 name: <%= @filebeat_config['beat_name'] %>
-<%- if @filebeat_config['tags'] > 0 -%>
+<%- if @filebeat_config['tags'].length > 0 -%>
 tags:
 <%- @filebeat_config['tags'].each do |tag| -%>
   - <%= tag %>
