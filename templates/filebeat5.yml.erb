@@ -273,7 +273,7 @@ output.kafka:
   <%- if @filebeat_config['output']['kafka']['key'] != nil -%>
   key: '<%= @filebeat_config['output']['kafka']['key'] %>'
   <%- end -%>
-  <%- if @filebeat_config['output']['kafka']['partition']['hash'] != nil -%>
+  <%- if @filebeat_config['output']['kafka']['partition'] != nil and @filebeat_config['output']['kafka']['partition']['hash'] != nil -%>
   partition.hash:
     <%- if @filebeat_config['output']['kafka']['partition']['hash']['reachable_only'] != nil -%>
     reachable_only: <%= @filebeat_config['output']['kafka']['partition']['hash']['reachable_only'] %>
