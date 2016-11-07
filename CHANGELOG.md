@@ -7,24 +7,24 @@ Changelog
 ## [v0.8.4](https://github.com/pcfens/puppet-filebeat/tree/v0.8.4)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.3...v0.8.4)
 
-- Fix regression: Add the SSL label to the filebeat 5 template. [\53](https://github.com/pcfens/puppet-filebeat/pull/53)
+- Fix regression: Add the SSL label to the filebeat 5 template. [\#53](https://github.com/pcfens/puppet-filebeat/pull/53)
 
 ## [v0.8.3](https://github.com/pcfens/puppet-filebeat/tree/v0.8.3)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.2...v0.8.3)
 
 - Don't use a possibly undefined array's length to determine if it should be
-  iterated over [\52](https://github.com/pcfens/puppet-filebeat/pull/52)
+  iterated over [\#52](https://github.com/pcfens/puppet-filebeat/pull/52)
 
 ## [v0.8.2](https://github.com/pcfens/puppet-filebeat/tree/v0.8.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.1...v0.8.2)
 
-- Correctly set document type for v5 prospectors [\51](https://github.com/pcfens/puppet-filebeat/pull/51)
+- Correctly set document type for v5 prospectors [\#51](https://github.com/pcfens/puppet-filebeat/pull/51)
 
 ## [v0.8.1](https://github.com/pcfens/puppet-filebeat/tree/v0.8.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.0...v0.8.1)
 
-- Don't manage the apt-transport-https package on Debian systems [\49](https://github.com/pcfens/puppet-filebeat/pull/49)
-- undefined values shouldn't be rendered by the filebeat5 template [\50](https://github.com/pcfens/puppet-filebeat/pull/50)
+- Don't manage the apt-transport-https package on Debian systems [\#49](https://github.com/pcfens/puppet-filebeat/pull/49)
+- undefined values shouldn't be rendered by the filebeat5 template [\#50](https://github.com/pcfens/puppet-filebeat/pull/50)
 
 ## [v0.8.0](https://github.com/pcfens/puppet-filebeat/tree/v0.8.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.4...v0.8.0)
@@ -56,7 +56,7 @@ Version 0.7.3 was never released even though it is tagged.
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.1...v0.7.2)
 
 - Wrap regular expressions in single quotes [\#31](https://github.com/pcfens/puppet-filebeat/pull/31) and [\#35](https://github.com/pcfens/puppet-filebeat/pull/35)
-- Use the default Windows temporary folder (C:\Windows\Temp) by default [\33](https://github.com/pcfens/puppet-filebeat/pull/33)
+- Use the default Windows temporary folder (C:\Windows\Temp) by default [\#33](https://github.com/pcfens/puppet-filebeat/pull/33)
 
 ## [v0.7.1](https://github.com/pcfens/puppet-filebeat/tree/v0.7.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.0...v0.7.1)
