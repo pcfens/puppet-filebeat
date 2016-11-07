@@ -4,6 +4,11 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.3...HEAD)
 
+## [v0.8.5](https://github.com/pcfens/puppet-filebeat/tree/v0.8.5)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.4...v0.8.5)
+
+- Check the kafka partition hash before checking for sub-hashes [\#54](https://github.com/pcfens/puppet-filebeat/pull/54)
+
 ## [v0.8.4](https://github.com/pcfens/puppet-filebeat/tree/v0.8.4)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.3...v0.8.4)
 
