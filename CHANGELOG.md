@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.7.4...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.2...HEAD)
+
+## [v0.8.1](https://github.com/pcfens/puppet-filebeat/tree/v0.8.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.1...v0.8.2)
+
+- Correctly set document type for v5 prospectors [\51](https://github.com/pcfens/puppet-filebeat/pull/51)
 
 ## [v0.8.1](https://github.com/pcfens/puppet-filebeat/tree/v0.8.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.0...v0.8.1)
