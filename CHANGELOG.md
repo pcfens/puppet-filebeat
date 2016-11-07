@@ -2,7 +2,13 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.2...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.3...HEAD)
+
+## [v0.8.3](https://github.com/pcfens/puppet-filebeat/tree/v0.8.3)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.2...v0.8.3)
+
+- Don't use a possibly undefined array's length to determine if it should be
+  iterated over [\52](https://github.com/pcfens/puppet-filebeat/pull/52)
 
 ## [v0.8.2](https://github.com/pcfens/puppet-filebeat/tree/v0.8.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.1...v0.8.2)
