@@ -4,6 +4,11 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.3...HEAD)
 
+## [v0.8.4](https://github.com/pcfens/puppet-filebeat/tree/v0.8.4)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.3...v0.8.4)
+
+- Fix regression: Add the SSL label to the filebeat 5 template. [\53](https://github.com/pcfens/puppet-filebeat/pull/53)
+
 ## [v0.8.3](https://github.com/pcfens/puppet-filebeat/tree/v0.8.3)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.2...v0.8.3)
 
