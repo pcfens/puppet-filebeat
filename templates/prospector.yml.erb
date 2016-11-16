@@ -15,8 +15,8 @@ filebeat:
       <%- end -%>
       <%- if @fields.length > 0 -%>
       fields:
-        <%- @fields.each_pair do |k, v| -%>
-        <%= k %>: <%= v %>
+        <%- @fields.sort_by{|k,v| k}.each  do |key, value| -%>
+        <%= key %>: <%= vvalue %>
         <%- end -%>
       <%- end -%>
       fields_under_root: <%= @fields_under_root %>
