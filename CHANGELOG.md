@@ -2,7 +2,15 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.3...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.6...HEAD)
+
+## [v0.8.6](https://github.com/pcfens/puppet-filebeat/tree/v0.8.6)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.5...v0.8.6)
+
+- Sort field keys [\#55](https://github.com/pcfens/puppet-filebeat/pull/55),
+[\#57](https://github.com/pcfens/puppet-filebeat/issues/57)
+- Refresh the filebeat service when packages are updated [\#56](https://github.com/pcfens/puppet-filebeat/issues/56)
+
 
 ## [v0.8.5](https://github.com/pcfens/puppet-filebeat/tree/v0.8.5)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.4...v0.8.5)
