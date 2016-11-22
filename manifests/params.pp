@@ -59,7 +59,7 @@ class filebeat::params {
     }
 
     default : {
-      fail($filebeat::kernel_fail_message)
+      fail("${::kernel} is not supported by filebeat.")
     }
   }
 }
