@@ -86,11 +86,11 @@ class filebeat (
 
   validate_bool($manage_repo, $prospectors_merge)
 
-  if $major_version == undef and $::filebeat_version == undef {
+  if $major_version == undef and $facts['filebeat_version'] == undef {
     $real_version = '5'
-  } elsif $major_version == undef and versioncmp($::filebeat_version, '5.0.0') >= 0 {
+  } elsif $major_version == undef and versioncmp($facts['filebeat_version'], '5.0.0') >= 0 {
     $real_version = '5'
-  } elsif $major_version == undef and versioncmp($::filebeat_version, '5.0.0') < 0 {
+  } elsif $major_version == undef and versioncmp($facts['filebeat_version'], '5.0.0') < 0 {
     $real_version = '1'
   } else {
     $real_version = $major_version
@@ -99,7 +99,7 @@ class filebeat (
   if $conf_template != undef {
     $real_conf_template = $conf_template
   } elsif $real_version == '1' {
-    if versioncmp('1.9.1', $::rubyversion) > 0 {
+    if versioncmp('1.9.1', $facts['rubyversion']) > 0 {
       $real_conf_template = "${module_name}/filebeat.yml.ruby18.erb"
     } else {
       $real_conf_template = "${module_name}/filebeat.yml.erb"
