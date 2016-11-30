@@ -31,9 +31,21 @@ class filebeat::params {
   # }
   #
   case $::kernel {
+    'FreeBSD'   : {
+      $directory       = '/usr/local/etc/filebeat'
+      $config_file     = "${directory}/filebeat.yml"
+      $config_dir      = "${directory}/conf.d"
+
+      # These parameters are ignored if/until tarball installs are supported in Linux
+      $tmp_dir         = '/tmp'
+      $install_dir     = undef
+      $download_url    = undef
+      $service_provider = undef
+    }
     'Linux'   : {
-      $config_file     = '/etc/filebeat/filebeat.yml'
-      $config_dir      = '/etc/filebeat/conf.d'
+      $directory       = '/etc/filebeat'
+      $config_file     = "${directory}/filebeat.yml"
+      $config_dir      = "${directory}/conf.d"
 
       # These parameters are ignored if/until tarball installs are supported in Linux
       $tmp_dir         = '/tmp'
@@ -50,8 +62,10 @@ class filebeat::params {
     }
 
     'Windows' : {
-      $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
-      $config_dir       = 'C:/Program Files/Filebeat/conf.d'
+      $install_dir      = 'C:/Program Files'
+      $directory        = "${install_dir}/Filebeat"
+      $config_file      = "${directory}/filebeat.yml"
+      $config_dir       = "${directory}/conf.d"
       $download_url     = 'https://download.elastic.co/beats/filebeat/filebeat-1.3.1-windows.zip'
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'
