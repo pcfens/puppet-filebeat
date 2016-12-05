@@ -1,5 +1,5 @@
 class filebeat::config {
-  $filebeat_config = {
+  $filebeat_config = delete_undef_values({
     'shutdown_timeout'  => $filebeat::shutdown_timeout,
     'beat_name'         => $filebeat::beat_name,
     'tags'              => $filebeat::tags,
@@ -19,7 +19,7 @@ class filebeat::config {
     'shipper'           => $filebeat::shipper,
     'logging'           => $filebeat::logging,
     'runoptions'        => $filebeat::run_options,
-  }
+  })
 
   case $::kernel {
     'Linux'   : {

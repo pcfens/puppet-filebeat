@@ -69,5 +69,11 @@ describe "filebeat class" do
     describe package(package_name) do
       it { should be_installed }
     end
+
+    describe file('/etc/filebeat/filebeat.yml') do
+      it { should be_file }
+      it { should contain('---') }
+      it { should_not contain('max_procs: !ruby') }
+    end
   end
 end
