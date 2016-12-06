@@ -2,7 +2,13 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.6...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.7...HEAD)
+
+## [v0.8.7](https://github.com/pcfens/puppet-filebeat/tree/v0.8.7)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.6...v0.8.7)
+
+- Update windows URL to the latest 5.x release
+- Remove nil values before rendering the template [\#65](https://github.com/pcfens/puppet-filebeat/pull/65)
 
 ## [v0.8.6](https://github.com/pcfens/puppet-filebeat/tree/v0.8.6)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.5...v0.8.6)
