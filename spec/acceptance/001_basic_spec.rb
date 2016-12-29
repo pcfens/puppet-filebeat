@@ -52,7 +52,12 @@ describe "filebeat class" do
             fields   => {
               service => 'system',
               file    => 'dmesg',
-            }
+            },
+            tags     => [
+              'tag1',
+              'tag2',
+              'tag3',
+            ]
           }
         }
       }
