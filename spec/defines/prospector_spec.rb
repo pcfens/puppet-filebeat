@@ -36,6 +36,11 @@ describe 'filebeat::prospector', :type => :define do
             '/var/log/apache2/*.log',
           ],
           :doc_type => 'apache',
+          :tags => [
+            'tag1',
+            'tag2',
+            'tag3',
+          ],
         }
       end
 
@@ -48,6 +53,10 @@ describe 'filebeat::prospector', :type => :define do
       - /var/log/apache2/*.log
       encoding: plain
       fields_under_root: false
+      tags:
+        - tag1
+        - tag2
+        - tag3
       input_type: log
       document_type: apache
       scan_frequency: 10s
@@ -66,6 +75,11 @@ describe 'filebeat::prospector', :type => :define do
         {
           :paths => [
             '/var/log/java_app/some.log',
+          ],
+          :tags => [
+            'tag1',
+            'tag2',
+            'tag3',
           ],
           :doc_type => 'java_app',
           :exclude_lines => [
@@ -97,6 +111,10 @@ describe 'filebeat::prospector', :type => :define do
         - .gz$
       encoding: plain
       fields_under_root: false
+      tags:
+        - tag1
+        - tag2
+        - tag3
       input_type: log
       document_type: java_app
       scan_frequency: 10s
@@ -135,6 +153,11 @@ describe 'filebeat::prospector', :type => :define do
           :paths => [
             'C:/Program Files/Apache Software Foundation/Apache2.2/*.log',
           ],
+          :tags => [
+            'tag1',
+            'tag2',
+            'tag3',
+          ],
           :doc_type => 'apache',
         }
       end
@@ -147,6 +170,10 @@ describe 'filebeat::prospector', :type => :define do
       - C:/Program Files/Apache Software Foundation/Apache2.2/*.log
       encoding: plain
       fields_under_root: false
+      tags:
+        - tag1
+        - tag2
+        - tag3
       input_type: log
       document_type: apache
       scan_frequency: 10s

@@ -20,10 +20,11 @@ define filebeat::prospector (
   $exclude_lines         = [],
   $max_bytes             = '10485760',
   $multiline             = {},
+  $tags                  = [],
 ) {
 
   validate_hash($fields, $multiline)
-  validate_array($paths, $exclude_files, $include_lines, $exclude_lines)
+  validate_array($paths, $exclude_files, $include_lines, $exclude_lines, $tags)
 
   $prospector_template = $filebeat::real_version ? {
     '5' => 'prospector5.yml.erb',
