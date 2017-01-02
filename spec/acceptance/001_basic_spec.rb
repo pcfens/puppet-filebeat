@@ -1,12 +1,10 @@
 require 'spec_helper_acceptance'
 
-describe "filebeat class" do
-
+describe 'filebeat class' do
   package_name = 'filebeat'
   service_name = 'filebeat'
 
   context 'default parameters' do
-
     let(:pp) do
       <<-EOS
       if $::osfamily == 'Debian' {
@@ -64,21 +62,21 @@ describe "filebeat class" do
       EOS
     end
 
-    it_behaves_like "an idempotent resource"
+    it_behaves_like 'an idempotent resource'
 
     describe service(service_name) do
-      it { should be_enabled }
-      it { should be_running }
+      it { is_expected.to be_enabled }
+      it { is_expected.to be_running }
     end
 
     describe package(package_name) do
-      it { should be_installed }
+      it { is_expected.to be_installed }
     end
 
     describe file('/etc/filebeat/filebeat.yml') do
-      it { should be_file }
-      it { should contain('---') }
-      it { should_not contain('max_procs: !ruby') }
+      it { is_expected.to be_file }
+      it { is_expected.to contain('---') }
+      it { is_expected.not_to contain('max_procs: !ruby') }
     end
   end
 end

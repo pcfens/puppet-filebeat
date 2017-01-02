@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe 'filebeat::prospector', :type => :define do
+describe 'filebeat::prospector', type: :define do
   let :pre_condition do
     'class { "filebeat":
         outputs => {
@@ -17,37 +17,35 @@ describe 'filebeat::prospector', :type => :define do
   end
 
   context 'with no parameters' do
-    it { expect { should raise_error(Puppet::Error) } }
+    it { is_expected.to raise_error(Puppet::Error) }
   end
 
   context 'On Linux' do
-    let :facts do {
-      :kernel => 'Linux',
-      :osfamily => 'Linux',
-      :rubyversion => '2.3.1',
-      :filebeat_version => '1',
-    }
+    let :facts do
+      {
+        kernel: 'Linux',
+        osfamily: 'Linux',
+        rubyversion: '2.3.1',
+        filebeat_version: '1.3.1'
+      }
     end
 
     context 'with file blobs set' do
       let :params do
         {
-          :paths => [
-            '/var/log/apache2/*.log',
+          paths: [
+            '/var/log/apache2/*.log'
           ],
-          :doc_type => 'apache',
-          :tags => [
-            'tag1',
-            'tag2',
-            'tag3',
-          ],
+          doc_type: 'apache',
+          tags: %w(tag1 tag2 tag3)
         }
       end
 
-      it { is_expected.to contain_file('filebeat-test-logs').with(
-        :path => '/etc/filebeat/conf.d/test-logs.yml',
-        :mode => '0644',
-        :content => 'filebeat:
+      it do
+        is_expected.to contain_file('filebeat-test-logs').with(
+          path: '/etc/filebeat/conf.d/test-logs.yml',
+          mode: '0644',
+          content: 'filebeat:
   prospectors:
     - paths:
       - /var/log/apache2/*.log
@@ -67,43 +65,41 @@ describe 'filebeat::prospector', :type => :define do
       max_backoff: 10s
       backoff_factor: 2
       max_bytes: 10485760
-',
-      )}
+'
+        )
+      end
     end
     context 'with some java like multiline settings' do
       let :params do
         {
-          :paths => [
-            '/var/log/java_app/some.log',
+          paths: [
+            '/var/log/java_app/some.log'
           ],
-          :tags => [
-            'tag1',
-            'tag2',
-            'tag3',
+          tags: %w(tag1 tag2 tag3),
+          doc_type: 'java_app',
+          exclude_lines: [
+            '^DEBUG'
           ],
-          :doc_type => 'java_app',
-          :exclude_lines => [
-            '^DEBUG',
-          ],
-          :include_lines => [
+          include_lines: [
             '^ERROR',
-            '^WARN',
+            '^WARN'
           ],
-          :exclude_files => [
-            '.gz$',
+          exclude_files: [
+            '.gz$'
           ],
-          :multiline => {
+          multiline: {
             'pattern' => '^\[',
             'negate' => 'true',
-            'match' => 'after',
-          },
+            'match' => 'after'
+          }
         }
       end
 
-      it { is_expected.to contain_file('filebeat-test-logs').with(
-        :path => '/etc/filebeat/conf.d/test-logs.yml',
-        :mode => '0644',
-        :content => 'filebeat:
+      it do
+        is_expected.to contain_file('filebeat-test-logs').with(
+          path: '/etc/filebeat/conf.d/test-logs.yml',
+          mode: '0644',
+          content: 'filebeat:
   prospectors:
     - paths:
       - /var/log/java_app/some.log
@@ -134,37 +130,36 @@ describe 'filebeat::prospector', :type => :define do
         - \'^WARN\'
       exclude_lines:
         - \'^DEBUG\'
-',
-      )}
+'
+        )
+      end
     end
   end
 
   context 'On Windows' do
-    let :facts do {
-      :kernel => 'Windows',
-      :rubyversion => '2.3.1',
-      :filebeat_version => '1',
-    }
+    let :facts do
+      {
+        kernel: 'Windows',
+        rubyversion: '2.3.1',
+        filebeat_version: '1.3.1'
+      }
     end
 
     context 'with file blobs set' do
       let :params do
         {
-          :paths => [
-            'C:/Program Files/Apache Software Foundation/Apache2.2/*.log',
+          paths: [
+            'C:/Program Files/Apache Software Foundation/Apache2.2/*.log'
           ],
-          :tags => [
-            'tag1',
-            'tag2',
-            'tag3',
-          ],
-          :doc_type => 'apache',
+          tags: %w(tag1 tag2 tag3),
+          doc_type: 'apache'
         }
       end
 
-      it { is_expected.to contain_file('filebeat-test-logs').with(
-        :path => 'C:/Program Files/Filebeat/conf.d/test-logs.yml',
-        :content => 'filebeat:
+      it do
+        is_expected.to contain_file('filebeat-test-logs').with(
+          path: 'C:/Program Files/Filebeat/conf.d/test-logs.yml',
+          content: 'filebeat:
   prospectors:
     - paths:
       - C:/Program Files/Apache Software Foundation/Apache2.2/*.log
@@ -184,8 +179,9 @@ describe 'filebeat::prospector', :type => :define do
       max_backoff: 10s
       backoff_factor: 2
       max_bytes: 10485760
-',
-      )}
+'
+        )
+      end
     end
   end
 end
