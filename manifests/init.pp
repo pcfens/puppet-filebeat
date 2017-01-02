@@ -104,13 +104,13 @@ class filebeat (
     $real_conf_template = $conf_template
   } elsif $real_version == '1' {
     if versioncmp('1.9.1', $::rubyversion) > 0 {
-      $real_conf_template = "${module_name}/filebeat.yml.ruby18.erb"
+      $real_conf_template = "${module_name}/filebeat1.yml.ruby18.erb"
     } else {
-      $real_conf_template = "${module_name}/filebeat.yml.erb"
+      $real_conf_template = "${module_name}/filebeat1.yml.erb"
     }
   } elsif $real_version == '5' {
     if $use_generic_template {
-      $real_conf_template = "${module_name}/filebeat.yml.erb"
+      $real_conf_template = "${module_name}/filebeat1.yml.erb"
     } else {
       $real_conf_template = "${module_name}/filebeat5.yml.erb"
     }

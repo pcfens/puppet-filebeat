@@ -27,8 +27,8 @@ define filebeat::prospector (
   validate_array($paths, $exclude_files, $include_lines, $exclude_lines, $tags)
 
   $prospector_template = $filebeat::real_version ? {
-    '5' => 'prospector5.yml.erb',
-    '1' => 'prospector.yml.erb',
+    '1'     => 'prospector1.yml.erb',
+    default => 'prospector5.yml.erb',
   }
 
   case $::kernel {
