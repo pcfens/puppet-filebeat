@@ -4,6 +4,11 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.7...HEAD)
 
+- Add support for tags in prospectors [\#68](https://github.com/pcfens/puppet-filebeat/pull/68)
+- Add support for filebeat processors [\#69](https://github.com/pcfens/puppet-filebeat/pull/69)
+- Fix the `filebeat_version` fact in Windows [\#59](https://github.com/pcfens/puppet-filebeat/issues/59)
+- Validate configuration files before notifying the filebeat service
+
 ## [v0.8.7](https://github.com/pcfens/puppet-filebeat/tree/v0.8.7)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.6...v0.8.7)
 
