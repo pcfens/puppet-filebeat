@@ -8,6 +8,7 @@ Changelog
 - Add support for filebeat processors [\#69](https://github.com/pcfens/puppet-filebeat/pull/69)
 - Fix the `filebeat_version` fact in Windows [\#59](https://github.com/pcfens/puppet-filebeat/issues/59)
 - Validate configuration files before notifying the filebeat service
+- Update the Windows install URL to the latest version
 
 ## [v0.8.7](https://github.com/pcfens/puppet-filebeat/tree/v0.8.7)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.6...v0.8.7)
