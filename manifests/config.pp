@@ -19,6 +19,7 @@ class filebeat::config {
     'shipper'           => $filebeat::shipper,
     'logging'           => $filebeat::logging,
     'runoptions'        => $filebeat::run_options,
+    'processors'        => $filebeat::processors,
   })
 
   case $::kernel {

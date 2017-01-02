@@ -150,6 +150,58 @@ When installing on Windows, this module will download the windows version of Fil
 can be overridden using the `tmp_dir` parameter. `tmp_dir` is not managed by this module,
 but is expected to exist as a directory that puppet can write to.
 
+### Processors
+
+Filebeat 5.0 and greater includes a new libbeat feature for filtering and/or enhancing all
+exported data through processors before geing sent to the configured output(s). By populating
+the `processors` parameter any number of processors may be configured to work on all events
+or only those that match certain conditions.
+
+To drop the offset and input_type fields from all events:
+
+```puppet
+class{"filebeat":
+  processors => [
+    {
+      "name" => "drop_fields",
+      "params" => ["input_type", "offset"]
+    },
+  ],
+}
+```
+
+To drop all events that have the http response code equal to 200:
+
+```puppet
+class{"filebeat":
+  processors => [
+    {
+      "name" => "drop_event",
+      "when" => {"equals" => {"http.code" => 200}}
+    },
+  ],
+}
+```
+
+Now to combine these examples into a single definition:
+
+```puppet
+class{"filebeat":
+  processors => [
+    {
+      "name" => "drop_fields",
+      "params" => ["input_type", "offset"]
+    },
+    {
+      "name" => "drop_event",
+      "when" => {"equals" => {"http.code" => 200}}
+    },
+  ],
+}
+```
+
+For more information please review the documentation [here](https://www.elastic.co/guide/en/beats/filebeat/5.1/configuration-processors.html).
+
 ## Reference
  - [**Public Classes**](#public-classes)
     - [Class: filebeat](#class-filebeat)
