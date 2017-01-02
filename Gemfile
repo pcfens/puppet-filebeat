@@ -12,7 +12,7 @@ end
 
 group :test do
   gem 'puppetlabs_spec_helper', '~> 1.2.2',                         :require => false
-  gem 'rspec-puppet',                                               :require => false, :git => 'https://github.com/rodjek/rspec-puppet.git'
+  gem 'rspec-puppet', '~> 2.5',                                     :require => false
   gem 'rspec-puppet-facts',                                         :require => false
   gem 'rspec-puppet-utils',                                         :require => false
   gem 'puppet-lint-absolute_classname-check',                       :require => false
@@ -29,6 +29,8 @@ group :test do
   gem 'rubocop-rspec', '~> 1.6',                                    :require => false if RUBY_VERSION >= '2.3.0'
   gem 'json_pure', '<= 2.0.1',                                      :require => false if RUBY_VERSION < '2.0.0'
   gem 'mocha', '>= 1.2.1',                                          :require => false
+  gem 'coveralls',                                                  :require => false if RUBY_VERSION >= '2.0.0'
+  gem 'simplecov-console',                                          :require => false if RUBY_VERSION >= '2.0.0'
 end
 
 group :development do
@@ -60,5 +62,3 @@ end
 
 ENV['PUPPET_VERSION'].nil? ? puppetversion = '~> 4.0' : puppetversion = ENV['PUPPET_VERSION'].to_s
 gem 'puppet', puppetversion, :require => false, :groups => [:test]
-
-# vim: syntax=ruby
