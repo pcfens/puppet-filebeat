@@ -33,22 +33,31 @@ define filebeat::prospector (
 
   case $::kernel {
     'Linux' : {
+      $filebeat_path = $filebeat::real_version ? {
+        '1'     => '/usr/bin/filebeat',
+        default => '/usr/share/filebeat/bin/filebeat',
+      }
+
       file { "filebeat-${name}":
-        ensure  => $ensure,
-        path    => "${filebeat::config_dir}/${name}.yml",
-        owner   => 'root',
-        group   => 'root',
-        mode    => $::filebeat::config_file_mode,
-        content => template("${module_name}/${prospector_template}"),
-        notify  => Service['filebeat'],
+        ensure       => $ensure,
+        path         => "${filebeat::config_dir}/${name}.yml",
+        owner        => 'root',
+        group        => 'root',
+        mode         => $::filebeat::config_file_mode,
+        content      => template("${module_name}/${prospector_template}"),
+        validate_cmd => "${filebeat_path} -N -configtest -c %",
+        notify       => Service['filebeat'],
       }
     }
     'Windows' : {
+      $filebeat_path = 'c:\Program Files\Filebeat\filebeat.exe'
+
       file { "filebeat-${name}":
-        ensure  => $ensure,
-        path    => "${filebeat::config_dir}/${name}.yml",
-        content => template("${module_name}/${prospector_template}"),
-        notify  => Service['filebeat'],
+        ensure       => $ensure,
+        path         => "${filebeat::config_dir}/${name}.yml",
+        content      => template("${module_name}/${prospector_template}"),
+        validate_cmd => "${filebeat_path} -N -configtest -c %",
+        notify       => Service['filebeat'],
       }
     }
     default : {
