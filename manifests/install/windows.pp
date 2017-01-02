@@ -3,7 +3,7 @@ class filebeat::install::windows {
   $foldername = 'Filebeat'
 
   file { $filebeat::install_dir:
-    ensure => directory
+    ensure => directory,
   }
 
   remote_file {"${filebeat::tmp_dir}/${filename}.zip":
