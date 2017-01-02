@@ -2,12 +2,6 @@
 
 [![Build Status](https://travis-ci.org/pcfens/puppet-filebeat.svg?branch=master)](https://travis-ci.org/pcfens/puppet-filebeat)
 
-## Warning
-
-Version 0.8.0 adds support for filebeat version 5. You may notice some changes to your configuration files.
-
-The changelog has more information.
-
 #### Table of Contents
 
 1. [Description](#description)
@@ -334,12 +328,18 @@ to fully understand what these parameters do.
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
 directly to elasticsearch).
 
-Only filebeat versions after 1.0.0-rc1 are supported. 1.0.0-rc1 and older don't
-support YAML like the ruby template can easily generate.
-
 When installing on Windows, there's an expectation that `C:\Temp` already exists, or an alternative
 location specified in the `tmp_dir` parameter exists and is writable by puppet. The temp directory
 is used to store the downloaded installer only.
+
+### Registry Path
+
+The default registry file in this module doesn't match the filebeat default, but moving the file
+while the filbeat service is running can cause data duplication or data loss. If you're installing
+filebeat for the first time you should consider setting `registry_file` to match the
+[default](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-global-options.html#_registry_file).
+
+Be sure to include a path or the file will be put at the root of your filesystem.
 
 ### Debian Systems
 
