@@ -153,7 +153,6 @@ filebeat:
       clean_inactive: <%= @clean_inactive %>
       <%- end -%>
 
-
       # Removes the state for file which cannot be found on disk anymore immediately
       <%- if @clean_removed -%>
       clean_removed: <%= @clean_removed %>
