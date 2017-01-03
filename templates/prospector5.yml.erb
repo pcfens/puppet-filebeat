@@ -121,33 +121,48 @@ filebeat:
       # Close inactive closes the file handler after the predefined period.
       # The period starts when the last line of the file was, not the file ModTime.
       # Time strings like 2h (2 hours), 5m (5 minutes) can be used.
-      #close_inactive: 5m
+      <%- if @close_inactive -%>
+      close_inactive: <%= @close_inactive %>
+      <%- end -%>      
 
       # Close renamed closes a file handler when the file is renamed or rotated.
       # Note: Potential data loss. Make sure to read and understand the docs for this option.
-      #close_renamed: false
+      <%- if @close_renamed -%>
+      close_renamed: <%= @close_renamed %>
+      <%- end -%>
 
       # When enabling this option, a file handler is closed immediately in case a file can't be found
       # any more. In case the file shows up again later, harvesting will continue at the last known position
       # after scan_frequency.
-      #close_removed: true
+      <%- if @close_removed -%>
+      close_removed: <%= @close_removed %>
+      <%- end -%>
 
       # Closes the file handler as soon as the harvesters reaches the end of the file.
       # By default this option is disabled.
       # Note: Potential data loss. Make sure to read and understand the docs for this option.
-      #close_eof: false
+      <%- if @close_close_eof -%>
+      close_eof: <%= @close_eof %>
+      <%- end -%>
 
       ### State options
 
       # Files for the modification data is older then clean_inactive the state from the registry is removed
       # By default this is disabled.
-      #clean_inactive: 0
+      <%- if @clean_inactive -%>
+      clean_inactive: <%= @clean_inactive %>
+      <%- end -%>
+
 
       # Removes the state for file which cannot be found on disk anymore immediately
-      #clean_removed: true
+      <%- if @clean_removed -%>
+      clean_removed: <%= @clean_removed %>
+      <%- end -%>
 
       # Close timeout closes the harvester after the predefined time.
       # This is independent if the harvester did finish reading the file or not.
       # By default this option is disabled.
       # Note: Potential data loss. Make sure to read and understand the docs for this option.
-      #close_timeout: 0
+      <%- if @close_timeout -%>
+      close_timeout: <%= @close_timeout %>
+      <%- end -%>
