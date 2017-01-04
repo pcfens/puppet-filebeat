@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.1...HEAD)
+
+## [v0.9.1](https://github.com/pcfens/puppet-filebeat/tree/v0.9.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.0...v0.9.1)
+
+- Fix yaml syntax around filebeat processors [\#71](https://github.com/pcfens/puppet-filebeat/pull/71)
 
 ## [v0.9.0](https://github.com/pcfens/puppet-filebeat/tree/v0.9.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.7...v0.9.0)
