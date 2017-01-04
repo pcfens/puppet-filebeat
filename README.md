@@ -164,7 +164,7 @@ class{"filebeat":
   processors => [
     {
       "name" => "drop_fields",
-      "params" => ["input_type", "offset"]
+      "params" => {"fields" => ["input_type", "offset"]}
     },
   ],
 }
@@ -190,7 +190,7 @@ class{"filebeat":
   processors => [
     {
       "name" => "drop_fields",
-      "params" => ["input_type", "offset"]
+      "params" => {"fields" => ["input_type", "offset"]}
     },
     {
       "name" => "drop_event",
