@@ -2,6 +2,12 @@
 
 [![Build Status](https://travis-ci.org/pcfens/puppet-filebeat.svg?branch=master)](https://travis-ci.org/pcfens/puppet-filebeat)
 
+## Warning
+
+Version 0.8.0 adds support for filebeat version 5. You may notice some changes to your configuration files.
+
+The changelog has more information.
+
 #### Table of Contents
 
 1. [Description](#description)
@@ -158,7 +164,7 @@ class{"filebeat":
   processors => [
     {
       "name" => "drop_fields",
-      "params" => ["input_type", "offset"]
+      "params" => {"fields" => ["input_type", "offset"]}
     },
   ],
 }
@@ -184,7 +190,7 @@ class{"filebeat":
   processors => [
     {
       "name" => "drop_fields",
-      "params" => ["input_type", "offset"]
+      "params" => {"fields" => ["input_type", "offset"]}
     },
     {
       "name" => "drop_event",
@@ -327,6 +333,9 @@ to fully understand what these parameters do.
 ## Limitations
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
 directly to elasticsearch).
+
+Only filebeat versions after 1.0.0-rc1 are supported. 1.0.0-rc1 and older don't
+support YAML like the ruby template can easily generate.
 
 When installing on Windows, there's an expectation that `C:\Temp` already exists, or an alternative
 location specified in the `tmp_dir` parameter exists and is writable by puppet. The temp directory
