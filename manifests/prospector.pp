@@ -15,6 +15,13 @@ define filebeat::prospector (
   $backoff               = '1s',
   $max_backoff           = '10s',
   $backoff_factor        = 2,
+  $close_inactive        = '5m',
+  $close_renamed         = false,
+  $close_removed         = true,
+  $close_eof             = false,
+  $clean_inactive        = 0,
+  $clean_removed         = true,
+  $close_timeout         = 0,
   $force_close_files     = false,
   $include_lines         = [],
   $exclude_lines         = [],
@@ -25,6 +32,7 @@ define filebeat::prospector (
 
   validate_hash($fields, $multiline)
   validate_array($paths, $exclude_files, $include_lines, $exclude_lines, $tags)
+  validate_bool($tail_files, $close_renamed, $close_removed, $close_eof, $clean_removed)
 
   $prospector_template = $filebeat::real_version ? {
     '1'     => 'prospector1.yml.erb',
