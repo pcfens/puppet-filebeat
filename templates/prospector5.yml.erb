@@ -127,23 +127,17 @@ filebeat:
 
       # Close renamed closes a file handler when the file is renamed or rotated.
       # Note: Potential data loss. Make sure to read and understand the docs for this option.
-      <%- if @close_renamed -%>
       close_renamed: <%= @close_renamed %>
-      <%- end -%>
 
       # When enabling this option, a file handler is closed immediately in case a file can't be found
       # any more. In case the file shows up again later, harvesting will continue at the last known position
       # after scan_frequency.
-      <%- if @close_removed -%>
       close_removed: <%= @close_removed %>
-      <%- end -%>
 
       # Closes the file handler as soon as the harvesters reaches the end of the file.
       # By default this option is disabled.
       # Note: Potential data loss. Make sure to read and understand the docs for this option.
-      <%- if @close_close_eof -%>
       close_eof: <%= @close_eof %>
-      <%- end -%>
 
       ### State options
 
@@ -154,9 +148,7 @@ filebeat:
       <%- end -%>
 
       # Removes the state for file which cannot be found on disk anymore immediately
-      <%- if @clean_removed -%>
       clean_removed: <%= @clean_removed %>
-      <%- end -%>
 
       # Close timeout closes the harvester after the predefined time.
       # This is independent if the harvester did finish reading the file or not.

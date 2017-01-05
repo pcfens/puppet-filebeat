@@ -32,10 +32,15 @@ define filebeat::prospector (
 
   validate_hash($fields, $multiline)
   validate_array($paths, $exclude_files, $include_lines, $exclude_lines, $tags)
+  validate_bool($tail_files, $close_renamed, $close_removed, $close_eof, $clean_removed)
 
   $prospector_template = $filebeat::real_version ? {
     '1'     => 'prospector1.yml.erb',
     default => 'prospector5.yml.erb',
+  }
+
+  if !$close_removed and $clean_removed {
+    warning('If you set close_removed to false, does not make sense to set clean_removed to true. Review the official Filebeat documentation')
   }
 
   case $::kernel {
