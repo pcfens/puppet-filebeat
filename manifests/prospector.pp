@@ -40,7 +40,7 @@ define filebeat::prospector (
   }
 
   if $close_removed == false and $clean_removed == true {
-    warning('If you set close_removed to false, does not make sense to set clean_removed to true. Review the official Filebeat documentation')
+    notify('If you set close_removed to false, does not make sense to set clean_removed to true. Review the official Filebeat documentation')
   }
 
   case $::kernel {
