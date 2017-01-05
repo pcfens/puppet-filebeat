@@ -39,10 +39,6 @@ define filebeat::prospector (
     default => 'prospector5.yml.erb',
   }
 
-  if $close_removed == false and $clean_removed == true {
-    notify('If you set close_removed to false, does not make sense to set clean_removed to true. Review the official Filebeat documentation')
-  }
-
   case $::kernel {
     'Linux' : {
       $filebeat_path = $filebeat::real_version ? {
