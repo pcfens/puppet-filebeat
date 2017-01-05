@@ -4,6 +4,11 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.1...HEAD)
 
+## [v0.9.2](https://github.com/pcfens/puppet-filebeat/tree/v0.9.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.1...v0.9.2)
+
+- Add support for close_* and clean_* parameters in prospectors [\#70](https://github.com/pcfens/puppet-filebeat/pull/70)
+
 ## [v0.9.1](https://github.com/pcfens/puppet-filebeat/tree/v0.9.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.0...v0.9.1)
 
