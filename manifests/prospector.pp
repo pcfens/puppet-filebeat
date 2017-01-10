@@ -27,10 +27,11 @@ define filebeat::prospector (
   $exclude_lines         = [],
   $max_bytes             = '10485760',
   $multiline             = {},
+  $json                  = {},
   $tags                  = [],
 ) {
 
-  validate_hash($fields, $multiline)
+  validate_hash($fields, $multiline, $json)
   validate_array($paths, $exclude_files, $include_lines, $exclude_lines, $tags)
   validate_bool($tail_files, $close_renamed, $close_removed, $close_eof, $clean_removed)
 
