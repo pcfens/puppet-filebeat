@@ -4,6 +4,8 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.1...HEAD)
 
+- Add support for JSON decoding [\72](https://github.com/pcfens/puppet-filebeat/pull/72)
+
 ## [v0.9.1](https://github.com/pcfens/puppet-filebeat/tree/v0.9.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.0...v0.9.1)
 
