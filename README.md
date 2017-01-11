@@ -13,6 +13,7 @@
 3. [Usage - Configuration options and additional functionality](#usage)
     - [Adding a prospector](#adding-a-prospector)
       - [Multiline Logs](#multiline-logs)
+      - [JSON logs](#json-logs)
     - [Prospectors in hiera](#prospectors-in-hiera)
     - [Usage on Windows](#usage-on-windows)
 4. [Reference](#reference)
@@ -125,6 +126,12 @@ filebeat::prospector { 'syslogs':
 Filebeat prospectors (versions >= 1.1) can handle multiline log entries. The `multiline`
 parameter accepts a hash containing `pattern`, `negate`, `match`, `max_lines`, and `timeout`
 as documented in the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/1.1/filebeat-configuration-details.html#multiline).
+
+#### JSON Logs
+
+Filebeat prospectors (versions >= 5.0) can natively decode JSON objects if they are stored one per line. The `json`
+parameter accepts a hash containing `message_key`, `keys_under_root`, `overwrite_keys`, and `add_error_key`
+as documented in the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/5.0/configuration-filebeat-options.html#config-json).
 
 ### Prospectors in Hiera
 
@@ -320,6 +327,8 @@ to fully understand what these parameters do.
   - `exclude_lines`: [Array] A list of regular expressions to match the files that you want to exclude.
     Ignored if empty (default: [])
   - `max_bytes`: [Integer] The maximum number of bytes that a single log message can have (default: 10485760)
+  - `json`: [Hash] Options that control how filebeat handles decoding of log messages in JSON format
+    [See above](#json-logs). (default: {})
   - `multiline`: [Hash] Options that control how Filebeat handles log messages that span multiple lines.
     [See above](#multiline-logs). (default: {})
 
