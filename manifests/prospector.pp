@@ -29,11 +29,12 @@ define filebeat::prospector (
   $multiline             = {},
   $json                  = {},
   $tags                  = [],
+  $symlinks              = false,
 ) {
 
   validate_hash($fields, $multiline, $json)
   validate_array($paths, $exclude_files, $include_lines, $exclude_lines, $tags)
-  validate_bool($tail_files, $close_renamed, $close_removed, $close_eof, $clean_removed)
+  validate_bool($tail_files, $close_renamed, $close_removed, $close_eof, $clean_removed, $symlinks)
 
   $prospector_template = $filebeat::real_version ? {
     '1'     => 'prospector1.yml.erb',

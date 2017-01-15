@@ -55,6 +55,9 @@ filebeat:
       <%- if @max_bytes -%>
       max_bytes: <%= @max_bytes %>
       <%- end -%>
+      <%- if @symlinks -%>
+      symlinks: <%= @symlinks %>
+      <%- end -%>
 
       <%- if @json.length > 0 -%>
       ### JSON configuration
