@@ -62,7 +62,7 @@ class filebeat::config {
         ensure       => file,
         path         => $filebeat::config_file,
         content      => template($filebeat::real_conf_template),
-        validate_cmd => "${filebeat_path} -N -configtest -c %",
+        validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
         notify       => Service['filebeat'],
         require      => File['filebeat-config-dir'],
       }

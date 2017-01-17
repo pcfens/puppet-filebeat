@@ -66,7 +66,7 @@ define filebeat::prospector (
         ensure       => $ensure,
         path         => "${filebeat::config_dir}/${name}.yml",
         content      => template("${module_name}/${prospector_template}"),
-        validate_cmd => "${filebeat_path} -N -configtest -c %",
+        validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
         notify       => Service['filebeat'],
       }
     }
