@@ -2,8 +2,13 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.1...HEAD)
 
+## [v0.10.1](https://github.com/pcfens/puppet-filebeat/tree/v0.10.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.0...v0.10.1)
+
+- Support harvesting symlinks [\#74](https://github.com/pcfens/puppet-filebeat/pull/74)
+- Fix windows config file validation command [\#75](https://github.com/pcfens/puppet-filebeat/issues/75)
 
 ## [v0.10.0](https://github.com/pcfens/puppet-filebeat/tree/v0.10.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.2...v0.10.0)
