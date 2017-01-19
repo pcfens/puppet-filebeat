@@ -4,6 +4,11 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.1...HEAD)
 
+## [v0.10.2](https://github.com/pcfens/puppet-filebeat/tree/v0.10.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.1...v0.10.2)
+
+- Add close_older and force_close_files within prospector v5 [\#77](https://github.com/pcfens/puppet-filebeat/pull/77)
+
 ## [v0.10.1](https://github.com/pcfens/puppet-filebeat/tree/v0.10.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.0...v0.10.1)
 
@@ -13,7 +18,7 @@ Changelog
 ## [v0.10.0](https://github.com/pcfens/puppet-filebeat/tree/v0.10.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.2...v0.10.0)
 
-- Add support for JSON decoding [\72](https://github.com/pcfens/puppet-filebeat/pull/72)
+- Add support for JSON decoding [\#72](https://github.com/pcfens/puppet-filebeat/pull/72)
 
 ## [v0.9.2](https://github.com/pcfens/puppet-filebeat/tree/v0.9.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.1...v0.9.2)
