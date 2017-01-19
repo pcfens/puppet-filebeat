@@ -8,6 +8,8 @@ define filebeat::prospector (
   $fields_under_root     = false,
   $ignore_older          = undef,
   $close_older           = undef,
+  $force_close_files     = undef,
+  $close_older           = undef,
   $doc_type              = 'log',
   $scan_frequency        = '10s',
   $harvester_buffer_size = 16384,
