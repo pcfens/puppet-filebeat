@@ -58,6 +58,12 @@ filebeat:
       <%- if @symlinks -%>
       symlinks: <%= @symlinks %>
       <%- end -%>
+      <%- if @close_older -%>
+      close_older: <%= @close_older %>
+      <%- end -%>
+      <%- if @force_close_files -%>
+      force_close_files: <%= @force_close_files %>
+      <%- end -%>
 
       <%- if @json.length > 0 -%>
       ### JSON configuration
