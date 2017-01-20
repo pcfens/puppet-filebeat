@@ -337,6 +337,9 @@ to fully understand what these parameters do.
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
 directly to elasticsearch).
 
+Only filebeat versions after 1.0.0-rc1 are supported. 1.0.0-rc1 and older don't
+support YAML like the ruby template can easily generate.
+
 When installing on Windows, there's an expectation that `C:\Temp` already exists, or an alternative
 location specified in the `tmp_dir` parameter exists and is writable by puppet. The temp directory
 is used to store the downloaded installer only.
