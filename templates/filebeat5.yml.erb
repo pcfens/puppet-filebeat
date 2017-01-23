@@ -84,8 +84,10 @@ processors:
       when:
 <%=  yaml_indent(_proc['when']) %>
     <%- end -%>
+    <%- unless _proc['params'].nil? or _proc['params'].empty? -%>
     <%- _proc['params'].each do |key,val|-%>
       <%= key %>: <%= val %>
+    <%- end -%>
     <%- end -%>
   <%- end -%>
 <%- end -%>
