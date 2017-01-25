@@ -1,5 +1,5 @@
 class filebeat::install::windows {
-  $filename = regsubst($filebeat::download_url, '^https.*\/([^\/]+)\.[^.].*', '\1')
+  $filename = regsubst($filebeat::download_url, '^https?.*\/([^\/]+)\.[^.].*', '\1')
   $foldername = 'Filebeat'
 
   file { $filebeat::install_dir:
