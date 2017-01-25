@@ -2,10 +2,10 @@
   def yaml_indent(conds)
     return_val = []
     tmp_val = conds.to_yaml.split("\n")
-    tmp_val.delete('---')
+    tmp_val.delete_if { |x| x.include?("---") }
 
     tmp_val.each do |val|
-      return_val << "        " + val
+      return_val << "      " + val
     end
 
     return_val.join("\n")
