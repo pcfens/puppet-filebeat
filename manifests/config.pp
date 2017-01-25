@@ -32,16 +32,18 @@ class filebeat::config {
         default => '/usr/share/filebeat/bin/filebeat',
       }
 
-      file {'filebeat.yml':
-        ensure       => file,
-        path         => $filebeat::config_file,
-        content      => template($filebeat::real_conf_template),
-        owner        => 'root',
-        group        => 'root',
-        mode         => $filebeat::config_file_mode,
-        validate_cmd => "${filebeat_path} -N -configtest -c %",
-        notify       => Service['filebeat'],
-        require      => File['filebeat-config-dir'],
+      if !empty($filebeat::prospectors_final) {
+        file {'filebeat.yml':
+          ensure       => file,
+          path         => $filebeat::config_file,
+          content      => template($filebeat::real_conf_template),
+          owner        => 'root',
+          group        => 'root',
+          mode         => $filebeat::config_file_mode,
+          validate_cmd => "${filebeat_path} -N -configtest -c %",
+          notify       => Service['filebeat'],
+          require      => File['filebeat-config-dir'],
+        }
       }
 
       file {'filebeat-config-dir':
@@ -58,13 +60,15 @@ class filebeat::config {
     'Windows' : {
       $filebeat_path = 'c:\Program Files\Filebeat\filebeat.exe'
 
-      file {'filebeat.yml':
-        ensure       => file,
-        path         => $filebeat::config_file,
-        content      => template($filebeat::real_conf_template),
-        validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
-        notify       => Service['filebeat'],
-        require      => File['filebeat-config-dir'],
+      if !empty($filebeat::prospectors_final) {
+        file {'filebeat.yml':
+          ensure       => file,
+          path         => $filebeat::config_file,
+          content      => template($filebeat::real_conf_template),
+          validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
+          notify       => Service['filebeat'],
+          require      => File['filebeat-config-dir'],
+        }
       }
 
       file {'filebeat-config-dir':
