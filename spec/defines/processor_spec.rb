@@ -33,7 +33,7 @@ describe 'filebeat::processor', type: :define do
     context 'add_cloud_metadata processor' do
       let :params do
         {
-          processor_name: 'add_cloud_metadata',
+          processor_name: 'add_cloud_metadata'
         }
       end
 
