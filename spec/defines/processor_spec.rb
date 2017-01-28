@@ -38,8 +38,9 @@ describe 'filebeat::processor', type: :define do
       end
 
       it do
-        is_expected.to contain_file('/etc/filebeat/conf.d/10-processor-test-processor.yml').with(
+        is_expected.to contain_file('filebeat-processor-test-processor').with(
           mode: '0644',
+          path: '/etc/filebeat/conf.d/10-processor-test-processor.yml',
           content: '---
 processors:
 - add_cloud_metadata:
@@ -68,8 +69,9 @@ processors:
       end
 
       it do
-        is_expected.to contain_file('/etc/filebeat/conf.d/10-processor-test-processor.yml').with(
+        is_expected.to contain_file('filebeat-processor-test-processor').with(
           mode: '0644',
+          path: '/etc/filebeat/conf.d/10-processor-test-processor.yml',
           content: '---
 processors:
 - drop_event:
@@ -100,8 +102,9 @@ processors:
       end
 
       it do
-        is_expected.to contain_file('/etc/filebeat/conf.d/10-processor-test-processor.yml').with(
+        is_expected.to contain_file('filebeat-processor-test-processor').with(
           mode: '0644',
+          path: '/etc/filebeat/conf.d/10-processor-test-processor.yml',
           content: '---
 processors:
 - drop_field:

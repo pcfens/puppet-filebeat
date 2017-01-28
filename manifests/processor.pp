@@ -10,61 +10,62 @@ define filebeat::processor(
   validate_integer($priority)
   validate_string($processor_name)
 
-  if versioncmp("${filebeat::real_version}", '5') < 0 {
-    fail("Processors only work on Filebeat 5.0 and higher")
+  if versioncmp($filebeat::real_version, '5') < 0 {
+    fail('Processors only work on Filebeat 5.0 and higher')
   }
 
   if $priority < 10 {
     $_priority = "0${priority}"
   }
   else {
-    $_priority = "${priority}"
+    $_priority = $priority
   }
 
-  if $processor_name == "drop_field" and $when == undef {
-    fail("drop_event processors require a condition, without one ALL events are dropped")
+  if $processor_name == 'drop_field' and $when == undef {
+    fail('drop_event processors require a condition, without one ALL events are dropped')
   }
   elsif $processor_name != 'add_cloud_metadata' and $params == undef {
     fail("${processor_name} requires parameters to function as expected")
   }
 
   if $processor_name == 'add_cloud_metadata' {
-    $_configuration = delete_undef_values(merge({"timeout" => "3s"}, $params))
+    $_configuration = delete_undef_values(merge({'timeout' => '3s'}, $params))
   }
   elsif $processor_name == 'drop_field' {
     $_configuration = $when
   }
   else {
-    $_configuration = delete_undef_values(merge({"when" => $when}, $params))
+    $_configuration = delete_undef_values(merge({'when' => $when}, $params))
   }
 
-  $filename         = "${filebeat::config_dir}/${_priority}-processor-${name}.yml"
   $processor_config = delete_undef_values({
-    "processors" => [
+    'processors' => [
       {
-        $processor_name => $_configuration,
-      }
-    ]
+        $processor_name => $_configuration
+      },
+    ],
   })
 
   case $::kernel {
     'Linux': {
-      file{"${filename}":
+      file{"filebeat-processor-${name}":
         ensure       => $ensure,
+        path         => "${filebeat::config_dir}/${_priority}-processor-${name}.yml",
         owner        => 'root',
         group        => 'root',
         mode         => $::filebeat::config_file_mode,
-        content      => inline_template("<%= @processor_config.to_yaml() %>"),
-        validate_cmd => "/usr/share/filebeat/bin/filebeat -N -configtest -c %",
-        notify       => Class["filebeat::service"],
+        content      => inline_template('<%= @processor_config.to_yaml() %>'),
+        validate_cmd => '/usr/share/filebeat/bin/filebeat -N -configtest -c %',
+        notify       => Class['filebeat::service'],
       }
     }
     'Windows': {
-      file{"${filename}":
+      file{"filebeat-processor-${name}":
         ensure       => $ensure,
-        content      => inline_template("<%= @processor_config.to_yaml() %>"),
-        validate_cmd => "c:\\Program Files\\Filebeat\\filebeat.exe -N -configtest -c %",
-        notify       => Class["filebeat::service"],
+        path         => "${filebeat::config_dir}/${_priority}-processor-${name}.yml",
+        content      => inline_template('<%= @processor_config.to_yaml() %>'),
+        validate_cmd => 'c:\Program Files\Filebeat\filebeat.exe -N -configtest -c %',
+        notify       => Class['filebeat::service'],
       }
     }
     default: {
