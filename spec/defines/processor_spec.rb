@@ -60,29 +60,6 @@ processors:
       it { is_expected.to raise_error(Puppet::Error) }
     end
 
-    context 'drop_event processor with conditions' do
-      let :params do
-        {
-          processor_name: 'drop_event',
-          when: {regex: {message: '^DEBUG'}}
-        }
-      end
-
-      it do
-        is_expected.to contain_file('filebeat-processor-test-processor').with(
-          mode: '0644',
-          path: '/etc/filebeat/conf.d/10-processor-test-processor.yml',
-          content: '---
-processors:
-- drop_event:
-    when:
-      regex:
-        message: ^DEBUG
-'
-        )
-      end
-    end
-
     context 'drop_field processor with no params' do
       let :params do
         {
@@ -91,29 +68,6 @@ processors:
       end
 
       it { is_expected.to raise_error(Puppet::Error) }
-    end
-
-    context 'drop_field processor with fields' do
-      let :params do
-        {
-          processor_name: 'drop_field',
-          params: {fields: ['input_type', 'offset']}
-        }
-      end
-
-      it do
-        is_expected.to contain_file('filebeat-processor-test-processor').with(
-          mode: '0644',
-          path: '/etc/filebeat/conf.d/10-processor-test-processor.yml',
-          content: '---
-processors:
-- drop_field:
-    fields:
-      - input_type
-      - offset
-'
-        )
-      end
     end
   end
 end
