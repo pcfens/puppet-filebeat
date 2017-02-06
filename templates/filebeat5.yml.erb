@@ -1,3 +1,16 @@
+<%-
+  def yaml_indent(conds)
+    return_val = []
+    tmp_val = conds.to_yaml.split("\n")
+    tmp_val = tmp_val.collect{|val| val.rstrip || val}
+    tmp_val.delete('---')
+    tmp_val.each do |val|
+      return_val << "        " + val
+    end
+
+    return_val.join("\n")
+  end
+-%>
 #========================= Filebeat global options ============================
 
 filebeat.spool_size: <%= @filebeat_config['filebeat']['spool_size'] %>
@@ -63,6 +76,21 @@ max_procs: <%= @filebeat_config['max_procs'] %>
 #       equals:
 #           http.code: 200
 #
+<%- unless @filebeat_config['processors'].empty? -%>
+processors:
+  <%- @filebeat_config['processors'].each do |_proc| -%>
+  - <%= _proc['name'] %>:
+    <%- unless _proc['when'].nil? or _proc['when'].empty? -%>
+      when:
+<%=  yaml_indent(_proc['when']) %>
+    <%- end -%>
+    <%- unless _proc['params'].nil? or _proc['params'].empty? -%>
+    <%- _proc['params'].each do |key,val|-%>
+      <%= key %>: <%= val %>
+    <%- end -%>
+    <%- end -%>
+  <%- end -%>
+<%- end -%>
 
 #================================ Outputs =====================================
 

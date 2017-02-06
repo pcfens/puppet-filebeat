@@ -1,27 +1,28 @@
 class filebeat::params {
-  $package_ensure = present
-  $manage_repo    = true
-  $service_ensure = running
-  $service_enable = true
-  $spool_size     = 2048
-  $idle_timeout   = '5s'
-  $publish_async  = false
-  $shutdown_timeout  = 0
-  $beat_name         = $::fqdn
-  $tags              = []
-  $queue_size        = 1000
-  $max_procs         = undef
-  $registry_file  = '.filebeat'
-  $config_dir_mode = '0755'
-  $config_file_mode = '0644'
-  $purge_conf_dir = true
-  $fields         = {}
-  $fields_under_root = false
-  $outputs        = {}
-  $shipper        = {}
-  $logging        = {}
-  $run_options    = {}
+  $package_ensure       = present
+  $manage_repo          = true
+  $service_ensure       = running
+  $service_enable       = true
+  $spool_size           = 2048
+  $idle_timeout         = '5s'
+  $publish_async        = false
+  $shutdown_timeout     = 0
+  $beat_name            = $::fqdn
+  $tags                 = []
+  $queue_size           = 1000
+  $max_procs            = undef
+  $registry_file        = '.filebeat'
+  $config_dir_mode      = '0755'
+  $config_file_mode     = '0644'
+  $purge_conf_dir       = true
+  $fields               = {}
+  $fields_under_root    = false
+  $outputs              = {}
+  $shipper              = {}
+  $logging              = {}
+  $run_options          = {}
   $use_generic_template = false
+  $processors           = []
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
@@ -62,18 +63,16 @@ class filebeat::params {
     }
 
     'Windows' : {
-      $install_dir      = 'C:/Program Files'
-      $directory        = "${install_dir}/Filebeat"
-      $config_file      = "${directory}/filebeat.yml"
-      $config_dir       = "${directory}/conf.d"
-      $download_url     = 'https://download.elastic.co/beats/filebeat/filebeat-1.3.1-windows.zip'
+      $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
+      $config_dir       = 'C:/Program Files/Filebeat/conf.d'
+      $download_url     = 'https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-windows-x86_64.zip'
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'
       $service_provider = undef
     }
 
     default : {
-      fail($filebeat::kernel_fail_message)
+      fail("${::kernel} is not supported by filebeat.")
     }
   }
 }

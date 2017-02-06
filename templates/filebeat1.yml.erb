@@ -1,4 +1,3 @@
-<%- filebeat_config = @filebeat_config.delete_if { |key, value| !defined?(value) } -%>
 <%- @filebeat_config['filebeat']['spool_size'] = Integer(@filebeat_config['filebeat']['spool_size']) -%>
 <%- if @filebeat_config['output']['file'] -%>
 <%- if @filebeat_config['output']['file']['rotate_every_kb'] -%>

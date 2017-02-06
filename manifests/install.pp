@@ -9,17 +9,17 @@ class filebeat::install {
       Anchor['filebeat::install::begin'] -> Class['filebeat::install::freebsd'] -> Anchor['filebeat::install::end']
     }
     'Linux':   {
-      class{ 'filebeat::install::linux':
+      class{ '::filebeat::install::linux':
         notify => Class['filebeat::service'],
       }
       Anchor['filebeat::install::begin'] -> Class['filebeat::install::linux'] -> Anchor['filebeat::install::end']
       if $::filebeat::manage_repo {
-        class { 'filebeat::repo': }
+        class { '::filebeat::repo': }
         Class['filebeat::repo'] -> Class['filebeat::install::linux']
       }
     }
     'Windows': {
-      class{'filebeat::install::windows':
+      class{'::filebeat::install::windows':
         notify => Class['filebeat::service'],
       }
       Anchor['filebeat::install::begin'] -> Class['filebeat::install::windows'] -> Anchor['filebeat::install::end']

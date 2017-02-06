@@ -43,6 +43,7 @@
 # @param max_procs [Number] The maximum number of CPUs that can be simultaneously used
 # @param fields [Hash] Optional fields that should be added to each event output
 # @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
+# @param processors [Array] An optional list of hashes used to configure filebeat processors
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 # @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
 class filebeat (
@@ -79,10 +80,13 @@ class filebeat (
   $max_procs            = $filebeat::params::max_procs,
   $fields               = $filebeat::params::fields,
   $fields_under_root    = $filebeat::params::fields_under_root,
+  $processors           = $filebeat::params::processors,
   #### End v5 onlly ####
   $prospectors          = {},
   $prospectors_merge    = false,
 ) inherits filebeat::params {
+
+  include ::stdlib
 
   $kernel_fail_message = "${::kernel} is not supported by filebeat."
 
@@ -102,13 +106,13 @@ class filebeat (
     $real_conf_template = $conf_template
   } elsif $real_version == '1' {
     if versioncmp('1.9.1', $::rubyversion) > 0 {
-      $real_conf_template = "${module_name}/filebeat.yml.ruby18.erb"
+      $real_conf_template = "${module_name}/filebeat1.yml.ruby18.erb"
     } else {
-      $real_conf_template = "${module_name}/filebeat.yml.erb"
+      $real_conf_template = "${module_name}/filebeat1.yml.erb"
     }
   } elsif $real_version == '5' {
     if $use_generic_template {
-      $real_conf_template = "${module_name}/filebeat.yml.erb"
+      $real_conf_template = "${module_name}/filebeat1.yml.erb"
     } else {
       $real_conf_template = "${module_name}/filebeat5.yml.erb"
     }
@@ -125,6 +129,7 @@ class filebeat (
     warning('You\'ve specified a non-standard config_file location - filebeat may fail to start unless you\'re doing something to fix this')
   }
 
+  validate_array($processors)
   validate_hash($outputs, $logging, $prospectors_final)
   validate_string($idle_timeout, $registry_file, $config_dir, $package_ensure)
 
@@ -133,9 +138,9 @@ class filebeat (
   }
 
   anchor { 'filebeat::begin': } ->
-  class { 'filebeat::install': } ->
-  class { 'filebeat::config': } ->
-  class { 'filebeat::service': } ->
+  class { '::filebeat::install': } ->
+  class { '::filebeat::config': } ->
+  class { '::filebeat::service': } ->
   anchor { 'filebeat::end': }
 
   if !empty($prospectors_final) {

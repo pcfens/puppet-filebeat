@@ -2,7 +2,48 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.6...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.1...HEAD)
+
+## [v0.10.2](https://github.com/pcfens/puppet-filebeat/tree/v0.10.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.1...v0.10.2)
+
+- Add close_older and force_close_files within prospector v5 [\#77](https://github.com/pcfens/puppet-filebeat/pull/77)
+
+## [v0.10.1](https://github.com/pcfens/puppet-filebeat/tree/v0.10.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.0...v0.10.1)
+
+- Support harvesting symlinks [\#74](https://github.com/pcfens/puppet-filebeat/pull/74)
+- Fix windows config file validation command [\#75](https://github.com/pcfens/puppet-filebeat/issues/75)
+
+## [v0.10.0](https://github.com/pcfens/puppet-filebeat/tree/v0.10.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.2...v0.10.0)
+
+- Add support for JSON decoding [\#72](https://github.com/pcfens/puppet-filebeat/pull/72)
+
+## [v0.9.2](https://github.com/pcfens/puppet-filebeat/tree/v0.9.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.1...v0.9.2)
+
+- Add support for close_* and clean_* parameters in prospectors [\#70](https://github.com/pcfens/puppet-filebeat/pull/70)
+
+## [v0.9.1](https://github.com/pcfens/puppet-filebeat/tree/v0.9.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.9.0...v0.9.1)
+
+- Fix yaml syntax around filebeat processors [\#71](https://github.com/pcfens/puppet-filebeat/pull/71)
+
+## [v0.9.0](https://github.com/pcfens/puppet-filebeat/tree/v0.9.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.7...v0.9.0)
+
+- Add support for tags in prospectors [\#68](https://github.com/pcfens/puppet-filebeat/pull/68)
+- Add support for filebeat processors [\#69](https://github.com/pcfens/puppet-filebeat/pull/69)
+- Fix the `filebeat_version` fact in Windows [\#59](https://github.com/pcfens/puppet-filebeat/issues/59)
+- Validate configuration files before notifying the filebeat service
+- Update the Windows install URL to the latest version
+
+## [v0.8.7](https://github.com/pcfens/puppet-filebeat/tree/v0.8.7)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.6...v0.8.7)
+
+- Update windows URL to the latest 5.x release
+- Remove nil values before rendering the template [\#65](https://github.com/pcfens/puppet-filebeat/pull/65)
 
 ## [v0.8.6](https://github.com/pcfens/puppet-filebeat/tree/v0.8.6)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.8.5...v0.8.6)

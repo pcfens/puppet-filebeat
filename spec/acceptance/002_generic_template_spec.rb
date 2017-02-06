@@ -1,12 +1,10 @@
 require 'spec_helper_acceptance'
 
-describe "filebeat class" do
-
+describe 'filebeat class' do
   package_name = 'filebeat'
   service_name = 'filebeat'
 
   context 'use generic template' do
-
     let(:pp) do
       <<-EOS
       if $::osfamily == 'Debian' {
@@ -53,22 +51,27 @@ describe "filebeat class" do
             fields   => {
               service => 'system',
               file    => 'dmesg',
-            }
+            },
+            tags      => [
+              'tag1',
+              'tag2',
+              'tag3',
+            ],
           }
         }
       }
       EOS
     end
 
-    it_behaves_like "an idempotent resource"
+    it_behaves_like 'an idempotent resource'
 
     describe service(service_name) do
-      it { should be_enabled }
-      it { should be_running }
+      it { is_expected.to be_enabled }
+      it { is_expected.to be_running }
     end
 
     describe package(package_name) do
-      it { should be_installed }
+      it { is_expected.to be_installed }
     end
   end
 end
