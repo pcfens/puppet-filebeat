@@ -39,7 +39,6 @@ class filebeat::config {
         owner        => 'root',
         group        => 'root',
         mode         => $filebeat::config_file_mode,
-        validate_cmd => "${filebeat_path} -N -configtest -c %",
         notify       => Service['filebeat'],
         require      => File['filebeat-config-dir'],
       }
@@ -62,7 +61,6 @@ class filebeat::config {
         ensure       => file,
         path         => $filebeat::config_file,
         content      => template($filebeat::real_conf_template),
-        validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
         notify       => Service['filebeat'],
         require      => File['filebeat-config-dir'],
       }
