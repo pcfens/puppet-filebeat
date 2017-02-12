@@ -4,6 +4,18 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.1...HEAD)
 
+## [v0.10.3](https://github.com/pcfens/puppet-filebeat/tree/v0.10.3)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.2...v0.10.3)
+
+- Allow non-SSL downloads of windows filebeat zipfile [\#82](https://github.com/pcfens/puppet-filebeat/pull/82)
+- Basic support of processors in puppet <4.x [\#79](https://github.com/pcfens/puppet-filebeat/issues/79) (See note below)
+- Confine the filebeat_version fact in a way that works in Ruby 1.8.7 [\#88](https://github.com/pcfens/puppet-filebeat/pull/88)
+
+Processor support is going to change in the next feature release (v0.11.x) in a way that is not
+backwards compatible with the current method. The upcoming change is documented in
+[\#85](https://github.com/pcfens/puppet-filebeat/pull/85).
+
+
 ## [v0.10.2](https://github.com/pcfens/puppet-filebeat/tree/v0.10.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.1...v0.10.2)
 
