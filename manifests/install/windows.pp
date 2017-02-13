@@ -10,6 +10,7 @@ class filebeat::install::windows {
     ensure      => present,
     source      => $filebeat::download_url,
     verify_peer => false,
+    proxy       => $filebeat::proxy_address,
   }
 
   exec { "unzip ${filename}":

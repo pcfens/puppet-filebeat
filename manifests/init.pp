@@ -45,6 +45,7 @@
 # @param processors [Array] An optional list of hashes used to configure filebeat processors
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 # @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
+# proxy_address [String] Proxy server to use for downloading files
 class filebeat (
   $major_version        = undef,
   $package_ensure       = $filebeat::params::package_ensure,
@@ -82,6 +83,7 @@ class filebeat (
   #### End v5 onlly ####
   $prospectors          = {},
   $prospectors_merge    = false,
+  $proxy_address        = undef
 ) inherits filebeat::params {
 
   include ::stdlib
@@ -133,6 +135,10 @@ class filebeat (
 
   if $package_ensure == '1.0.0-beta4' or $package_ensure == '1.0.0-rc1' {
     fail('Filebeat versions 1.0.0-rc1 and before are unsupported because they don\'t parse normal YAML headers')
+  }
+
+  if(!empty($proxy_address)){
+    validate_re($proxy_address, ['^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$'], 'ERROR: You must enter a proxy url in a valid format i.e. http://proxy.net:3128')
   }
 
   anchor { 'filebeat::begin': } ->
