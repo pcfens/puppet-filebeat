@@ -521,6 +521,19 @@ output.file:
   number_of_files: <%= @filebeat_config['output']['file']['number_of_files'] %>
   <%- end -%>
 <%- end -%>
+<%- if @filebeat_config['output']['console'] != nil -%>
+#-------------------------- Console output ------------------------------------
+output.console:
+  <%- if @filebeat_config['output']['console']['enabled'] != nil -%>
+  enabled: <%= @filebeat_config['output']['console']['enabled'] %>
+  <%- end -%>
+  <%- if @filebeat_config['output']['console']['pretty'] != nil -%>
+  pretty: <%= @filebeat_config['output']['console']['pretty'] %>
+  <%- end -%>
+  <%- if @filebeat_config['output']['console']['bulk_max_size'] != nil -%>
+  bulk_max_size: <%= @filebeat_config['output']['console']['bulk_max_size'] %>
+  <%- end -%>
+<%- end -%>
 
 #================================= Paths ======================================
 
