@@ -90,7 +90,7 @@ class filebeat (
 
   validate_bool($manage_repo, $prospectors_merge)
 
-  if $major_version == undef and $::filebeat_version == undef {
+  if $major_version == undef and getvar('::filebeat_version') == undef {
     $real_version = '5'
   } elsif $major_version == undef and versioncmp($::filebeat_version, '5.0.0') >= 0 {
     $real_version = '5'
