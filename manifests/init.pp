@@ -42,7 +42,7 @@
 # @param max_procs [Number] The maximum number of CPUs that can be simultaneously used
 # @param fields [Hash] Optional fields that should be added to each event output
 # @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
-# @param processors [Array] An optional list of hashes used to configure filebeat processors
+# @param processors [Hash] Processors that will be added. Commonly used to create processors using hiera.
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 # @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
 class filebeat (
@@ -78,7 +78,8 @@ class filebeat (
   $max_procs            = $filebeat::params::max_procs,
   $fields               = $filebeat::params::fields,
   $fields_under_root    = $filebeat::params::fields_under_root,
-  $processors           = $filebeat::params::processors,
+  $processors           = {},
+  $processors_merge     = false,
   #### End v5 onlly ####
   $prospectors          = {},
   $prospectors_merge    = false,
@@ -88,7 +89,7 @@ class filebeat (
 
   $kernel_fail_message = "${::kernel} is not supported by filebeat."
 
-  validate_bool($manage_repo, $prospectors_merge)
+  validate_bool($manage_repo, $processors_merge, $prospectors_merge)
 
   if $major_version == undef and getvar('::filebeat_version') == undef {
     $real_version = '5'
@@ -123,11 +124,16 @@ class filebeat (
     $prospectors_final = $prospectors
   }
 
+  if $processors_merge {
+    $processors_final = hiera_hash('filebeat::processors', $processors)
+  } else {
+    $processors_final = $processors
+  }
+
   if $config_file != $filebeat::params::config_file {
     warning('You\'ve specified a non-standard config_file location - filebeat may fail to start unless you\'re doing something to fix this')
   }
 
-  validate_array($processors)
   validate_hash($outputs, $logging, $prospectors_final)
   validate_string($idle_timeout, $registry_file, $config_dir, $package_ensure)
 
@@ -143,5 +149,8 @@ class filebeat (
 
   if !empty($prospectors_final) {
     create_resources('filebeat::prospector', $prospectors_final)
+  }
+  if !empty($processors_final) {
+    create_resources('filebeat::processors', $processors_final)
   }
 }

@@ -16,6 +16,7 @@
       - [JSON logs](#json-logs)
     - [Prospectors in hiera](#prospectors-in-hiera)
     - [Usage on Windows](#usage-on-windows)
+    - [Processors](#processors)
 4. [Reference](#reference)
     - [Public Classes](#public-classes)
     - [Private Classes](#private-classes)
@@ -154,20 +155,19 @@ but is expected to exist as a directory that puppet can write to.
 ### Processors
 
 Filebeat 5.0 and greater includes a new libbeat feature for filtering and/or enhancing all
-exported data through processors before geing sent to the configured output(s). By populating
-the `processors` parameter any number of processors may be configured to work on all events
-or only those that match certain conditions.
+exported data through processors before geing sent to the configured output(s). They can be
+defined as a hash added to the class declaration (also used for automatically creating
+processors using hiera), or as their own defined resources.
 
 To drop the offset and input_type fields from all events:
 
 ```puppet
 class{"filebeat":
-  processors => [
-    {
-      "name" => "drop_fields",
+  processors => {
+    "drop_fields" => {
       "params" => {"fields" => ["input_type", "offset"]}
     },
-  ],
+  },
 }
 ```
 
@@ -175,12 +175,11 @@ To drop all events that have the http response code equal to 200:
 
 ```puppet
 class{"filebeat":
-  processors => [
-    {
-      "name" => "drop_event",
+  processors => {
+    "drop_event" => {
       "when" => {"equals" => {"http.code" => 200}}
     },
-  ],
+  },
 }
 ```
 
@@ -188,20 +187,31 @@ Now to combine these examples into a single definition:
 
 ```puppet
 class{"filebeat":
-  processors => [
-    {
-      "name" => "drop_fields",
-      "params" => {"fields" => ["input_type", "offset"]}
+  processors => {
+    "drop_fields" => {
+      "params"   => {"fields" => ["input_type", "offset"]},
+      "priority" => 1,
     },
-    {
-      "name" => "drop_event",
-      "when" => {"equals" => {"http.code" => 200}}
+    "drop_event" => {
+      "when"     => {"equals" => {"http.code" => 200}},
+      "priority: => 2,
     },
-  ],
+  },
 }
 ```
 
 For more information please review the documentation [here](https://www.elastic.co/guide/en/beats/filebeat/5.1/configuration-processors.html).
+
+#### Processors in Hiera
+
+Processors can be declared in hiera using the `processors` parameter. By default, hiera will not merge
+processor declarations down the hiera hierarchy. To change the behavior in puppet 3 use the `processors_merge`
+parameter. In puppet 4, you can use `processors_merge`, but can also use the
+[lookup_options](https://docs.puppet.com/puppet/latest/reference/lookup_quick.html#setting-lookupoptions-in-data)
+flag.
+
+When `processors_merge` is set to true, `processors` will be replaced by the output of
+`hiera_hash('filebeat::processors')`.
 
 ## Reference
  - [**Public Classes**](#public-classes)
@@ -216,6 +226,7 @@ For more information please review the documentation [here](https://www.elastic.
     - [Class: filebeat::install::windows](#class-filebeatinstallwindows)
  - [**Public Defines**](#public-defines)
     - [Define: filebeat::prospector](#define-filebeatprospector)
+    - [Define: filebeat::processors](#define-filebeatprocessor)
 
 ### Public Classes
 
@@ -331,6 +342,23 @@ to fully understand what these parameters do.
     [See above](#json-logs). (default: {})
   - `multiline`: [Hash] Options that control how Filebeat handles log messages that span multiple lines.
     [See above](#multiline-logs). (default: {})
+
+#### Define: `filebeat::processor`
+
+Installs a configuration file for a processor.
+
+Be sure to read the [processor configuration details](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-processors.html)
+to fully understand what these parameters do.
+
+**Parameters for `filebeat::processor`**
+  - `ensure`: The ensure parameter on the prospector configuration file. (default: present)
+  - `priority`: [Integer] Used to help alpha-numerically sort the processor files in the config dir
+  location. (default: 10)
+  - `processor_name`: [String] The name of the processor. (default: $name)
+  - `params`: [Hash] The key-value pairs to pass to the processor as parameters. Not required on all
+  processors, review documentation for more details. (default: undef)
+  - `when`: Optional[Hash] Run this processor on any event that matches these conditions. Populates
+  the `when` option. (default: undef)
 
 
 ## Limitations
