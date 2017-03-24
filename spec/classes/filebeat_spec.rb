@@ -385,7 +385,7 @@ describe 'filebeat', type: :class do
           filebeat_version: '5.2.2'
         }
       end
-      
+
       # it { is_expected.to compile.with_all_deps } # Omitted because of https://github.com/rodjek/rspec-puppet/issues/192
       it { is_expected.to contain_class('filebeat::params') }
       it { is_expected.to contain_anchor('filebeat::begin') }
