@@ -236,7 +236,9 @@ Installs and configures filebeat.
 
 **Parameters within `filebeat`**
 - `major_version`: [String] The major version of filebeat to install. Should be either undef, 1, or 5. (default 5 if 1 not already installed)
-- `package_ensure`: [String] The ensure parameter for the filebeat package (default: present)
+- `package_ensure`: [String] The ensure parameter for the filebeat package If set to absent,
+  prospectors and processors passed as parameters are ignored and everything managed by
+  puppet will be removed. (default: present)
 - `manage_repo`: [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 - `service_ensure`: [String] The ensure parameter on the filebeat service (default: running)
 - `service_enable`: [String] The enable parameter on the filebeat service (default: true)

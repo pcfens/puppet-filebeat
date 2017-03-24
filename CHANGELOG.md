@@ -4,15 +4,18 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.4...HEAD)
 
+**Breaking Changes**
+- Processors are managed by their own defined resource (slight syntax change) [\#85](https://github.com/pcfens/puppet-filebeat/pull/85)
+
+**Normal Enhancements/Bugfixes**
+- Support proxy for windows file downloads [\#90](https://github.com/pcfens/puppet-filebeat/pull/90)
+- Setting `package_ensure` to absent removes puppet managed files and removes the package
+
 ## [v0.10.4](https://github.com/pcfens/puppet-filebeat/tree/v0.10.4)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.3...v0.10.4)
 
 - Add output.console support to the config template [\#91](https://github.com/pcfens/puppet-filebeat/issues/91)
 - Support puppet with strict variables enabled [\#92](https://github.com/pcfens/puppet-filebeat/issues/92)
-
-Processor support is going to change in the next feature release (v0.11.x) in a way that is not
-backwards compatible with the current method. The upcoming change is documented in
-[\#85](https://github.com/pcfens/puppet-filebeat/pull/85).
 
 ## [v0.10.3](https://github.com/pcfens/puppet-filebeat/tree/v0.10.3)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.2...v0.10.3)

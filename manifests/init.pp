@@ -119,7 +119,6 @@ class filebeat (
     }
   }
 
-
   if $prospectors_merge {
     $prospectors_final = hiera_hash('filebeat::prospectors', $prospectors)
   } else {
@@ -147,16 +146,40 @@ class filebeat (
     validate_re($proxy_address, ['^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$'], 'ERROR: You must enter a proxy url in a valid format i.e. http://proxy.net:3128')
   }
 
-  anchor { 'filebeat::begin': } ->
-  class { '::filebeat::install': } ->
-  class { '::filebeat::config': } ->
-  class { '::filebeat::service': } ->
-  anchor { 'filebeat::end': }
-
-  if !empty($prospectors_final) {
-    create_resources('filebeat::prospector', $prospectors_final)
+  if $package_ensure == 'absent' {
+    $alternate_ensure = 'absent'
+    $real_service_ensure = 'stopped'
+    $file_ensure = 'absent'
+    $directory_ensure = 'absent'
+  } else {
+    $alternate_ensure = 'present'
+    $file_ensure = 'file'
+    $directory_ensure = 'directory'
+    $real_service_ensure = $service_ensure
   }
-  if !empty($processors_final) {
-    create_resources('filebeat::processors', $processors_final)
+
+  # If we're removing filebeat, do things in a different order to make sure
+  # we remove as much as possible
+  if $package_ensure == 'absent' {
+    anchor { 'filebeat::begin': } ->
+    class { '::filebeat::config': } ->
+    class { '::filebeat::install': } ->
+    class { '::filebeat::service': } ->
+    anchor { 'filebeat::end': }
+  } else {
+    anchor { 'filebeat::begin': } ->
+    class { '::filebeat::install': } ->
+    class { '::filebeat::config': } ->
+    class { '::filebeat::service': } ->
+    anchor { 'filebeat::end': }
+  }
+
+  if $package_ensure != 'absent' {
+    if !empty($prospectors_final) {
+      create_resources('filebeat::prospector', $prospectors_final)
+    }
+    if !empty($processors_final) {
+      create_resources('filebeat::processor', $processors_final)
+    }
   }
 }

@@ -17,6 +17,7 @@ class filebeat::repo {
 
       if !defined(Apt::Source['beats']){
         apt::source { 'beats':
+          ensure   => $::filebeat::alternate_ensure,
           location => $debian_repo_url,
           release  => 'stable',
           repos    => 'main',
@@ -30,6 +31,7 @@ class filebeat::repo {
     'RedHat', 'Linux': {
       if !defined(Yumrepo['beats']){
         yumrepo { 'beats':
+          ensure   => $::filebeat::alternate_ensure,
           descr    => 'elastic beats repo',
           baseurl  => $yum_repo_url,
           gpgcheck => 1,
@@ -46,6 +48,7 @@ class filebeat::repo {
       }
       if !defined(Zypprepo['beats']){
         zypprepo { 'beats':
+          ensure      => $::filebeat::alternate_ensure,
           baseurl     => $yum_repo_url,
           enabled     => 1,
           autorefresh => 1,

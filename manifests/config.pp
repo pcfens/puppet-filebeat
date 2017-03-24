@@ -33,7 +33,7 @@ class filebeat::config {
       }
 
       file {'filebeat.yml':
-        ensure       => file,
+        ensure       => $filebeat::file_ensure,
         path         => $filebeat::config_file,
         content      => template($filebeat::real_conf_template),
         owner        => 'root',
@@ -45,13 +45,14 @@ class filebeat::config {
       }
 
       file {'filebeat-config-dir':
-        ensure  => directory,
+        ensure  => $filebeat::directory_ensure,
         path    => $filebeat::config_dir,
         owner   => 'root',
         group   => 'root',
         mode    => $filebeat::config_dir_mode,
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
+        force   => true,
       }
     } # end Linux
 
@@ -59,7 +60,7 @@ class filebeat::config {
       $filebeat_path = 'c:\Program Files\Filebeat\filebeat.exe'
 
       file {'filebeat.yml':
-        ensure       => file,
+        ensure       => $filebeat::file_ensure,
         path         => $filebeat::config_file,
         content      => template($filebeat::real_conf_template),
         validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
@@ -68,10 +69,11 @@ class filebeat::config {
       }
 
       file {'filebeat-config-dir':
-        ensure  => directory,
+        ensure  => $filebeat::directory_ensure,
         path    => $filebeat::config_dir,
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
+        force   => true,
       }
     } # end Windows
 
