@@ -70,6 +70,7 @@ describe 'filebeat', type: :class do
           filebeat_version: '1.3.1'
         }
       end
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('filebeat::params') }
       it { is_expected.to contain_anchor('filebeat::begin') }
@@ -104,6 +105,7 @@ describe 'filebeat', type: :class do
           filebeat_version: '1.3.1'
         }
       end
+
       # it { is_expected.to compile.with_all_deps } # Omitted because of https://github.com/rodjek/rspec-puppet/issues/192
       it { is_expected.to contain_class('filebeat::params') }
       it { is_expected.to contain_anchor('filebeat::begin') }
@@ -206,6 +208,7 @@ describe 'filebeat', type: :class do
             filebeat_version: filebeat_vers
           }
         end
+
         it { is_expected.to compile.with_all_deps }
         it { is_expected.to contain_class('filebeat::params') }
         it { is_expected.to contain_anchor('filebeat::begin') }
@@ -240,6 +243,7 @@ describe 'filebeat', type: :class do
             filebeat_version: filebeat_vers
           }
         end
+
         # it { is_expected.to compile.with_all_deps } # Omitted because of https://github.com/rodjek/rspec-puppet/issues/192
         it { is_expected.to contain_class('filebeat::params') }
         it { is_expected.to contain_anchor('filebeat::begin') }
@@ -270,7 +274,7 @@ describe 'filebeat', type: :class do
     end
   end
 
-  context "when uninstalling filebeat" do
+  context 'when uninstalling filebeat' do
     let :facts do
       {
         kernel: 'Linux',
@@ -346,6 +350,7 @@ describe 'filebeat', type: :class do
           filebeat_version: '5.2.2'
         }
       end
+
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_class('filebeat::params') }
       it { is_expected.to contain_anchor('filebeat::begin') }
@@ -414,6 +419,7 @@ describe 'filebeat', type: :class do
         osfamily: 'Solaris'
       }
     end
+
     it { is_expected.to raise_error(Puppet::Error) }
   end
 end
