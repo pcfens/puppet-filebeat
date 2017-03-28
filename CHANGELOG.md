@@ -6,10 +6,14 @@ Changelog
 
 **Breaking Changes**
 - Processors are managed by their own defined resource (slight syntax change) [\#85](https://github.com/pcfens/puppet-filebeat/pull/85)
+- The registry file has likely moved because of an upstream change. Moving this file
+  can cause problems (duplicate or missed log entries), so you may want to point it
+  to your existing file (check in /.filebeat on Linux systems)
 
 **Normal Enhancements/Bugfixes**
 - Support proxy for windows file downloads [\#90](https://github.com/pcfens/puppet-filebeat/pull/90)
 - Setting `package_ensure` to absent removes puppet managed files and removes the package
+- Add support for index conditional output to elasticsearch [\#97](https://github.com/pcfens/puppet-filebeat/pull/97)
 
 ## [v0.10.4](https://github.com/pcfens/puppet-filebeat/tree/v0.10.4)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.3...v0.10.4)
