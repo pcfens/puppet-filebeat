@@ -11,7 +11,6 @@ class filebeat::params {
   $tags                 = []
   $queue_size           = 1000
   $max_procs            = undef
-  $registry_file        = '.filebeat'
   $config_dir_mode      = '0755'
   $config_file_mode     = '0644'
   $purge_conf_dir       = true
@@ -34,6 +33,7 @@ class filebeat::params {
     'Linux'   : {
       $config_file     = '/etc/filebeat/filebeat.yml'
       $config_dir      = '/etc/filebeat/conf.d'
+      $registry_file   = '/var/lib/filebeat/registry'
 
       # These parameters are ignored if/until tarball installs are supported in Linux
       $tmp_dir         = '/tmp'
@@ -52,6 +52,7 @@ class filebeat::params {
     'Windows' : {
       $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
       $config_dir       = 'C:/Program Files/Filebeat/conf.d'
+      $registry_file    = 'C:/ProgramData/filebeat/registry'
       $download_url     = 'https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-windows-x86_64.zip'
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'
