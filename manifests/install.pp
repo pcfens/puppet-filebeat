@@ -2,6 +2,12 @@ class filebeat::install {
   anchor { 'filebeat::install::begin': }
 
   case $::kernel {
+    'FreeBSD': {
+      class{ 'filebeat::install::freebsd':
+        notify => Class['filebeat::service'],
+      }
+      Anchor['filebeat::install::begin'] -> Class['filebeat::install::freebsd'] -> Anchor['filebeat::install::end']
+    }
     'Linux':   {
       class{ '::filebeat::install::linux':
         notify => Class['filebeat::service'],

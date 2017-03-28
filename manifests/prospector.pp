@@ -42,6 +42,17 @@ define filebeat::prospector (
   }
 
   case $::kernel {
+    'FreeBSD' : {
+      file { "filebeat-${name}":
+        ensure  => $ensure,
+        path    => "${filebeat::config_dir}/${name}.yml",
+        owner   => 'root',
+        group   => 'wheel',
+        mode    => $::filebeat::config_file_mode,
+        content => template("${module_name}/${prospector_template}"),
+        notify  => Service['filebeat'],
+      }
+    }
     'Linux' : {
       $filebeat_path = $filebeat::real_version ? {
         '1'     => '/usr/bin/filebeat',

@@ -25,6 +25,35 @@ class filebeat::config {
   Filebeat::Prospector <| |> -> File['filebeat.yml']
 
   case $::kernel {
+    'FreeBSD' : {
+      file {'filebeat.yml':
+        ensure  => file,
+        path    => $filebeat::config_file,
+        content => template($filebeat::real_conf_template),
+        owner   => 'root',
+        group   => 'wheel',
+        mode    => $filebeat::config_file_mode,
+        notify  => Service['filebeat'],
+      }
+
+      file {'filebeat-config-dir':
+        ensure  => directory,
+        path    => $filebeat::config_dir,
+        owner   => 'root',
+        group   => 'wheel',
+        mode    => $filebeat::config_dir_mode,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
+      }
+
+      file  { '/usr/local/etc/filebeat.yml':
+        ensure => 'link',
+        force  => true,
+        target => $filebeat::config_file,
+        require => File['filebeat.yml'],
+        notify  => Service['filebeat'],
+      }
+    } # end FreeBSD
     'Linux'   : {
 
       $filebeat_path = $filebeat::real_version ? {
