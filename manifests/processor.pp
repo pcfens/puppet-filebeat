@@ -49,23 +49,21 @@ define filebeat::processor(
   case $::kernel {
     'Linux': {
       file{"filebeat-processor-${name}":
-        ensure       => $ensure,
-        path         => "${filebeat::config_dir}/${_priority}-processor-${name}.yml",
-        owner        => 'root',
-        group        => 'root',
-        mode         => $::filebeat::config_file_mode,
-        content      => inline_template('<%= @processor_config.to_yaml() %>'),
-        validate_cmd => '/usr/share/filebeat/bin/filebeat -N -configtest -c %',
-        notify       => Class['filebeat::service'],
+        ensure  => $ensure,
+        path    => "${filebeat::config_dir}/${_priority}-processor-${name}.yml",
+        owner   => 'root',
+        group   => 'root',
+        mode    => $::filebeat::config_file_mode,
+        content => inline_template('<%= @processor_config.to_yaml() %>'),
+        notify  => Class['filebeat::service'],
       }
     }
     'Windows': {
       file{"filebeat-processor-${name}":
-        ensure       => $ensure,
-        path         => "${filebeat::config_dir}/${_priority}-processor-${name}.yml",
-        content      => inline_template('<%= @processor_config.to_yaml() %>'),
-        validate_cmd => 'c:\Program Files\Filebeat\filebeat.exe -N -configtest -c %',
-        notify       => Class['filebeat::service'],
+        ensure  => $ensure,
+        path    => "${filebeat::config_dir}/${_priority}-processor-${name}.yml",
+        content => inline_template('<%= @processor_config.to_yaml() %>'),
+        notify  => Class['filebeat::service'],
       }
     }
     default: {
