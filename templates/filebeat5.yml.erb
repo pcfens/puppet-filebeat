@@ -103,6 +103,16 @@ output.elasticsearch:
   <%- if @filebeat_config['output']['elasticsearch']['pipeline'] != nil -%>
   pipeline: "<%= @filebeat_config['output']['elasticsearch']['pipeline'] %>"
   <%- end -%>
+  <%- if @filebeat_config['output']['elasticsearch']['pipelines'] != nil -%>
+  pipelines:
+  <%- @filebeat_config['output']['elasticsearch']['pipelines'].each do |pipeline| -%>
+    <%- if pipeline['name'] != nil -%>
+    - pipeline: "<%= pipeline['name'] %>"
+      when.equals:
+        <%= pipeline['filter'] %>: "<%= pipeline['pattern'] %>"
+    <%- end -%>
+  <%- end -%>
+  <%- end -%>
   <%- if @filebeat_config['output']['elasticsearch']['indices'] != nil -%>
   indices:
   <%- @filebeat_config['output']['elasticsearch']['indices'].each do |indice| -%>
