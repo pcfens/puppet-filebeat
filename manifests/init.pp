@@ -161,17 +161,17 @@ class filebeat (
   # If we're removing filebeat, do things in a different order to make sure
   # we remove as much as possible
   if $package_ensure == 'absent' {
-    anchor { 'filebeat::begin': } ->
-    class { '::filebeat::config': } ->
-    class { '::filebeat::install': } ->
-    class { '::filebeat::service': } ->
-    anchor { 'filebeat::end': }
+    anchor { 'filebeat::begin': }
+    -> class { '::filebeat::config': }
+    -> class { '::filebeat::install': }
+    -> class { '::filebeat::service': }
+    -> anchor { 'filebeat::end': }
   } else {
-    anchor { 'filebeat::begin': } ->
-    class { '::filebeat::install': } ->
-    class { '::filebeat::config': } ->
-    class { '::filebeat::service': } ->
-    anchor { 'filebeat::end': }
+    anchor { 'filebeat::begin': }
+    -> class { '::filebeat::install': }
+    -> class { '::filebeat::config': }
+    -> class { '::filebeat::service': }
+    -> anchor { 'filebeat::end': }
   }
 
   if $package_ensure != 'absent' {
