@@ -14,6 +14,7 @@ Changelog
 - Support proxy for windows file downloads [\#90](https://github.com/pcfens/puppet-filebeat/pull/90)
 - Setting `package_ensure` to absent removes puppet managed files and removes the package
 - Add support for index conditional output to elasticsearch [\#97](https://github.com/pcfens/puppet-filebeat/pull/97)
+- Add support for a conditional pipeline for elasticsearch [\#98](https://github.com/pcfens/puppet-filebeat/pull/98)
 
 ## [v0.10.4](https://github.com/pcfens/puppet-filebeat/tree/v0.10.4)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.3...v0.10.4)
