@@ -4,6 +4,9 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.4...HEAD)
 
+## [v0.11.0](https://github.com/pcfens/puppet-filebeat/tree/v0.11.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.4...v0.11.0)
+
 **Breaking Changes**
 - Processors are managed by their own defined resource (slight syntax change) [\#85](https://github.com/pcfens/puppet-filebeat/pull/85)
 - The registry file has likely moved because of an upstream change. Moving this file
@@ -16,6 +19,7 @@ Changelog
 - Add support for index conditional output to elasticsearch [\#97](https://github.com/pcfens/puppet-filebeat/pull/97)
 - Add support for a conditional pipeline for elasticsearch [\#98](https://github.com/pcfens/puppet-filebeat/pull/98)
 - Template should check for nil instead of undef [\#63](https://github.com/pcfens/puppet-filebeat/issues/63)
+- Support for the round_robin and group_events parameters in kafka outputs [\#100](https://github.com/pcfens/puppet-filebeat/pull/100)
 
 ## [v0.10.4](https://github.com/pcfens/puppet-filebeat/tree/v0.10.4)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.3...v0.10.4)

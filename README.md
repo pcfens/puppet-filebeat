@@ -3,7 +3,8 @@
 [![Build Status](https://travis-ci.org/pcfens/puppet-filebeat.svg?branch=master)](https://travis-ci.org/pcfens/puppet-filebeat)
 
 ## Upgrading from <= v 0.10.4
-Be sure to read the changelog as there are up to 2 breaking changes introduced in v0.11.0
+Be sure to read the changelog as there are up to 2 breaking changes introduced in v0.11.0 related
+to processors and the default registry path
 
 #### Table of Contents
 
