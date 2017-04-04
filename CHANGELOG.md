@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.4...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.1...HEAD)
+
+## [v0.11.0](https://github.com/pcfens/puppet-filebeat/tree/v0.11.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.0...v0.11.1)
+
+- Restore puppet 3.x compatibility regression ([PUP-2523](https://tickets.puppetlabs.com/browse/PUP-2523))
 
 ## [v0.11.0](https://github.com/pcfens/puppet-filebeat/tree/v0.11.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.10.4...v0.11.0)
