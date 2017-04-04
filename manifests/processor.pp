@@ -41,7 +41,7 @@ define filebeat::processor(
   $processor_config = delete_undef_values({
     'processors' => [
       {
-        $processor_name => $_configuration
+        "${processor_name}" => $_configuration
       },
     ],
   })
