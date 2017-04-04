@@ -38,11 +38,11 @@ matrix:
     bundler_args: --without system_tests development
     env: STRICT_VARIABLES="yes"
     script: bundle exec rake rubocop
-  - rvm: 2.1.9
+  - rvm: 2.1.10
     bundler_args: --without system_tests development
     env: PUPPET_GEM_VERSION="~> 4.0" STRICT_VARIABLES=yes
-  - rvm: 2.1.9
+  - rvm: 2.1.10
     bundler_args: --without system_tests development
-    env: PUPPET_GEM_VERSION="~> 3.8"
+    env: PUPPET_GEM_VERSION="3.8.7"
 notifications:
   email: false
