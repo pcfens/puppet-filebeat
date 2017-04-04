@@ -293,6 +293,10 @@ output.kafka:
   <%- if @filebeat_config['output']['kafka']['topic'] != nil -%>
   topic: <%= @filebeat_config['output']['kafka']['topic'] %>
   <%- end -%>
+  <%- if @filebeat_config['output']['kafka']['round_robin'] != nil -%>
+  round_robin:
+    group_events: <%= @filebeat_config['output']['kafka']['round_robin']['group_events'] %>
+  <%- end -%>
   <%- if @filebeat_config['output']['kafka']['key'] != nil -%>
   key: '<%= @filebeat_config['output']['kafka']['key'] %>'
   <%- end -%>
