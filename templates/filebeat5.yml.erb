@@ -31,7 +31,7 @@ queue_size: <%= @filebeat_config['queue_size'] %>
 # Do not modify this value.
 #bulk_queue_size: 0
 
-<%- if @filebeat_config['max_procs'] != :undef -%>
+<%- if @filebeat_config['max_procs'] != nil -%>
 max_procs: <%= @filebeat_config['max_procs'] %>
 <%- end -%>
 
