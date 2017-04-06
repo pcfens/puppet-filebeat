@@ -21,7 +21,7 @@ define filebeat::processor(
     $_priority = $priority
   }
 
-  if $processor_name == 'drop_field' and $when == undef {
+  if $processor_name == 'drop_event' and $when == undef {
     fail('drop_event processors require a condition, without one ALL events are dropped')
   }
   elsif $processor_name != 'add_cloud_metadata' and $params == undef {
@@ -31,7 +31,7 @@ define filebeat::processor(
   if $processor_name == 'add_cloud_metadata' {
     $_configuration = delete_undef_values(merge({'timeout' => '3s'}, $params))
   }
-  elsif $processor_name == 'drop_field' {
+  elsif $processor_name == 'drop_event' {
     $_configuration = $when
   }
   else {
