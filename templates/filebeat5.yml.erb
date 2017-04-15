@@ -19,9 +19,7 @@ tags:
 
 <%- if @filebeat_config['fields'].length > 0 -%>
 fields:
-  <%- @filebeat_config['fields'].each_pair do |k, v| -%>
-  <%= k %>: <%= v %>
-  <%- end -%>
+<%= @filebeat_config['fields'].to_yaml().gsub("---\n", '').gsub(/^/, '  ') %>
 <%- end -%>
 
 fields_under_root: <%= @filebeat_config['fields_under_root'] %>
