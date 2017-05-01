@@ -24,7 +24,7 @@ define filebeat::processor(
   if $processor_name == 'drop_event' and $when == undef {
     fail('drop_event processors require a condition, without one ALL events are dropped')
   }
-  elsif $processor_name != 'add_cloud_metadata' and $params == undef {
+  elsif $processor_name != 'add_cloud_metadata' and $processor_name != 'add_locale' and $params == undef {
     fail("${processor_name} requires parameters to function as expected")
   }
 
