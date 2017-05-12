@@ -300,6 +300,12 @@ output.kafka:
   <%- if @filebeat_config['output']['kafka']['key'] != nil -%>
   key: '<%= @filebeat_config['output']['kafka']['key'] %>'
   <%- end -%>
+  <%- if @filebeat_config['output']['kafka']['codec.format'] != nil -%>
+  codec.format:
+    <%- if @filebeat_config['output']['kafka']['codec.format']['string'] != nil -%>
+    string: <%= @filebeat_config['output']['kafka']['codec.format']['string'] %>
+    <%- end -%>
+  <%- end -%>
   <%- if @filebeat_config['output']['kafka']['partition'] != nil and @filebeat_config['output']['kafka']['partition']['hash'] != nil -%>
   partition.hash:
     <%- if @filebeat_config['output']['kafka']['partition']['hash']['reachable_only'] != nil -%>
