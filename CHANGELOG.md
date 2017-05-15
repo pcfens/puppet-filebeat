@@ -2,9 +2,16 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.1...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.2...HEAD)
 
-## [v0.11.0](https://github.com/pcfens/puppet-filebeat/tree/v0.11.1)
+## [v0.11.2](https://github.com/pcfens/puppet-filebeat/tree/v0.11.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.1...v0.11.2)
+
+- Explicitly support newer versions of the powershell modules [\#105](https://github.com/pcfens/puppet-filebeat/issues/105)
+- Support kafka codec.format module [\#106](https://github.com/pcfens/puppet-filebeat/pull/106)
+- The `add_locale` processor doesnt' require parameters [\#104](https://github.com/pcfens/puppet-filebeat/pull/104)
+
+## [v0.11.1](https://github.com/pcfens/puppet-filebeat/tree/v0.11.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.0...v0.11.1)
 
 - Restore puppet 3.x compatibility regression ([PUP-2523](https://tickets.puppetlabs.com/browse/PUP-2523))
