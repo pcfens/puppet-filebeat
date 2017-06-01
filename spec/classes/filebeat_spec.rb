@@ -274,6 +274,74 @@ describe 'filebeat', type: :class do
     end
   end
 
+  context 'when seting repository priority' do
+    let :facts do
+      {
+        kernel: 'Linux',
+        osfamily: 'Debian',
+        lsbdistid: 'Ubuntu',
+        lsbdistrelease: '16.04',
+        rubyversion: '1.9.3',
+        puppetversion: Puppet.version,
+        filebeat_version: '5.2.2'
+      }
+    end
+
+    let :params do
+      {
+        repo_priority: 10
+      }
+    end
+
+    context 'defaults' do
+      it { is_expected.to compile.with_all_deps }
+      it { is_expected.to contain_package('filebeat') }
+      it { is_expected.to contain_class('filebeat::params') }
+      it { is_expected.to contain_anchor('filebeat::begin') }
+      it { is_expected.to contain_anchor('filebeat::end') }
+      it { is_expected.to contain_class('filebeat::install') }
+      it { is_expected.to contain_class('filebeat::config') }
+      it { is_expected.to contain_anchor('filebeat::install::begin') }
+      it { is_expected.to contain_anchor('filebeat::install::end') }
+      it { is_expected.to contain_class('filebeat::install::linux') }
+      it { is_expected.to contain_class('filebeat::repo') }
+      it { is_expected.to contain_class('filebeat::service') }
+      it { is_expected.not_to contain_class('filebeat::install::windows') }
+      it do
+        is_expected.to contain_apt__source('beats').with(
+          pin => 10
+        )
+      end
+    end
+
+    describe 'on a RHEL system' do
+      let :facts do
+        {
+          kernel: 'Linux',
+          osfamily: 'RedHat',
+          rubyversion: '1.8.7',
+          puppetversion: Puppet.version,
+          filebeat_version: '5.2.2'
+        }
+      end
+
+      it { is_expected.to compile.with_all_deps }
+      it { is_expected.to contain_class('filebeat::params') }
+      it { is_expected.to contain_anchor('filebeat::begin') }
+      it { is_expected.to contain_anchor('filebeat::end') }
+      it { is_expected.to contain_class('filebeat::install') }
+      it { is_expected.to contain_class('filebeat::config') }
+      it { is_expected.to contain_anchor('filebeat::install::begin') }
+      it { is_expected.to contain_anchor('filebeat::install::end') }
+
+      it do
+        is_expected.to contain_yumrepo('beats').with(
+          priority => 10
+        )
+      end
+    end
+  end
+
   context 'when uninstalling filebeat' do
     let :facts do
       {
