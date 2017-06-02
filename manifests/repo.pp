@@ -21,6 +21,7 @@ class filebeat::repo {
           location => $debian_repo_url,
           release  => 'stable',
           repos    => 'main',
+          pin      => $::filebeat::repo_priority,
           key      => {
             id     => '46095ACC8548582C1A2699A9D27D666CD88E42B4',
             source => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
@@ -36,6 +37,7 @@ class filebeat::repo {
           baseurl  => $yum_repo_url,
           gpgcheck => 1,
           gpgkey   => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
+          priority => $::filebeat::repo_priority,
           enabled  => 1,
         }
       }

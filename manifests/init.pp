@@ -18,6 +18,7 @@
 # @param manage_repo [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 # @param service_ensure [String] The ensure parameter on the filebeat service (default: running)
 # @param service_enable [String] The enable parameter on the filebeat service (default: true)
+# @param repo_priority [Integer] Repository priority.  yum and apt supported (default: undef)
 # @param spool_size [Integer] How large the spool should grow before being flushed to the network (default: 2048)
 # @param idle_timeout [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 # @param publish_async [Boolean] If set to true filebeat will publish while preparing the next batch of lines to send (defualt: false)
@@ -53,6 +54,7 @@ class filebeat (
   $service_ensure       = $filebeat::params::service_ensure,
   $service_enable       = $filebeat::params::service_enable,
   $service_provider     = $filebeat::params::service_provider,
+  $repo_priority        = undef,
   $spool_size           = $filebeat::params::spool_size,
   $idle_timeout         = $filebeat::params::idle_timeout,
   $publish_async        = $filebeat::params::publish_async,
@@ -92,6 +94,10 @@ class filebeat (
   $kernel_fail_message = "${::kernel} is not supported by filebeat."
 
   validate_bool($manage_repo, $processors_merge, $prospectors_merge)
+
+  if $repo_priority != undef {
+    validate_integer($repo_priority)
+  }
 
   if $major_version == undef and getvar('::filebeat_version') == undef {
     $real_version = '5'
