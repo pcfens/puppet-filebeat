@@ -55,7 +55,6 @@ define filebeat::prospector (
         group        => 'root',
         mode         => $::filebeat::config_file_mode,
         content      => template("${module_name}/${prospector_template}"),
-        validate_cmd => "${filebeat_path} -N -configtest -c %",
         notify       => Service['filebeat'],
       }
     }
@@ -66,7 +65,6 @@ define filebeat::prospector (
         ensure       => $ensure,
         path         => "${filebeat::config_dir}/${name}.yml",
         content      => template("${module_name}/${prospector_template}"),
-        validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
         notify       => Service['filebeat'],
       }
     }
