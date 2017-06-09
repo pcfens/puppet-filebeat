@@ -15,7 +15,7 @@ class filebeat::install::windows {
 
   exec { "unzip ${filename}":
     command  => "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${filebeat::tmp_dir}/${filename}.zip')).items(), 16)",
-    creates  => "${filebeat::install_dir}/Filebeat",
+    creates  => "${filebeat::install_dir}/Filebeat/${filename}",
     provider => powershell,
     require  => [
       File[$filebeat::install_dir],
@@ -23,18 +23,34 @@ class filebeat::install::windows {
     ],
   }
 
-  exec { 'rename folder':
-    command  => "Rename-Item '${filebeat::install_dir}/${filename}' Filebeat",
-    creates  => "${filebeat::install_dir}/Filebeat",
+  # You can't remove the old dir while the service has files locked...
+  exec { "stop service ${filename}":
+    command  => "Set-Service -Name filebeat -Status Stopped",
+    creates  => "${filebeat::install_dir}/Filebeat/${filename}",
+    onlyif   => 'if(Get-WmiObject -Class Win32_Service -Filter "Name=\'filebeat\'") {exit 0} else {exit 1}',
     provider => powershell,
     require  => Exec["unzip ${filename}"],
   }
 
+  exec { "rename ${filename}":
+    command  => "Remove-Item '${filebeat::install_dir}/Filebeat' -Recurse -Force -ErrorAction SilentlyContinue; Rename-Item '${filebeat::install_dir}/${filename}' '${filebeat::install_dir}/Filebeat'",
+    creates  => "${filebeat::install_dir}/Filebeat/${filename}",
+    provider => powershell,
+    require  => Exec["stop service ${filename}"],
+  }
+
+  exec { "mark ${filename}":
+    command  => "New-Item '${filebeat::install_dir}/Filebeat/${filename}' -ItemType file",
+    creates  => "${filebeat::install_dir}/Filebeat/${filename}",
+    provider => powershell,
+    require  => Exec["rename ${filename}"],
+  }
+
   exec { "install ${filename}":
-    cwd      => "${filebeat::install_dir}/Filebeat",
-    command  => './install-service-filebeat.ps1',
-    onlyif   => 'if(Get-WmiObject -Class Win32_Service -Filter "Name=\'filebeat\'") { exit 1 } else {exit 0 }',
-    provider =>  powershell,
-    require  => Exec['rename folder'],
+    cwd         => "${filebeat::install_dir}/Filebeat",
+    command     => './install-service-filebeat.ps1',
+    refreshonly => true,
+    provider    => powershell,
+    subscribe   => Exec["mark ${filename}"],
   }
 }
