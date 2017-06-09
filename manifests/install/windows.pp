@@ -1,14 +1,14 @@
 class filebeat::install::windows {
-  $filename = regsubst($filebeat::download_url, '^https?.*\/([^\/]+)\.[^.].*', '\1')
+  $filename = regsubst($filebeat::real_download_url, '^https?.*\/([^\/]+)\.[^.].*', '\1')
   $foldername = 'Filebeat'
 
   file { $filebeat::install_dir:
     ensure => directory,
   }
 
-  remote_file {"${filebeat::tmp_dir}/${filename}.zip":
+  remote_file { "${filebeat::tmp_dir}/${filename}.zip":
     ensure      => present,
-    source      => $filebeat::download_url,
+    source      => $filebeat::real_download_url,
     verify_peer => false,
     proxy       => $filebeat::proxy_address,
   }
@@ -25,7 +25,7 @@ class filebeat::install::windows {
 
   # You can't remove the old dir while the service has files locked...
   exec { "stop service ${filename}":
-    command  => "Set-Service -Name filebeat -Status Stopped",
+    command  => 'Set-Service -Name filebeat -Status Stopped',
     creates  => "${filebeat::install_dir}/Filebeat/${filename}",
     onlyif   => 'if(Get-WmiObject -Class Win32_Service -Filter "Name=\'filebeat\'") {exit 0} else {exit 1}',
     provider => powershell,

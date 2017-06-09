@@ -69,7 +69,7 @@ class filebeat (
   $logging              = $filebeat::params::logging,
   $run_options          = $filebeat::params::run_options,
   $conf_template        = undef,
-  $download_url         = $filebeat::params::download_url,
+  $download_url         = undef,
   $install_dir          = $filebeat::params::install_dir,
   $tmp_dir              = $filebeat::params::tmp_dir,
   #### v5 only ####
@@ -123,6 +123,11 @@ class filebeat (
     } else {
       $real_conf_template = "${module_name}/filebeat5.yml.erb"
     }
+  }
+
+  $real_download_url = $download_url ? {
+    undef   => "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${package_ensure}-windows-x86_64.zip",
+    default => $download_url,
   }
 
   if $prospectors_merge {
