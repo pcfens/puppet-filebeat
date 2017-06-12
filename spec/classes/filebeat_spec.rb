@@ -309,7 +309,7 @@ describe 'filebeat', type: :class do
       it { is_expected.not_to contain_class('filebeat::install::windows') }
       it do
         is_expected.to contain_apt__source('beats').with(
-          pin => 10
+          pin: 10
         )
       end
     end
@@ -336,7 +336,7 @@ describe 'filebeat', type: :class do
 
       it do
         is_expected.to contain_yumrepo('beats').with(
-          priority => 10
+          priority: 10
         )
       end
     end

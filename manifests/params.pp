@@ -1,5 +1,4 @@
 class filebeat::params {
-  $package_ensure       = present
   $manage_repo          = true
   $service_ensure       = running
   $service_enable       = true
@@ -21,6 +20,7 @@ class filebeat::params {
   $logging              = {}
   $run_options          = {}
   $use_generic_template = false
+  $kernel_fail_message  = "${::kernel} is not supported by filebeat."
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
@@ -31,6 +31,7 @@ class filebeat::params {
   #
   case $::kernel {
     'Linux'   : {
+      $package_ensure  = present
       $config_file     = '/etc/filebeat/filebeat.yml'
       $config_dir      = '/etc/filebeat/conf.d'
       $registry_file   = '/var/lib/filebeat/registry'
@@ -38,7 +39,6 @@ class filebeat::params {
       # These parameters are ignored if/until tarball installs are supported in Linux
       $tmp_dir         = '/tmp'
       $install_dir     = undef
-      $download_url    = undef
       case $::osfamily {
         'RedHat': {
           $service_provider = 'redhat'
@@ -50,17 +50,17 @@ class filebeat::params {
     }
 
     'Windows' : {
+      $package_ensure   = '5.1.1'
       $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
       $config_dir       = 'C:/Program Files/Filebeat/conf.d'
       $registry_file    = 'C:/ProgramData/filebeat/registry'
-      $download_url     = 'https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-5.1.1-windows-x86_64.zip'
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'
       $service_provider = undef
     }
 
     default : {
-      fail("${::kernel} is not supported by filebeat.")
+      fail($kernel_fail_message)
     }
   }
 }
