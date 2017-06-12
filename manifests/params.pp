@@ -20,6 +20,7 @@ class filebeat::params {
   $logging              = {}
   $run_options          = {}
   $use_generic_template = false
+  $kernel_fail_message  = "${::kernel} is not supported by filebeat."
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
@@ -59,7 +60,7 @@ class filebeat::params {
     }
 
     default : {
-      fail("${::kernel} is not supported by filebeat.")
+      fail($kernel_fail_message)
     }
   }
 }
