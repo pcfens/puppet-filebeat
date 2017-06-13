@@ -6,21 +6,25 @@ class filebeat::install::windows {
 
   $filename = regsubst($filebeat::real_download_url, '^https?.*\/([^\/]+)\.[^.].*', '\1')
   $foldername = 'Filebeat'
-  $version_file = join([$filebeat::install_dir, $foldername, $filename], '/')
+  $zip_file = join([$filebeat::tmp_dir, "${filename}.zip"], '/')
+  $install_folder = join([$filebeat::install_dir, $foldername], '/')
+  $version_file = join([$install_folder, $filename], '/')
 
   Exec {
     provider => powershell,
   }
 
-  file { $filebeat::install_dir:
-    ensure => directory,
+  if ! defined(File[$filebeat::install_dir]) {
+    file { $filebeat::install_dir:
+      ensure => directory,
+    }
   }
 
   # Note: We can use archive for unzip and cleanup, thus removing the following two resources.
   # However, this requires 7zip, which archive can install via chocolatey:
   # https://github.com/voxpupuli/puppet-archive/blob/master/manifests/init.pp#L31
   # I'm not choosing to impose those dependencies on anyone at this time...
-  archive { "${filebeat::tmp_dir}/${filename}.zip":
+  archive { $zip_file:
     source       => $filebeat::real_download_url,
     cleanup      => false,
     creates      => $version_file,
@@ -28,16 +32,16 @@ class filebeat::install::windows {
   }
 
   exec { "unzip ${filename}":
-    command => "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${filebeat::tmp_dir}/${filename}.zip')).items(), 16)",
+    command => "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${zip_file}')).items(), 16)",
     creates => $version_file,
     require => [
       File[$filebeat::install_dir],
-      Archive["${filebeat::tmp_dir}/${filename}.zip"],
+      Archive[$zip_file],
     ],
   }
 
   # Clean up after ourselves
-  file { "${filebeat::tmp_dir}/${filename}.zip":
+  file { $zip_file:
     ensure  => absent,
     backup  => false,
     require => Exec["unzip ${filename}"],
@@ -52,19 +56,19 @@ class filebeat::install::windows {
   }
 
   exec { "rename ${filename}":
-    command => "Remove-Item '${filebeat::install_dir}/Filebeat' -Recurse -Force -ErrorAction SilentlyContinue; Rename-Item '${filebeat::install_dir}/${filename}' '${filebeat::install_dir}/Filebeat'",
+    command => "Remove-Item '${install_folder}' -Recurse -Force -ErrorAction SilentlyContinue; Rename-Item '${filebeat::install_dir}/${filename}' '${install_folder}'",
     creates => $version_file,
     require => Exec["stop service ${filename}"],
   }
 
   exec { "mark ${filename}":
-    command => "New-Item '${filebeat::install_dir}/Filebeat/${filename}' -ItemType file",
+    command => "New-Item '${version_file}' -ItemType file",
     creates => $version_file,
     require => Exec["rename ${filename}"],
   }
 
   exec { "install ${filename}":
-    cwd         => "${filebeat::install_dir}/Filebeat",
+    cwd         => $install_folder,
     command     => './install-service-filebeat.ps1',
     refreshonly => true,
     subscribe   => Exec["mark ${filename}"],
