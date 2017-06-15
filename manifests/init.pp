@@ -83,7 +83,7 @@ class filebeat (
   $fields_under_root    = $filebeat::params::fields_under_root,
   $processors           = {},
   $processors_merge     = false,
-  #### End v5 onlly ####
+  #### End v5 only ####
   $prospectors          = {},
   $prospectors_merge    = false,
   $proxy_address        = undef
