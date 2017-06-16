@@ -10,7 +10,7 @@ Changelog
 Windows users: you may see a restart and replacement of your existing filebeat directory.
 There's a very brief discussion of the change in the [pull request](https://github.com/pcfens/puppet-filebeat/pull/113#issuecomment-307628477)
 
-- Support upgrades in Windows [\113](https://github.com/pcfens/puppet-filebeat/pull/113)
+- Support upgrades in Windows [\#113](https://github.com/pcfens/puppet-filebeat/pull/113)
 - Add optional repo_priority parameter [\#110](https://github.com/pcfens/puppet-filebeat/pull/110)
 - Update external dependencies, including pinning apt version
 
