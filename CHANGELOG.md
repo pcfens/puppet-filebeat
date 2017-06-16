@@ -4,6 +4,13 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.2...HEAD)
 
+Windows users: you may see a restart and replacement of your existing filebeat directory.
+There's a very brief discussion of the change in the [pull request](https://github.com/pcfens/puppet-filebeat/pull/113#issuecomment-307628477)
+
+- Support upgrades in Windows [\113](https://github.com/pcfens/puppet-filebeat/pull/113)
+- Add optional repo_priority parameter [\#110](https://github.com/pcfens/puppet-filebeat/pull/110)
+- Update external dependencies, including pinning apt version
+
 ## [v0.11.2](https://github.com/pcfens/puppet-filebeat/tree/v0.11.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.1...v0.11.2)
 
