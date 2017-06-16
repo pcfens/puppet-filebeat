@@ -4,6 +4,9 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.2...HEAD)
 
+## [v0.12.0](https://github.com/pcfens/puppet-filebeat/tree/v0.12.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.2...v0.12.0)
+
 Windows users: you may see a restart and replacement of your existing filebeat directory.
 There's a very brief discussion of the change in the [pull request](https://github.com/pcfens/puppet-filebeat/pull/113#issuecomment-307628477)
 
