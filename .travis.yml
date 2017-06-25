@@ -16,13 +16,6 @@ matrix:
   - rvm: 2.3.1
     bundler_args: --without development
     dist: trusty
-    env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true STRICT_VARIABLES=yes
-    script: bundle exec rake beaker
-    services: docker
-    sudo: required
-  - rvm: 2.3.1
-    bundler_args: --without development
-    dist: trusty
     env: BEAKER_set=ubuntu-16.04 PUPPET_INSTALL_TYPE=agent BEAKER_debug=true
     script: bundle exec rake beaker
     services: docker
@@ -38,13 +31,11 @@ matrix:
     bundler_args: --without system_tests development
     env: STRICT_VARIABLES="yes"
     script: bundle exec rake rubocop
-  - rvm: 2.1.10
+  - rvm: 2.1.9
     bundler_args: --without system_tests development
     env: PUPPET_GEM_VERSION="~> 4.0" STRICT_VARIABLES=yes
-  - rvm: 2.1.10
+  - rvm: 2.4.0
     bundler_args: --without system_tests development
-    env: PUPPET_GEM_VERSION="3.8.7"
-  allow_failures:
-    - env: PUPPET_GEM_VERSION="3.8.7"
+    env: PUPPET_GEM_VERSION="~> 5.0" STRICT_VARIABLES=yes
 notifications:
   email: false

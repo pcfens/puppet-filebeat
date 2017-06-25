@@ -26,20 +26,19 @@ class filebeat::config {
 
   case $::kernel {
     'Linux'   : {
-
-      $filebeat_path = $filebeat::real_version ? {
-        '1'     => '/usr/bin/filebeat',
-        default => '/usr/share/filebeat/bin/filebeat',
+      $validate_cmd = $filebeat::disable_config_test ? {
+        true    => undef,
+        default => '/usr/share/filebeat/bin/filebeat -N -configtest -c %',
       }
 
       file {'filebeat.yml':
         ensure       => $filebeat::file_ensure,
         path         => $filebeat::config_file,
-        content      => template($filebeat::real_conf_template),
+        content      => template($filebeat::conf_template),
         owner        => 'root',
         group        => 'root',
         mode         => $filebeat::config_file_mode,
-        validate_cmd => "${filebeat_path} -N -configtest -c %",
+        validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
         require      => File['filebeat-config-dir'],
       }
@@ -60,11 +59,16 @@ class filebeat::config {
       $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
       $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
 
+      $validate_cmd = $filebeat::disable_config_test ? {
+        true    => undef,
+        default => "\"${filebeat_path}\" -N -configtest -c \"%\"",
+      }
+
       file {'filebeat.yml':
         ensure       => $filebeat::file_ensure,
         path         => $filebeat::config_file,
-        content      => template($filebeat::real_conf_template),
-        validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
+        content      => template($filebeat::conf_template),
+        validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
         require      => File['filebeat-config-dir'],
       }
