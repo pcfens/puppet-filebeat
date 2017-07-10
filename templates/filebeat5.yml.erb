@@ -76,6 +76,9 @@ output.elasticsearch:
   <%- @filebeat_config['output']['elasticsearch']['hosts'].each do |host| -%>
     - <%= host %>
   <%- end -%>
+  <%- if @filebeat_config['output']['elasticsearch']['loadbalance'] != nil -%>
+  loadbalance: <%= @filebeat_config['output']['elasticsearch']['loadbalance'] %>
+  <%- end -%>
   <%- if @filebeat_config['output']['elasticsearch']['compression_level'] != nil -%>
   compression_level: <%= @filebeat_config['output']['elasticsearch']['compression_level'] %>
   <%- end -%>
