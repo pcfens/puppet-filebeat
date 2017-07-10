@@ -220,6 +220,18 @@ output.logstash:
   <%- @filebeat_config['output']['logstash']['hosts'].each do |host| -%>
     - <%= host %>
   <%- end -%>
+  <%- if @filebeat_config['output']['logstash']['ssl_certificate'] != nil -%>
+    ssl.certificate: <%= @filebeat_config['output']['logstash']['ssl_certificate'] %>
+  <%- end -%>
+  <%- if @filebeat_config['output']['logstash']['ssl_key'] != nil -%>
+    ssl.certificate: <%= @filebeat_config['output']['logstash']['ssl_key'] %>
+  <%- end -%>
+  <%- if @filebeat_config['output']['logstash']['ssl_certificate'] != nil -%>
+      ssl.certificate: <%= @filebeat_config['output']['logstash']['ssl_certificate'] %>
+  <%- end -%>
+<%- if @filebeat_config['output']['logstash']['ssl_key'] != nil -%>
+    ssl.certificate: <%= @filebeat_config['output']['logstash']['ssl_key'] %>
+  <%- end -%>
   <%- if @filebeat_config['output']['logstash']['worker'] != nil -%>
   worker: <%= @filebeat_config['output']['logstash']['worker'] %>
   <%- end -%>
