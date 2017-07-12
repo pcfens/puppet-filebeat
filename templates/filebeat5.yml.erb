@@ -221,10 +221,10 @@ output.logstash:
     - <%= host %>
   <%- end -%>
   <%- if @filebeat_config['output']['logstash']['ssl_certificate'] != nil -%>
-    ssl.certificate: <%= @filebeat_config['output']['logstash']['ssl_certificate'] %>
+  ssl.certificate: <%= @filebeat_config['output']['logstash']['ssl_certificate'] %>
   <%- end -%>
   <%- if @filebeat_config['output']['logstash']['ssl_key'] != nil -%>
-    ssl.key: <%= @filebeat_config['output']['logstash']['ssl_key'] %>
+  ssl.key: <%= @filebeat_config['output']['logstash']['ssl_key'] %>
   <%- end -%>
   <%- if @filebeat_config['output']['logstash']['worker'] != nil -%>````„∑
   worker: <%= @filebeat_config['output']['logstash']['worker'] %>
