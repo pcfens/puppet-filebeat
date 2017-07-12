@@ -226,7 +226,7 @@ output.logstash:
   <%- if @filebeat_config['output']['logstash']['ssl_key'] != nil -%>
   ssl.key: <%= @filebeat_config['output']['logstash']['ssl_key'] %>
   <%- end -%>
-  <%- if @filebeat_config['output']['logstash']['worker'] != nil -%>````„∑
+  <%- if @filebeat_config['output']['logstash']['worker'] != nil -%>
   worker: <%= @filebeat_config['output']['logstash']['worker'] %>
   <%- end -%>
   <%- if @filebeat_config['output']['logstash']['compression_level'] != nil -%>
