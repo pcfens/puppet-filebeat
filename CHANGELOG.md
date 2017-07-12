@@ -2,7 +2,17 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.2...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.12.1...HEAD)
+
+- This is the last release with support for Filebeat versions prior to 5
+- Last release with support for Puppet 3
+
+The next major release will be a breaking release for anyone using processors.
+
+## [v0.12.1](https://github.com/pcfens/puppet-filebeat/tree/v0.12.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.12.0...v0.12.1)
+
+- Add support for SSL in Logstash [\#117](https://github.com/pcfens/puppet-filebeat/pull/117)
 
 ## [v0.12.0](https://github.com/pcfens/puppet-filebeat/tree/v0.12.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.11.2...v0.12.0)
