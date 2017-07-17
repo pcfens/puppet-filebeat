@@ -36,38 +36,52 @@ define filebeat::prospector (
   validate_array($paths, $exclude_files, $include_lines, $exclude_lines, $tags)
   validate_bool($tail_files, $close_renamed, $close_removed, $close_eof, $clean_removed, $symlinks)
 
-  $prospector_template = $filebeat::real_version ? {
-    '1'     => 'prospector1.yml.erb',
-    default => 'prospector5.yml.erb',
-  }
+  $prospector_template = 'prospector.yml.erb'
 
   case $::kernel {
     'Linux' : {
-      $filebeat_path = $filebeat::real_version ? {
-        '1'     => '/usr/bin/filebeat',
-        default => '/usr/share/filebeat/bin/filebeat',
-      }
+      if !$filebeat::disable_config_test {
+        file { "filebeat-${name}":
+          ensure       => $ensure,
+          path         => "${filebeat::config_dir}/${name}.yml",
+          owner        => 'root',
+          group        => 'root',
+          mode         => $::filebeat::config_file_mode,
+          content      => template("${module_name}/${prospector_template}"),
+          validate_cmd => '/usr/share/filebeat/bin/filebeat -N -configtest -c %',
+          notify       => Service['filebeat'],
+        }
+      } else {
+        file { "filebeat-${name}":
+          ensure  => $ensure,
+          path    => "${filebeat::config_dir}/${name}.yml",
+          owner   => 'root',
+          group   => 'root',
+          mode    => $::filebeat::config_file_mode,
+          content => template("${module_name}/${prospector_template}"),
+          notify  => Service['filebeat'],
+        }
 
-      file { "filebeat-${name}":
-        ensure       => $ensure,
-        path         => "${filebeat::config_dir}/${name}.yml",
-        owner        => 'root',
-        group        => 'root',
-        mode         => $::filebeat::config_file_mode,
-        content      => template("${module_name}/${prospector_template}"),
-        validate_cmd => "${filebeat_path} -N -configtest -c %",
-        notify       => Service['filebeat'],
       }
     }
     'Windows' : {
       $filebeat_path = 'c:\Program Files\Filebeat\filebeat.exe'
 
-      file { "filebeat-${name}":
-        ensure       => $ensure,
-        path         => "${filebeat::config_dir}/${name}.yml",
-        content      => template("${module_name}/${prospector_template}"),
-        validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
-        notify       => Service['filebeat'],
+      if !$filebeat::disable_config_test {
+        file { "filebeat-${name}":
+          ensure       => $ensure,
+          path         => "${filebeat::config_dir}/${name}.yml",
+          content      => template("${module_name}/${prospector_template}"),
+          validate_cmd => "\"${filebeat_path}\" -N -configtest -c \"%\"",
+          notify       => Service['filebeat'],
+        }
+      } else {
+        file { "filebeat-${name}":
+          ensure  => $ensure,
+          path    => "${filebeat::config_dir}/${name}.yml",
+          content => template("${module_name}/${prospector_template}"),
+          notify  => Service['filebeat'],
+        }
       }
     }
     default : {

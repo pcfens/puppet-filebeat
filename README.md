@@ -2,16 +2,11 @@
 
 [![Build Status](https://travis-ci.org/pcfens/puppet-filebeat.svg?branch=master)](https://travis-ci.org/pcfens/puppet-filebeat)
 
-## Upgrading from <= v 0.10.4
-Be sure to read the changelog as there are up to 2 breaking changes introduced in v0.11.0 related
-to processors and the default registry path
-
 #### Table of Contents
 
 1. [Description](#description)
 2. [Setup - The basics of getting started with filebeat](#setup)
     - [What filebeat affects](#what-filebeat-affects)
-    - [Upgrading to Filebeat 5.x](#upgrading-to-filebeat-5x)
     - [Setup requirements](#setup-requirements)
     - [Beginning with filebeat](#beginning-with-filebeat)
 3. [Usage - Configuration options and additional functionality](#usage)
@@ -40,19 +35,6 @@ The `filebeat` module installs and configures the [filebeat log shipper](https:/
 
 By default `filebeat` adds a software repository to your system, and installs filebeat along
 with required configurations.
-
-### Upgrading to Filebeat 5.x
-
-If you use this module on a system with filebeat 1.x installed, and you keep your current parameters
-nothing will change. Setting `major_version` to '5' will modify the configuration template and update
-package repositories, but won't update the package itself. To update the package set the
-`package_ensure` parameter to at least 5.0.0.
-
-Windows users should set `major_version` to 5 and update the `download_url` parameter to the correct
-[download](https://www.elastic.co/downloads/beats/filebeat).
-
-If you're on a Debian based system, you need to make sure that the apt-transport-https package
-is installed if you want this module to manage the repository for you (it does by default).
 
 ### Setup Requirements
 
@@ -105,7 +87,9 @@ class { 'filebeat':
 
 ```
 
-[Shipper](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html#configuration-shipper) and [logging](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html#configuration-logging) options can be configured the same way, and are documented on the [elastic website](https://www.elastic.co/guide/en/beats/filebeat/current/index.html).
+[Shipper](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html#configuration-shipper) and
+[logging](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-configuration-details.html#configuration-logging) options
+can be configured the same way, and are documented on the [elastic website](https://www.elastic.co/guide/en/beats/filebeat/current/index.html).
 
 ### Adding a prospector
 
@@ -129,26 +113,22 @@ filebeat::prospector { 'syslogs':
 
 #### Multiline Logs
 
-Filebeat prospectors (versions >= 1.1) can handle multiline log entries. The `multiline`
+Filebeat prospectors can handle multiline log entries. The `multiline`
 parameter accepts a hash containing `pattern`, `negate`, `match`, `max_lines`, and `timeout`
-as documented in the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/1.1/filebeat-configuration-details.html#multiline).
+as documented in the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/current/multiline-examples.html).
 
 #### JSON Logs
 
 Filebeat prospectors (versions >= 5.0) can natively decode JSON objects if they are stored one per line. The `json`
 parameter accepts a hash containing `message_key`, `keys_under_root`, `overwrite_keys`, and `add_error_key`
-as documented in the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/5.0/configuration-filebeat-options.html#config-json).
+as documented in the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/5.5/configuration-filebeat-options.html#config-json).
 
 ### Prospectors in Hiera
 
-Prospectors can be declared in hiera using the `prospectors` parameter. By default, hiera will not merge
-prospector declarations down the hiera hierarchy. To change the behavior in puppet 3 use the `prospectors_merge`
-parameter. In puppet 4, you can use `prospectors_merge`, but can also use the
+Prospectors can be defined in hiera using the `prospectors` parameter. By default, hiera will not merge
+prospector declarations down the hiera hierarchy. That behavior can be changed by configuring the
 [lookup_options](https://docs.puppet.com/puppet/latest/reference/lookup_quick.html#setting-lookupoptions-in-data)
 flag.
-
-When `prospectors_merge` is set to true, `prospectors` will be replaced by the output of
-`hiera_hash('filebeat::prospectors')`.
 
 ### Usage on Windows
 
@@ -210,13 +190,9 @@ For more information please review the documentation [here](https://www.elastic.
 #### Processors in Hiera
 
 Processors can be declared in hiera using the `processors` parameter. By default, hiera will not merge
-processor declarations down the hiera hierarchy. To change the behavior in puppet 3 use the `processors_merge`
-parameter. In puppet 4, you can use `processors_merge`, but can also use the
+processor declarations down the hiera hierarchy. That behavior can be changed by configuring the
 [lookup_options](https://docs.puppet.com/puppet/latest/reference/lookup_quick.html#setting-lookupoptions-in-data)
 flag.
-
-When `processors_merge` is set to true, `processors` will be replaced by the output of
-`hiera_hash('filebeat::processors')`.
 
 ## Reference
  - [**Public Classes**](#public-classes)
@@ -240,7 +216,6 @@ When `processors_merge` is set to true, `processors` will be replaced by the out
 Installs and configures filebeat.
 
 **Parameters within `filebeat`**
-- `major_version`: [String] The major version of filebeat to install. Should be either undef, 1, or 5. (default 5 if 1 not already installed)
 - `package_ensure`: [String] The ensure parameter for the filebeat package If set to absent,
   prospectors and processors passed as parameters are ignored and everything managed by
   puppet will be removed. (default: present)
@@ -260,15 +235,14 @@ Installs and configures filebeat.
 - `config_dir_mode`: [String] The permissions mode set on the configuration directory (default: 0755)
 - `config_file_mode`: [String] The permissions mode set on configuration files (default: 0644)
 - `purge_conf_dir`: [Boolean] Should files in the prospector configuration directory not managed by puppet be automatically purged
+- `disable_config_test`: [Boolean] Disable configuration and prospector validation tests (default: false)
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 - `logging`: [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
-- `conf_template`: [String] The configuration template to use to generate the main filebeat.yml config file
+- `conf_template`: [String] The configuration template to use to generate the main filebeat.yml config file.
 - `download_url`: [String] The URL of the zip file that should be downloaded to install filebeat (windows only)
 - `install_dir`: [String] Where filebeat should be installed (windows only)
 - `tmp_dir`: [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
-- `use_generic_template`: [Boolean] Use a more generic version of the configuration template. The generic template is more
-  future proof (if types are correct), but looks very different than the example file (default: false)
 - `shutdown_timeout`: [String] How long filebeat waits on shutdown for the publisher to finish sending events
 - `beat_name`: [String] The name of the beat shipper (default: hostname)
 - `tags`: [Array] A list of tags that will be included with each published transaction
@@ -277,7 +251,6 @@ Installs and configures filebeat.
 - `fields`: [Hash] Optional fields that should be added to each event output
 - `fields_under_root`: [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 - `prospectors`: [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
-- `prospectors_merge`: [Boolean] If true, `hiera_hash()` will be used to build the the `prospectors` parameter (default: false)
 
 ### Private Classes
 
@@ -326,10 +299,9 @@ to fully understand what these parameters do.
   - `input_type`: [String] log or stdin - where filebeat reads the log from (default:log)
   - `fields`: [Hash] Optional fields to add information to the output (default: {})
   - `fields_under_root`: [Boolean] Should the `fields` parameter fields be stored at the top level of indexed documents.
-  - `ignore_older`: [String] Files older than this field will be ignored by filebeat (default: 24h in filebeat < 1.2.0, infinite in filebeat >= 1.2.0)
+  - `ignore_older`: [String] Files older than this field will be ignored by filebeat (default: ignore nothing)
   - `close_older`: [String] Files that haven't been modified since `close_older`, they'll be closed. New
-  modifications will be read when files are scanned again according to `scan_frequency`. Introduced in
-  filebeat 1.2.0 (default: 1h)
+  modifications will be read when files are scanned again according to `scan_frequency`. (default: 1h)
   - `log_type`: [String] \(Deprecated - use `doc_type`\) The document_type setting (optional - default: log)
   - `doc_type`: [String] The event type to used for published lines, used as type field in logstash
     and elasticsearch (optional - default: log)
@@ -351,24 +323,6 @@ to fully understand what these parameters do.
   - `multiline`: [Hash] Options that control how Filebeat handles log messages that span multiple lines.
     [See above](#multiline-logs). (default: {})
 
-#### Define: `filebeat::processor`
-
-Installs a configuration file for a processor.
-
-Be sure to read the [processor configuration details](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-processors.html)
-to fully understand what these parameters do.
-
-**Parameters for `filebeat::processor`**
-  - `ensure`: The ensure parameter on the prospector configuration file. (default: present)
-  - `priority`: [Integer] Used to help alpha-numerically sort the processor files in the config dir
-  location. (default: 10)
-  - `processor_name`: [String] The name of the processor. (default: $name)
-  - `params`: [Hash] The key-value pairs to pass to the processor as parameters. Not required on all
-  processors, review documentation for more details. (default: undef)
-  - `when`: Optional[Hash] Run this processor on any event that matches these conditions. Populates
-  the `when` option. (default: undef)
-
-
 ## Limitations
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
 directly to elasticsearch).
@@ -376,6 +330,12 @@ directly to elasticsearch).
 When installing on Windows, there's an expectation that `C:\Temp` already exists, or an alternative
 location specified in the `tmp_dir` parameter exists and is writable by puppet. The temp directory
 is used to store the downloaded installer only.
+
+### Generic template
+
+By default, a generic, open ended template is used that simply converts your configuration into
+a hash that is produced as YAML on the system. To use a template that is more strict, but possibly
+incomplete, set `conf_template` to `filebeat/filebeat.yml.erb`.
 
 ### Registry Path
 
@@ -389,20 +349,6 @@ Be sure to include a path or the file will be put at the root of your filesystem
 ### Debian Systems
 
 Filebeat 5.x and newer requires apt-transport-https, but this module won't install it for you.
-
-### Pre-1.9.1 Ruby
-If you're on a system running a Ruby pre-1.9.1, hashes aren't sorted consistently, causing puppet runs to
-not be idempotent. To fix this, a limited template is used if the rubyversion is pre-1.9.1.
-The limited template only supports elasticsearch, logstash, file, and console outputs, and not all options
-may be supported (there is no warning when an option is omitted). Unlike with newer rubies, as new versions
-of filebeat are released, this template may not work until it's updated, even if you're using an updated
-configuration hash.
-
-If you don't care about keeping puppet idempotent, this can be overridden by setting the `conf_template`
-parameter to 'filebeat/filebeat.yml.erb'.
-
-See [templates/filebeat.yml.ruby18.erb](https://github.com/pcfens/puppet-filebeat/blob/master/templates/filebeat.yml.ruby18.erb)
-for the all of the details.
 
 ### Using config_file
 There are a few very specific use cases where you don't want this module to directly manage the filebeat

@@ -1,13 +1,6 @@
 class filebeat::repo {
-  $debian_repo_url = $filebeat::real_version ? {
-    '1' => 'http://packages.elastic.co/beats/apt',
-    '5' => 'https://artifacts.elastic.co/packages/5.x/apt',
-  }
-
-  $yum_repo_url = $filebeat::real_version ? {
-    '1' => 'https://packages.elastic.co/beats/yum/el/$basearch',
-    '5' => 'https://artifacts.elastic.co/packages/5.x/yum',
-  }
+  $debian_repo_url = 'https://artifacts.elastic.co/packages/5.x/apt'
+  $yum_repo_url = 'https://artifacts.elastic.co/packages/5.x/yum'
 
   case $::osfamily {
     'Debian': {

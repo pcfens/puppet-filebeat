@@ -4,6 +4,13 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v1.0.0...HEAD)
 
+- Drop support for Puppet 3
+- Drop support for Filebeat versions before 5
+- Add support for Puppet 5
+- Use a generic template by default
+- Remove processor defined type (create it in the config template)
+- Add a flag to disable validating the configuration (`disable_config_test`)
+
 ## [v1.0.0](https://github.com/pcfens/puppet-filebeat/tree/v1.0.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v0.12.1...v1.0.0)
 
