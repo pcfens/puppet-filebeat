@@ -41,6 +41,7 @@ class filebeat::params {
           $service_provider = undef
         }
       }
+      $url_arch        = undef
     }
 
     'Windows' : {
@@ -51,6 +52,11 @@ class filebeat::params {
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'
       $service_provider = undef
+      $url_arch         = $::architecture ? {
+        'x86'   => 'x86',
+        'x64'   => 'x86_64',
+        default => fail("${::architecture} is not supported by filebeat."),
+      }
     }
 
     default : {
