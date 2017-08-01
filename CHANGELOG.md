@@ -2,7 +2,10 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v1.0.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.0.0...HEAD)
+
+## [v1.0.0](https://github.com/pcfens/puppet-filebeat/tree/v2.0.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v1.0.0...v2.0.0)
 
 - Drop support for Puppet 3
 - Drop support for Filebeat versions before 5
