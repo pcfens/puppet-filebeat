@@ -1,7 +1,7 @@
 class filebeat::config {
   $filebeat_config = delete_undef_values({
     'shutdown_timeout'  => $filebeat::shutdown_timeout,
-    'beat_name'         => $filebeat::beat_name,
+    'name'              => $filebeat::beat_name,
     'tags'              => $filebeat::tags,
     'queue_size'        => $filebeat::queue_size,
     'max_procs'         => $filebeat::max_procs,
