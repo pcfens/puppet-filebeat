@@ -117,11 +117,11 @@ describe 'filebeat', type: :class do
         it { is_expected.to contain_anchor('filebeat::end') }
         it { is_expected.to contain_class('filebeat::install') }
 
-        it { is_expected.to contain_archive('C:/Windows/Temp/filebeat-5.5.2-windows-x86_64.zip')}
-        it { is_expected.to contain_exec('rename filebeat-5.5.2-windows-x86_64')}
-        it { is_expected.to contain_exec('unzip filebeat-5.5.2-windows-x86_64')}
-        it { is_expected.to contain_exec('install filebeat-5.5.2-windows-x86_64')}
-        it { is_expected.to contain_exec('mark filebeat-5.5.2-windows-x86_64')}
+        it { is_expected.to contain_archive('C:/Windows/Temp/filebeat-5.5.2-windows-x86_64.zip') }
+        it { is_expected.to contain_exec('rename filebeat-5.5.2-windows-x86_64') }
+        it { is_expected.to contain_exec('unzip filebeat-5.5.2-windows-x86_64') }
+        it { is_expected.to contain_exec('install filebeat-5.5.2-windows-x86_64') }
+        it { is_expected.to contain_exec('mark filebeat-5.5.2-windows-x86_64') }
 
         it { is_expected.to contain_class('filebeat::config') }
         it { is_expected.to contain_anchor('filebeat::install::begin') }
@@ -335,11 +335,11 @@ describe 'filebeat', type: :class do
       it { is_expected.to contain_anchor('filebeat::end') }
       it { is_expected.to contain_class('filebeat::install') }
 
-      it { is_expected.to contain_archive('C:/Windows/Temp/filebeat-absent-windows-x86_64.zip')}
-      it { is_expected.to contain_exec('rename filebeat-absent-windows-x86_64')}
-      it { is_expected.to contain_exec('unzip filebeat-absent-windows-x86_64')}
-      it { is_expected.to contain_exec('install filebeat-absent-windows-x86_64')}
-      it { is_expected.to contain_exec('mark filebeat-absent-windows-x86_64')}
+      it { is_expected.to contain_archive('C:/Windows/Temp/filebeat-absent-windows-x86_64.zip') }
+      it { is_expected.to contain_exec('rename filebeat-absent-windows-x86_64') }
+      it { is_expected.to contain_exec('unzip filebeat-absent-windows-x86_64') }
+      it { is_expected.to contain_exec('install filebeat-absent-windows-x86_64') }
+      it { is_expected.to contain_exec('mark filebeat-absent-windows-x86_64') }
 
       it { is_expected.to contain_class('filebeat::config') }
       it { is_expected.to contain_anchor('filebeat::install::begin') }
