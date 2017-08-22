@@ -5,6 +5,7 @@ Changelog
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.0.0...HEAD)
 
 - Change beat_name configuration parameter to name [\#126](https://github.com/pcfens/puppet-filebeat/issues/126)
+- Make configuration directory/file ownership configurable [\#127](https://github.com/pcfens/puppet-filebeat/issues/127)
 
 ## [v2.0.0](https://github.com/pcfens/puppet-filebeat/tree/v2.0.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v1.0.0...v2.0.0)

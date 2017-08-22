@@ -140,7 +140,7 @@ but is expected to exist as a directory that puppet can write to.
 ### Processors
 
 Filebeat 5.0 and greater includes a new libbeat feature for filtering and/or enhancing all
-exported data through processors before geing sent to the configured output(s). They can be
+exported data through processors before being sent to the configured output(s). They can be
 defined as a hash added to the class declaration (also used for automatically creating
 processors using hiera), or as their own defined resources.
 
@@ -233,7 +233,11 @@ Installs and configures filebeat.
   that filebeat expects for your operating system.
 - `config_dir`: [String] The directory where prospectors should be defined (default: /etc/filebeat/conf.d)
 - `config_dir_mode`: [String] The permissions mode set on the configuration directory (default: 0755)
+- `config_dir_owner`: [String] The owner of the configuration directory (default: root). Linux only.
+- `config_dir_group`: [String] The group of the configuration directory (default: root). Linux only.
 - `config_file_mode`: [String] The permissions mode set on configuration files (default: 0644)
+- `config_file_owner`: [String] The owner of the configuration files, including prospectors (default: root). Linux only.
+- `config_file_group`: [String] The group of the configuration files, including prospectors (default: root). Linux only.
 - `purge_conf_dir`: [Boolean] Should files in the prospector configuration directory not managed by puppet be automatically purged
 - `disable_config_test`: [Boolean] Disable configuration and prospector validation tests (default: false)
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
@@ -250,6 +254,8 @@ Installs and configures filebeat.
 - `max_procs`: [Number] The maximum number of CPUs that can be simultaneously used
 - `fields`: [Hash] Optional fields that should be added to each event output
 - `fields_under_root`: [Boolean] If set to true, custom fields are stored in the top level instead of under fields
+- `disable_config_test`: [Boolean] If set to true, configuration tests won't be run on config files before writing them.
+- `processors`: [Hash] Processors that should be configured.
 - `prospectors`: [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 
 ### Private Classes

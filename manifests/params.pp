@@ -10,8 +10,8 @@ class filebeat::params {
   $tags                 = []
   $queue_size           = 1000
   $max_procs            = undef
-  $config_dir_mode      = '0755'
   $config_file_mode     = '0644'
+  $config_dir_mode      = '0755'
   $purge_conf_dir       = true
   $fields               = {}
   $fields_under_root    = false
@@ -22,6 +22,11 @@ class filebeat::params {
   $kernel_fail_message  = "${::kernel} is not supported by filebeat."
   $conf_template        = "${module_name}/pure_hash.yml.erb"
   $disable_config_test  = false
+
+  $config_file_owner = 'root'
+  $config_file_group = 'root'
+  $config_dir_owner  = 'root'
+  $config_dir_group  = 'root'
 
   case $::kernel {
     'Linux'   : {
@@ -45,7 +50,7 @@ class filebeat::params {
     }
 
     'Windows' : {
-      $package_ensure   = '5.1.1'
+      $package_ensure   = '5.5.2'
       $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
       $config_dir       = 'C:/Program Files/Filebeat/conf.d'
       $registry_file    = 'C:/ProgramData/filebeat/registry'
