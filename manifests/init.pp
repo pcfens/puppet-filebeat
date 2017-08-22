@@ -39,7 +39,7 @@
 # @param max_procs [Integer] The maximum number of CPUs that can be simultaneously used
 # @param fields [Hash] Optional fields that should be added to each event output
 # @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
-# @param processors [Array] Processors that will be added. Commonly used to create processors using hiera.
+# @param processors [Hash] Processors that will be added. Commonly used to create processors using hiera.
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 # @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
@@ -65,17 +65,17 @@ class filebeat (
   Hash    $run_options          = $filebeat::params::run_options,
   String  $conf_template        = $filebeat::params::conf_template,
   Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $download_url = undef,
-  Optional[String]  $install_dir          = $filebeat::params::install_dir,
+  Optional[String]  $install_dir = $filebeat::params::install_dir,
   String  $tmp_dir              = $filebeat::params::tmp_dir,
   Integer $shutdown_timeout     = $filebeat::params::shutdown_timeout,
   String  $beat_name            = $filebeat::params::beat_name,
   Array   $tags                 = $filebeat::params::tags,
   Integer $queue_size           = $filebeat::params::queue_size,
-  Optional[Integer] $max_procs            = $filebeat::params::max_procs,
-  Hash $fields               = $filebeat::params::fields,
+  Optional[Integer] $max_procs  = $filebeat::params::max_procs,
+  Hash $fields                  = $filebeat::params::fields,
   Boolean $fields_under_root    = $filebeat::params::fields_under_root,
   Boolean $disable_config_test  = $filebeat::params::disable_config_test,
-  Array[Hash] $processors       = [],
+  Hash    $processors           = {},
   Hash    $prospectors          = {},
   Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $proxy_address = undef
 ) inherits filebeat::params {
