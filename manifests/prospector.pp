@@ -64,6 +64,31 @@ define filebeat::prospector (
 
       }
     }
+    'FreeBSD' : {
+      if !$filebeat::disable_config_test {
+        file { "filebeat-${name}":
+          ensure       => $ensure,
+          path         => "${filebeat::config_dir}/${name}.yml",
+          owner        => 'root',
+          group        => 'wheel',
+          mode         => $::filebeat::config_file_mode,
+          content      => template("${module_name}/${prospector_template}"),
+          validate_cmd => '/usr/local/sbin/filebeat -N -configtest -c %',
+          notify       => Service['filebeat'],
+        }
+      } else {
+        file { "filebeat-${name}":
+          ensure  => $ensure,
+          path    => "${filebeat::config_dir}/${name}.yml",
+          owner   => 'root',
+          group   => 'wheel',
+          mode    => $::filebeat::config_file_mode,
+          content => template("${module_name}/${prospector_template}"),
+          notify  => Service['filebeat'],
+        }
+
+      }
+    }
     'Windows' : {
       $filebeat_path = 'c:\Program Files\Filebeat\filebeat.exe'
 
