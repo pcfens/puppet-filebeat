@@ -48,7 +48,16 @@ class filebeat::params {
       }
       $url_arch        = undef
     }
-
+    'FreeBSD': {
+      $package_ensure   = present
+      $config_file      = '/usr/local/etc/filebeat/filebeat.yml'
+      $config_dir       = '/usr/local/etc/filebeat/conf.d'
+      $registry_file    = '/var/lib/filebeat/registry'
+      $tmp_dir          = '/tmp'
+      $service_provider = undef
+      $install_dir      = undef
+      $url_arch         = undef
+    }
     'Windows' : {
       $package_ensure   = '5.5.2'
       $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
