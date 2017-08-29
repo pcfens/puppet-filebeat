@@ -49,9 +49,9 @@ class filebeat::params {
       $url_arch        = undef
    }
     'FreeBSD': {
-      $package_ensure   = present
-      $config_file      = '/usr/local/etc/filebeat/filebeat.yml'
-      $config_dir       = '/usr/local/etc/filebeat/conf.d'
+      $package_ensure    = present
+      $config_file       = '/usr/local/etc/filebeat/filebeat.yml'
+      $config_dir        = '/usr/local/etc/filebeat/conf.d'
       $config_file_owner = 'root'
       $config_file_group = 'wheel'
       $config_dir_owner  = 'root'

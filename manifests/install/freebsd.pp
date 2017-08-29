@@ -7,4 +7,11 @@ class filebeat::install::freebsd {
     mode   => '0555',
     source => 'puppet:///modules/filebeat/FreeBSD/rc.d_filebeat',
   }
+  file {'/usr/local/etc/filebeat':
+    ensure => directory,
+    owner  => 'root',
+    group  => 'wheel',
+    mode   => '0755',
+  }
+ 
 }
