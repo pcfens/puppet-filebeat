@@ -30,6 +30,7 @@ define filebeat::prospector (
   $json                  = {},
   $tags                  = [],
   $symlinks              = false,
+  $pipeline              = undef,
 ) {
 
   validate_hash($fields, $multiline, $json)

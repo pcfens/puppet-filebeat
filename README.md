@@ -318,6 +318,7 @@ to fully understand what these parameters do.
   - `backoff_factor`: [Integer] `backoff` is multiplied by this parameter until `max_backoff` is reached to
     determine the actual backoff (default: 2)
   - `force_close_files`: [Boolean] Should filebeat forcibly close a file when renamed (default: false)
+  - `pipeline`: [String] Filebeat can be configured for a different ingest pipeline for each prospector (default: undef)
   - `include_lines`: [Array] A list of regular expressions to match the lines that you want to include.
     Ignored if empty (default: [])
   - `exclude_lines`: [Array] A list of regular expressions to match the files that you want to exclude.

@@ -64,6 +64,9 @@ filebeat:
       <%- if @force_close_files -%>
       force_close_files: <%= @force_close_files %>
       <%- end -%>
+      <%- if @pipeline -%>
+      pipeline: <%= @pipeline %>
+      <%- end -%>
 
       <%- if @json.length > 0 -%>
       ### JSON configuration
