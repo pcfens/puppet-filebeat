@@ -1,5 +1,7 @@
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
+gem "rake"
+
 def location_for(place_or_version, fake_version = nil)
   if place_or_version =~ %r{\A(git[:@][^#]*)#(.*)}
     [fake_version, { git: Regexp.last_match(1), branch: Regexp.last_match(2), require: false }].compact
