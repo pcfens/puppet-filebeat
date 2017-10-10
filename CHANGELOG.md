@@ -2,9 +2,16 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.1.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.2.0...HEAD)
 
-## [v2.1.0](https://github.com/pcfens/puppet-filebeat/tree/v2.2.0)
+## [v2.2.0](https://github.com/pcfens/puppet-filebeat/tree/v2.2.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.1.0...v2.2.0)
+
+- Support pipeline configurations in prospectors [\#134](https://github.com/pcfens/puppet-filebeat/pull/134)
+- Fix regex for validating download URL [\#135](https://github.com/pcfens/puppet-filebeat/pull/135)
+- Overhaul testing
+
+## [v2.1.0](https://github.com/pcfens/puppet-filebeat/tree/v2.1.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.0.0...v2.1.0)
 
 - Change beat_name configuration parameter to name [\#126](https://github.com/pcfens/puppet-filebeat/issues/126)
