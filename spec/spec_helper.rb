@@ -2,14 +2,22 @@ require 'puppetlabs_spec_helper/module_spec_helper'
 require 'rspec-puppet-facts'
 include RspecPuppetFacts
 
-RSpec.configure do |c|
-  default_facts = {
-    puppetversion: Puppet.version,
-    facterversion: Facter.version
-  }
-  default_facts.merge!(YAML.load(File.read(File.expand_path('../default_facts.yml', __FILE__)))) if File.exist?(File.expand_path('../default_facts.yml', __FILE__))
-  default_facts.merge!(YAML.load(File.read(File.expand_path('../default_module_facts.yml', __FILE__)))) if File.exist?(File.expand_path('../default_module_facts.yml', __FILE__))
-  c.default_facts = default_facts
+default_facts = {
+  puppetversion: Puppet.version,
+  facterversion: Facter.version,
+}
+
+default_facts_path = File.expand_path(File.join(File.dirname(__FILE__), 'default_facts.yml'))
+default_module_facts_path = File.expand_path(File.join(File.dirname(__FILE__), 'default_module_facts.yml'))
+
+if File.exist?(default_facts_path) && File.readable?(default_facts_path)
+  default_facts.merge!(YAML.safe_load(File.read(default_facts_path)))
 end
 
-# vim: syntax=ruby
+if File.exist?(default_module_facts_path) && File.readable?(default_module_facts_path)
+  default_facts.merge!(YAML.safe_load(File.read(default_module_facts_path)))
+end
+
+RSpec.configure do |c|
+  c.default_facts = default_facts
+end

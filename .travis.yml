@@ -9,14 +9,14 @@ before_install:
   - gem --version
   - bundle -v
 script:
-    - "bundle exec rake validate lint spec SPEC_OPTS='--format documentation'"
+    - "bundle exec rake validate metadata_lint lint spec SPEC_OPTS='--format documentation'"
 matrix:
   fast_finish: true
   include:
   - rvm: 2.3.1
     bundler_args: --without development
     dist: trusty
-    env: BEAKER_set=ubuntu-16.04 PUPPET_INSTALL_TYPE=agent BEAKER_debug=true
+    env: PUPPET_INSTALL_TYPE=agent BEAKER_debug=true
     script: bundle exec rake beaker
     services: docker
     sudo: required
