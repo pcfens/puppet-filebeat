@@ -3,7 +3,7 @@ require 'beaker/puppet_install_helper'
 
 run_puppet_install_helper
 
-UNSUPPORTED_PLATFORMS = %w(aix Solaris BSD).freeze
+UNSUPPORTED_PLATFORMS = %w[aix Solaris BSD].freeze
 
 RSpec.configure do |c|
   module_root = File.expand_path(File.join(File.dirname(__FILE__), '..'))

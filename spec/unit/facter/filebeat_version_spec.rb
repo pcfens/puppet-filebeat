@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe 'filebeat_version' do
-  before do
+  before :each do
     Facter.clear
     Facter.fact(:kernel).stubs(:value).returns('Linux')
   end
   context 'on a Linux host' do
-    before do
+    before :each do
       File.stubs(:executable?)
       Facter::Util::Resolution.stubs(:exec)
       File.expects(:executable?).with('/usr/share/filebeat/bin/filebeat').returns true
