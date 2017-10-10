@@ -68,7 +68,7 @@ class filebeat (
   Hash    $logging              = $filebeat::params::logging,
   Hash    $run_options          = $filebeat::params::run_options,
   String  $conf_template        = $filebeat::params::conf_template,
-  Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-\.]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $download_url = undef,
+  Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-\.]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $download_url = undef, # lint:ignore:140chars
   Optional[String]  $install_dir = $filebeat::params::install_dir,
   String  $tmp_dir              = $filebeat::params::tmp_dir,
   Integer $shutdown_timeout     = $filebeat::params::shutdown_timeout,
@@ -81,7 +81,7 @@ class filebeat (
   Boolean $disable_config_test  = $filebeat::params::disable_config_test,
   Hash    $processors           = {},
   Hash    $prospectors          = {},
-  Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-\.]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $proxy_address = undef
+  Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-\.]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $proxy_address = undef # lint:ignore:140chars
 ) inherits filebeat::params {
 
   include ::stdlib

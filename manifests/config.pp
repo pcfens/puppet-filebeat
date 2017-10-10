@@ -1,3 +1,8 @@
+# filebeat::config
+#
+# Manage the configuration files for filebeat
+#
+# @summary A private class to manage the filebeat config file
 class filebeat::config {
   $filebeat_config = delete_undef_values({
     'shutdown_timeout'  => $filebeat::shutdown_timeout,

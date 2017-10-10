@@ -1,3 +1,8 @@
+# filebeat::install
+#
+# A private class to manage the installation of Filebeat
+#
+# @summary A private class that manages the install of Filebeat
 class filebeat::install {
   anchor { 'filebeat::install::begin': }
 
@@ -24,4 +29,5 @@ class filebeat::install {
   }
 
   anchor { 'filebeat::install::end': }
+
 }
