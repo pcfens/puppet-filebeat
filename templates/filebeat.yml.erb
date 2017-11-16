@@ -1,8 +1,10 @@
 #========================= Filebeat global options ============================
 
+<% unless scope.function_versioncmp([@major_version, '6']) >= 0 -%>
 filebeat.spool_size: <%= @filebeat_config['filebeat']['spool_size'] %>
 filebeat.publish_async: <%= @filebeat_config['filebeat']['publish_async'] %>
 filebeat.idle_timeout: <%= @filebeat_config['filebeat']['idle_timeout'] %>
+<% end -%>
 filebeat.registry_file: <%= @filebeat_config['filebeat']['registry_file'] %>
 filebeat.config_dir: <%= @filebeat_config['filebeat']['config_dir'] %>
 filebeat.shutdown_timeout: <%= @filebeat_config['filebeat']['shutdown_timeout'] %>
@@ -25,7 +27,9 @@ fields:
 <%- end -%>
 
 fields_under_root: <%= @filebeat_config['fields_under_root'] %>
+<% unless scope.function_versioncmp([@major_version, '6']) >= 0 -%>
 queue_size: <%= @filebeat_config['queue_size'] %>
+<% end -%>
 
 # The internal queue size for bulk events in the processing pipeline.
 # Do not modify this value.

@@ -36,6 +36,11 @@ The `filebeat` module installs and configures the [filebeat log shipper](https:/
 By default `filebeat` adds a software repository to your system, and installs filebeat along
 with required configurations.
 
+### Upgrading to Filebeat 6.x
+
+To upgrade to Filebeat 6.x, simply set `$filebeat::major_version` to `6` and `$filebeat::package_ensure` to `latest`.
+
+
 ### Setup Requirements
 
 The `filebeat` module depends on [`puppetlabs/stdlib`](https://forge.puppetlabs.com/puppetlabs/stdlib), and on
@@ -220,6 +225,7 @@ Installs and configures filebeat.
   prospectors and processors passed as parameters are ignored and everything managed by
   puppet will be removed. (default: present)
 - `manage_repo`: [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
+- `major_version`: [Enum] The major version of Filebeat to install. Should be either `5` or `6`. The default value is `5`.
 - `service_ensure`: [String] The ensure parameter on the filebeat service (default: running)
 - `service_enable`: [String] The enable parameter on the filebeat service (default: true)
 - `param repo_priority`: [Integer] Repository priority.  yum and apt supported (default: undef)

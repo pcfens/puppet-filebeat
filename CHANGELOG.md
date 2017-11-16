@@ -4,6 +4,8 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.2.0...HEAD)
 
+- Add support for Filebeat 6
+
 ## [v2.2.0](https://github.com/pcfens/puppet-filebeat/tree/v2.2.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.1.0...v2.2.0)
 
