@@ -5,6 +5,7 @@
 # @summary Set a bunch of default parameters
 class filebeat::params {
   $manage_repo          = true
+  $major_version        = '5'
   $service_ensure       = running
   $service_enable       = true
   $spool_size           = 2048
