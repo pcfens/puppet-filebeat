@@ -2,9 +2,14 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.2.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.3.0...HEAD)
 
-- Add support for Filebeat 6
+
+## [v2.3.0](https://github.com/pcfens/puppet-filebeat/tree/v2.3.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.2.0...v2.3.0)
+
+- Add support for Filebeat 6 [\#141](https://github.com/pcfens/puppet-filebeat/pull/141)
+- Add Support for hash.random in Kafka output [\#142](https://github.com/pcfens/puppet-filebeat/pull/142)
 
 ## [v2.2.0](https://github.com/pcfens/puppet-filebeat/tree/v2.2.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.1.0...v2.2.0)
