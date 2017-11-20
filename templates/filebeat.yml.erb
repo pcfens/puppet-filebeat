@@ -320,6 +320,9 @@ output.kafka:
     <%- if @filebeat_config['output']['kafka']['partition']['hash']['reachable_only'] != nil -%>
     reachable_only: <%= @filebeat_config['output']['kafka']['partition']['hash']['reachable_only'] %>
     <%- end -%>
+    <%- if @filebeat_config['output']['kafka']['partition']['hash']['random'] != nil -%>
+    random: <%= @filebeat_config['output']['kafka']['partition']['hash']['random'] %>
+    <%- end -%>
     <%- if @filebeat_config['output']['kafka']['partition']['hash']['hash'] != nil -%>
     hash:
     <%- @filebeat_config['output']['kafka']['partition']['hash']['hash'].each do |value| -%>
