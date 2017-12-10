@@ -10,11 +10,4 @@ class filebeat::install::freebsd {
   # single FreeBSD Package (see https://www.freshports.org/sysutils/beats/ )
   ensure_packages (['beats'], {ensure => $filebeat::package_ensure})
 
-  file {'/usr/local/etc/filebeat':
-    ensure => directory,
-    owner  => 'root',
-    group  => 'wheel',
-    mode   => '0755',
-  }
-
 }
