@@ -36,6 +36,11 @@ The `filebeat` module installs and configures the [filebeat log shipper](https:/
 By default `filebeat` adds a software repository to your system, and installs filebeat along
 with required configurations.
 
+### Upgrading to Filebeat 6.x
+
+To upgrade to Filebeat 6.x, simply set `$filebeat::major_version` to `6` and `$filebeat::package_ensure` to `latest`.
+
+
 ### Setup Requirements
 
 The `filebeat` module depends on [`puppetlabs/stdlib`](https://forge.puppetlabs.com/puppetlabs/stdlib), and on
@@ -220,6 +225,7 @@ Installs and configures filebeat.
   prospectors and processors passed as parameters are ignored and everything managed by
   puppet will be removed. (default: present)
 - `manage_repo`: [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
+- `major_version`: [Enum] The major version of Filebeat to install. Should be either `5` or `6`. The default value is `5`.
 - `service_ensure`: [String] The ensure parameter on the filebeat service (default: running)
 - `service_enable`: [String] The enable parameter on the filebeat service (default: true)
 - `param repo_priority`: [Integer] Repository priority.  yum and apt supported (default: undef)
@@ -239,7 +245,6 @@ Installs and configures filebeat.
 - `config_file_owner`: [String] The owner of the configuration files, including prospectors (default: root). Linux only.
 - `config_file_group`: [String] The group of the configuration files, including prospectors (default: root). Linux only.
 - `purge_conf_dir`: [Boolean] Should files in the prospector configuration directory not managed by puppet be automatically purged
-- `disable_config_test`: [Boolean] Disable configuration and prospector validation tests (default: false)
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 - `logging`: [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
@@ -319,6 +324,7 @@ to fully understand what these parameters do.
   - `backoff_factor`: [Integer] `backoff` is multiplied by this parameter until `max_backoff` is reached to
     determine the actual backoff (default: 2)
   - `force_close_files`: [Boolean] Should filebeat forcibly close a file when renamed (default: false)
+  - `pipeline`: [String] Filebeat can be configured for a different ingest pipeline for each prospector (default: undef)
   - `include_lines`: [Array] A list of regular expressions to match the lines that you want to include.
     Ignored if empty (default: [])
   - `exclude_lines`: [Array] A list of regular expressions to match the files that you want to exclude.

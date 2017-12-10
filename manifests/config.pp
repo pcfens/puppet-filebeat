@@ -1,26 +1,54 @@
+# filebeat::config
+#
+# Manage the configuration files for filebeat
+#
+# @summary A private class to manage the filebeat config file
 class filebeat::config {
-  $filebeat_config = delete_undef_values({
-    'shutdown_timeout'  => $filebeat::shutdown_timeout,
-    'name'              => $filebeat::beat_name,
-    'tags'              => $filebeat::tags,
-    'queue_size'        => $filebeat::queue_size,
-    'max_procs'         => $filebeat::max_procs,
-    'fields'            => $filebeat::fields,
-    'fields_under_root' => $filebeat::fields_under_root,
-    'filebeat'          => {
-      'spool_size'       => $filebeat::spool_size,
-      'idle_timeout'     => $filebeat::idle_timeout,
-      'registry_file'    => $filebeat::registry_file,
-      'publish_async'    => $filebeat::publish_async,
-      'config_dir'       => $filebeat::config_dir,
-      'shutdown_timeout' => $filebeat::shutdown_timeout,
-    },
-    'output'            => $filebeat::outputs,
-    'shipper'           => $filebeat::shipper,
-    'logging'           => $filebeat::logging,
-    'runoptions'        => $filebeat::run_options,
-    'processors'        => $filebeat::processors,
-  })
+  $major_version = $filebeat::major_version
+
+  if versioncmp($major_version, '6') >= 0 {
+    $filebeat_config = delete_undef_values({
+      'shutdown_timeout'  => $filebeat::shutdown_timeout,
+      'name'              => $filebeat::beat_name,
+      'tags'              => $filebeat::tags,
+      'max_procs'         => $filebeat::max_procs,
+      'fields'            => $filebeat::fields,
+      'fields_under_root' => $filebeat::fields_under_root,
+      'filebeat'          => {
+        'registry_file'    => $filebeat::registry_file,
+        'config_dir'       => $filebeat::config_dir,
+        'shutdown_timeout' => $filebeat::shutdown_timeout,
+      },
+      'output'            => $filebeat::outputs,
+      'shipper'           => $filebeat::shipper,
+      'logging'           => $filebeat::logging,
+      'runoptions'        => $filebeat::run_options,
+      'processors'        => $filebeat::processors,
+    })
+  } else {
+    $filebeat_config = delete_undef_values({
+      'shutdown_timeout'  => $filebeat::shutdown_timeout,
+      'name'              => $filebeat::beat_name,
+      'tags'              => $filebeat::tags,
+      'queue_size'        => $filebeat::queue_size,
+      'max_procs'         => $filebeat::max_procs,
+      'fields'            => $filebeat::fields,
+      'fields_under_root' => $filebeat::fields_under_root,
+      'filebeat'          => {
+        'spool_size'       => $filebeat::spool_size,
+        'idle_timeout'     => $filebeat::idle_timeout,
+        'registry_file'    => $filebeat::registry_file,
+        'publish_async'    => $filebeat::publish_async,
+        'config_dir'       => $filebeat::config_dir,
+        'shutdown_timeout' => $filebeat::shutdown_timeout,
+      },
+      'output'            => $filebeat::outputs,
+      'shipper'           => $filebeat::shipper,
+      'logging'           => $filebeat::logging,
+      'runoptions'        => $filebeat::run_options,
+      'processors'        => $filebeat::processors,
+    })
+  }
 
   Filebeat::Prospector <| |> -> File['filebeat.yml']
 
@@ -28,7 +56,10 @@ class filebeat::config {
     'Linux'   : {
       $validate_cmd = $filebeat::disable_config_test ? {
         true    => undef,
-        default => '/usr/share/filebeat/bin/filebeat -N -configtest -c %',
+        default => $major_version ? {
+          '5'     => '/usr/share/filebeat/bin/filebeat -N -configtest -c %',
+          default => '/usr/share/filebeat/bin/filebeat -c % test config',
+        },
       }
 
       file {'filebeat.yml':

@@ -14,6 +14,7 @@
 #
 # @param package_ensure [String] The ensure parameter for the filebeat package (default: present)
 # @param manage_repo [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
+# @param major_version [Enum] The major version of Filebeat to be installed.
 # @param service_ensure [String] The ensure parameter on the filebeat service (default: running)
 # @param service_enable [String] The enable parameter on the filebeat service (default: true)
 # @param repo_priority [Integer] Repository priority.  yum and apt supported (default: undef)
@@ -46,6 +47,7 @@
 class filebeat (
   String  $package_ensure       = $filebeat::params::package_ensure,
   Boolean $manage_repo          = $filebeat::params::manage_repo,
+  Enum['5','6'] $major_version     = $filebeat::params::major_version,
   Variant[Boolean, Enum['stopped', 'running']] $service_ensure = $filebeat::params::service_ensure,
   Boolean $service_enable = $filebeat::params::service_enable,
   Optional[String]  $service_provider = $filebeat::params::service_provider,
@@ -68,7 +70,7 @@ class filebeat (
   Hash    $logging              = $filebeat::params::logging,
   Hash    $run_options          = $filebeat::params::run_options,
   String  $conf_template        = $filebeat::params::conf_template,
-  Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $download_url = undef,
+  Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-\.]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $download_url = undef, # lint:ignore:140chars
   Optional[String]  $install_dir = $filebeat::params::install_dir,
   String  $tmp_dir              = $filebeat::params::tmp_dir,
   Integer $shutdown_timeout     = $filebeat::params::shutdown_timeout,
@@ -81,7 +83,7 @@ class filebeat (
   Boolean $disable_config_test  = $filebeat::params::disable_config_test,
   Hash    $processors           = {},
   Hash    $prospectors          = {},
-  Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $proxy_address = undef
+  Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-\.]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\=[\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $proxy_address = undef # lint:ignore:140chars
 ) inherits filebeat::params {
 
   include ::stdlib

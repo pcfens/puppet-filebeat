@@ -1,3 +1,9 @@
+# filebeat::install::windows
+#
+# Download and install filebeat on Windows
+#
+# @summary A private class that installs filebeat on Windows
+#
 class filebeat::install::windows {
   # I'd like to use chocolatey to do this install, but the package for chocolatey is
   # failing for updates and seems rather unpredictable at the moment. We may revisit
@@ -32,7 +38,7 @@ class filebeat::install::windows {
   }
 
   exec { "unzip ${filename}":
-    command => "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${zip_file}')).items(), 16)",
+    command => "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${zip_file}')).items(), 16)", # lint:ignore:140chars
     creates => $version_file,
     require => [
       File[$filebeat::install_dir],
@@ -56,7 +62,7 @@ class filebeat::install::windows {
   }
 
   exec { "rename ${filename}":
-    command => "Remove-Item '${install_folder}' -Recurse -Force -ErrorAction SilentlyContinue; Rename-Item '${filebeat::install_dir}/${filename}' '${install_folder}'",
+    command => "Remove-Item '${install_folder}' -Recurse -Force -ErrorAction SilentlyContinue;Rename-Item '${filebeat::install_dir}/${filename}' '${install_folder}'", # lint:ignore:140chars
     creates => $version_file,
     require => Exec["stop service ${filename}"],
   }

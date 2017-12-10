@@ -1,5 +1,11 @@
+# filebeat::params
+#
+# Set a number of default parameters
+#
+# @summary Set a bunch of default parameters
 class filebeat::params {
   $manage_repo          = true
+  $major_version        = '5'
   $service_ensure       = running
   $service_enable       = true
   $spool_size           = 2048
@@ -63,7 +69,7 @@ class filebeat::params {
       $url_arch         = undef
     }
     'Windows' : {
-      $package_ensure   = '5.5.2'
+      $package_ensure   = '5.6.2'
       $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
       $config_dir       = 'C:/Program Files/Filebeat/conf.d'
       $registry_file    = 'C:/ProgramData/filebeat/registry'

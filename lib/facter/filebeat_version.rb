@@ -1,6 +1,6 @@
 require 'facter'
 Facter.add('filebeat_version') do
-  confine :kernel => %w(Linux Windows) # rubocop:disable Style/HashSyntax
+  confine 'kernel' => %w[Linux Windows]
   if File.executable?('/usr/bin/filebeat')
     filebeat_version = Facter::Util::Resolution.exec('/usr/bin/filebeat --version')
   elsif File.executable?('/usr/share/filebeat/bin/filebeat')
