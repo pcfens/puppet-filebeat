@@ -85,6 +85,7 @@ class filebeat::config {
         force   => true,
       }
     } # end Linux
+
     'FreeBSD'   : {
       $validate_cmd = $filebeat::disable_config_test ? {
         true    => undef,
@@ -114,6 +115,7 @@ class filebeat::config {
         force   => true,
       }
     } # end FreeBSD
+
     'Windows' : {
       $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
       $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')

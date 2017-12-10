@@ -17,7 +17,7 @@ class filebeat::install {
         Class['filebeat::repo'] -> Class['filebeat::install::linux']
       }
     }
-    'FreeBSD':   {
+    'FreeBSD': {
       class{ '::filebeat::install::freebsd':
         notify => Class['filebeat::service'],
       }

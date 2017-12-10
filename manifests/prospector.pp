@@ -73,6 +73,7 @@ define filebeat::prospector (
 
       }
     }
+
     'FreeBSD' : {
       if !$filebeat::disable_config_test {
         file { "filebeat-${name}":
@@ -95,12 +96,11 @@ define filebeat::prospector (
           content => template("${module_name}/${prospector_template}"),
           notify  => Service['filebeat'],
         }
-
       }
     }
+
     'Windows' : {
       $filebeat_path = 'c:\Program Files\Filebeat\filebeat.exe'
-
       if !$filebeat::disable_config_test {
         file { "filebeat-${name}":
           ensure       => $ensure,
@@ -118,8 +118,10 @@ define filebeat::prospector (
         }
       }
     }
+
     default : {
       fail($filebeat::kernel_fail_message)
     }
+
   }
 }
