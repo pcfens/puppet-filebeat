@@ -71,6 +71,10 @@ class filebeat::params {
 
     'Windows' : {
       $package_ensure   = '5.6.2'
+      $config_file_owner = 'Administrator'
+      $config_file_group = undef
+      $config_dir_owner = 'Administrator'
+      $config_dir_group = undef
       $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
       $config_dir       = 'C:/Program Files/Filebeat/conf.d'
       $registry_file    = 'C:/ProgramData/filebeat/registry'
