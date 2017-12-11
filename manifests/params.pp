@@ -29,17 +29,16 @@ class filebeat::params {
   $conf_template        = "${module_name}/pure_hash.yml.erb"
   $disable_config_test  = false
 
-  $config_file_owner = 'root'
-  $config_file_group = 'root'
-  $config_dir_owner  = 'root'
-  $config_dir_group  = 'root'
-
   case $::kernel {
     'Linux'   : {
-      $package_ensure  = present
-      $config_file     = '/etc/filebeat/filebeat.yml'
-      $config_dir      = '/etc/filebeat/conf.d'
-      $registry_file   = '/var/lib/filebeat/registry'
+      $package_ensure    = present
+      $config_file       = '/etc/filebeat/filebeat.yml'
+      $config_dir        = '/etc/filebeat/conf.d'
+      $config_file_owner = 'root'
+      $config_file_group = 'root'
+      $config_dir_owner  = 'root'
+      $config_dir_group  = 'root'
+      $registry_file     = '/var/lib/filebeat/registry'
 
       # These parameters are ignored if/until tarball installs are supported in Linux
       $tmp_dir         = '/tmp'
@@ -53,6 +52,21 @@ class filebeat::params {
         }
       }
       $url_arch        = undef
+    }
+
+    'FreeBSD': {
+      $package_ensure    = present
+      $config_file       = '/usr/local/etc/filebeat.yml'
+      $config_dir        = '/usr/local/etc/filebeat.d'
+      $config_file_owner = 'root'
+      $config_file_group = 'wheel'
+      $config_dir_owner  = 'root'
+      $config_dir_group  = 'wheel'
+      $registry_file     = '/var/lib/filebeat/registry'
+      $tmp_dir           = '/tmp'
+      $service_provider  = undef
+      $install_dir       = undef
+      $url_arch          = undef
     }
 
     'Windows' : {
