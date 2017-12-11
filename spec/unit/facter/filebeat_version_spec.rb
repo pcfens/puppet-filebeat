@@ -5,7 +5,7 @@ describe 'filebeat_version' do
     Facter.clear
     Facter.fact(:kernel).stubs(:value).returns('Linux')
   end
-  context 'on a Linux host' do
+  context 'when on a Linux host' do
     before :each do
       File.stubs(:executable?)
       Facter::Util::Resolution.stubs(:exec)
