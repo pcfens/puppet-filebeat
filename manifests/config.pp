@@ -57,8 +57,8 @@ class filebeat::config {
       $validate_cmd = $filebeat::disable_config_test ? {
         true    => undef,
         default => $major_version ? {
-          '5'     => '/usr/share/filebeat/bin/filebeat -N -configtest -c %',
-          default => '/usr/share/filebeat/bin/filebeat -c % test config',
+          '5'     => "${filebeat::filebeat_path} -N -configtest -c %",
+          default => "${filebeat::filebeat_path} -c % test config",
         },
       }
 

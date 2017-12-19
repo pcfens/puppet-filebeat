@@ -4,8 +4,6 @@
 #
 # @summary Set a bunch of default parameters
 class filebeat::params {
-  $manage_repo          = true
-  $major_version        = '5'
   $service_ensure       = running
   $service_enable       = true
   $spool_size           = 2048
@@ -29,6 +27,28 @@ class filebeat::params {
   $conf_template        = "${module_name}/pure_hash.yml.erb"
   $disable_config_test  = false
 
+  # These are irrelevant as long as the template is set based on the major_version parameter
+  # if versioncmp('1.9.1', $::rubyversion) > 0 {
+  #   $conf_template = "${module_name}/filebeat.yml.ruby18.erb"
+  # } else {
+  #   $conf_template = "${module_name}/filebeat.yml.erb"
+  # }
+  #
+
+  # Archlinux has a proper package in the official repos
+  # we shouldn't manage the repo on it
+  case $facts['os']['family'] {
+    'Archlinux': {
+      $manage_repo = false
+      $filebeat_path = '/usr/bin/filebeat'
+      $major_version = '6'
+    }
+    default: {
+      $manage_repo = true
+      $filebeat_path = '/usr/share/filebeat/bin/filebeat'
+      $major_version = '5'
+    }
+  }
   case $::kernel {
     'Linux'   : {
       $package_ensure    = present
