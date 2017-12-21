@@ -57,7 +57,7 @@ define filebeat::prospector (
           group        => 'root',
           mode         => $::filebeat::config_file_mode,
           content      => template("${module_name}/${prospector_template}"),
-          validate_cmd => '/usr/share/filebeat/bin/filebeat -N -configtest -c %',
+          validate_cmd => "${filebeat::filebeat_path} -N -configtest -c %",
           notify       => Service['filebeat'],
         }
       } else {
@@ -70,7 +70,6 @@ define filebeat::prospector (
           content => template("${module_name}/${prospector_template}"),
           notify  => Service['filebeat'],
         }
-
       }
     }
 
