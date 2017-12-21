@@ -2,8 +2,13 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.3.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.4.0...HEAD)
 
+## [v2.4.0](https://github.com/pcfens/puppet-filebeat/tree/v2.4.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.3.0...v2.4.0)
+
+- Add support for FreeBSD [\#130](https://github.com/pcfens/puppet-filebeat/pull/130)
+- Add support for Archlinux [\#147](https://github.com/pcfens/puppet-filebeat/pull/147)
 
 ## [v2.3.0](https://github.com/pcfens/puppet-filebeat/tree/v2.3.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.2.0...v2.3.0)
