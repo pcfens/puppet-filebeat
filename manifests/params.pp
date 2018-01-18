@@ -9,7 +9,7 @@ class filebeat::params {
   $spool_size           = 2048
   $idle_timeout         = '5s'
   $publish_async        = false
-  $shutdown_timeout     = 0
+  $shutdown_timeout     = '0'
   $beat_name            = $::fqdn
   $tags                 = []
   $queue_size           = 1000

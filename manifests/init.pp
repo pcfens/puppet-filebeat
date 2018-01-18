@@ -73,7 +73,7 @@ class filebeat (
   Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-\.]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\ = [\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $download_url = undef, # lint:ignore:140chars
   Optional[String]  $install_dir                                                                                                             = $filebeat::params::install_dir,
   String  $tmp_dir                                                                                                                           = $filebeat::params::tmp_dir,
-  Integer $shutdown_timeout                                                                                                                  = $filebeat::params::shutdown_timeout,
+  String  $shutdown_timeout                                                                                                                  = $filebeat::params::shutdown_timeout,
   String  $beat_name                                                                                                                         = $filebeat::params::beat_name,
   Array   $tags                                                                                                                              = $filebeat::params::tags,
   Integer $queue_size                                                                                                                        = $filebeat::params::queue_size,
