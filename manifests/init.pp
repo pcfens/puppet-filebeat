@@ -42,6 +42,7 @@
 # @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 # @param processors [Hash] Processors that will be added. Commonly used to create processors using hiera.
 # @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
+# @param setup [Hash] setup that will be created. Commonly used to create setup using hiera
 # @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
 class filebeat (
