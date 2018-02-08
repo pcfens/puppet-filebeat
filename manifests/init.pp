@@ -83,6 +83,7 @@ class filebeat (
   Boolean $disable_config_test                                                                                                               = $filebeat::params::disable_config_test,
   Hash    $processors                                                                                                                        = {},
   Hash    $prospectors                                                                                                                       = {},
+  Hash    $setup                                                                                                                             = {},
   Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-\.]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\ = [\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $proxy_address = undef, # lint:ignore:140chars
   Stdlib::Absolutepath $filebeat_path                                                                                                        = $filebeat::params::filebeat_path
 ) inherits filebeat::params {

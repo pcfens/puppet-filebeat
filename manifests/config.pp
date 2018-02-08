@@ -24,6 +24,7 @@ class filebeat::config {
       'logging'           => $filebeat::logging,
       'runoptions'        => $filebeat::run_options,
       'processors'        => $filebeat::processors,
+      'setup'             => $filebeat::setup,
     })
   } else {
     $filebeat_config = delete_undef_values({
