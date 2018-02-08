@@ -262,6 +262,7 @@ Installs and configures filebeat.
 - `disable_config_test`: [Boolean] If set to true, configuration tests won't be run on config files before writing them.
 - `processors`: [Hash] Processors that should be configured.
 - `prospectors`: [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
+- `setup`: [Hash] Setup that will be created. Commonly used to create setup using hiera
 
 ### Private Classes
 
