@@ -29,6 +29,7 @@
 # @param outputs [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 # @param shipper [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 # @param logging [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
+# @param config [Hash] Will be converted to YAML to create the optional config section of the filebeat config (see documentation)
 # @param conf_template [String] The configuration template to use to generate the main filebeat.yml config file
 # @param download_url [String] The URL of the zip file that should be downloaded to install filebeat (windows only)
 # @param install_dir [String] Where filebeat should be installed (windows only)
@@ -69,6 +70,7 @@ class filebeat (
   Hash    $outputs                                                                                                                           = $filebeat::params::outputs,
   Hash    $shipper                                                                                                                           = $filebeat::params::shipper,
   Hash    $logging                                                                                                                           = $filebeat::params::logging,
+  Hash    $config_hash                                                                                                                       = $filebeat::params::config_hash,
   Hash    $run_options                                                                                                                       = $filebeat::params::run_options,
   String  $conf_template                                                                                                                     = $filebeat::params::conf_template,
   Optional[Pattern[/^(http(?:s)?\:\/\/[a-zA-Z0-9]+(?:(?:\.|\-)[a-zA-Z0-9]+)+(?:\:\d+)?(?:\/[\w\-\.]+)*(?:\/?|\/\w+\.[a-zA-Z]{2,4}(?:\?[\w]+\ = [\w\-]+)?)?(?:\&[\w]+\=[\w\-]+)*)$/]] $download_url = undef, # lint:ignore:140chars
