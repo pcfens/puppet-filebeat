@@ -45,8 +45,8 @@ class filebeat::params {
     }
     default: {
       $manage_repo = true
-      $filebeat_path = '/usr/share/filebeat/bin/filebeat'
-      $major_version = '5'
+      $filebeat_path = '/usr/bin/filebeat'
+      $major_version = '6'
     }
   }
   case $::kernel {
