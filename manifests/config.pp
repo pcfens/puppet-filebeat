@@ -15,9 +15,12 @@ class filebeat::config {
       'fields'            => $filebeat::fields,
       'fields_under_root' => $filebeat::fields_under_root,
       'filebeat'          => {
-        'registry_file'    => $filebeat::registry_file,
-        'config_dir'       => $filebeat::config_dir,
-        'shutdown_timeout' => $filebeat::shutdown_timeout,
+        'registry_file'      => $filebeat::registry_file,
+        'config.prospectors' => {
+          'enabled' => true,
+          'path'    => "${filebeat::config_dir}/*.yml",
+        },
+        'shutdown_timeout'   => $filebeat::shutdown_timeout,
       },
       'output'            => $filebeat::outputs,
       'shipper'           => $filebeat::shipper,

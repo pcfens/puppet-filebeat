@@ -45,7 +45,10 @@ define filebeat::prospector (
   validate_array($paths, $exclude_files, $include_lines, $exclude_lines, $tags)
   validate_bool($tail_files, $close_renamed, $close_removed, $close_eof, $clean_removed, $symlinks)
 
-  $prospector_template = 'prospector.yml.erb'
+  $prospector_template = $filebeat::major_version ? {
+    '5'     => 'prospector5.yml.erb',
+    default => 'prospector.yml.erb',
+  }
 
   case $::kernel {
     'Linux' : {
