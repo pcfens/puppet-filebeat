@@ -38,7 +38,7 @@ with required configurations.
 
 ### Upgrading to Filebeat 6.x
 
-To upgrade to Filebeat 6.x, simply set `$filebeat::major_version` to `6` and `$filebeat::package_ensure` to `latest`.
+To upgrade to Filebeat 6.x, simply set `$filebeat::major_version` to `6` and `$filebeat::package_ensure` to `latest` (or whichever version of 6.x you want, just not present).
 
 
 ### Setup Requirements

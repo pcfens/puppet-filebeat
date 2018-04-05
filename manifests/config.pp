@@ -54,11 +54,20 @@ class filebeat::config {
     })
   }
 
+  if $::filebeat_version {
+    $skip_validation = versioncmp($::filebeat_version, $filebeat::major_version) ? {
+      -1      => true,
+      default => false,
+    }
+  } else {
+    $skip_validation = false
+  }
+
   Filebeat::Prospector <| |> -> File['filebeat.yml']
 
   case $::kernel {
     'Linux'   : {
-      $validate_cmd = $filebeat::disable_config_test ? {
+      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
         default => $major_version ? {
           '5'     => "${filebeat::filebeat_path} -N -configtest -c %",
@@ -91,7 +100,7 @@ class filebeat::config {
     } # end Linux
 
     'FreeBSD'   : {
-      $validate_cmd = $filebeat::disable_config_test ? {
+      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
         default => '/usr/local/sbin/filebeat -N -configtest -c %',
       }
@@ -124,7 +133,7 @@ class filebeat::config {
       $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
       $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
 
-      $validate_cmd = $filebeat::disable_config_test ? {
+      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
         default => "\"${filebeat_path}\" -N -configtest -c \"%\"",
       }
