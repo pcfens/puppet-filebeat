@@ -4,28 +4,29 @@
 #
 # @summary Set a bunch of default parameters
 class filebeat::params {
-  $service_ensure       = running
-  $service_enable       = true
-  $spool_size           = 2048
-  $idle_timeout         = '5s'
-  $publish_async        = false
-  $shutdown_timeout     = '0'
-  $beat_name            = $::fqdn
-  $tags                 = []
-  $queue_size           = 1000
-  $max_procs            = undef
-  $config_file_mode     = '0644'
-  $config_dir_mode      = '0755'
-  $purge_conf_dir       = true
-  $fields               = {}
-  $fields_under_root    = false
-  $outputs              = {}
-  $shipper              = {}
-  $logging              = {}
-  $run_options          = {}
-  $kernel_fail_message  = "${::kernel} is not supported by filebeat."
-  $conf_template        = "${module_name}/pure_hash.yml.erb"
-  $disable_config_test  = false
+  $service_ensure        = running
+  $service_enable        = true
+  $spool_size            = 2048
+  $idle_timeout          = '5s'
+  $publish_async         = false
+  $shutdown_timeout      = '0'
+  $beat_name             = $::fqdn
+  $tags                  = []
+  $queue_size            = 1000
+  $max_procs             = undef
+  $config_file_mode      = '0644'
+  $config_dir_mode       = '0755'
+  $purge_conf_dir        = true
+  $fields                = {}
+  $fields_under_root     = false
+  $outputs               = {}
+  $shipper               = {}
+  $logging               = {}
+  $run_options           = {}
+  $kernel_fail_message   = "${::kernel} is not supported by filebeat."
+  $osfamily_fail_message = "${::osfamily} is not supported by filebeat."
+  $conf_template         = "${module_name}/pure_hash.yml.erb"
+  $disable_config_test   = false
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
