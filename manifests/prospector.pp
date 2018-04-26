@@ -56,16 +56,15 @@ define filebeat::prospector (
     $skip_validation = false
   }
 
-  $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
-    true    => undef,
-    default => $filebeat::major_version ? {
-      '5'     => "\"${filebeat::filebeat_path}\" -N -configtest -c \"%\"",
-      default => "\"${filebeat::filebeat_path}\" -c \"${filebeat::config_file}\" test config",
-    },
-  }
-
   case $::kernel {
     'Linux' : {
+      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
+        true    => undef,
+        default => $filebeat::major_version ? {
+          '5'     => "\"${filebeat::filebeat_path}\" -N -configtest -c \"%\"",
+          default => "\"${filebeat::filebeat_path}\" -c \"${filebeat::config_file}\" test config",
+        },
+      }
       file { "filebeat-${name}":
         ensure       => $ensure,
         path         => "${filebeat::config_dir}/${name}.yml",
@@ -80,6 +79,10 @@ define filebeat::prospector (
     }
 
     'FreeBSD' : {
+      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
+        true    => undef,
+        default => '/usr/local/sbin/filebeat -N -configtest -c %',
+      }
       file { "filebeat-${name}":
         ensure       => $ensure,
         path         => "${filebeat::config_dir}/${name}.yml",
@@ -94,7 +97,17 @@ define filebeat::prospector (
     }
 
     'Windows' : {
-      $filebeat_path = 'c:\Program Files\Filebeat\filebeat.exe'
+      $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
+      $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
+
+      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
+        true    => undef,
+        default => $::filebeat_version ? {
+          '5'     => "\"${filebeat_path}\" -N -configtest -c \"%\"",
+          default => "\"${filebeat_path}\" -c \"${filebeat::config_file}\" test config",
+        },
+      }
+
       file { "filebeat-${name}":
         ensure       => $ensure,
         path         => "${filebeat::config_dir}/${name}.yml",
