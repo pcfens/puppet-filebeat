@@ -2,7 +2,10 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.4.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.0.0...HEAD)
+
+## [v3.0.0](https://github.com/pcfens/puppet-filebeat/tree/v3.0.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.4.0...v3.0.0)
 
 Potentially Breaking Change:
 - Make filebeat 6 the default version.
