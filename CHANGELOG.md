@@ -4,6 +4,20 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.4.0...HEAD)
 
+Potentially Breaking Change:
+- Make filebeat 6 the default version.
+
+Non-breaking changes:
+- Allow setup entries in configuration [\#152](https://github.com/pcfens/puppet-filebeat/pull/152), [\#146](https://github.com/pcfens/puppet-filebeat/issues/146)
+- Processors should be an array of hashes [\#157](https://github.com/pcfens/puppet-filebeat/pull/157), [\#156](https://github.com/pcfens/puppet-filebeat/issues/156)
+- Validate URLs using stdlib [\#158](https://github.com/pcfens/puppet-filebeat/pull/158)
+- Use external configuration setup for Filebeat 6+  [\#153](https://github.com/pcfens/puppet-filebeat/issues/153)
+- Use version subcommand when determining version [\#159](https://github.com/pcfens/puppet-filebeat/issues/159)
+- Add processors support to prospectors [\#162](https://github.com/pcfens/puppet-filebeat/pull/162)
+- Update unsupported OS Family notice [\#161](https://github.com/pcfens/puppet-filebeat/pull/161)
+- Use Puppet 4+ data types for prospectors [\#165](https://github.com/pcfens/puppet-filebeat/pull/165)
+- Fix windows validation command [\#164](https://github.com/pcfens/puppet-filebeat/pull/164), [\#163](https://github.com/pcfens/puppet-filebeat/issues/163)
+
 ## [v2.4.0](https://github.com/pcfens/puppet-filebeat/tree/v2.4.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.3.0...v2.4.0)
 
