@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.0.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.0.1...HEAD)
+
+## [v3.0.1](https://github.com/pcfens/puppet-filebeat/tree/v3.0.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.0.0...v3.0.1)
+
+- Fix array validation in prospector defined resource [\#166](https://github.com/pcfens/puppet-filebeat/pull/166)
 
 ## [v3.0.0](https://github.com/pcfens/puppet-filebeat/tree/v3.0.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v2.4.0...v3.0.0)
