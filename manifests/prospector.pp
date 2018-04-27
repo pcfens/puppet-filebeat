@@ -39,7 +39,7 @@ define filebeat::prospector (
   Array[String] $tags               = [],
   Boolean $symlinks                 = false,
   Optional[String] $pipeline        = undef,
-  Array[String] $processors         = [],
+  Array $processors                 = [],
 ) {
 
   $prospector_template = $filebeat::major_version ? {
