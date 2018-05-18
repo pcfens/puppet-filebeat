@@ -21,6 +21,7 @@ class filebeat::config {
           'path'    => "${filebeat::config_dir}/*.yml",
         },
         'shutdown_timeout'   => $filebeat::shutdown_timeout,
+        'modules'           => $filebeat::modules,
       },
       'output'            => $filebeat::outputs,
       'shipper'           => $filebeat::shipper,
@@ -30,7 +31,7 @@ class filebeat::config {
       'setup'             => $filebeat::setup,
     })
   } else {
-    $filebeat_config = delete_undef_values({
+    $filebeat_config_temp = delete_undef_values({
       'shutdown_timeout'  => $filebeat::shutdown_timeout,
       'name'              => $filebeat::beat_name,
       'tags'              => $filebeat::tags,
@@ -52,6 +53,13 @@ class filebeat::config {
       'runoptions'        => $filebeat::run_options,
       'processors'        => $filebeat::processors,
     })
+    # Add the 'modules' section if supported (version >= 5.2.0)
+    if versioncmp($filebeat::package_ensure, '5.2.0') >= 0 {
+      $filebeat_config = deep_merge($filebeat_config_temp, {'modules' => $filebeat::modules})
+    }
+    else {
+      $filebeat_config = $filebeat_config_temp
+    }
   }
 
   if $::filebeat_version {
