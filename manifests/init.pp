@@ -29,6 +29,7 @@
 # @param outputs [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 # @param shipper [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 # @param logging [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
+# @param modules [Array] Will be converted to YAML to create the optional modules section of the filebeat config (see documentation)
 # @param conf_template [String] The configuration template to use to generate the main filebeat.yml config file
 # @param download_url [String] The URL of the zip file that should be downloaded to install filebeat (windows only)
 # @param install_dir [String] Where filebeat should be installed (windows only)
@@ -85,6 +86,7 @@ class filebeat (
   Array   $processors                                                 = [],
   Hash    $prospectors                                                = {},
   Hash    $setup                                                      = {},
+  Array   $modules                                                    = [],
   Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]] $proxy_address = undef, # lint:ignore:140chars
   Stdlib::Absolutepath $filebeat_path                                 = $filebeat::params::filebeat_path
 ) inherits filebeat::params {

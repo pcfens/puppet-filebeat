@@ -248,6 +248,7 @@ Installs and configures filebeat.
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 - `logging`: [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
+- `modules`: [Array] Will be converted to YAML to create the optional modules section of the filebeat config (see documentation)
 - `conf_template`: [String] The configuration template to use to generate the main filebeat.yml config file.
 - `download_url`: [String] The URL of the zip file that should be downloaded to install filebeat (windows only)
 - `install_dir`: [String] Where filebeat should be installed (windows only)
