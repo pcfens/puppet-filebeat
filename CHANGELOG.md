@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.0.1...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.1.0...HEAD)
+
+## [v3.1.0](https://github.com/pcfens/puppet-filebeat/tree/v3.1.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.0.1...v3.1.0)
+
+- Manage filebeat modules as an array [\#168](https://github.com/pcfens/puppet-filebeat/pull/168)
 
 ## [v3.0.1](https://github.com/pcfens/puppet-filebeat/tree/v3.0.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.0.0...v3.0.1)
