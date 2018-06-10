@@ -92,22 +92,22 @@ class filebeat::params {
     }
 
     'Windows' : {
-      $package_ensure   = '5.6.2'
+      $package_ensure   = '6.2.4'
       $config_file_owner = 'Administrator'
       $config_file_group = undef
       $config_dir_owner = 'Administrator'
       $config_dir_group = undef
-      $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
-      $config_dir       = 'C:/Program Files/Filebeat/conf.d'
-      $registry_file    = 'C:/ProgramData/filebeat/registry'
-      $install_dir      = 'C:/Program Files'
-      $tmp_dir          = 'C:/Windows/Temp'
-      $service_provider = undef
       $url_arch         = $::architecture ? {
         'x86'   => 'x86',
         'x64'   => 'x86_64',
         default => fail("${::architecture} is not supported by filebeat."),
       }
+      $install_dir      = "C:/ProgramData/chocolatey/lib/filebeat/tools/filebeat-${package_ensure}-windows-${url_arch}"
+      $config_file      = "${install_dir}/filebeat.yml"
+      $config_dir       = "${install_dir}/conf.d"
+      $registry_file    = 'C:/ProgramData/filebeat/registry'
+      $tmp_dir          = 'C:/Windows/Temp'
+      $service_provider = undef
     }
 
     default : {
