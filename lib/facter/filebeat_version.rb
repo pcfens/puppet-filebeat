@@ -9,6 +9,8 @@ Facter.add('filebeat_version') do
     filebeat_version = Facter::Util::Resolution.exec('/usr/local/sbin/filebeat --version')
   elsif File.exist?('c:\Program Files\Filebeat\filebeat.exe')
     filebeat_version = Facter::Util::Resolution.exec('"c:\Program Files\Filebeat\filebeat.exe" --version')
+  elsif (filebeat_dir = Dir.glob('c:/ProgramData/chocolatey/lib/filebeat/tools/filebeat-*')[0])
+    filebeat_version = Facter::Util::Resolution.exec('"' + filebeat_dir + '/filebeat.exe" --version')
   end
   setcode do
     %r{^filebeat version ([^\s]+)?}.match(filebeat_version)[1] unless filebeat_version.nil?
