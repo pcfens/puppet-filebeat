@@ -28,6 +28,7 @@ class filebeat::params {
   $osfamily_fail_message = "${::osfamily} is not supported by filebeat."
   $conf_template         = "${module_name}/pure_hash.yml.erb"
   $disable_config_test   = false
+  $xpack                 = undef
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
