@@ -46,6 +46,7 @@
 # @param setup [Hash] setup that will be created. Commonly used to create setup using hiera
 # @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
+# @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
 class filebeat (
   String  $package_ensure                                             = $filebeat::params::package_ensure,
   Boolean $manage_repo                                                = $filebeat::params::manage_repo,
@@ -88,7 +89,8 @@ class filebeat (
   Hash    $setup                                                      = {},
   Array   $modules                                                    = [],
   Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]] $proxy_address = undef, # lint:ignore:140chars
-  Stdlib::Absolutepath $filebeat_path                                 = $filebeat::params::filebeat_path
+  Stdlib::Absolutepath $filebeat_path                                 = $filebeat::params::filebeat_path,
+  Optional[Hash] $xpack                                               = $filebeat::params::xpack,
 ) inherits filebeat::params {
 
   include ::stdlib
