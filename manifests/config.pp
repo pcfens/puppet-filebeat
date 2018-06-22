@@ -144,6 +144,39 @@ class filebeat::config {
       }
     } # end FreeBSD
 
+    'OpenBSD'   : {
+      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
+        true    => undef,
+        default => $major_version ? {
+          '5'     => "${filebeat::filebeat_path} -N -configtest -c %",
+          default => "${filebeat::filebeat_path} -c % test config",
+        },
+      }
+
+      file {'filebeat.yml':
+        ensure       => $filebeat::file_ensure,
+        path         => $filebeat::config_file,
+        content      => template($filebeat::conf_template),
+        owner        => $filebeat::config_file_owner,
+        group        => $filebeat::config_file_group,
+        mode         => $filebeat::config_file_mode,
+        validate_cmd => $validate_cmd,
+        notify       => Service['filebeat'],
+        require      => File['filebeat-config-dir'],
+      }
+
+      file {'filebeat-config-dir':
+        ensure  => $filebeat::directory_ensure,
+        path    => $filebeat::config_dir,
+        owner   => $filebeat::config_dir_owner,
+        group   => $filebeat::config_dir_group,
+        mode    => $filebeat::config_dir_mode,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
+        force   => true,
+      }
+    } # end OpenBSD
+
     'Windows' : {
       $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
       $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
