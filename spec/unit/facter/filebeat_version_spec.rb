@@ -16,4 +16,20 @@ describe 'filebeat_version' do
       expect(Facter.fact(:filebeat_version).value).to eq('5.1.1')
     end
   end
+
+  context 'when the filebeat package is not installed' do
+    before :each do
+      File.stubs(:executable?)
+      Facter::Util::Resolution.stubs(:exec)
+      File.expects(:executable?).with('/usr/bin/filebeat').returns false
+      File.expects(:executable?).with('/usr/local/bin/filebeat').returns false
+      File.expects(:executable?).with('/usr/share/filebeat/bin/filebeat').returns false
+      File.expects(:executable?).with('/usr/local/sbin/filebeat').returns false
+      File.stubs(:exist?)
+      File.expects(:exist?).with('c:\Program Files\Filebeat\filebeat.exe').returns false
+    end
+    it 'returns false' do
+      expect(Facter.fact(:filebeat_version).value).to eq(false)
+    end
+  end
 end
