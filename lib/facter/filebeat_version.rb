@@ -13,6 +13,6 @@ Facter.add('filebeat_version') do
     filebeat_version = Facter::Util::Resolution.exec('"c:\Program Files\Filebeat\filebeat.exe" --version')
   end
   setcode do
-    %r{^filebeat version ([^\s]+)?}.match(filebeat_version)[1] unless filebeat_version.nil?
+    filebeat_version.nil? ? false : %r{^filebeat version ([^\s]+)?}.match(filebeat_version)[1]
   end
 end
