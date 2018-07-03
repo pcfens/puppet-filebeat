@@ -264,6 +264,7 @@ Installs and configures filebeat.
 - `processors`: [Hash] Processors that should be configured.
 - `prospectors`: [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
 - `setup`: [Hash] Setup that will be created. Commonly used to create setup using hiera
+- `xpack`: [Hash] XPack configuration to pass to filebeat
 
 ### Private Classes
 
