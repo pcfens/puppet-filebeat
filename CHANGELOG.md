@@ -2,7 +2,14 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.1.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.0...HEAD)
+
+## [v3.2.0](https://github.com/pcfens/puppet-filebeat/tree/v3.2.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.1.0...v3.2.0)
+
+- Add support for xpack monitoring [\#172](https://github.com/pcfens/puppet-filebeat/pull/172)
+- Add support for OpenBSD [\#173](https://github.com/pcfens/puppet-filebeat/pull/173)
+- Set filebeat_version to false when filebeat isn't installed [\#175](https://github.com/pcfens/puppet-filebeat/pull/175)
 
 ## [v3.1.0](https://github.com/pcfens/puppet-filebeat/tree/v3.1.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.0.1...v3.1.0)
