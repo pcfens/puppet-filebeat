@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.1...HEAD)
+
+## [v3.2.1](https://github.com/pcfens/puppet-filebeat/tree/v3.2.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.0...v3.2.1)
+
+- Fetch the suse repository signing key over https [\#176](https://github.com/pcfens/puppet-filebeat/issues/176)
 
 ## [v3.2.0](https://github.com/pcfens/puppet-filebeat/tree/v3.2.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.1.0...v3.2.0)
