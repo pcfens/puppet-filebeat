@@ -54,7 +54,7 @@ class filebeat::repo {
           autorefresh => 1,
           name        => 'beats',
           gpgcheck    => 1,
-          gpgkey      => 'http://packages.elastic.co/GPG-KEY-elasticsearch',
+          gpgkey      => 'https://packages.elastic.co/GPG-KEY-elasticsearch',
           type        => 'yum',
         }
       }
