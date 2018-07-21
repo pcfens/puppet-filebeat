@@ -29,6 +29,8 @@ class filebeat::params {
   $conf_template         = "${module_name}/pure_hash.yml.erb"
   $disable_config_test   = false
   $xpack                 = undef
+  $oss                   = false
+  $prerelease            = false
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
@@ -64,6 +66,7 @@ class filebeat::params {
   }
   case $::kernel {
     'Linux'   : {
+      $package_name      = 'filebeat'
       $package_ensure    = present
       $config_file       = '/etc/filebeat/filebeat.yml'
       $config_dir        = '/etc/filebeat/conf.d'
@@ -87,6 +90,9 @@ class filebeat::params {
     }
 
     'FreeBSD': {
+      # filebeat, heartbeat, metricbeat, packetbeat are all contained in a
+      # single FreeBSD Package (see https://www.freshports.org/sysutils/beats/ )
+      $package_name      = 'beats'
       $package_ensure    = present
       $config_file       = '/usr/local/etc/filebeat.yml'
       $config_dir        = '/usr/local/etc/filebeat.d'
@@ -102,6 +108,7 @@ class filebeat::params {
     }
 
     'OpenBSD': {
+      $package_name      = 'filebeat'
       $package_ensure    = present
       $config_file       = '/etc/filebeat/filebeat.yml'
       $config_dir        = '/etc/filebeat/conf.d'
@@ -117,6 +124,7 @@ class filebeat::params {
     }
 
     'Windows' : {
+      $package_name     = 'filebeat'
       $package_ensure   = '5.6.2'
       $config_file_owner = 'Administrator'
       $config_file_group = undef

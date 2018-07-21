@@ -224,6 +224,11 @@ Installs and configures filebeat.
 - `package_ensure`: [String] The ensure parameter for the filebeat package If set to absent,
   prospectors and processors passed as parameters are ignored and everything managed by
   puppet will be removed. (default: present)
+- `package_name`: [String] Name of the package to install.
+- `oss`: [Boolean] Whether to use the purely open source
+  (i.e., bundled without X-Pack) repository  (default: false)
+- `prerelease`: [Boolean] Whether to use a repo for
+  prerelease versions, like "6.0.0-rc2"  (default: false)
 - `manage_repo`: [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 - `major_version`: [Enum] The major version of Filebeat to install. Should be either `5` or `6`. The default value is `5`.
 - `service_ensure`: [String] The ensure parameter on the filebeat service (default: running)
