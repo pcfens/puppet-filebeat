@@ -13,6 +13,9 @@
 # }
 #
 # @param package_ensure [String] The ensure parameter for the filebeat package (default: present)
+# @param package_name [String] Name of the package to install.
+# @param oss [Boolean] Whether to use the purely open source (i.e., bundled without X-Pack) repository  (default: false)
+# @param prerelease [Boolean] Whether to use a repo for prerelease versions, like "6.0.0-rc2"  (default: false)
 # @param manage_repo [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 # @param major_version [Enum] The major version of Filebeat to be installed.
 # @param service_ensure [String] The ensure parameter on the filebeat service (default: running)
@@ -49,6 +52,9 @@
 # @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
 class filebeat (
   String  $package_ensure                                             = $filebeat::params::package_ensure,
+  String  $package_name                                               = $filebeat::params::package_name,
+  Boolean $oss                                                        = $filebeat::params::oss,
+  Boolean $prerelease                                                 = $filebeat::params::prerelease,
   Boolean $manage_repo                                                = $filebeat::params::manage_repo,
   Enum['5','6'] $major_version                                        = $filebeat::params::major_version,
   Variant[Boolean, Enum['stopped', 'running']] $service_ensure        = $filebeat::params::service_ensure,
@@ -95,8 +101,13 @@ class filebeat (
 
   include ::stdlib
 
+  $real_package_name = $oss ? {
+    true    => "${package_name}-oss",
+    default => $package_name,
+  }
+
   $real_download_url = $download_url ? {
-    undef   => "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${package_ensure}-windows-${filebeat::params::url_arch}.zip",
+    undef   => "https://artifacts.elastic.co/downloads/beats/filebeat/${$real_package_name}-${package_ensure}-windows-${filebeat::params::url_arch}.zip",
     default => $download_url,
   }
 

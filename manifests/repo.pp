@@ -4,8 +4,25 @@
 #
 # @summary Manages the yum, apt, and zypp repositories for Filebeat
 class filebeat::repo {
-  $debian_repo_url = "https://artifacts.elastic.co/packages/${filebeat::major_version}.x/apt"
-  $yum_repo_url = "https://artifacts.elastic.co/packages/${filebeat::major_version}.x/yum"
+  if $filebeat::oss {
+    if versioncmp($filebeat::major_version, '6') < 0 {
+      fail('OSS repositories are not available for filebeat <6')
+    }
+
+    $version_prefix = 'oss-'
+  } else {
+    $version_prefix = ''
+  }
+
+  if $filebeat::prerelease {
+    $version_suffix = '.x-prerelease'
+  } else {
+    $version_suffix = '.x'
+  }
+
+  $repo_dir = "${version_prefix}${filebeat::major_version}${version_suffix}"
+  $debian_repo_url = "https://artifacts.elastic.co/packages/${repo_dir}/apt"
+  $yum_repo_url = "https://artifacts.elastic.co/packages/${repo_dir}/yum"
 
   case $::osfamily {
     'Debian': {

@@ -5,9 +5,12 @@
 # @summary A simple class to install the filebeat package
 #
 class filebeat::install::freebsd {
+  if $filebeat::oss {
+    warning('No OSS version of filebeat available under OpenBSD')
+  }
 
-  # filebeat, heartbeat, metricbeat, packetbeat are all contained in a
-  # single FreeBSD Package (see https://www.freshports.org/sysutils/beats/ )
-  ensure_packages (['beats'], {ensure => $filebeat::package_ensure})
-
+  package {'filebeat':
+    ensure => $filebeat::package_ensure,
+    name   => $filebeat::real_package_name,
+  }
 }
