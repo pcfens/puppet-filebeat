@@ -66,7 +66,6 @@ class { 'filebeat':
        'http://anotherserver:9200'
      ],
      'loadbalance' => true,
-     'index'       => 'packetbeat',
      'cas'         => [
         '/etc/pki/root/ca.pem',
      ],
