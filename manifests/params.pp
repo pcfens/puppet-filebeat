@@ -43,11 +43,13 @@ class filebeat::params {
   case $facts['os']['family'] {
     'Archlinux': {
       $manage_repo = false
+      $manage_apt  = false
       $filebeat_path = '/usr/bin/filebeat'
       $major_version = '6'
     }
     'OpenBSD': {
       $manage_repo = false
+      $manage_apt  = false
       $filebeat_path = '/usr/local/bin/filebeat'
       # lint:ignore:only_variable_string
       $major_version = versioncmp('6.3', "${::kernelversion}") < 0 ? {
@@ -58,6 +60,7 @@ class filebeat::params {
     }
     default: {
       $manage_repo = true
+      $manage_apt  = true
       $filebeat_path = '/usr/share/filebeat/bin/filebeat'
       $major_version = '6'
     }
