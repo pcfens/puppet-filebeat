@@ -7,7 +7,6 @@
   "source": "https://github.com/pcfens/puppet-filebeat",
   "project_page": "https://github.com/pcfens/puppet-filebeat",
   "issues_url": "https://github.com/pcfens/puppet-filebeat/issues",
-  "tags": ["filebeat", "logstash", "elasticsearch", "elastic"],
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
@@ -97,7 +96,13 @@
       "version_requirement": ">= 4.0.0 < 6.0.0"
     }
   ],
-  "pdk-version": "1.1.0",
-  "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-module-template.git",
-  "template-ref": "heads/master-0-g54e88a4"
+  "tags": [
+    "filebeat",
+    "logstash",
+    "elasticsearch",
+    "elastic"
+  ],
+  "pdk-version": "1.7.0",
+  "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
+  "template-ref": "1.7.0-0-g57412ed"
 }

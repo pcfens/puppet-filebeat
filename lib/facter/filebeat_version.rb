@@ -1,6 +1,6 @@
 require 'facter'
 Facter.add('filebeat_version') do
-  confine 'kernel' => %w[FreeBSD OpenBSD Linux Windows]
+  confine 'kernel' => ['FreeBSD', 'OpenBSD', 'Linux', 'Windows']
   if File.executable?('/usr/bin/filebeat')
     filebeat_version = Facter::Util::Resolution.exec('/usr/bin/filebeat version')
   elsif File.executable?('/usr/local/bin/filebeat')
