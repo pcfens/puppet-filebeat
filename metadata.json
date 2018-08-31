@@ -1,6 +1,6 @@
 {
   "name": "pcfens-filebeat",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "author": "pcfens",
   "summary": "A module to install and manage the filebeat log shipper",
   "license": "Apache-2.0",

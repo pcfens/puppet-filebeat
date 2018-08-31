@@ -2,10 +2,14 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.1...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.2...HEAD)
+
+## [v3.2.2](https://github.com/pcfens/puppet-filebeat/tree/v3.2.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.1...v3.2.2)
 
 - Don't add xpack configuration when it's undef [\#187](https://github.com/pcfens/puppet-filebeat/pull/187)
 - Don't disallow using puppetlabs/apt 6.x (check their [changelog](https://forge.puppet.com/puppetlabs/apt/changelog#600-2018-08-24) as this release drops support for Puppet pre 4.7) [\#186](https://github.com/pcfens/puppet-filebeat/pull/186)
+- Use the latest PDK
 
 ## [v3.2.1](https://github.com/pcfens/puppet-filebeat/tree/v3.2.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.0...v3.2.1)
