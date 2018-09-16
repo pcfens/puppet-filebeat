@@ -1,9 +1,21 @@
 ---
 - type: <%= @input_type %>
+  <%- if @input_type != 'docker' -%>
   paths:
-    <%- @paths.each do |log_path| -%>
-    - <%= log_path %>
+  <%- @paths.each do |log_path| -%>
+  - <%= log_path %>
+  <%- end -%>
+  <%- else -%>
+  containers:
+    ids:
+    <%- @containers_ids.each do |id| -%>
+    - <%= id %>
     <%- end -%>
+    path: <%= @containers_path %>
+    stream: <%= @containers_stream %>
+  combine_partial: <%= @combine_partial %>
+  cri.parse_flags: <%= @cri_parse_flags %>
+  <%- end %>
   <%- if @encoding -%>
   encoding: <%= @encoding %>
   <%- end -%>
