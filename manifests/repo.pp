@@ -9,7 +9,9 @@ class filebeat::repo {
 
   case $::osfamily {
     'Debian': {
-      include ::apt
+      if $::filebeat::manage_apt == true {
+        include ::apt
+      }
 
       Class['apt::update'] -> Package['filebeat']
 
