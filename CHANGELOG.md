@@ -2,7 +2,14 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.2...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.0...HEAD)
+
+## [v3.3.0](https://github.com/pcfens/puppet-filebeat/tree/v3.3.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.2...v3.3.0)
+
+- Allow use of puppet/archive 3.x [\#190](https://github.com/pcfens/puppet-filebeat/pull/190)
+- Add support for Docker inputs [\#191](https://github.com/pcfens/puppet-filebeat/pull/191)
+- Support puppetlabs/stdlib 5.x
 
 ## [v3.2.2](https://github.com/pcfens/puppet-filebeat/tree/v3.2.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.1...v3.2.2)
