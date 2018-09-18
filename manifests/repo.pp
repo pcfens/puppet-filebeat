@@ -9,7 +9,7 @@ class filebeat::repo {
 
   case $::osfamily {
     'Debian': {
-      if $manage_apt == true {
+      if $::filebeat::manage_apt == true {
         include ::apt
       }
 
