@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.1...HEAD)
+
+## [v3.3.1](https://github.com/pcfens/puppet-filebeat/tree/v3.3.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.0...v3.3.1)
+
+- Add a new `manage_apt` flag for disabling the inclusion of puppetlabs/apt [\#185](https://github.com/pcfens/puppet-filebeat/pull/185)
 
 ## [v3.3.0](https://github.com/pcfens/puppet-filebeat/tree/v3.3.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.2.2...v3.3.0)
