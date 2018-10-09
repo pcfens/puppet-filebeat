@@ -2,7 +2,10 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.1...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.2...HEAD)
+
+## [v3.3.2](https://github.com/pcfens/puppet-filebeat/tree/v3.3.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.1...v3.3.2)
 
 - Produce valid YAML for prospectors [\#193](https://github.com/pcfens/puppet-filebeat/pull/193)
 - Upgrade to PDK 1.7.1
