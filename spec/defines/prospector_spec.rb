@@ -52,16 +52,16 @@ describe 'filebeat::prospector' do
 
       if os_facts[:kernel] != 'windows'
         it { is_expected.to compile }
-      end
 
-      it {
-        is_expected.to contain_file('filebeat-docker').with(
-          notify: 'Service[filebeat]',
-        )
-        is_expected.to contain_file('filebeat-docker').with_content(
-          %r{- type: docker\n\s{2}containers:\n\s{4}ids:\n\s{4}- '\*'\n\s{4}path: /var/lib/docker/containers\n\s{4}stream: all\n\s{2}combine_partial: false\n\s{2}cri.parse_flags: false\n},
-        )
-      }
+        it {
+          is_expected.to contain_file('filebeat-docker').with(
+            notify: 'Service[filebeat]',
+          )
+          is_expected.to contain_file('filebeat-docker').with_content(
+            %r{- type: docker\n\s{2}containers:\n\s{4}ids:\n\s{4}- '\*'\n\s{4}path: /var/lib/docker/containers\n\s{4}stream: all\n\s{2}combine_partial: false\n\s{2}cri.parse_flags: false\n},
+          )
+        }
+      end
     end
   end
 

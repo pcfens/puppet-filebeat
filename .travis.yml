@@ -21,7 +21,7 @@ matrix:
   fast_finish: true
   include:
     -
-      env: CHECK="syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop"
+      env: CHECK="syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop" DEPLOY_TO_FORGE=yes
     -
       env: CHECK=parallel_spec
     -
