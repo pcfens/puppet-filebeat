@@ -45,6 +45,7 @@ define filebeat::prospector (
   Boolean $symlinks                 = false,
   Optional[String] $pipeline        = undef,
   Array $processors                 = [],
+  Integer $harvester_limit          = undef,
 ) {
 
   $prospector_template = $filebeat::major_version ? {
