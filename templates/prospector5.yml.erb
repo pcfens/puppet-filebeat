@@ -136,7 +136,9 @@ filebeat:
 
       # Experimental: Max number of harvesters that are started in parallel.
       # Default is 0 which means unlimited
-      #harvester_limit: 0
+      <%- if @harvester_limit -%>
+      harvester_limit: <%= @harvester_limit %>
+      <%- end -%>
 
       ### Harvester closing options
 
