@@ -194,5 +194,5 @@
   <%- if @processors.length > 0 -%>
   # Managing processors releated only for specified prospector
   processors:
-    <%- %><%= @processors.to_yaml.lines[1..-1].join.gsub(/^/, '  ') -%>
+    <%- %><%= @processors.to_yaml.lines.drop(1).join.gsub(/^/, '  ') -%>
   <%- end -%>
