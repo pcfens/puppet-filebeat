@@ -24,10 +24,10 @@
 # @param publish_async [Boolean] If set to true filebeat will publish while preparing the next batch of lines to send (defualt: false)
 # @param registry_file [String] The registry file used to store positions, absolute or relative to working directory (default .filebeat)
 # @param registry_flush [String] The timeout value that controls when registry entries are written to disk (default: 0s)
-# @param config_dir [String] The directory where prospectors should be defined (default: /etc/filebeat/conf.d)
+# @param config_dir [String] The directory where inputs should be defined (default: /etc/filebeat/conf.d)
 # @param config_dir_mode [String] The unix permissions mode set on the configuration directory (default: 0755)
 # @param config_file_mode [String] The unix permissions mode set on configuration files (default: 0644)
-# @param purge_conf_dir [Boolean] Should files in the prospector configuration directory not managed by puppet be automatically purged
+# @param purge_conf_dir [Boolean] Should files in the input configuration directory not managed by puppet be automatically purged
 # @param outputs [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 # @param shipper [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 # @param logging [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
@@ -44,16 +44,16 @@
 # @param fields [Hash] Optional fields that should be added to each event output
 # @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 # @param processors [Array] Processors that will be added. Commonly used to create processors using hiera.
-# @param prospectors [Hash] Prospectors that will be created. Commonly used to create prospectors using hiera
+# @param inputs [Hash] Inputs that will be created. Commonly used to create inputs using hiera
 # @param setup [Hash] setup that will be created. Commonly used to create setup using hiera
-# @param prospectors_merge [Boolean] Whether $prospectors should merge all hiera sources, or use simple automatic parameter lookup
+# @param inputs_merge [Boolean] Whether $inputs should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
 # @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
 class filebeat (
   String  $package_ensure                                             = $filebeat::params::package_ensure,
   Boolean $manage_repo                                                = $filebeat::params::manage_repo,
   Boolean $manage_apt                                                 = $filebeat::params::manage_apt,
-  Enum['5','6'] $major_version                                        = $filebeat::params::major_version,
+  Enum['5','6', '7'] $major_version                                   = $filebeat::params::major_version,
   Variant[Boolean, Enum['stopped', 'running']] $service_ensure        = $filebeat::params::service_ensure,
   Boolean $service_enable                                             = $filebeat::params::service_enable,
   Optional[String]  $service_provider                                 = $filebeat::params::service_provider,
@@ -91,7 +91,7 @@ class filebeat (
   Boolean $fields_under_root                                          = $filebeat::params::fields_under_root,
   Boolean $disable_config_test                                        = $filebeat::params::disable_config_test,
   Array   $processors                                                 = [],
-  Hash    $prospectors                                                = {},
+  Hash    $inputs                                                     = {},
   Hash    $setup                                                      = {},
   Array   $modules                                                    = [],
   Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]] $proxy_address = undef, # lint:ignore:140chars
@@ -139,8 +139,8 @@ class filebeat (
   }
 
   if $package_ensure != 'absent' {
-    if !empty($prospectors) {
-      create_resources('filebeat::prospector', $prospectors)
+    if !empty($inputs) {
+      create_resources('filebeat::input', $inputs)
     }
   }
 }

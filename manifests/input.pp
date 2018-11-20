@@ -1,4 +1,4 @@
-# filebeat::prospector
+# filebeat::input
 #
 # A description of what this defined type does
 #
@@ -48,7 +48,7 @@ define filebeat::prospector (
   Array $processors                        = [],
 ) {
 
-  $prospector_template = $filebeat::major_version ? {
+  $input_template = $filebeat::major_version ? {
     '5'     => 'prospector5.yml.erb',
     default => 'prospector.yml.erb',
   }
@@ -77,7 +77,7 @@ define filebeat::prospector (
         owner        => 'root',
         group        => '0',
         mode         => $::filebeat::config_file_mode,
-        content      => template("${module_name}/${prospector_template}"),
+        content      => template("${module_name}/${input_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
         require      => File['filebeat.yml'],
@@ -95,7 +95,7 @@ define filebeat::prospector (
         owner        => 'root',
         group        => 'wheel',
         mode         => $::filebeat::config_file_mode,
-        content      => template("${module_name}/${prospector_template}"),
+        content      => template("${module_name}/${input_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
         require      => File['filebeat.yml'],
@@ -117,7 +117,7 @@ define filebeat::prospector (
       file { "filebeat-${name}":
         ensure       => $ensure,
         path         => "${filebeat::config_dir}/${name}.yml",
-        content      => template("${module_name}/${prospector_template}"),
+        content      => template("${module_name}/${input_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
         require      => File['filebeat.yml'],
