@@ -154,7 +154,7 @@ To drop the offset and input_type fields from all events:
 class{"filebeat":
   processors => {
     "drop_fields" => {
-      "params" => {"fields" => ["input_type", "offset"]}
+      "fields" => ["input_type", "offset"],
     },
   },
 }
