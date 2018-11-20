@@ -6,6 +6,9 @@ filebeat.publish_async: <%= @filebeat_config['filebeat']['publish_async'] %>
 filebeat.idle_timeout: <%= @filebeat_config['filebeat']['idle_timeout'] %>
 <% end -%>
 filebeat.registry_file: <%= @filebeat_config['filebeat']['registry_file'] %>
+<%- if @filebeat_config['registry_flush'] != nil -%>
+filebeat.registry_flush: <%= @filebeat_config['registry_flush'] %>
+<%- end -%>
 filebeat.config_dir: <%= @filebeat_config['filebeat']['config_dir'] %>
 filebeat.shutdown_timeout: <%= @filebeat_config['filebeat']['shutdown_timeout'] %>
 

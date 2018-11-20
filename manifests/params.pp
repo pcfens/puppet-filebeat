@@ -87,6 +87,7 @@ class filebeat::params {
         }
       }
       $url_arch        = undef
+      $registry_flush  = undef
     }
 
     'FreeBSD': {
@@ -102,6 +103,7 @@ class filebeat::params {
       $service_provider  = undef
       $install_dir       = undef
       $url_arch          = undef
+      $registry_flush    = undef
     }
 
     'OpenBSD': {
@@ -117,6 +119,7 @@ class filebeat::params {
       $service_provider  = undef
       $install_dir       = undef
       $url_arch          = undef
+      $registry_flush    = undef
     }
 
     'Windows' : {
@@ -136,6 +139,7 @@ class filebeat::params {
         'x64'   => 'x86_64',
         default => fail("${::architecture} is not supported by filebeat."),
       }
+      $registry_flush    = undef
     }
 
     default : {

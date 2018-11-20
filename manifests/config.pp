@@ -16,6 +16,7 @@ class filebeat::config {
       'fields_under_root' => $filebeat::fields_under_root,
       'filebeat'          => {
         'registry_file'      => $filebeat::registry_file,
+        'registry_flush'     => $filebeat::registry_flush,
         'config.prospectors' => {
           'enabled' => true,
           'path'    => "${filebeat::config_dir}/*.yml",

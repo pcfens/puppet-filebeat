@@ -23,6 +23,7 @@
 # @param idle_timeout [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 # @param publish_async [Boolean] If set to true filebeat will publish while preparing the next batch of lines to send (defualt: false)
 # @param registry_file [String] The registry file used to store positions, absolute or relative to working directory (default .filebeat)
+# @param registry_flush [String] The timeout value that controls when registry entries are written to disk (default: 0s)
 # @param config_dir [String] The directory where prospectors should be defined (default: /etc/filebeat/conf.d)
 # @param config_dir_mode [String] The unix permissions mode set on the configuration directory (default: 0755)
 # @param config_file_mode [String] The unix permissions mode set on configuration files (default: 0644)
@@ -61,6 +62,7 @@ class filebeat (
   String  $idle_timeout                                               = $filebeat::params::idle_timeout,
   Boolean $publish_async                                              = $filebeat::params::publish_async,
   String  $registry_file                                              = $filebeat::params::registry_file,
+  String  $registry_flush                                             = $filebeat::params::registry_flush,
   String  $config_file                                                = $filebeat::params::config_file,
   Optional[String] $config_file_owner                                 = $filebeat::params::config_file_owner,
   Optional[String] $config_file_group                                 = $filebeat::params::config_file_group,
