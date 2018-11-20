@@ -4,6 +4,10 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.2...HEAD)
 
+- Add a harvester limit [\#196](https://github.com/pcfens/puppet-filebeat/pull/196)
+- Fix documentaion error [\#198](https://github.com/pcfens/puppet-filebeat/issues/198)
+- Fix Puppet 4.10 undefined method error [\#199](https://github.com/pcfens/puppet-filebeat/pull/199)
+
 ## [v3.3.2](https://github.com/pcfens/puppet-filebeat/tree/v3.3.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.1...v3.3.2)
 
