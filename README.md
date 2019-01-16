@@ -232,7 +232,7 @@ Installs and configures filebeat.
 - `service_provider`: [String] The provider parameter on the filebeat service (default: on RedHat based systems use redhat, otherwise undefined)
 - `spool_size`: [Integer] How large the spool should grow before being flushed to the network (default: 2048)
 - `idle_timeout`: [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
-- `publish_async`: [Boolean] If set to true filebeat will publish while preparing the next batch of lines to transmit (defualt: false)
+- `publish_async`: [Boolean] If set to true filebeat will publish while preparing the next batch of lines to transmit (default: false)
 - `registry_file`: [String] The registry file used to store positions, must be an absolute path (default is OS dependent - see params.pp)
 - `config_file`: [String] Where the configuration file managed by this module should be placed. If you think
   you might want to use this, read the [limitations](#using-config_file) first. Defaults to the location
