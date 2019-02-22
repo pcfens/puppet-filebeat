@@ -20,6 +20,10 @@ class filebeat::config {
           'enabled' => true,
           'path'    => "${filebeat::config_dir}/*.yml",
         },
+        'config.modules' => {
+          'enabled' => $filebeat::enable_conf_modules,
+          'path'    => "${filebeat::modules_dir}/*.yml",
+        },
         'shutdown_timeout'   => $filebeat::shutdown_timeout,
         'modules'           => $filebeat::modules,
       },
