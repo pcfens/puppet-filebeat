@@ -245,6 +245,8 @@ Installs and configures filebeat.
 - `config_file_owner`: [String] The owner of the configuration files, including prospectors (default: root). Linux only.
 - `config_file_group`: [String] The group of the configuration files, including prospectors (default: root). Linux only.
 - `purge_conf_dir`: [Boolean] Should files in the prospector configuration directory not managed by puppet be automatically purged
+- `enable_conf_modules`: [Boolean] Should filebeat.config.modules be enabled
+- `modules_dir`: [String] The directory where module configurations should be defined (default: /etc/filebeat/modules.d)
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 - `logging`: [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
