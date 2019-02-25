@@ -2,7 +2,10 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.3...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.4.0...HEAD)
+
+## [v3.4.0](https://github.com/pcfens/puppet-filebeat/tree/v3.4.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.3...v3.4.0)
 
 - Add filebeat.config.modules section [\#204](https://github.com/pcfens/puppet-filebeat/pull/204)
 - Fix filebeat::prospector::fields_under_root [\#205](https://github.com/pcfens/puppet-filebeat/pull/205)
