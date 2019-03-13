@@ -17,6 +17,7 @@ class filebeat::params {
   $config_file_mode      = '0644'
   $config_dir_mode       = '0755'
   $purge_conf_dir        = true
+  $enable_conf_modules   = false
   $fields                = {}
   $fields_under_root     = false
   $outputs               = {}
@@ -74,6 +75,7 @@ class filebeat::params {
       $config_file_group = 'root'
       $config_dir_owner  = 'root'
       $config_dir_group  = 'root'
+      $modules_dir        = '/etc/filebeat/modules.d'
       $registry_file     = '/var/lib/filebeat/registry'
       # These parameters are ignored if/until tarball installs are supported in Linux
       $tmp_dir         = '/tmp'
@@ -98,6 +100,7 @@ class filebeat::params {
       $config_file_group = 'wheel'
       $config_dir_owner  = 'root'
       $config_dir_group  = 'wheel'
+      $modules_dir       = '/usr/local/etc/filebeat.modules.d'
       $registry_file     = '/var/lib/filebeat/registry'
       $tmp_dir           = '/tmp'
       $service_provider  = undef
@@ -114,6 +117,7 @@ class filebeat::params {
       $config_file_group = 'wheel'
       $config_dir_owner  = 'root'
       $config_dir_group  = 'wheel'
+      $modules_dir        = '/etc/filebeat/modules.d'
       $registry_file     = '/var/db/filebeat/.filebeat'
       $tmp_dir           = '/tmp'
       $service_provider  = undef
@@ -130,6 +134,7 @@ class filebeat::params {
       $config_dir_group = undef
       $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
       $config_dir       = 'C:/Program Files/Filebeat/conf.d'
+      $modules_dir      = 'C:/Program Files/Filebeat/modules.d'
       $registry_file    = 'C:/ProgramData/filebeat/registry'
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'

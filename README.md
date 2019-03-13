@@ -232,7 +232,7 @@ Installs and configures filebeat.
 - `service_provider`: [String] The provider parameter on the filebeat service (default: on RedHat based systems use redhat, otherwise undefined)
 - `spool_size`: [Integer] How large the spool should grow before being flushed to the network (default: 2048)
 - `idle_timeout`: [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
-- `publish_async`: [Boolean] If set to true filebeat will publish while preparing the next batch of lines to transmit (defualt: false)
+- `publish_async`: [Boolean] If set to true filebeat will publish while preparing the next batch of lines to transmit (default: false)
 - `registry_file`: [String] The registry file used to store positions, must be an absolute path (default is OS dependent - see params.pp)
 - `config_file`: [String] Where the configuration file managed by this module should be placed. If you think
   you might want to use this, read the [limitations](#using-config_file) first. Defaults to the location
@@ -245,6 +245,8 @@ Installs and configures filebeat.
 - `config_file_owner`: [String] The owner of the configuration files, including prospectors (default: root). Linux only.
 - `config_file_group`: [String] The group of the configuration files, including prospectors (default: root). Linux only.
 - `purge_conf_dir`: [Boolean] Should files in the prospector configuration directory not managed by puppet be automatically purged
+- `enable_conf_modules`: [Boolean] Should filebeat.config.modules be enabled
+- `modules_dir`: [String] The directory where module configurations should be defined (default: /etc/filebeat/modules.d)
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 - `logging`: [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
