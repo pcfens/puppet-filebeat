@@ -5,6 +5,7 @@ Changelog
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.4.0...HEAD)
 
 - Allow strings and integers for `clean_inactive` [\#208](https://github.com/pcfens/puppet-filebeat/issues/208)
+- Support filebeat.registry_flush [\#207](https://github.com/pcfens/puppet-filebeat/pull/207)
 
 ## [v3.4.0](https://github.com/pcfens/puppet-filebeat/tree/v3.4.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.3...v3.4.0)
