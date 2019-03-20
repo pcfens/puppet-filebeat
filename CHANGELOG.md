@@ -4,6 +4,8 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.4.0...HEAD)
 
+- Allow strings and integers for `clean_inactive` [\#208](https://github.com/pcfens/puppet-filebeat/issues/208)
+
 ## [v3.4.0](https://github.com/pcfens/puppet-filebeat/tree/v3.4.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.3...v3.4.0)
 
