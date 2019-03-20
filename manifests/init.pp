@@ -62,7 +62,7 @@ class filebeat (
   String  $idle_timeout                                               = $filebeat::params::idle_timeout,
   Boolean $publish_async                                              = $filebeat::params::publish_async,
   String  $registry_file                                              = $filebeat::params::registry_file,
-  String  $registry_flush                                             = $filebeat::params::registry_flush,
+  Optional[String] $registry_flush                                    = $filebeat::params::registry_flush,
   String  $config_file                                                = $filebeat::params::config_file,
   Optional[String] $config_file_owner                                 = $filebeat::params::config_file_owner,
   Optional[String] $config_file_group                                 = $filebeat::params::config_file_group,
