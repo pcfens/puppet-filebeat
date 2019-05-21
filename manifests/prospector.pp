@@ -80,7 +80,7 @@ define filebeat::prospector (
         content      => template("${module_name}/${prospector_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
-        before       => File['filebeat.yml'],
+        require      => File['filebeat.yml'],
       }
     }
 
@@ -98,7 +98,7 @@ define filebeat::prospector (
         content      => template("${module_name}/${prospector_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
-        before       => File['filebeat.yml'],
+        require      => File['filebeat.yml'],
       }
     }
 
@@ -120,7 +120,7 @@ define filebeat::prospector (
         content      => template("${module_name}/${prospector_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
-        before       => File['filebeat.yml'],
+        require      => File['filebeat.yml'],
       }
     }
 
