@@ -83,8 +83,6 @@ class filebeat::config {
     $skip_validation = false
   }
 
-  Filebeat::Prospector <| |> -> File['filebeat.yml']
-
   case $::kernel {
     'Linux'   : {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
