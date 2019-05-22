@@ -6,7 +6,7 @@
 #
 # @example
 #   filebeat::prospector { 'namevar': }
-define filebeat::prospector (
+define filebeat::input (
   Enum['absent', 'present'] $ensure        = present,
   Array[String] $paths                     = [],
   Array[String] $exclude_files             = [],

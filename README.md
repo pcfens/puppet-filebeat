@@ -36,9 +36,12 @@ The `filebeat` module installs and configures the [filebeat log shipper](https:/
 By default `filebeat` adds a software repository to your system, and installs filebeat along
 with required configurations.
 
-### Upgrading to Filebeat 6.x
+### Upgrading to Filebeat 7.x
 
-To upgrade to Filebeat 6.x, simply set `$filebeat::major_version` to `6` and `$filebeat::package_ensure` to `latest` (or whichever version of 6.x you want, just not present).
+To upgrade to Filebeat 7.x, simply set `$filebeat::major_version` to `6` and `$filebeat::package_ensure` to `latest` (or whichever version of 7.x you want, just not present).
+
+You'll also need to change instances of `filebeat::prospector` to `filebeat::input` when upgrading to version 4.x of
+this module.
 
 
 ### Setup Requirements

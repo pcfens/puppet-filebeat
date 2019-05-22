@@ -22,12 +22,11 @@
 # @param spool_size [Integer] How large the spool should grow before being flushed to the network (default: 2048)
 # @param idle_timeout [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 # @param publish_async [Boolean] If set to true filebeat will publish while preparing the next batch of lines to send (defualt: false)
-# @param registry_file [String] The registry file used to store positions, absolute or relative to working directory (default .filebeat)
-# @param registry_flush [String] The timeout value that controls when registry entries are written to disk (default: 0s)
 # @param config_dir [String] The directory where inputs should be defined (default: /etc/filebeat/conf.d)
 # @param config_dir_mode [String] The unix permissions mode set on the configuration directory (default: 0755)
 # @param config_file_mode [String] The unix permissions mode set on configuration files (default: 0644)
 # @param purge_conf_dir [Boolean] Should files in the input configuration directory not managed by puppet be automatically purged
+# @param http [Hash] A hash of the http section of configuration
 # @param outputs [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 # @param shipper [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 # @param logging [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
@@ -61,8 +60,6 @@ class filebeat (
   Integer $spool_size                                                 = $filebeat::params::spool_size,
   String  $idle_timeout                                               = $filebeat::params::idle_timeout,
   Boolean $publish_async                                              = $filebeat::params::publish_async,
-  String  $registry_file                                              = $filebeat::params::registry_file,
-  Optional[String] $registry_flush                                    = $filebeat::params::registry_flush,
   String  $config_file                                                = $filebeat::params::config_file,
   Optional[String] $config_file_owner                                 = $filebeat::params::config_file_owner,
   Optional[String] $config_file_group                                 = $filebeat::params::config_file_group,
@@ -74,6 +71,7 @@ class filebeat (
   Boolean $purge_conf_dir                                             = $filebeat::params::purge_conf_dir,
   String  $modules_dir                                                = $filebeat::params::modules_dir,
   Boolean $enable_conf_modules                                        = $filebeat::params::enable_conf_modules,
+  Hash    $http                                                       = $filebeat::params::http,
   Hash    $outputs                                                    = $filebeat::params::outputs,
   Hash    $shipper                                                    = $filebeat::params::shipper,
   Hash    $logging                                                    = $filebeat::params::logging,

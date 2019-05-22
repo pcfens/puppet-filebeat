@@ -2,10 +2,15 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.4.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.0...HEAD)
 
-- Allow strings and integers for `clean_inactive` [\#208](https://github.com/pcfens/puppet-filebeat/issues/208)
-- Support filebeat.registry_flush [\#207](https://github.com/pcfens/puppet-filebeat/pull/207)
+## [v4.0.0](https://github.com/pcfens/puppet-filebeat/tree/v4.0.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.4.0...v4.0.0)
+
+- Switch from `filebeat::prospector` to `filebeat::input` to reflect the changes
+  in the upstream filebeat configuration.
+- Add support for Filebeat 7
+- Remove support for `registry_file` and `registry_flush` settings (removed in 7.x)
 
 ## [v3.4.0](https://github.com/pcfens/puppet-filebeat/tree/v3.4.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.3...v3.4.0)

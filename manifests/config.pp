@@ -15,8 +15,6 @@ class filebeat::config {
       'fields'            => $filebeat::fields,
       'fields_under_root' => $filebeat::fields_under_root,
       'filebeat'          => {
-        'registry_file'      => $filebeat::registry_file,
-        'registry_flush'     => $filebeat::registry_flush,
         'config.inputs' => {
           'enabled' => true,
           'path'    => "${filebeat::config_dir}/*.yml",
@@ -28,6 +26,7 @@ class filebeat::config {
         'shutdown_timeout'   => $filebeat::shutdown_timeout,
         'modules'           => $filebeat::modules,
       },
+      'http'              => $filebeat::http,
       'output'            => $filebeat::outputs,
       'shipper'           => $filebeat::shipper,
       'logging'           => $filebeat::logging,
