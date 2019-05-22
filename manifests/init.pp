@@ -38,7 +38,6 @@
 # @param shutdown_timeout [String] How long filebeat waits on shutdown for the publisher to finish sending events
 # @param beat_name [String] The name of the beat shipper (default: hostname)
 # @param tags [Array] A list of tags that will be included with each published transaction
-# @param queue_size [String] The internal queue size for events in the pipeline
 # @param max_procs [Integer] The maximum number of CPUs that can be simultaneously used
 # @param fields [Hash] Optional fields that should be added to each event output
 # @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
@@ -83,7 +82,6 @@ class filebeat (
   String  $shutdown_timeout                                           = $filebeat::params::shutdown_timeout,
   String  $beat_name                                                  = $filebeat::params::beat_name,
   Array   $tags                                                       = $filebeat::params::tags,
-  Integer $queue_size                                                 = $filebeat::params::queue_size,
   Optional[Integer] $max_procs                                        = $filebeat::params::max_procs,
   Hash $fields                                                        = $filebeat::params::fields,
   Boolean $fields_under_root                                          = $filebeat::params::fields_under_root,

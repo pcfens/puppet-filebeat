@@ -12,7 +12,6 @@ class filebeat::params {
   $shutdown_timeout      = '0'
   $beat_name             = $::fqdn
   $tags                  = []
-  $queue_size            = 1000
   $max_procs             = undef
   $config_file_mode      = '0644'
   $config_dir_mode       = '0755'

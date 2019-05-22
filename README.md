@@ -236,8 +236,6 @@ Installs and configures filebeat.
 - `spool_size`: [Integer] How large the spool should grow before being flushed to the network (default: 2048)
 - `idle_timeout`: [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 - `publish_async`: [Boolean] If set to true filebeat will publish while preparing the next batch of lines to transmit (default: false)
-- `registry_flush`: [String] The timeout value that controls when registry entries are written to disk (default: 0s)
-- `registry_file`: [String] The registry file used to store positions, must be an absolute path (default is OS dependent - see params.pp)
 - `config_file`: [String] Where the configuration file managed by this module should be placed. If you think
   you might want to use this, read the [limitations](#using-config_file) first. Defaults to the location
   that filebeat expects for your operating system.
@@ -262,7 +260,6 @@ Installs and configures filebeat.
 - `shutdown_timeout`: [String] How long filebeat waits on shutdown for the publisher to finish sending events
 - `beat_name`: [String] The name of the beat shipper (default: hostname)
 - `tags`: [Array] A list of tags that will be included with each published transaction
-- `queue_size`: [String] The internal queue size for events in the pipeline
 - `max_procs`: [Number] The maximum number of CPUs that can be simultaneously used
 - `fields`: [Hash] Optional fields that should be added to each event output
 - `fields_under_root`: [Boolean] If set to true, custom fields are stored in the top level instead of under fields
@@ -362,15 +359,6 @@ is used to store the downloaded installer only.
 By default, a generic, open ended template is used that simply converts your configuration into
 a hash that is produced as YAML on the system. To use a template that is more strict, but possibly
 incomplete, set `conf_template` to `filebeat/filebeat.yml.erb`.
-
-### Registry Path
-
-The default registry file in this module doesn't match the filebeat default, but moving the file
-while the filbeat service is running can cause data duplication or data loss. If you're installing
-filebeat for the first time you should consider setting `registry_file` to match the
-[default](https://www.elastic.co/guide/en/beats/filebeat/current/configuration-global-options.html#_registry_file).
-
-Be sure to include a path or the file will be put at the root of your filesystem.
 
 ### Debian Systems
 

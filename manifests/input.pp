@@ -5,7 +5,7 @@
 # @summary A short summary of the purpose of this defined type.
 #
 # @example
-#   filebeat::prospector { 'namevar': }
+#   filebeat::input { 'namevar': }
 define filebeat::input (
   Enum['absent', 'present'] $ensure        = present,
   Array[String] $paths                     = [],

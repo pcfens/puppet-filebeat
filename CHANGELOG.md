@@ -11,6 +11,7 @@ Changelog
   in the upstream filebeat configuration.
 - Add support for Filebeat 7
 - Remove support for `registry_file` and `registry_flush` settings (removed in 7.x)
+- Remove `queue_size` parameter
 
 ## [v3.4.0](https://github.com/pcfens/puppet-filebeat/tree/v3.4.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.3.3...v3.4.0)
