@@ -4,7 +4,7 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.0...HEAD)
 
-## [v4.0.0](https://github.com/pcfens/puppet-filebeat/tree/v4.0.0)
+## [v4.0.0](https://github.com/pcfens/puppet-filebeat/tree/v4.0.0) (unreleased)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.4.0...v4.0.0)
 
 - Switch from `filebeat::prospector` to `filebeat::input` to reflect the changes
