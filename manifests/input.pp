@@ -53,8 +53,8 @@ define filebeat::input (
     default => 'prospector.yml.erb',
   }
 
-  if $::filebeat_version {
-    $skip_validation = versioncmp($::filebeat_version, $filebeat::major_version) ? {
+  if 'filebeat_version' in $facts {
+    $skip_validation = versioncmp($facts['filebeat_version'], $filebeat::major_version) ? {
       -1      => true,
       default => false,
     }
@@ -108,7 +108,7 @@ define filebeat::input (
 
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
-        default => $::filebeat_version ? {
+        default => $facts['filebeat_version'] ? {
           '5'     => "\"${filebeat_path}\" -N -configtest -c \"%\"",
           default => "\"${filebeat_path}\" -c \"${filebeat::config_file}\" test config",
         },

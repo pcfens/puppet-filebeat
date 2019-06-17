@@ -93,6 +93,10 @@ class filebeat (
   Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]] $proxy_address = undef, # lint:ignore:140chars
   Stdlib::Absolutepath $filebeat_path                                 = $filebeat::params::filebeat_path,
   Optional[Hash] $xpack                                               = $filebeat::params::xpack,
+
+  Integer $queue_size                                                 = 4096,
+  String $registry_file                                               = 'filebeat.yml',
+
 ) inherits filebeat::params {
 
   include ::stdlib

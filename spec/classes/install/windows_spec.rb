@@ -5,12 +5,12 @@ describe 'filebeat::install::windows' do
     'include ::filebeat'
   end
 
-  on_supported_os(facterversion: '2.4').each do |os, os_facts|
+  on_supported_os(facterversion: '2.4').each do |os, facts|
     context "on #{os}" do
-      let(:facts) { os_facts }
+      let(:facts) { facts }
 
-      case os_facts[:kernel]
-      when 'windows'
+      case facts[:kernel]
+      when /[Ww]indows/
         # it { is_expected.to compile }
         it { is_expected.to contain_file('C:/Program Files').with_ensure('directory') }
         it {
@@ -50,7 +50,6 @@ describe 'filebeat::install::windows' do
             ensure: 'absent',
           )
         }
-
       else
         it { is_expected.not_to compile }
       end
