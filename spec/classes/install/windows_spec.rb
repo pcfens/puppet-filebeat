@@ -10,7 +10,7 @@ describe 'filebeat::install::windows' do
       let(:facts) { facts }
 
       case facts[:kernel]
-      when /[Ww]indows/
+      when 'windows'
         # it { is_expected.to compile }
         it { is_expected.to contain_file('C:/Program Files').with_ensure('directory') }
         it {
