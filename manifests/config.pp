@@ -73,7 +73,7 @@ class filebeat::config {
     }
   }
 
-  if 'filebeat_version' in $facts {
+  if 'filebeat_version' in $facts and $facts['filebeat_version'] != false {
     $skip_validation = versioncmp($facts['filebeat_version'], $filebeat::major_version) ? {
       -1      => true,
       default => false,
