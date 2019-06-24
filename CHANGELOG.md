@@ -4,6 +4,13 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.0...HEAD)
 
+## [v4.0.1](https://github.com/pcfens/puppet-filebeat/tree/v4.0.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.0...v4.0.1)
+
+- Fix unit tests [\#216](https://github.com/pcfens/puppet-filebeat/pull/213)
+- Fix fresh install regression [\#217](https://github.com/pcfens/puppet-filebeat/pull/216)
+
+
 ## [v4.0.0](https://github.com/pcfens/puppet-filebeat/tree/v4.0.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v3.4.0...v4.0.0)
 
