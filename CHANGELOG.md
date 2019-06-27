@@ -4,6 +4,11 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.0...HEAD)
 
+## [v4.0.2](https://github.com/pcfens/puppet-filebeat/tree/v4.0.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.1...v4.0.2)
+
+- Clear the yum cache whenever we modify the yum repo config [\#217](https://github.com/pcfens/puppet-filebeat/issues/217)
+
 ## [v4.0.1](https://github.com/pcfens/puppet-filebeat/tree/v4.0.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.0...v4.0.1)
 
