@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.3...HEAD)
+
+## [v4.0.3](https://github.com/pcfens/puppet-filebeat/tree/v4.0.3)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.2...v4.0.3)
+
+- Fix `filebeat_version` fact on Windows [\#218](https://github.com/pcfens/puppet-filebeat/pull/218)
 
 ## [v4.0.2](https://github.com/pcfens/puppet-filebeat/tree/v4.0.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.1...v4.0.2)
