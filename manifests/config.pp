@@ -185,7 +185,10 @@ class filebeat::config {
 
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
-        default => "\"${filebeat_path}\" -N -configtest -c \"%\"",
+        default => $major_version ? {
+          '7'     => "\"${filebeat_path}\" test config -c \"%\"",
+          default => "\"${filebeat_path}\" -N -configtest -c \"%\"",
+        }
       }
 
       file {'filebeat.yml':
