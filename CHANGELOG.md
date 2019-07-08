@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.3...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.4...HEAD)
+
+## [v4.0.4](https://github.com/pcfens/puppet-filebeat/tree/v4.0.4)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.3...v4.0.4)
+
+- Validate configuration in Windows [\#219](https://github.com/pcfens/puppet-filebeat/pull/219)
 
 ## [v4.0.3](https://github.com/pcfens/puppet-filebeat/tree/v4.0.3)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.2...v4.0.3)
