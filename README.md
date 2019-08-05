@@ -38,7 +38,7 @@ with required configurations.
 
 ### Upgrading to Filebeat 7.x
 
-To upgrade to Filebeat 7.x, simply set `$filebeat::major_version` to `6` and `$filebeat::package_ensure` to `latest` (or whichever version of 7.x you want, just not present).
+To upgrade to Filebeat 7.x, simply set `$filebeat::major_version` to `7` and `$filebeat::package_ensure` to `latest` (or whichever version of 7.x you want, just not present).
 
 You'll also need to change instances of `filebeat::prospector` to `filebeat::input` when upgrading to version 4.x of
 this module.
