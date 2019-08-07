@@ -2,7 +2,14 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.4...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.5...HEAD)
+
+## [v4.0.5](https://github.com/pcfens/puppet-filebeat/tree/v4.0.5)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.4...v4.0.5)
+
+- Update metadata for apt and stdlib modules [\#220](https://github.com/pcfens/puppet-filebeat/pull/220)
+- Fix README typo [\#221](https://github.com/pcfens/puppet-filebeat/pull/221)
+
 
 ## [v4.0.4](https://github.com/pcfens/puppet-filebeat/tree/v4.0.4)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.3...v4.0.4)
