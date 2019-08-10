@@ -407,11 +407,13 @@ class {'filebeat':
     },
   systemd_beat_log_opts_override => "",
 }
+```
 
-this will only work on systems with puppet version 6.1+. on systems with puppet version < 6.1 you will need to `systemctl daemon-reload`. This can be achived by using the [camptocamp-systemd](https://forge.puppet.com/camptocamp/systemd)
+this will only work on systems with puppet version 6.1+. On systems with puppet version < 6.1 you will need to `systemctl daemon-reload`. This can be achived by using the [camptocamp-systemd](https://forge.puppet.com/camptocamp/systemd)
 
 ```puppet
 include systemd::systemctl::daemon_reload
+
 class {'filebeat':
   logging => {
 ...
