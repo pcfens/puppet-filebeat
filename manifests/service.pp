@@ -10,11 +10,19 @@ class filebeat::service {
     provider => $filebeat::service_provider,
   }
 
-  $major_version = $filebeat::major_version
+  $major_version                  = $filebeat::major_version
+  $systemd_beat_log_opts_override = $filebeat::systemd_beat_log_opts_override
 
-  if versioncmp($major_version, '7') >= 0 {
+  #make sure puppet client version 6.1+ with filebeat version 7+, running on systemd
+  if ( versioncmp( $major_version, '7'   ) >= 0 and
+      versioncmp( $::clientversion, '6.1' ) >= 0 and
+      $::service_provider == 'systemd' ) {
 
-    $logging = $filebeat::logging
+    unless $systemd_beat_log_opts_override == undef {
+      $ensure_overide = 'present'
+    } else {
+      $ensure_overide = 'absent'
+    }
 
     ensure_resource('file',
       $filebeat::systemd_drop_in_dir,
@@ -26,8 +34,8 @@ class filebeat::service {
     ensure_resource('file',
       "${filebeat::systemd_drop_in_dir}/logging.conf",
       {
-        ensure  => 'present',
-        content => template($filebeat::systemd_log_opt_template),
+        ensure  => $ensure_overide,
+        content => template($filebeat::systemd_beat_log_opts_template),
         require => File[$filebeat::systemd_drop_in_dir],
         notify  => Service['filebeat'],
       }

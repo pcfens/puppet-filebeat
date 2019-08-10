@@ -252,6 +252,7 @@ Installs and configures filebeat.
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 - `logging`: [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
+- `systemd_beat_log_opts_override`: [String] Will overide the default `BEAT_LOG_OPTS=-e`. Required if using `logging` hash on systems running with systemd. required: Puppet 6.1+, Filebeat 7+,
 - `modules`: [Array] Will be converted to YAML to create the optional modules section of the filebeat config (see documentation)
 - `conf_template`: [String] The configuration template to use to generate the main filebeat.yml config file.
 - `download_url`: [String] The URL of the zip file that should be downloaded to install filebeat (windows only)
@@ -382,6 +383,43 @@ file { '/etc/filebeat/filebeat.yml':
 }
 ```
 to ensure that services are managed like you might expect.
+
+### Logging on systems with Systemd and with version filebeat 7.0+ installed
+With filebeat version 7+ running on systems with systemd, the filebeat systemd service file contains a default that will ignore the logging hash parameter
+
+```
+Environment="BEAT_LOG_OPTS=-e`
+```
+to overide this default, you will need to set the systemd_beat_log_opts_override parameter to empty string
+
+example:
+```puppet
+class {'filebeat':
+  logging => {
+    'level'     => 'debug',
+    'to_syslog' => false,
+    'to_files'  => true,
+    'files'     => {
+      'path'        => '/var/log/filebeat',
+      'name'        => 'filebeat',
+      'keepfiles'   => '7',
+      'permissions' => '0644'
+    },
+  systemd_beat_log_opts_override => "",
+}
+
+this will only work on systems with puppet version 6.1+. on systems with puppet version < 6.1 you will need to `systemctl daemon-reload`. This can be achived by using the [camptocamp-systemd](https://forge.puppet.com/camptocamp/systemd)
+
+```puppet
+include systemd::systemctl::daemon_reload
+class {'filebeat':
+  logging => {
+...
+    },
+  systemd_beat_log_opts_override => "",
+  notify  => Class['systemd::systemctl::daemon_reload'],
+}
+```
 
 ## Development
 

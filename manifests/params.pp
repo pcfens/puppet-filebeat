@@ -31,7 +31,7 @@ class filebeat::params {
   $disable_config_test      = false
   $xpack                    = undef
   $systemd_drop_in_dir      = '/etc/systemd/system/filebeat.service.d'
-  $systemd_log_opt_template = "${module_name}/systemd/logging.conf.erb"
+  $systemd_beat_log_opts_template = "${module_name}/systemd/logging.conf.erb"
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {

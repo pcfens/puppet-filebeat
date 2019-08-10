@@ -97,7 +97,8 @@ class filebeat (
   Integer $queue_size                                                 = 4096,
   String $registry_file                                               = 'filebeat.yml',
 
-  String $systemd_log_opt_template                                    = $filebeat::params::systemd_log_opt_template,
+  Optional[String] $systemd_beat_log_opts_override                    = undef,
+  String $systemd_beat_log_opts_template                              = $filebeat::params::systemd_beat_log_opts_template,
   String $systemd_drop_in_dir                                         = $filebeat::params::systemd_drop_in_dir,
 
 ) inherits filebeat::params {

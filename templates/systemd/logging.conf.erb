@@ -1,2 +1,2 @@
 [Service]
-Environment="BEAT_LOG_OPTS=<%= '-e' if @logging.empty? %>"
+Environment="BEAT_LOG_OPTS=<%= @systemd_beat_log_opts_override %>"
