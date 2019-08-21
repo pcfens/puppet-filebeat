@@ -99,7 +99,7 @@ class filebeat (
 
   Optional[String] $systemd_beat_log_opts_override                    = undef,
   String $systemd_beat_log_opts_template                              = $filebeat::params::systemd_beat_log_opts_template,
-  String $systemd_drop_in_dir                                         = $filebeat::params::systemd_drop_in_dir,
+  String $systemd_override_dir                                        = $filebeat::params::systemd_override_dir,
 
 ) inherits filebeat::params {
 
