@@ -15,31 +15,35 @@ class filebeat::service {
 
   #make sure puppet client version 6.1+ with filebeat version 7+, running on systemd
   if ( versioncmp( $major_version, '7'   ) >= 0 and
-      versioncmp( $::clientversion, '6.1' ) >= 0 and
-      $::service_provider == 'systemd' ) {
+    $::service_provider == 'systemd' ) {
 
-    unless $systemd_beat_log_opts_override == undef {
-      $ensure_overide = 'present'
-    } else {
-      $ensure_overide = 'absent'
-    }
+    if ( versioncmp( $::clientversion, '6.1' ) >= 0 ) {
 
-    ensure_resource('file',
-      $filebeat::systemd_drop_in_dir,
-      {
-        ensure => 'directory',
+      unless $systemd_beat_log_opts_override == undef {
+        $ensure_overide = 'present'
+      } else {
+        $ensure_overide = 'absent'
       }
-    )
 
-    ensure_resource('file',
-      "${filebeat::systemd_drop_in_dir}/logging.conf",
-      {
+      ensure_resource('file',
+        $filebeat::systemd_override_dir,
+        {
+          ensure => 'directory',
+        }
+      )
+
+      file { "${filebeat::systemd_override_dir}/logging.conf":
         ensure  => $ensure_overide,
         content => template($filebeat::systemd_beat_log_opts_template),
-        require => File[$filebeat::systemd_drop_in_dir],
+        require => File[$filebeat::systemd_override_dir],
         notify  => Service['filebeat'],
       }
-    )
 
+    } else {
+      unless defined('systemd') {
+        warning('You\'ve specified an $systemd_beat_log_opts_override varible on a system running puppet version < 6.1 and not declared "systemd" resource See README.md for more information') # lint:ignore:140chars
+      }
+    }
   }
+
 }
