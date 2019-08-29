@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.5...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.0...HEAD)
+
+## [v4.1.0](https://github.com/pcfens/puppet-filebeat/tree/v4.1.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.5...v4.1.0)
+
+- Allow for override of the default systemd logging options [#\223](https://github.com/pcfens/puppet-filebeat/pull/223)
 
 ## [v4.0.5](https://github.com/pcfens/puppet-filebeat/tree/v4.0.5)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.4...v4.0.5)
