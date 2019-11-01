@@ -342,6 +342,7 @@ to fully understand what these parameters do.
   - `exclude_lines`: [Array] A list of regular expressions to match the files that you want to exclude.
     Ignored if empty (default: [])
   - `max_bytes`: [Integer] The maximum number of bytes that a single log message can have (default: 10485760)
+  - `tags`: [Array] A list of tags to send along with the log data.
   - `json`: [Hash] Options that control how filebeat handles decoding of log messages in JSON format
     [See above](#json-logs). (default: {})
   - `multiline`: [Hash] Options that control how Filebeat handles log messages that span multiple lines.
