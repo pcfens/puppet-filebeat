@@ -2,7 +2,11 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.1...HEAD)
+
+## [v4.1.1](https://github.com/pcfens/puppet-filebeat/tree/v4.1.1)
+- Support old versions of filebeat for a version fact only [#\227](https://github.com/pcfens/puppet-filebeat/pull/227)
+- Fix the processor input data type [#\228](https://github.com/pcfens/puppet-filebeat/issues/228)
 
 ## [v4.1.0](https://github.com/pcfens/puppet-filebeat/tree/v4.1.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.5...v4.1.0)
