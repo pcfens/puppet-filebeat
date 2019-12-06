@@ -2,9 +2,16 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.1...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.2...HEAD)
+
+## [v4.1.2](https://github.com/pcfens/puppet-filebeat/tree/v4.1.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.1...v4.1.2)
+
+- Fix hardocded path to ym [#\229](https://github.com/pcfens/puppet-filebeat/pull/229)
 
 ## [v4.1.1](https://github.com/pcfens/puppet-filebeat/tree/v4.1.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.0...v4.1.1)
+
 - Support old versions of filebeat for a version fact only [#\227](https://github.com/pcfens/puppet-filebeat/pull/227)
 - Fix the processor input data type [#\228](https://github.com/pcfens/puppet-filebeat/issues/228)
 
