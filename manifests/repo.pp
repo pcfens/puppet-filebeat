@@ -44,7 +44,7 @@ class filebeat::repo {
       }
 
       exec { 'flush-yum-cache':
-        command     => '/bin/yum clean all',
+        command     => 'yum clean all',
         refreshonly => true,
         path        => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
       }
