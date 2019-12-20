@@ -1,11 +1,6 @@
 ---
 - type: <%= @input_type %>
-  <%- if @input_type != 'docker' -%>
-  paths:
-  <%- @paths.each do |log_path| -%>
-  - <%= log_path %>
-  <%- end -%>
-  <%- else -%>
+  <%- if @input_type == 'docker' -%>
   containers:
     ids:
     <%- @containers_ids.each do |id| -%>
@@ -15,7 +10,14 @@
     stream: <%= @containers_stream %>
   combine_partial: <%= @combine_partial %>
   cri.parse_flags: <%= @cri_parse_flags %>
-  <%- end %>
+  <%- elsif @input_type == 'syslog' -%>
+  protocol.<%= @syslog_protocol %>:
+    host: <%= @syslog_host %>
+  <%- else -%>
+  paths:
+  <%- @paths.each do |log_path| -%>
+  - <%= log_path %>
+  <%- end -%>
   <%- if @encoding -%>
   encoding: <%= @encoding %>
   <%- end -%>
@@ -196,3 +198,4 @@
   processors:
     <%- %><%= @processors.to_yaml.lines.drop(1).join.gsub(/^/, '  ') -%>
   <%- end -%>
+  <%- end %>

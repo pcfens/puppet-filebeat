@@ -311,15 +311,17 @@ to fully understand what these parameters do.
 
 **Parameters for `filebeat::input`**
   - `ensure`: The ensure parameter on the input configuration file. (default: present)
-  - `paths`: [Array] The paths, or blobs that should be handled by the input. (required only if input_type is not _docker_)
+  - `paths`: [Array] The paths, or blobs that should be handled by the input. (required if input_type is _log_)
   - `containers_ids`: [Array] If input_type is _docker_, the list of Docker container ids to read the logs from. (default: '*')
   - `containers_path`: [String] If input_type is _docker_, the path from where the logs should be read from. (default: /var/log/docker/containers)
   - `containers_stream`: [String] If input_type is _docker_, read from the specified stream only. (default: all)
   - `combine_partial`: [Boolean] If input_type is _docker_, enable partial messages joining. (default: false)
   - `cri_parse_flags`: [Boolean] If input_type is _docker_, enable CRI flags parsing from the log file. (default: false)
+  - `syslog_protocol`: [Enum tcp,udp] Syslog protocol (default: udp)
+  - `syslog_host`: [String] Host to listen for syslog messages (default: localhost:5140)
   - `exclude_files`: [Array] Files that match any regex in the list are excluded from filebeat (default: [])
   - `encoding`: [String] The file encoding. (default: plain)
-  - `input_type`: [String] log, docker or stdin - where filebeat reads the log from (default:log)
+  - `input_type`: [String] where filebeat reads the log from (default:log)
   - `fields`: [Hash] Optional fields to add information to the output (default: {})
   - `fields_under_root`: [Boolean] Should the `fields` parameter fields be stored at the top level of indexed documents.
   - `ignore_older`: [String] Files older than this field will be ignored by filebeat (default: ignore nothing)

@@ -14,6 +14,8 @@ define filebeat::input (
   String $containers_path                  = '/var/lib/docker/containers',
   String $containers_stream                = 'all',
   Boolean $combine_partial                 = false,
+  Enum['tcp', 'udp'] $syslog_protocol      = 'udp',
+  String $syslog_host                      = 'localhost:5140',
   Boolean $cri_parse_flags                 = false,
   String $encoding                         = 'plain',
   String $input_type                       = 'log',
