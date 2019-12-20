@@ -2,7 +2,14 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.2...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.2.0...HEAD)
+
+## [v4.2.0](https://github.com/pcfens/puppet-filebeat/tree/v4.2.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.2...v4.2.0)
+
+- Fix regression of processors type
+- Add support for syslog inputs [#\232](https://github.com/pcfens/puppet-filebeat/pull/233)
+- Upgrade PDK to 1.15.0
 
 ## [v4.1.2](https://github.com/pcfens/puppet-filebeat/tree/v4.1.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.1...v4.1.2)
