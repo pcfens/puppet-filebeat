@@ -1,2 +1,3 @@
 filebeat_version: undef
 concat_basedir: "/tmp"
+service_provider: systemd
