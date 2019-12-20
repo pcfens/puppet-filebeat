@@ -50,7 +50,7 @@ describe 'filebeat::input' do
         }
       end
 
-      if os_facts[:kernel] != 'windows'
+      if os_facts[:kernel] == 'Linux'
         it { is_expected.to compile }
 
         it {
