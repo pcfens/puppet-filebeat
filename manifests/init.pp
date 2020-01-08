@@ -47,6 +47,8 @@
 # @param inputs_merge [Boolean] Whether $inputs should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
 # @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
+# @param package_provider [String] Accept only exec or chocolatey for windows OS. Exec will download package on internet.
+# @param package_name [String] package name to install default to filebeat.
 class filebeat (
   String  $package_ensure                                             = $filebeat::params::package_ensure,
   Boolean $manage_repo                                                = $filebeat::params::manage_repo,
@@ -100,7 +102,8 @@ class filebeat (
   Optional[String] $systemd_beat_log_opts_override                    = undef,
   String $systemd_beat_log_opts_template                              = $filebeat::params::systemd_beat_log_opts_template,
   String $systemd_override_dir                                        = $filebeat::params::systemd_override_dir,
-
+  Variant[String, Enum['exec', 'chocolatey']] $package_provider       = $filebeat::params::package_provider,
+  Optional[String[1]] $package_name                                   = $filebeat::params::package_name,
 ) inherits filebeat::params {
 
   include ::stdlib

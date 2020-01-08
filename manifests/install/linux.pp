@@ -9,7 +9,7 @@ class filebeat::install::linux {
     fail('filebeat::install::linux shouldn\'t run on Windows')
   }
 
-  package {'filebeat':
+  package { $filebeat::package_name:
     ensure => $filebeat::package_ensure,
   }
 }

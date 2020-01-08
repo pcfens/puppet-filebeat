@@ -32,6 +32,9 @@ class filebeat::params {
   $xpack                    = undef
   $systemd_override_dir     = '/etc/systemd/system/filebeat.service.d'
   $systemd_beat_log_opts_template = "${module_name}/systemd/logging.conf.erb"
+  $package_provider           = 'exec'
+  $package_name               = 'filebeat'
+
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
@@ -40,7 +43,6 @@ class filebeat::params {
   #   $conf_template = "${module_name}/filebeat.yml.erb"
   # }
   #
-
   # Archlinux and OpenBSD have proper packages in the official repos
   # we shouldn't manage the repo on them
   case $facts['os']['family'] {
@@ -123,14 +125,21 @@ class filebeat::params {
     }
 
     'Windows' : {
-      $package_ensure   = '7.1.0'
+      if $package_provider == 'chocolatey' {
+        $package_ensure = '7.2.0'
+        $config_file    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\filebeat.yml'
+        $modules_dir    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\modules.d'
+        $config_dir     = 'C:\ProgramData\chocolatey\lib\filebeat\tools\conf.d'
+      } else {
+        $package_ensure   = '7.1.0'
+        $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
+        $modules_dir      = 'C:/Program Files/Filebeat/modules.d'
+        $config_dir       = 'C:/Program Files/Filebeat/conf.d'
+      }
       $config_file_owner = 'Administrator'
       $config_file_group = undef
       $config_dir_owner = 'Administrator'
       $config_dir_group = undef
-      $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
-      $config_dir       = 'C:/Program Files/Filebeat/conf.d'
-      $modules_dir      = 'C:/Program Files/Filebeat/modules.d'
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'
       $service_provider = undef
