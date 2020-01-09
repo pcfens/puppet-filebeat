@@ -16,6 +16,7 @@
     - [Inputs in hiera](#inputs-in-hiera)
     - [Usage on Windows](#usage-on-windows)
     - [Processors](#processors)
+    - [Index Lifecycle Management](#index-lifecycle-management)
 4. [Reference](#reference)
     - [Public Classes](#public-classes)
     - [Private Classes](#private-classes)
@@ -200,6 +201,22 @@ Processors can be declared in hiera using the `processors` parameter. By default
 processor declarations down the hiera hierarchy. That behavior can be changed by configuring the
 [lookup_options](https://docs.puppet.com/puppet/latest/reference/lookup_quick.html#setting-lookupoptions-in-data)
 flag.
+
+### Index Lifecycle Management
+
+You can override the default filebeat ILM policy by specifying `ilm.policy` hash in `filebeat::setup` parameter:
+
+```
+filebeat::setup:
+  ilm.policy:
+    phases:
+      hot:
+        min_age: "0ms"
+        actions:
+          rollover:
+            max_size: "10gb"
+            max_age: "1d"
+```
 
 ## Reference
  - [**Public Classes**](#public-classes)

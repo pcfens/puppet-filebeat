@@ -6,6 +6,17 @@
 class filebeat::config {
   $major_version = $filebeat::major_version
 
+  if has_key($filebeat::setup, 'ilm.policy') {
+    file {"${filebeat::config_dir}/ilm_policy.json":
+      content => to_json({'policy' => $filebeat::setup['ilm.policy']}),
+      notify  => Service['filebeat'],
+      require => File['filebeat-config-dir'],
+    }
+    $setup = $filebeat::setup - 'ilm.policy' + {'ilm.policy_file' => "${filebeat::config_dir}/ilm_policy.json"}
+  } else {
+    $setup = $filebeat::setup
+  }
+
   if versioncmp($major_version, '6') >= 0 {
     $filebeat_config_temp = delete_undef_values({
       'shutdown_timeout'  => $filebeat::shutdown_timeout,
@@ -32,7 +43,7 @@ class filebeat::config {
       'logging'           => $filebeat::logging,
       'runoptions'        => $filebeat::run_options,
       'processors'        => $filebeat::processors,
-      'setup'             => $filebeat::setup,
+      'setup'             => $setup,
     })
     # Add the 'xpack' section if supported (version >= 6.1.0) and not undef
     if $filebeat::xpack and versioncmp($filebeat::package_ensure, '6.1.0') >= 0 {
