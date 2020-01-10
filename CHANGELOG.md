@@ -4,6 +4,8 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.2.0...HEAD)
 
+- Support setting index index lifecycle policy [#\238](https://github.com/pcfens/puppet-filebeat/pull/238)
+
 ## [v4.2.0](https://github.com/pcfens/puppet-filebeat/tree/v4.2.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.2...v4.2.0)
 
