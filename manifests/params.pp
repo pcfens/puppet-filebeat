@@ -125,7 +125,7 @@ class filebeat::params {
     }
 
     'Windows' : {
-      if $filebeat::package_provider == 'chocolatey' {
+      if package_provider == 'chocolatey' {
         $package_ensure = '7.2.0'
         $config_file    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\filebeat.yml'
         $modules_dir    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\modules.d'
