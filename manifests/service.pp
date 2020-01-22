@@ -40,6 +40,26 @@ class filebeat::service {
       }
 
     } else {
+
+      unless $systemd_beat_log_opts_override == undef {
+        $ensure_overide = 'present'
+      } else {
+        $ensure_overide = 'absent'
+      }
+
+      if !defined(File[$filebeat::systemd_override_dir]) {
+        file{$filebeat::systemd_override_dir:
+          ensure => 'directory',
+        }
+      }
+
+      file { "${filebeat::systemd_override_dir}/logging.conf":
+        ensure  => $ensure_overide,
+        content => template($filebeat::systemd_beat_log_opts_template),
+        require => File[$filebeat::systemd_override_dir],
+        notify  => Service['filebeat'],
+      }
+
       unless defined('systemd') {
         warning('You\'ve specified an $systemd_beat_log_opts_override varible on a system running puppet version < 6.1 and not declared "systemd" resource See README.md for more information') # lint:ignore:140chars
       }
