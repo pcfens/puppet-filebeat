@@ -150,7 +150,7 @@ class filebeat (
       create_resources('filebeat::input', $inputs)
     }
   }
-  if $filebeat::package_provider != 'exec' {
+  if $package_provider != 'exec' {
     $package_ensure = '7.2.0'
     $config_file    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\filebeat.yml'
     $modules_dir    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\modules.d'
