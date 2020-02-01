@@ -15,11 +15,6 @@ class filebeat::install::windows {
       ensure   => $filebeat::package_ensure,
       provider => 'chocolatey',
     }
-
-      $package_ensure = '7.2.0'
-      $config_file    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\filebeat.yml'
-      $modules_dir    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\modules.d'
-      $config_dir     = 'C:\ProgramData\chocolatey\lib\filebeat\tools\conf.d'
   }
   else {
     $filename = regsubst($filebeat::real_download_url, '^https?.*\/([^\/]+)\.[^.].*', '\1')
