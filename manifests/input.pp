@@ -105,8 +105,13 @@ define filebeat::input (
     }
 
     'Windows' : {
-      $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
-      $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
+      if $filebeat::package_provider = 'exec' {
+        $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
+        $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
+      }
+      else {
+        $filebeat_path = "C:/ProgramData/chocolatey/lib/filebeat/tools/filebeat.exe"
+      }
 
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
