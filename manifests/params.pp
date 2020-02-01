@@ -32,7 +32,7 @@ class filebeat::params {
   $xpack                    = undef
   $systemd_override_dir     = '/etc/systemd/system/filebeat.service.d'
   $systemd_beat_log_opts_template = "${module_name}/systemd/logging.conf.erb"
-  $package_provider           = $filebeat::package_provider
+  $package_provider           = $filebeat::real_package_provider
   $package_name               = 'filebeat'
 
 
@@ -125,7 +125,7 @@ class filebeat::params {
     }
 
     'Windows' : {
-      if $package_provider != 'exec' {
+      if $package_provider == 'chocolatey' {
         $package_ensure = '7.2.0'
         $config_file    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\filebeat.yml'
         $modules_dir    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\modules.d'
