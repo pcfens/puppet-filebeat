@@ -105,7 +105,7 @@ define filebeat::input (
     }
 
     'Windows' : {
-      if $filebeat::package_provider == 'exec' {
+      if $filebeat::real_package_provider == 'exec' {
         $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
         $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
       }
