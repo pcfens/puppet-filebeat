@@ -10,7 +10,7 @@ class filebeat::install::windows {
   # that in the future as it would greatly simplify this code and basically reduce it to
   # one package resource with type => chocolatey....
 
-  if $filebeat::package_provider != 'exec' {
+  if $filebeat::real_package_provider != 'exec' {
     package { $filebeat::package_name:
       ensure   => $filebeat::package_ensure,
       provider => 'chocolatey',
