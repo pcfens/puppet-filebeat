@@ -130,17 +130,19 @@ class filebeat::params {
         $config_file    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\filebeat.yml'
         $modules_dir    = 'C:\ProgramData\chocolatey\lib\filebeat\tools\modules.d'
         $config_dir     = 'C:\ProgramData\chocolatey\lib\filebeat\tools\conf.d'
+        $install_dir      = 'C:/ProgramData'
       } else {
         $package_ensure   = '7.1.0'
         $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
         $modules_dir      = 'C:/Program Files/Filebeat/modules.d'
         $config_dir       = 'C:/Program Files/Filebeat/conf.d'
+        $install_dir      = 'C:/Program Files'
       }
       $config_file_owner = 'Administrator'
       $config_file_group = undef
       $config_dir_owner = 'Administrator'
       $config_dir_group = undef
-      $install_dir      = 'C:/Program Files'
+
       $tmp_dir          = 'C:/Windows/Temp'
       $service_provider = undef
       $url_arch         = $::architecture ? {
