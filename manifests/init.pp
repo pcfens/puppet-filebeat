@@ -109,7 +109,7 @@ class filebeat (
   include ::stdlib
 
   $real_package_provider = $package_provider ? {
-    undef   => "exec",
+    undef   => 'exec',
     default => $package_provider,
   }
 

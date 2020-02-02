@@ -110,7 +110,7 @@ define filebeat::input (
         $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
       }
       else {
-        $filebeat_path = "C:/ProgramData/chocolatey/lib/filebeat/tools/filebeat.exe"
+        $filebeat_path = 'C:/ProgramData/chocolatey/lib/filebeat/tools/filebeat.exe'
       }
 
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
