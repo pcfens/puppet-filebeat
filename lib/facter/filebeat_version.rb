@@ -7,7 +7,10 @@ Facter.add('filebeat_version') do
       filebeat_version = Facter::Util::Resolution.exec('/usr/bin/filebeat --version')
     end
   elsif File.executable?('/usr/local/bin/filebeat')
-    filebeat_version = Facter::Util::Resolution.exec('/usr/local/bin/filebeat --version')
+    filebeat_version = Facter::Util::Resolution.exec('/usr/local/bin/filebeat version')
+    if filebeat_version.empty?
+      filebeat_version = Facter::Util::Resolution.exec('/usr/local/bin/filebeat --version')
+    end
   elsif File.executable?('/usr/share/filebeat/bin/filebeat')
     filebeat_version = Facter::Util::Resolution.exec('/usr/share/filebeat/bin/filebeat --version')
   elsif File.executable?('/usr/local/sbin/filebeat')
