@@ -4,30 +4,36 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.2.0...HEAD)
 
-- Support setting index index lifecycle policy [#\238](https://github.com/pcfens/puppet-filebeat/pull/238)
+## [v4.3.0](https://github.com/pcfens/puppet-filebeat/tree/v4.3.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.2.0...v4.3.0)
+
+- Support setting index index lifecycle policy [\#238](https://github.com/pcfens/puppet-filebeat/pull/238)
+- Support logging overrides with Puppet older than 6.1 [\#241](https://github.com/pcfens/puppet-filebeat/pull/241)
+- Allow inputs to be defined using just a hash (supports open ended inputs) [\#236](https://github.com/pcfens/puppet-filebeat/pull/236)
+
 
 ## [v4.2.0](https://github.com/pcfens/puppet-filebeat/tree/v4.2.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.2...v4.2.0)
 
 - Fix regression of processors type
-- Add support for syslog inputs [#\232](https://github.com/pcfens/puppet-filebeat/pull/233)
+- Add support for syslog inputs [\#232](https://github.com/pcfens/puppet-filebeat/pull/233)
 - Upgrade PDK to 1.15.0
 
 ## [v4.1.2](https://github.com/pcfens/puppet-filebeat/tree/v4.1.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.1...v4.1.2)
 
-- Fix hardocded path to yum [#\229](https://github.com/pcfens/puppet-filebeat/pull/229)
+- Fix hardocded path to yum [\#229](https://github.com/pcfens/puppet-filebeat/pull/229)
 
 ## [v4.1.1](https://github.com/pcfens/puppet-filebeat/tree/v4.1.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.0...v4.1.1)
 
-- Support old versions of filebeat for a version fact only [#\227](https://github.com/pcfens/puppet-filebeat/pull/227)
-- Fix the processor input data type [#\228](https://github.com/pcfens/puppet-filebeat/issues/228)
+- Support old versions of filebeat for a version fact only [\#227](https://github.com/pcfens/puppet-filebeat/pull/227)
+- Fix the processor input data type [\#228](https://github.com/pcfens/puppet-filebeat/issues/228)
 
 ## [v4.1.0](https://github.com/pcfens/puppet-filebeat/tree/v4.1.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.5...v4.1.0)
 
-- Allow for override of the default systemd logging options [#\223](https://github.com/pcfens/puppet-filebeat/pull/223)
+- Allow for override of the default systemd logging options [\#223](https://github.com/pcfens/puppet-filebeat/pull/223)
 
 ## [v4.0.5](https://github.com/pcfens/puppet-filebeat/tree/v4.0.5)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.4...v4.0.5)
