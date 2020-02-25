@@ -10,7 +10,10 @@ cache:
 before_script:
   - bundle -v
   - rm Gemfile.lock || true
-  - gem update --system $RUBYGEMS_VERSION
+  - "# Update system gems if requested. This is useful to temporarily workaround troubles in the test runner"
+  - "# Set `rubygems_version` in the .sync.yml to set a value"
+  - "# Ignore exit code of SIGPIPE'd yes to not fail with shell's pipefail set"
+  - '[ -z "$RUBYGEMS_VERSION" ] || (yes || true) | gem update --system $RUBYGEMS_VERSION'
   - gem --version
   - bundle -v
   - bundle install --without system_tests --path vendor/bundle --jobs $(nproc)
