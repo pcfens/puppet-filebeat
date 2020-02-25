@@ -138,6 +138,9 @@ input declarations down the hiera hierarchy. That behavior can be changed by con
 [lookup_options](https://docs.puppet.com/puppet/latest/reference/lookup_quick.html#setting-lookupoptions-in-data)
 flag.
 
+`inputs` can be a Hash that will follow all the parameters listed on this documentation or an
+Array that will output as is to the input config file.
+
 ### Usage on Windows
 
 When installing on Windows, this module will download the windows version of Filebeat from
@@ -283,7 +286,7 @@ Installs and configures filebeat.
 - `fields_under_root`: [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 - `disable_config_test`: [Boolean] If set to true, configuration tests won't be run on config files before writing them.
 - `processors`: [Hash] Processors that should be configured.
-- `inputs`: [Hash] Inputs that will be created. Commonly used to create inputs using hiera
+- `inputs`: [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
 - `setup`: [Hash] Setup that will be created. Commonly used to create setup using hiera
 - `xpack`: [Hash] XPack configuration to pass to filebeat
 

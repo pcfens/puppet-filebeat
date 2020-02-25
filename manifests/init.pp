@@ -42,7 +42,7 @@
 # @param fields [Hash] Optional fields that should be added to each event output
 # @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 # @param processors [Array] Processors that will be added. Commonly used to create processors using hiera.
-# @param inputs [Hash] Inputs that will be created. Commonly used to create inputs using hiera
+# @param inputs [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
 # @param setup [Hash] setup that will be created. Commonly used to create setup using hiera
 # @param inputs_merge [Boolean] Whether $inputs should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
@@ -87,7 +87,7 @@ class filebeat (
   Boolean $fields_under_root                                          = $filebeat::params::fields_under_root,
   Boolean $disable_config_test                                        = $filebeat::params::disable_config_test,
   Array   $processors                                                 = [],
-  Hash    $inputs                                                     = {},
+  Variant[Hash, Array] $inputs                                        = {},
   Hash    $setup                                                      = {},
   Array   $modules                                                    = [],
   Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]] $proxy_address = undef, # lint:ignore:140chars
@@ -144,7 +144,11 @@ class filebeat (
 
   if $package_ensure != 'absent' {
     if !empty($inputs) {
-      create_resources('filebeat::input', $inputs)
+      if $inputs =~ Array {
+        create_resources('filebeat::input', { 'inputs' => { pure_array => true } })
+      } else {
+        create_resources('filebeat::input', $inputs)
+      }
     }
   }
 }

@@ -48,11 +48,12 @@ define filebeat::input (
   Boolean $symlinks                        = false,
   Optional[String] $pipeline               = undef,
   Array $processors                        = [],
+  Boolean $pure_array                      = false,
 ) {
 
   $input_template = $filebeat::major_version ? {
-    '5'     => 'prospector5.yml.erb',
-    default => 'prospector.yml.erb',
+    '5'     => 'prospector.yml.erb',
+    default => 'input.yml.erb',
   }
 
   if 'filebeat_version' in $facts and $facts['filebeat_version'] != false {
