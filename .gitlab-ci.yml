@@ -18,17 +18,17 @@ before_script:
   - bundle -v
   - bundle install --without system_tests --path vendor/bundle --jobs $(nproc)
 
-syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop-Ruby 2.5.3-Puppet ~> 6:
+syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop-Ruby 2.5.7-Puppet ~> 6:
   stage: syntax
-  image: ruby:2.5.3
+  image: ruby:2.5.7
   script:
     - bundle exec rake syntax lint metadata_lint check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop
   variables:
     PUPPET_GEM_VERSION: '~> 6'
 
-parallel_spec-Ruby 2.5.3-Puppet ~> 6:
+parallel_spec-Ruby 2.5.7-Puppet ~> 6:
   stage: unit
-  image: ruby:2.5.3
+  image: ruby:2.5.7
   script:
     - bundle exec rake parallel_spec
   variables:
