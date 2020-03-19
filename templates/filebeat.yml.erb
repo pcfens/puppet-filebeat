@@ -575,6 +575,9 @@ output.console:
 # CLI flag or in the configuration file, the default for the data path is a data
 # subdirectory inside the home path.
 #path.data: ${path.home}/data
+<%- if @data_dir -%>
+path.data: <%= @data_dir %>
+<%- end -%>
 
 # The logs path for a filebeat installation. This is the default location for
 # the Beat's log files. If not set by a CLI flag or in the configuration file,
