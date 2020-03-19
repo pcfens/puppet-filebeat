@@ -25,8 +25,8 @@
 # @param config_dir [String] The directory where inputs should be defined (default: /etc/filebeat/conf.d)
 # @param config_dir_mode [String] The unix permissions mode set on the configuration directory (default: 0755)
 # @param config_file_mode [String] The unix permissions mode set on configuration files (default: 0644)
-# @param data_dir [String] The location for persistent data files. NOTE! This folder has to pre-exist! (default: {path.home}/data)
 # @param purge_conf_dir [Boolean] Should files in the input configuration directory not managed by puppet be automatically purged
+# @param data_dir [String] The location for persistent data files. NOTE! This folder has to pre-exist! (default: {path.home}/data)
 # @param http [Hash] A hash of the http section of configuration
 # @param outputs [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 # @param shipper [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
@@ -65,11 +65,11 @@ class filebeat (
   Optional[String] $config_file_group                                 = $filebeat::params::config_file_group,
   String[4,4]  $config_dir_mode                                       = $filebeat::params::config_dir_mode,
   String  $config_dir                                                 = $filebeat::params::config_dir,
-  Optional[String] $config_dir                                        = undef,
   String[4,4]  $config_file_mode                                      = $filebeat::params::config_file_mode,
   Optional[String] $config_dir_owner                                  = $filebeat::params::config_dir_owner,
   Optional[String] $config_dir_group                                  = $filebeat::params::config_dir_group,
   Boolean $purge_conf_dir                                             = $filebeat::params::purge_conf_dir,
+  Optional[String] $data_dir                                          = undef,
   String  $modules_dir                                                = $filebeat::params::modules_dir,
   Boolean $enable_conf_modules                                        = $filebeat::params::enable_conf_modules,
   Hash    $http                                                       = $filebeat::params::http,
