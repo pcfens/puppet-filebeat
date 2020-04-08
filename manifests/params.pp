@@ -32,7 +32,8 @@ class filebeat::params {
   $xpack                    = undef
   $systemd_override_dir     = '/etc/systemd/system/filebeat.service.d'
   $systemd_beat_log_opts_template = "${module_name}/systemd/logging.conf.erb"
-
+  $package_name             = 'filebeat'
+  $chocolatey_basedir       = "C:/ProgramData/chocolatey/lib/filebeat/tools"
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
   #   $conf_template = "${module_name}/filebeat.yml.ruby18.erb"
@@ -123,15 +124,23 @@ class filebeat::params {
     }
 
     'Windows' : {
-      $package_ensure   = '7.1.0'
+      $path_exists = find_file($chocolatey_basedir)
+      if $path_exists  {
+        $config_file    = 'C:/ProgramData/chocolatey/lib/filebeat/tools/filebeat.yml'
+        $modules_dir    = 'C:/ProgramData/chocolatey/lib/filebeat/tools/modules.d'
+        $config_dir     = 'C:/ProgramData/chocolatey/lib/filebeat/tools/conf.d'
+      } else {
+        $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
+        $modules_dir      = 'C:/Program Files/Filebeat/modules.d'
+        $config_dir       = 'C:/Program Files/Filebeat/conf.d'
+      }
+      $install_dir       = 'C:/Program Files'
+      $package_ensure    = '7.1.0'
       $config_file_owner = 'Administrator'
       $config_file_group = undef
       $config_dir_owner = 'Administrator'
       $config_dir_group = undef
-      $config_file      = 'C:/Program Files/Filebeat/filebeat.yml'
-      $config_dir       = 'C:/Program Files/Filebeat/conf.d'
-      $modules_dir      = 'C:/Program Files/Filebeat/modules.d'
-      $install_dir      = 'C:/Program Files'
+
       $tmp_dir          = 'C:/Windows/Temp'
       $service_provider = undef
       $url_arch         = $::architecture ? {

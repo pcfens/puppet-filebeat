@@ -191,15 +191,15 @@ class filebeat::config {
     } # end OpenBSD
 
     'Windows' : {
-      $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
-      $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
 
-      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
-        true    => undef,
-        default => $major_version ? {
-          '7'     => "\"${filebeat_path}\" test config -c \"%\"",
-          default => "\"${filebeat_path}\" -N -configtest -c \"%\"",
-        }
+      if $filebeat::chocolatey_provider {
+
+        $filebeat_path =  'C:\ProgramData\chocolatey\lib\filebeat\tools\filebeat.exe'
+
+      } else {
+
+        $cmd_install_dir = regsubst($filebeat::install_dir, '/', '\\', 'G')
+        $filebeat_path = join([$cmd_install_dir, 'Filebeat', 'filebeat.exe'], '\\')
       }
 
       file {'filebeat.yml':
@@ -210,6 +210,16 @@ class filebeat::config {
         notify       => Service['filebeat'],
         require      => File['filebeat-config-dir'],
       }
+
+      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
+        true    => undef,
+        default => $major_version ? {
+          '7'     => "\"${filebeat_path}\" test config -c \"%\"",
+          default => "\"${filebeat_path}\" -N -configtest -c \"%\"",
+        }
+      }
+
+
 
       file {'filebeat-config-dir':
         ensure  => $filebeat::directory_ensure,
