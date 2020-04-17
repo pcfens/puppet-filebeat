@@ -17,6 +17,12 @@ class filebeat::install {
         Class['filebeat::repo'] -> Class['filebeat::install::linux']
       }
     }
+    'SunOS': {
+      class{ '::filebeat::install::sunos':
+        notify => Class['filebeat::service'],
+      }
+      Anchor['filebeat::install::begin'] -> Class['filebeat::install::sunos'] -> Anchor['filebeat::install::end']
+    }
     'FreeBSD': {
       class{ '::filebeat::install::freebsd':
         notify => Class['filebeat::service'],
