@@ -158,41 +158,49 @@ processors using hiera), or as their own defined resources.
 To drop the offset and input_type fields from all events:
 
 ```puppet
-class{"filebeat":
-  processors => {
-    "drop_fields" => {
-      "fields" => ["input_type", "offset"],
-    },
-  },
+class {'filebeat':
+  processors => [
+    {
+      'drop_fields' => {
+        'fields' => ['input_type', 'offset'],
+      }
+    }
+  ],
 }
 ```
 
 To drop all events that have the http response code equal to 200:
 input
 ```puppet
-class{"filebeat":
-  processors => {
-    "drop_event" => {
-      "when" => {"equals" => {"http.code" => 200}}
-    },
-  },
+class {'filebeat':
+  processors => [
+    {
+      'drop_event' => {
+        'when' => {'equals' => {'http.code' => 200}}
+      }
+    }
+  ],
 }
 ```
 
 Now to combine these examples into a single definition:
 
 ```puppet
-class{"filebeat":
-  processors => {
-    "drop_fields" => {
-      "params"   => {"fields" => ["input_type", "offset"]},
-      "priority" => 1,
+class {'filebeat':
+  processors => [
+    {
+      'drop_fields' => {
+        'params'   => {'fields' => ['input_type', 'offset']},
+        'priority' => 1,
+      }
     },
-    "drop_event" => {
-      "when"     => {"equals" => {"http.code" => 200}},
-      "priority: => 2,
-    },
-  },
+    {
+      'drop_event' => {
+        'when'     => {'equals' => {'http.code' => 200}},
+        'priority' => 2,
+      }
+    }
+  ],
 }
 ```
 
@@ -285,7 +293,7 @@ Installs and configures filebeat.
 - `fields`: [Hash] Optional fields that should be added to each event output
 - `fields_under_root`: [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 - `disable_config_test`: [Boolean] If set to true, configuration tests won't be run on config files before writing them.
-- `processors`: [Hash] Processors that should be configured.
+- `processors`: [Array] Processors that should be configured.
 - `inputs`: [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
 - `setup`: [Hash] Setup that will be created. Commonly used to create setup using hiera
 - `xpack`: [Hash] XPack configuration to pass to filebeat
