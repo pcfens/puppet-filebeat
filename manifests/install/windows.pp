@@ -38,7 +38,7 @@ class filebeat::install::windows {
   }
 
   exec { "unzip ${filename}":
-    command => "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${zip_file}')).items(), 16)", # lint:ignore:140chars
+    command => "Expand-Archive ${zip_file} ${filebeat::install_dir}",
     creates => $version_file,
     require => [
       File[$filebeat::install_dir],
