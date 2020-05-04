@@ -38,7 +38,7 @@ class filebeat::install::windows {
   }
 
   exec { "unzip ${filename}":
-    command => "Expand-Archive ${zip_file} ${filebeat::install_dir}",
+    command => "Expand-Archive ${zip_file} \"${filebeat::install_dir}\"",
     creates => $version_file,
     require => [
       File[$filebeat::install_dir],
