@@ -14,7 +14,7 @@ class filebeat::install::windows {
   $foldername = 'Filebeat'
   $zip_file = join([$filebeat::tmp_dir, "${filename}.zip"], '/')
   $install_folder = join([$filebeat::install_dir, $foldername], '/')
-  $version_file = join([$install_folder, $filename], '/')
+  $version_file = join([$filebeat::install_dir, $filename], '/')
 
   Exec {
     provider => powershell,
