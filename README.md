@@ -294,6 +294,7 @@ Installs and configures filebeat.
 - `fields_under_root`: [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 - `disable_config_test`: [Boolean] If set to true, configuration tests won't be run on config files before writing them.
 - `processors`: [Array] Processors that should be configured.
+- `monitoring`: [Hash] The monitoring.* components of the filebeat configuration.
 - `inputs`: [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
 - `setup`: [Hash] Setup that will be created. Commonly used to create setup using hiera
 - `xpack`: [Hash] XPack configuration to pass to filebeat

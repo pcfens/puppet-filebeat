@@ -43,6 +43,7 @@ class filebeat::config {
       'logging'           => $filebeat::logging,
       'runoptions'        => $filebeat::run_options,
       'processors'        => $filebeat::processors,
+      'monitoring'        => $filebeat::monitoring,
       'setup'             => $setup,
     })
     # Add the 'xpack' section if supported (version >= 6.1.0) and not undef
