@@ -121,11 +121,13 @@ class filebeat (
     $real_service_ensure = 'stopped'
     $file_ensure = 'absent'
     $directory_ensure = 'absent'
+    $real_service_enable = false
   } else {
     $alternate_ensure = 'present'
     $file_ensure = 'file'
     $directory_ensure = 'directory'
     $real_service_ensure = $service_ensure
+    $real_service_enable = $service_enable
   }
 
   # If we're removing filebeat, do things in a different order to make sure
