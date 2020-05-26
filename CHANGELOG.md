@@ -5,6 +5,7 @@ Changelog
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.3.1...HEAD)
 
 - Add the ability to supply the monitoring.* of the config file [\#252](https://github.com/pcfens/puppet-filebeat/issues/252)
+- Add support for Windows Server 2016 and 2019 Core editions [\#255](https://github.com/pcfens/puppet-filebeat/pull/255)
 
 ## [v4.3.1](https://github.com/pcfens/puppet-filebeat/tree/v4.3.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.3.0...v4.3.1)
