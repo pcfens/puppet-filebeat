@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.1...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.2...HEAD)
+
+## [v4.4.2](https://github.com/pcfens/puppet-filebeat/tree/v4.4.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.1...v4.4.2)
+
+- Fix empty monitoring parameter [\#257](https://github.com/pcfens/puppet-filebeat/issues/257)
 
 ## [v4.4.1](https://github.com/pcfens/puppet-filebeat/tree/v4.4.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.0...v4.4.1)
