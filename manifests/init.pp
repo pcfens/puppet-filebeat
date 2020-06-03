@@ -88,7 +88,7 @@ class filebeat (
   Boolean $fields_under_root                                          = $filebeat::params::fields_under_root,
   Boolean $disable_config_test                                        = $filebeat::params::disable_config_test,
   Array   $processors                                                 = [],
-  Hash    $monitoring                                                 = {},
+  Optional[Hash]  $monitoring                                         = undef,
   Variant[Hash, Array] $inputs                                        = {},
   Hash    $setup                                                      = {},
   Array   $modules                                                    = [],
