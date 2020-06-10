@@ -16,7 +16,12 @@
     - <%= tag %>
     <%- end -%>
   <%- end -%>
-  <%- if @input_type == 'docker' -%>
+  <%- if @input_type =~ /(tcp|udp)/ -%>
+  host: <%= @host %>
+  <%- if @max_message_size -%>
+  max_message_size: <%= @max_message_size %>
+  <%- end -%>
+  <%- elsif @input_type == 'docker' -%>
   containers:
     ids:
     <%- @containers_ids.each do |id| -%>
