@@ -378,6 +378,8 @@ to fully understand what these parameters do.
     [See above](#json-logs). (default: {})
   - `multiline`: [Hash] Options that control how Filebeat handles log messages that span multiple lines.
     [See above](#multiline-logs). (default: {})
+  - `host`: [String] Host and port used to read events for TCP or UDP plugin (default: localhost:9000)
+  - `max_message_size`: [String] The maximum size of the message received over TCP or UDP (default: undef)
 
 ## Limitations
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
