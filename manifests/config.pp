@@ -125,6 +125,7 @@ class filebeat::config {
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
         force   => true,
+        notify  => Service['filebeat'],
       }
     } # end Linux
 
@@ -155,6 +156,7 @@ class filebeat::config {
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
         force   => true,
+        notify  => Service['filebeat'],
       }
     } # end FreeBSD
 
@@ -188,6 +190,7 @@ class filebeat::config {
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
         force   => true,
+        notify  => Service['filebeat'],
       }
     } # end OpenBSD
 
