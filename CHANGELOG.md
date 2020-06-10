@@ -4,6 +4,9 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.2...HEAD)
 
+- Restart filebeat when config files are removed [\#258](https://github.com/pcfens/puppet-filebeat/pull/258)
+- Support TCP and UDP input plugins [\#259](https://github.com/pcfens/puppet-filebeat/pull/259)
+
 ## [v4.4.2](https://github.com/pcfens/puppet-filebeat/tree/v4.4.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.1...v4.4.2)
 
