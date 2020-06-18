@@ -4,6 +4,11 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.5.0...HEAD)
 
+## [v4.6.0](https://github.com/pcfens/puppet-filebeat/tree/v4.6.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.5.0...v4.6.0)
+
+- Allow processors to be applied to all inputs, and consolidated common configuration [\#260](https://github.com/pcfens/puppet-filebeat/pull/260)
+
 ## [v4.5.0](https://github.com/pcfens/puppet-filebeat/tree/v4.5.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.2...v4.5.0)
 
