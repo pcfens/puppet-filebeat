@@ -48,6 +48,7 @@
 # @param inputs_merge [Boolean] Whether $inputs should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
 # @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
+# @param extra_validate_options [String] Extra command line options to pass to the configuration validation command
 class filebeat (
   String  $package_ensure                                             = $filebeat::params::package_ensure,
   Boolean $manage_repo                                                = $filebeat::params::manage_repo,
@@ -102,6 +103,7 @@ class filebeat (
   Optional[String] $systemd_beat_log_opts_override                    = undef,
   String $systemd_beat_log_opts_template                              = $filebeat::params::systemd_beat_log_opts_template,
   String $systemd_override_dir                                        = $filebeat::params::systemd_override_dir,
+  Optional[String] $extra_validate_options                            = undef,
 
 ) inherits filebeat::params {
 
