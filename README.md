@@ -298,6 +298,7 @@ Installs and configures filebeat.
 - `inputs`: [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
 - `setup`: [Hash] Setup that will be created. Commonly used to create setup using hiera
 - `xpack`: [Hash] XPack configuration to pass to filebeat
+- `extra_validate_options`: [String] Extra command line options to pass to the configuration validation command.
 
 ### Private Classes
 
