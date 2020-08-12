@@ -2,7 +2,12 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.5.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.0...HEAD)
+
+## [v4.7.0](https://github.com/pcfens/puppet-filebeat/tree/v4.7.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.6.0...v4.7.0)
+
+- Add `extra_validation_options` when validating the config [\#265](https://github.com/pcfens/puppet-filebeat/pull/265)
 
 ## [v4.6.0](https://github.com/pcfens/puppet-filebeat/tree/v4.6.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.5.0...v4.6.0)
