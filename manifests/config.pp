@@ -38,6 +38,7 @@ class filebeat::config {
         'modules'           => $filebeat::modules,
       },
       'http'              => $filebeat::http,
+      'cloud'             => $filebeat::cloud,
       'output'            => $filebeat::outputs,
       'shipper'           => $filebeat::shipper,
       'logging'           => $filebeat::logging,
