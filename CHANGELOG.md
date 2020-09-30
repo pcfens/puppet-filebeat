@@ -2,7 +2,13 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.1...HEAD)
+
+## [v4.8.0](https://github.com/pcfens/puppet-filebeat/tree/v4.8.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.0...v4.8.0)
+
+- Update powershell dependency constraints [\#268](https://github.com/pcfens/puppet-filebeat/pull/268)
+- Support ES cloud credentials [\267](https://github.com/pcfens/puppet-filebeat/pull/267)
 
 ## [v4.7.0](https://github.com/pcfens/puppet-filebeat/tree/v4.7.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.6.0...v4.7.0)
