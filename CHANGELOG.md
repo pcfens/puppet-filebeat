@@ -2,7 +2,33 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.0...HEAD)
+
+## [v4.7.0](https://github.com/pcfens/puppet-filebeat/tree/v4.7.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.6.0...v4.7.0)
+
+- Add `extra_validation_options` when validating the config [\#265](https://github.com/pcfens/puppet-filebeat/pull/265)
+
+## [v4.6.0](https://github.com/pcfens/puppet-filebeat/tree/v4.6.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.5.0...v4.6.0)
+
+- Allow processors to be applied to all inputs, and consolidated common configuration [\#260](https://github.com/pcfens/puppet-filebeat/pull/260)
+
+## [v4.5.0](https://github.com/pcfens/puppet-filebeat/tree/v4.5.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.2...v4.5.0)
+
+- Restart filebeat when config files are removed [\#258](https://github.com/pcfens/puppet-filebeat/pull/258)
+- Support TCP and UDP input plugins [\#259](https://github.com/pcfens/puppet-filebeat/pull/259)
+
+## [v4.4.2](https://github.com/pcfens/puppet-filebeat/tree/v4.4.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.1...v4.4.2)
+
+- Fix empty monitoring parameter [\#257](https://github.com/pcfens/puppet-filebeat/issues/257)
+
+## [v4.4.1](https://github.com/pcfens/puppet-filebeat/tree/v4.4.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.0...v4.4.1)
+
+- Fix powershell module version dependency [\#256](https://github.com/pcfens/puppet-filebeat/pull/256
 
 ## [v4.4.0](https://github.com/pcfens/puppet-filebeat/tree/v4.4.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.3.1...v4.4.0)

@@ -38,6 +38,7 @@ class filebeat::config {
         'modules'           => $filebeat::modules,
       },
       'http'              => $filebeat::http,
+      'cloud'             => $filebeat::cloud,
       'output'            => $filebeat::outputs,
       'shipper'           => $filebeat::shipper,
       'logging'           => $filebeat::logging,
@@ -99,8 +100,8 @@ class filebeat::config {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
         default => $major_version ? {
-          '5'     => "${filebeat::filebeat_path} -N -configtest -c %",
-          default => "${filebeat::filebeat_path} -c % test config",
+          '5'     => "${filebeat::filebeat_path} ${filebeat::extra_validate_options} -N -configtest -c %",
+          default => "${filebeat::filebeat_path} ${filebeat::extra_validate_options} -c % test config",
         },
       }
 
@@ -125,13 +126,14 @@ class filebeat::config {
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
         force   => true,
+        notify  => Service['filebeat'],
       }
     } # end Linux
 
     'FreeBSD'   : {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
-        default => '/usr/local/sbin/filebeat -N -configtest -c %',
+        default => '/usr/local/sbin/filebeat ${filebeat::extra_validate_options} -N -configtest -c %',
       }
 
       file {'filebeat.yml':
@@ -155,6 +157,7 @@ class filebeat::config {
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
         force   => true,
+        notify  => Service['filebeat'],
       }
     } # end FreeBSD
 
@@ -162,8 +165,8 @@ class filebeat::config {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
         default => $major_version ? {
-          '5'     => "${filebeat::filebeat_path} -N -configtest -c %",
-          default => "${filebeat::filebeat_path} -c % test config",
+          '5'     => "${filebeat::filebeat_path} ${filebeat::extra_validate_options} -N -configtest -c %",
+          default => "${filebeat::filebeat_path} ${filebeat::extra_validate_options} -c % test config",
         },
       }
 
@@ -188,6 +191,7 @@ class filebeat::config {
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
         force   => true,
+        notify  => Service['filebeat'],
       }
     } # end OpenBSD
 
@@ -198,8 +202,8 @@ class filebeat::config {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
         default => $major_version ? {
-          '7'     => "\"${filebeat_path}\" test config -c \"%\"",
-          default => "\"${filebeat_path}\" -N -configtest -c \"%\"",
+          '7'     => "\"${filebeat_path}\" ${filebeat::extra_validate_options} test config -c \"%\"",
+          default => "\"${filebeat_path}\" ${filebeat::extra_validate_options} -N -configtest -c \"%\"",
         }
       }
 

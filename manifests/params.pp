@@ -20,6 +20,7 @@ class filebeat::params {
   $fields                   = {}
   $fields_under_root        = false
   $http                     = {}
+  $cloud                    = {}
   $outputs                  = {}
   $shipper                  = {}
   $logging                  = {}

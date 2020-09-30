@@ -3,20 +3,12 @@
 <%- else -%>
 ---
 - type: <%= @input_type %>
-  <%- if @fields.length > 0 -%>
-  fields:
-    <%- @fields.each_pair do |k, v| -%>
-    <%= k %>: <%= v %>
-    <%- end -%>
+  <%- if @input_type =~ /(tcp|udp)/ -%>
+  host: <%= @host %>
+  <%- if @max_message_size -%>
+  max_message_size: <%= @max_message_size %>
   <%- end -%>
-  fields_under_root: <%= @fields_under_root %>
-  <%- if @tags.length > 0 -%>
-  tags:
-    <%- @tags.each do |tag| -%>
-    - <%= tag %>
-    <%- end -%>
-  <%- end -%>
-  <%- if @input_type == 'docker' -%>
+  <%- elsif @input_type == 'docker' -%>
   containers:
     ids:
     <%- @containers_ids.each do |id| -%>
@@ -196,10 +188,24 @@
   <%- if @close_timeout -%>
   close_timeout: <%= @close_timeout %>
   <%- end -%>
+  <%- end -%>
+  <%- # Everything below this can be applied to any input. %>
+  <%- # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-general-options.html#configuration-general %>
+  <%- if @fields.length > 0 -%>
+  fields:
+    <%- @fields.each_pair do |k, v| -%>
+    <%= k %>: <%= v %>
+    <%- end -%>
+  <%- end -%>
+  fields_under_root: <%= @fields_under_root %>
+  <%- if @tags.length > 0 -%>
+  tags:
+    <%- @tags.each do |tag| -%>
+    - <%= tag %>
+    <%- end -%>
+  <%- end -%>
   <%- if @processors.length > 0 -%>
-  # Managing processors releated only for specified input
   processors:
     <%- %><%= @processors.to_yaml.lines.drop(1).join.gsub(/^/, '  ') -%>
   <%- end -%>
-  <%- end %>
 <%- end %>

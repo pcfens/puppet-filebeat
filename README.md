@@ -277,6 +277,7 @@ Installs and configures filebeat.
 - `purge_conf_dir`: [Boolean] Should files in the input configuration directory not managed by puppet be automatically purged
 - `enable_conf_modules`: [Boolean] Should filebeat.config.modules be enabled
 - `modules_dir`: [String] The directory where module configurations should be defined (default: /etc/filebeat/modules.d)
+- `cloud`: [Hash] Will be converted to YAML for the optional cloud.id and cloud.auth of the configuration (see documentation, and above)
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 - `logging`: [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
@@ -298,6 +299,7 @@ Installs and configures filebeat.
 - `inputs`: [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
 - `setup`: [Hash] Setup that will be created. Commonly used to create setup using hiera
 - `xpack`: [Hash] XPack configuration to pass to filebeat
+- `extra_validate_options`: [String] Extra command line options to pass to the configuration validation command.
 
 ### Private Classes
 
@@ -378,6 +380,8 @@ to fully understand what these parameters do.
     [See above](#json-logs). (default: {})
   - `multiline`: [Hash] Options that control how Filebeat handles log messages that span multiple lines.
     [See above](#multiline-logs). (default: {})
+  - `host`: [String] Host and port used to read events for TCP or UDP plugin (default: localhost:9000)
+  - `max_message_size`: [String] The maximum size of the message received over TCP or UDP (default: undef)
 
 ## Limitations
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping

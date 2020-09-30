@@ -27,6 +27,7 @@
 # @param config_file_mode [String] The unix permissions mode set on configuration files (default: 0644)
 # @param purge_conf_dir [Boolean] Should files in the input configuration directory not managed by puppet be automatically purged
 # @param http [Hash] A hash of the http section of configuration
+# @param cloud [Hash] Will be converted to YAML for the optional cloud of the configuration (see documentation, and above)
 # @param outputs [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 # @param shipper [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 # @param logging [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
@@ -48,6 +49,7 @@
 # @param inputs_merge [Boolean] Whether $inputs should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
 # @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
+# @param extra_validate_options [String] Extra command line options to pass to the configuration validation command
 class filebeat (
   String  $package_ensure                                             = $filebeat::params::package_ensure,
   Boolean $manage_repo                                                = $filebeat::params::manage_repo,
@@ -72,6 +74,7 @@ class filebeat (
   String  $modules_dir                                                = $filebeat::params::modules_dir,
   Boolean $enable_conf_modules                                        = $filebeat::params::enable_conf_modules,
   Hash    $http                                                       = $filebeat::params::http,
+  Hash    $cloud                                                      = $filebeat::params::cloud,
   Hash    $outputs                                                    = $filebeat::params::outputs,
   Hash    $shipper                                                    = $filebeat::params::shipper,
   Hash    $logging                                                    = $filebeat::params::logging,
@@ -88,7 +91,7 @@ class filebeat (
   Boolean $fields_under_root                                          = $filebeat::params::fields_under_root,
   Boolean $disable_config_test                                        = $filebeat::params::disable_config_test,
   Array   $processors                                                 = [],
-  Hash    $monitoring                                                 = {},
+  Optional[Hash]  $monitoring                                         = undef,
   Variant[Hash, Array] $inputs                                        = {},
   Hash    $setup                                                      = {},
   Array   $modules                                                    = [],
@@ -102,6 +105,7 @@ class filebeat (
   Optional[String] $systemd_beat_log_opts_override                    = undef,
   String $systemd_beat_log_opts_template                              = $filebeat::params::systemd_beat_log_opts_template,
   String $systemd_override_dir                                        = $filebeat::params::systemd_override_dir,
+  Optional[String] $extra_validate_options                            = undef,
 
 ) inherits filebeat::params {
 
