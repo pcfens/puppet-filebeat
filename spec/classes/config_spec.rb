@@ -47,8 +47,9 @@ describe 'filebeat::config' do
             }
             context 'with added extra_validate_options parameter' do
               let(:pre_condition) { "class { 'filebeat': major_version => '#{major_version}', extra_validate_options => '--foo'}" }
+
               it {
-                is_expected.to contain_file('filebeat.yml').with_validate_cmd(/filebeat --foo/)
+                is_expected.to contain_file('filebeat.yml').with_validate_cmd(%r{/filebeat --foo/})
               }
             end
 
