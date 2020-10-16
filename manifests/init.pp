@@ -37,7 +37,7 @@
 # @param install_dir [String] Where filebeat should be installed (windows only)
 # @param tmp_dir [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
 # @param shutdown_timeout [String] How long filebeat waits on shutdown for the publisher to finish sending events
-# @param beat_name [String] The name of the beat shipper (default: hostname)
+# @param beat_name [String] The name of the beat shipper (default: FQDN)
 # @param tags [Array] A list of tags that will be included with each published transaction
 # @param max_procs [Integer] The maximum number of CPUs that can be simultaneously used
 # @param fields [Hash] Optional fields that should be added to each event output

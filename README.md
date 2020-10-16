@@ -288,7 +288,7 @@ Installs and configures filebeat.
 - `install_dir`: [String] Where filebeat should be installed (windows only)
 - `tmp_dir`: [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
 - `shutdown_timeout`: [String] How long filebeat waits on shutdown for the publisher to finish sending events
-- `beat_name`: [String] The name of the beat shipper (default: hostname)
+- `beat_name`: [String] The name of the beat shipper (default: FQDN)
 - `tags`: [Array] A list of tags that will be included with each published transaction
 - `max_procs`: [Number] The maximum number of CPUs that can be simultaneously used
 - `fields`: [Hash] Optional fields that should be added to each event output
