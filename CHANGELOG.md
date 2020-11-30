@@ -4,6 +4,8 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.1...HEAD)
 
+- Make pipeline available in all inputs [\#275](https://github.com/pcfens/puppet-filebeat/pull/275)
+
 ## [v4.8.0](https://github.com/pcfens/puppet-filebeat/tree/v4.8.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.0...v4.8.0)
 
