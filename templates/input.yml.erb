@@ -71,9 +71,6 @@
   <%- if @force_close_files -%>
   force_close_files: <%= @force_close_files %>
   <%- end -%>
-  <%- if @pipeline -%>
-  pipeline: <%= @pipeline %>
-  <%- end -%>
 
   <%- if @json.length > 0 -%>
   ### JSON configuration
@@ -191,6 +188,9 @@
   <%- end -%>
   <%- # Everything below this can be applied to any input. -%>
   <%- # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-general-options.html#configuration-general -%>
+  <%- if @pipeline -%>
+  pipeline: <%= @pipeline %>
+  <%- end -%>
   <%- if @fields.length > 0 -%>
   fields:
     <%- @fields.each_pair do |k, v| -%>
