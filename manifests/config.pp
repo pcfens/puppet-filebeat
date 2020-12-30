@@ -9,7 +9,7 @@ class filebeat::config {
   if has_key($filebeat::setup, 'ilm.policy') {
     file {"${filebeat::config_dir}/ilm_policy.json":
       content => to_json({'policy' => $filebeat::setup['ilm.policy']}),
-      notify  => Service['filebeat'],
+      notify  => Service["${service_name}"],
       require => File['filebeat-config-dir'],
     }
     $setup = $filebeat::setup - 'ilm.policy' + {'ilm.policy_file' => "${filebeat::config_dir}/ilm_policy.json"}
@@ -28,6 +28,8 @@ class filebeat::config {
     if 'type' in $output_values { 
       $output = { $output_values['type'] => delete($output_values, 'type') }
       $config_file = regsubst($filebeat::config_file, '.yml', ".${output_name}.yml")
+      $service_output = $output_name
+      $service_name = "${filebeat::module_name}.${output_name}"
     }
     else {
       if $output_name == 'none' {
@@ -38,11 +40,17 @@ class filebeat::config {
       }
       if keys($filebeat::outputs).length <= 1 {
         $config_file = $filebeat::config_file
+        $service_output = $filebeat::module_name
+        $service_name = $filebeat::module_name
       }
       else {
         $config_file = regsubst($filebeat::config_file, '.yml', ".${output_name}.yml")
+        $service_name = $output_name
+        $service_name = "${filebeat::module_name}.${output_name}"
       }
     }
+
+    filebeat::service::add { "${service_output}": }
 
     if versioncmp($major_version, '6') >= 0 {
       $filebeat_config_temp = delete_undef_values({
@@ -140,7 +148,7 @@ class filebeat::config {
           group        => $filebeat::config_file_group,
           mode         => $filebeat::config_file_mode,
           validate_cmd => $validate_cmd,
-          notify       => Service['filebeat'],
+          notify       => Service["${service_name}"],
           require      => File['filebeat-config-dir'],
         }
 
@@ -154,7 +162,7 @@ class filebeat::config {
             recurse => $filebeat::purge_conf_dir,
             purge   => $filebeat::purge_conf_dir,
             force   => true,
-            notify  => Service['filebeat'],
+            notify  => Service["${service_name}"],
           }
         }
       } # end Linux
@@ -173,7 +181,7 @@ class filebeat::config {
           group        => $filebeat::config_file_group,
           mode         => $filebeat::config_file_mode,
           validate_cmd => $validate_cmd,
-          notify       => Service['filebeat'],
+          notify       => Service["${service_name}"],
           require      => File['filebeat-config-dir'],
         }
   
@@ -186,7 +194,7 @@ class filebeat::config {
           recurse => $filebeat::purge_conf_dir,
           purge   => $filebeat::purge_conf_dir,
           force   => true,
-          notify  => Service['filebeat'],
+          notify  => Service["${service_name}"],
         }
       } # end FreeBSD
   
@@ -207,7 +215,7 @@ class filebeat::config {
           group        => $filebeat::config_file_group,
           mode         => $filebeat::config_file_mode,
           validate_cmd => $validate_cmd,
-          notify       => Service['filebeat'],
+          notify       => Service["${service_name}"],
           require      => File['filebeat-config-dir'],
         }
   
@@ -220,7 +228,7 @@ class filebeat::config {
           recurse => $filebeat::purge_conf_dir,
           purge   => $filebeat::purge_conf_dir,
           force   => true,
-          notify  => Service['filebeat'],
+          notify  => Service["${service_name}"],
         }
       } # end OpenBSD
   
@@ -241,7 +249,7 @@ class filebeat::config {
           path         => $filebeat::config_file,
           content      => template($filebeat::conf_template),
           validate_cmd => $validate_cmd,
-          notify       => Service['filebeat'],
+          notify       => Service["${service_name}"],
           require      => File['filebeat-config-dir'],
         }
   

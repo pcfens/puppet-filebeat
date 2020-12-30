@@ -65,5 +65,38 @@ class filebeat::service {
       }
     }
   }
+}
+define filebeat::service::add {
+  if  $::service_provider == 'systemd' {
+    if $name == $filebeat::module_name {
+      $service_name = $name
+    }
+    else {
+      $service_name = "${filebeat::module_name}.${name}"
+      file { "/var/lib/filebeat/${name}":
+        ensure => directory,
+        mode => '0750',
+        owner => $filebeat::config_file_owner,
+        group => $filebeat::config_file_group,
+        before => Systemd::Unit_file["${filebeat::module_name}.${name}.service"],
+      }
+      file { "/var/log/filebeat/${name}":
+        ensure => directory,
+        mode => '0700',
+        owner => $filebeat::config_file_owner,
+        group => $filebeat::config_file_group,
+        before => Systemd::Unit_file["${filebeat::module_name}.${name}.service"],
+      }
+    }
+    systemd::unit_file { "${service_name}.service":
+      content => template($filebeat::systemd_service_template),
+    }
+    ~> service {"${service_name}":
+      ensure => 'running',
+    }
 
+  }
+  else {
+    warning("You\'re trying to add service to systemd for the additional output '${name}', but the system is using '${::service_provider}' instead of systemd.")
+  }
 }
