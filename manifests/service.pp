@@ -4,10 +4,22 @@
 #
 # @summary Manage the filebeat service
 class filebeat::service {
-  service { 'filebeat':
-    ensure   => $filebeat::real_service_ensure,
-    enable   => $filebeat::real_service_enable,
-    provider => $filebeat::service_provider,
+  if keys($filebeat::outputs).length <= 1 {
+    service { 'filebeat':
+      ensure   => $filebeat::real_service_ensure,
+      enable   => $filebeat::real_service_enable,
+      provider => $filebeat::service_provider,
+    }
+  }
+  else {
+    systemd::unit_file { "filebeat.service":
+      content => template($filebeat::systemd_composite_service_template),
+    }
+    ~> service {'filebeat':
+      enable => $filebeat::real_service_enable,
+      ensure => $filebeat::real_service_ensure,
+      provider => $filebeat::service_provider,
+    }
   }
 
   $major_version                  = $filebeat::major_version
@@ -92,7 +104,9 @@ define filebeat::service::add {
       content => template($filebeat::systemd_service_template),
     }
     ~> service {"${service_name}":
-      ensure => 'running',
+      enable => $filebeat::real_service_enable,
+      ensure => $filebeat::real_service_ensure,
+      provider => $filebeat::service_provider,
     }
 
   }

@@ -12,4 +12,4 @@ ExecStart=/usr/share/filebeat/bin/filebeat --environment systemd $BEAT_LOG_OPTS 
 Restart=always
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=filebeat.service
