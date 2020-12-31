@@ -85,7 +85,7 @@ define filebeat::input (
         content      => template("${module_name}/${input_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
-        require      => File['filebeat.yml'],
+        require      => Class['filebeat::config'],
       }
     }
 

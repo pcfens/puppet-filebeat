@@ -13,8 +13,8 @@ class filebeat::install {
       }
       Anchor['filebeat::install::begin'] -> Class['filebeat::install::linux'] -> Anchor['filebeat::install::end']
       if $::filebeat::manage_repo {
-        class { '::filebeat::repo': }
-        Class['filebeat::repo'] -> Class['filebeat::install::linux']
+        include elastic_stack::repo
+        Class['elastic_stack::repo'] -> Class['filebeat::install::linux']
       }
     }
     'FreeBSD': {

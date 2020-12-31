@@ -19,7 +19,7 @@ class filebeat::params {
   $enable_conf_modules      = false
   $fields                   = {}
   $fields_under_root        = false
-  $http                     = {}
+  $http                     = { 'enabled' => false }
   $cloud                    = {}
   $outputs                  = {}
   $shipper                  = {}
@@ -33,6 +33,8 @@ class filebeat::params {
   $xpack                    = undef
   $systemd_override_dir     = '/etc/systemd/system/filebeat.service.d'
   $systemd_beat_log_opts_template = "${module_name}/systemd/logging.conf.erb"
+  $systemd_service_template = "${module_name}/systemd/filebeat.service.erb"
+  $systemd_composite_service_template = "${module_name}/systemd/filebeat.composite.service.erb"
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
