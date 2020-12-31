@@ -185,16 +185,18 @@ class filebeat::config {
           require      => File['filebeat-config-dir'],
         }
   
-        file {'filebeat-config-dir':
-          ensure  => $filebeat::directory_ensure,
-          path    => $filebeat::config_dir,
-          owner   => $filebeat::config_dir_owner,
-          group   => $filebeat::config_dir_group,
-          mode    => $filebeat::config_dir_mode,
-          recurse => $filebeat::purge_conf_dir,
-          purge   => $filebeat::purge_conf_dir,
-          force   => true,
-          notify  => Service["${service_name}"],
+        if !defined(File['filebeat-config-dir']) {
+          file {'filebeat-config-dir':
+            ensure  => $filebeat::directory_ensure,
+            path    => $filebeat::config_dir,
+            owner   => $filebeat::config_dir_owner,
+            group   => $filebeat::config_dir_group,
+            mode    => $filebeat::config_dir_mode,
+            recurse => $filebeat::purge_conf_dir,
+            purge   => $filebeat::purge_conf_dir,
+            force   => true,
+            notify  => Service["${service_name}"],
+          }
         }
       } # end FreeBSD
   
@@ -219,16 +221,18 @@ class filebeat::config {
           require      => File['filebeat-config-dir'],
         }
   
-        file {'filebeat-config-dir':
-          ensure  => $filebeat::directory_ensure,
-          path    => $filebeat::config_dir,
-          owner   => $filebeat::config_dir_owner,
-          group   => $filebeat::config_dir_group,
-          mode    => $filebeat::config_dir_mode,
-          recurse => $filebeat::purge_conf_dir,
-          purge   => $filebeat::purge_conf_dir,
-          force   => true,
-          notify  => Service["${service_name}"],
+        if !defined(File['filebeat-config-dir']) {
+          file {'filebeat-config-dir':
+            ensure  => $filebeat::directory_ensure,
+            path    => $filebeat::config_dir,
+            owner   => $filebeat::config_dir_owner,
+            group   => $filebeat::config_dir_group,
+            mode    => $filebeat::config_dir_mode,
+            recurse => $filebeat::purge_conf_dir,
+            purge   => $filebeat::purge_conf_dir,
+            force   => true,
+            notify  => Service["${service_name}"],
+          }
         }
       } # end OpenBSD
   
@@ -253,12 +257,14 @@ class filebeat::config {
           require      => File['filebeat-config-dir'],
         }
   
-        file {'filebeat-config-dir':
-          ensure  => $filebeat::directory_ensure,
-          path    => $filebeat::config_dir,
-          recurse => $filebeat::purge_conf_dir,
-          purge   => $filebeat::purge_conf_dir,
-          force   => true,
+        if !defined(File['filebeat-config-dir']) {
+          file {'filebeat-config-dir':
+            ensure  => $filebeat::directory_ensure,
+            path    => $filebeat::config_dir,
+            recurse => $filebeat::purge_conf_dir,
+            purge   => $filebeat::purge_conf_dir,
+            force   => true,
+          }
         }
       } # end Windows
   
