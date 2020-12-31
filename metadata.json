@@ -27,6 +27,14 @@
     {
       "name": "puppetlabs/yumrepo_core",
       "version_requirement": ">= 1.0.0 < 2.0.0"
+    },
+    {
+      "name": "camptocamp-systemd",
+      "version_requirement": ">= 2.0.0 < 3.0.0"
+    },
+    {
+      "name": "elastic-elastic_stack",
+      "version_requirement": ">= 7.0.0 < 8.0.0"
     }
   ],
   "operatingsystem_support": [
