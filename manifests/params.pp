@@ -24,6 +24,7 @@ class filebeat::params {
   $outputs                  = {}
   $shipper                  = {}
   $logging                  = {}
+  $autodiscover             = {}
   $run_options              = {}
   $modules                  = []
   $kernel_fail_message      = "${::kernel} is not supported by filebeat."
