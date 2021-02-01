@@ -42,6 +42,7 @@ class filebeat::config {
       'output'            => $filebeat::outputs,
       'shipper'           => $filebeat::shipper,
       'logging'           => $filebeat::logging,
+      'autodiscover'      => $filebeat::autodiscover,
       'runoptions'        => $filebeat::run_options,
       'processors'        => $filebeat::processors,
       'monitoring'        => $filebeat::monitoring,

@@ -50,6 +50,7 @@
 # proxy_address [String] Proxy server to use for downloading files
 # @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
 # @param extra_validate_options [String] Extra command line options to pass to the configuration validation command
+# @param autodiscover [Hash] Will be converted to YAML for the optional autodiscover section of the configuration (see documentation, and above)
 class filebeat (
   String  $package_ensure                                             = $filebeat::params::package_ensure,
   Boolean $manage_repo                                                = $filebeat::params::manage_repo,
@@ -106,6 +107,7 @@ class filebeat (
   String $systemd_beat_log_opts_template                              = $filebeat::params::systemd_beat_log_opts_template,
   String $systemd_override_dir                                        = $filebeat::params::systemd_override_dir,
   Optional[String] $extra_validate_options                            = undef,
+  Hash $autodiscover                                                  = $filebeat::params::autodiscover,
 
 ) inherits filebeat::params {
 

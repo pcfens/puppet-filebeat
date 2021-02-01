@@ -280,6 +280,7 @@ Installs and configures filebeat.
 - `cloud`: [Hash] Will be converted to YAML for the optional cloud.id and cloud.auth of the configuration (see documentation, and above)
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
+- `autodiscover`: [Hash] Will be converted to YAML for the optional autodiscover section of the configuration (see documentation, and above)`
 - `logging`: [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
 - `systemd_beat_log_opts_override`: [String] Will overide the default `BEAT_LOG_OPTS=-e`. Required if using `logging` hash on systems running with systemd. required: Puppet 6.1+, Filebeat 7+,
 - `modules`: [Array] Will be converted to YAML to create the optional modules section of the filebeat config (see documentation)
