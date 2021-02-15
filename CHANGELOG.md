@@ -2,9 +2,15 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.1...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.9.0...HEAD)
+
+## [v4.9.0](https://github.com/pcfens/puppet-filebeat/tree/v4.9.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.8.0...v4.9.0)
+
 
 - Make pipeline available in all inputs [\#275](https://github.com/pcfens/puppet-filebeat/pull/275)
+- Support autodiscovery [\#278](https://github.com/pcfens/puppet-filebeat/pull/278)
+- Support `close_timeout` as a string [\#279](https://github.com/pcfens/puppet-filebeat/pull/279)
 
 ## [v4.8.0](https://github.com/pcfens/puppet-filebeat/tree/v4.8.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.0...v4.8.0)
