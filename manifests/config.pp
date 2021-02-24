@@ -48,12 +48,18 @@ class filebeat::config {
       'monitoring'        => $filebeat::monitoring,
       'setup'             => $setup,
     })
+    # Add the migration.6_to_7.enabled section, if requested:
+    if $filebeat::migrate_67 {
+      $filebeat_config_temp_migrate = deep_merge($filebeat_config_temp, { 'migration.6_to_7.enabled' => true })
+    } else {
+      $filebeat_config_temp_migrate = $filebeat_config_temp
+    }
     # Add the 'xpack' section if supported (version >= 6.1.0) and not undef
     if $filebeat::xpack and versioncmp($filebeat::package_ensure, '6.1.0') >= 0 {
-      $filebeat_config = deep_merge($filebeat_config_temp, {'xpack' => $filebeat::xpack})
+      $filebeat_config = deep_merge($filebeat_config_temp_migrate, {'xpack' => $filebeat::xpack})
     }
     else {
-      $filebeat_config = $filebeat_config_temp
+      $filebeat_config = $filebeat_config_temp_migrate
     }
   } else {
     $filebeat_config_temp = delete_undef_values({

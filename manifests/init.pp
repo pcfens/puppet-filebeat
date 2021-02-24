@@ -49,6 +49,7 @@
 # @param inputs_merge [Boolean] Whether $inputs should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
 # @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
+# @param migrate_67 [Boolean] Decides whether to add the migration.6_to_7.enabled setting (default: false)
 # @param extra_validate_options [String] Extra command line options to pass to the configuration validation command
 # @param autodiscover [Hash] Will be converted to YAML for the optional autodiscover section of the configuration (see documentation, and above)
 class filebeat (
@@ -91,6 +92,7 @@ class filebeat (
   Hash $fields                                                        = $filebeat::params::fields,
   Boolean $fields_under_root                                          = $filebeat::params::fields_under_root,
   Boolean $disable_config_test                                        = $filebeat::params::disable_config_test,
+  Boolean $migrate_67                                                 = $filebeat::params::migrate_67,
   Array   $processors                                                 = [],
   Optional[Hash]  $monitoring                                         = undef,
   Variant[Hash, Array] $inputs                                        = {},
