@@ -10,6 +10,21 @@ describe 'filebeat::input' do
             ],
           },
         },
+        inputs => [
+          {
+            "type" => "logs",
+            "paths" => [
+              "/var/log/auth.log",
+              "/var/log/syslog",
+            ],
+          },
+          {
+            "type" => "syslog",
+            "protocol.tcp" => {
+              "host" => "0.0.0.0:514",
+            },
+          },
+        ],
       }'
   end
 
@@ -59,6 +74,33 @@ describe 'filebeat::input' do
           )
           is_expected.to contain_file('filebeat-docker').with_content(
             %r{- type: docker\n\s{2}containers:\n\s{4}ids:\n\s{4}- '\*'\n\s{4}path: /var/lib/docker/containers\n\s{4}stream: all\n\s{2}combine_partial: false\n\s{2}cri.parse_flags: false\n},
+          )
+        }
+      end
+    end
+  end
+
+  on_supported_os(facterversion: '2.4').each do |os, os_facts|
+    context "with array input support on #{os}" do
+      let(:facts) { os_facts }
+
+      # Docker Support
+      let(:title) { 'test-array' }
+      let(:params) do
+        {
+          'pure_array' => true,
+        }
+      end
+
+      if os_facts[:kernel] == 'Linux'
+        it { is_expected.to compile }
+
+        it {
+          is_expected.to contain_file('filebeat-test-array').with(
+            notify: 'Service[filebeat]',
+          )
+          is_expected.to contain_file('filebeat-test-array').with_content(
+            %r{- type: logs\n\s{2}paths:\n\s{2}- "/var/log/auth.log"\n\s{2}- "/var/log/syslog"\n- type: syslog\n\s{2}protocol.tcp:\n\s{4}host: 0.0.0.0:514\n},
           )
         }
       end

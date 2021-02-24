@@ -24,9 +24,9 @@ describe 'filebeat::config' do
 
             case major_version
             when 5
-              "#{path} -N -configtest -c %"
+              "#{path}  -N -configtest -c %"
             else
-              "#{path} -c % test config"
+              "#{path}  -c % test config"
             end
           end
 
@@ -45,6 +45,13 @@ describe 'filebeat::config' do
                 require: 'File[filebeat-config-dir]',
               )
             }
+            context 'with added extra_validate_options parameter' do
+              let(:pre_condition) { "class { 'filebeat': major_version => '#{major_version}', extra_validate_options => '--foo'}" }
+
+              it {
+                is_expected.to contain_file('filebeat.yml').with_validate_cmd(%r{filebeat --foo})
+              }
+            end
 
             it {
               is_expected.to contain_file('filebeat-config-dir').with(

@@ -2,32 +2,89 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.2.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.9.0...HEAD)
 
-- Support setting index index lifecycle policy [#\238](https://github.com/pcfens/puppet-filebeat/pull/238)
+## [v4.9.0](https://github.com/pcfens/puppet-filebeat/tree/v4.9.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.8.0...v4.9.0)
+
+
+- Make pipeline available in all inputs [\#275](https://github.com/pcfens/puppet-filebeat/pull/275)
+- Support autodiscovery [\#278](https://github.com/pcfens/puppet-filebeat/pull/278)
+- Support `close_timeout` as a string [\#279](https://github.com/pcfens/puppet-filebeat/pull/279)
+
+## [v4.8.0](https://github.com/pcfens/puppet-filebeat/tree/v4.8.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.7.0...v4.8.0)
+
+- Update powershell dependency constraints [\#268](https://github.com/pcfens/puppet-filebeat/pull/268)
+- Support ES cloud credentials [\267](https://github.com/pcfens/puppet-filebeat/pull/267)
+
+## [v4.7.0](https://github.com/pcfens/puppet-filebeat/tree/v4.7.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.6.0...v4.7.0)
+
+- Add `extra_validation_options` when validating the config [\#265](https://github.com/pcfens/puppet-filebeat/pull/265)
+
+## [v4.6.0](https://github.com/pcfens/puppet-filebeat/tree/v4.6.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.5.0...v4.6.0)
+
+- Allow processors to be applied to all inputs, and consolidated common configuration [\#260](https://github.com/pcfens/puppet-filebeat/pull/260)
+
+## [v4.5.0](https://github.com/pcfens/puppet-filebeat/tree/v4.5.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.2...v4.5.0)
+
+- Restart filebeat when config files are removed [\#258](https://github.com/pcfens/puppet-filebeat/pull/258)
+- Support TCP and UDP input plugins [\#259](https://github.com/pcfens/puppet-filebeat/pull/259)
+
+## [v4.4.2](https://github.com/pcfens/puppet-filebeat/tree/v4.4.2)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.1...v4.4.2)
+
+- Fix empty monitoring parameter [\#257](https://github.com/pcfens/puppet-filebeat/issues/257)
+
+## [v4.4.1](https://github.com/pcfens/puppet-filebeat/tree/v4.4.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.4.0...v4.4.1)
+
+- Fix powershell module version dependency [\#256](https://github.com/pcfens/puppet-filebeat/pull/256
+
+## [v4.4.0](https://github.com/pcfens/puppet-filebeat/tree/v4.4.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.3.1...v4.4.0)
+
+- Add the ability to supply the monitoring.* of the config file [\#252](https://github.com/pcfens/puppet-filebeat/issues/252)
+- Add support for Windows Server 2016 and 2019 Core editions [\#255](https://github.com/pcfens/puppet-filebeat/pull/255)
+
+## [v4.3.1](https://github.com/pcfens/puppet-filebeat/tree/v4.3.1)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.3.0...v4.3.1)
+
+- Allow fields and tags to be defined for any input type [\#249](https://github.com/pcfens/puppet-filebeat/pull/249)
+
+## [v4.3.0](https://github.com/pcfens/puppet-filebeat/tree/v4.3.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.2.0...v4.3.0)
+
+- Support setting index index lifecycle policy [\#238](https://github.com/pcfens/puppet-filebeat/pull/238)
+- Support logging overrides with Puppet older than 6.1 [\#241](https://github.com/pcfens/puppet-filebeat/pull/241)
+- Allow inputs to be defined using just a hash (supports open ended inputs) [\#236](https://github.com/pcfens/puppet-filebeat/pull/236)
+
 
 ## [v4.2.0](https://github.com/pcfens/puppet-filebeat/tree/v4.2.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.2...v4.2.0)
 
 - Fix regression of processors type
-- Add support for syslog inputs [#\232](https://github.com/pcfens/puppet-filebeat/pull/233)
+- Add support for syslog inputs [\#232](https://github.com/pcfens/puppet-filebeat/pull/233)
 - Upgrade PDK to 1.15.0
 
 ## [v4.1.2](https://github.com/pcfens/puppet-filebeat/tree/v4.1.2)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.1...v4.1.2)
 
-- Fix hardocded path to yum [#\229](https://github.com/pcfens/puppet-filebeat/pull/229)
+- Fix hardocded path to yum [\#229](https://github.com/pcfens/puppet-filebeat/pull/229)
 
 ## [v4.1.1](https://github.com/pcfens/puppet-filebeat/tree/v4.1.1)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.1.0...v4.1.1)
 
-- Support old versions of filebeat for a version fact only [#\227](https://github.com/pcfens/puppet-filebeat/pull/227)
-- Fix the processor input data type [#\228](https://github.com/pcfens/puppet-filebeat/issues/228)
+- Support old versions of filebeat for a version fact only [\#227](https://github.com/pcfens/puppet-filebeat/pull/227)
+- Fix the processor input data type [\#228](https://github.com/pcfens/puppet-filebeat/issues/228)
 
 ## [v4.1.0](https://github.com/pcfens/puppet-filebeat/tree/v4.1.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.5...v4.1.0)
 
-- Allow for override of the default systemd logging options [#\223](https://github.com/pcfens/puppet-filebeat/pull/223)
+- Allow for override of the default systemd logging options [\#223](https://github.com/pcfens/puppet-filebeat/pull/223)
 
 ## [v4.0.5](https://github.com/pcfens/puppet-filebeat/tree/v4.0.5)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.0.4...v4.0.5)

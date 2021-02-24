@@ -37,7 +37,7 @@ define filebeat::input (
   Boolean $close_eof                       = false,
   Variant[String, Integer] $clean_inactive = 0,
   Boolean $clean_removed                   = true,
-  Integer $close_timeout                   = 0,
+  Variant[Integer,String] $close_timeout   = 0,
   Boolean $force_close_files               = false,
   Array[String] $include_lines             = [],
   Array[String] $exclude_lines             = [],
@@ -48,11 +48,14 @@ define filebeat::input (
   Boolean $symlinks                        = false,
   Optional[String] $pipeline               = undef,
   Array $processors                        = [],
+  Boolean $pure_array                      = false,
+  String $host                             = 'localhost:9000',
+  Optional[String] $max_message_size       = undef,
 ) {
 
   $input_template = $filebeat::major_version ? {
-    '5'     => 'prospector5.yml.erb',
-    default => 'prospector.yml.erb',
+    '5'     => 'prospector.yml.erb',
+    default => 'input.yml.erb',
   }
 
   if 'filebeat_version' in $facts and $facts['filebeat_version'] != false {

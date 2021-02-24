@@ -20,9 +20,11 @@ class filebeat::params {
   $fields                   = {}
   $fields_under_root        = false
   $http                     = {}
+  $cloud                    = {}
   $outputs                  = {}
   $shipper                  = {}
   $logging                  = {}
+  $autodiscover             = {}
   $run_options              = {}
   $modules                  = []
   $kernel_fail_message      = "${::kernel} is not supported by filebeat."

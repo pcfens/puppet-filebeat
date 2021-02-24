@@ -37,8 +37,20 @@ class filebeat::install::windows {
     proxy_server => $filebeat::proxy_address,
   }
 
+  # Core editions of Windows Server do not have a shell as such, so use the Shell.Application COM object doesn't work.
+  # Expand-Archive is a native powershell cmdlet which ships with Powershell 5, which in turn ships with Windows 10 and 
+  # Windows Server 2016 and newer.
+  if ((versioncmp($::operatingsystemrelease, '2016') > 0) or (versioncmp($::operatingsystemrelease, '10') == 0))
+  {
+    $unzip_command = "Expand-Archive ${zip_file} \"${filebeat::install_dir}\""
+  }
+  else
+  {
+    $unzip_command = "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${zip_file}')).items(), 16)" # lint:ignore:140chars
+  }
+
   exec { "unzip ${filename}":
-    command => "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${zip_file}')).items(), 16)", # lint:ignore:140chars
+    command => $unzip_command,
     creates => $version_file,
     require => [
       File[$filebeat::install_dir],

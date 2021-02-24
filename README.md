@@ -138,6 +138,9 @@ input declarations down the hiera hierarchy. That behavior can be changed by con
 [lookup_options](https://docs.puppet.com/puppet/latest/reference/lookup_quick.html#setting-lookupoptions-in-data)
 flag.
 
+`inputs` can be a Hash that will follow all the parameters listed on this documentation or an
+Array that will output as is to the input config file.
+
 ### Usage on Windows
 
 When installing on Windows, this module will download the windows version of Filebeat from
@@ -155,41 +158,49 @@ processors using hiera), or as their own defined resources.
 To drop the offset and input_type fields from all events:
 
 ```puppet
-class{"filebeat":
-  processors => {
-    "drop_fields" => {
-      "fields" => ["input_type", "offset"],
-    },
-  },
+class {'filebeat':
+  processors => [
+    {
+      'drop_fields' => {
+        'fields' => ['input_type', 'offset'],
+      }
+    }
+  ],
 }
 ```
 
 To drop all events that have the http response code equal to 200:
 input
 ```puppet
-class{"filebeat":
-  processors => {
-    "drop_event" => {
-      "when" => {"equals" => {"http.code" => 200}}
-    },
-  },
+class {'filebeat':
+  processors => [
+    {
+      'drop_event' => {
+        'when' => {'equals' => {'http.code' => 200}}
+      }
+    }
+  ],
 }
 ```
 
 Now to combine these examples into a single definition:
 
 ```puppet
-class{"filebeat":
-  processors => {
-    "drop_fields" => {
-      "params"   => {"fields" => ["input_type", "offset"]},
-      "priority" => 1,
+class {'filebeat':
+  processors => [
+    {
+      'drop_fields' => {
+        'params'   => {'fields' => ['input_type', 'offset']},
+        'priority' => 1,
+      }
     },
-    "drop_event" => {
-      "when"     => {"equals" => {"http.code" => 200}},
-      "priority: => 2,
-    },
-  },
+    {
+      'drop_event' => {
+        'when'     => {'equals' => {'http.code' => 200}},
+        'priority' => 2,
+      }
+    }
+  ],
 }
 ```
 
@@ -266,8 +277,10 @@ Installs and configures filebeat.
 - `purge_conf_dir`: [Boolean] Should files in the input configuration directory not managed by puppet be automatically purged
 - `enable_conf_modules`: [Boolean] Should filebeat.config.modules be enabled
 - `modules_dir`: [String] The directory where module configurations should be defined (default: /etc/filebeat/modules.d)
+- `cloud`: [Hash] Will be converted to YAML for the optional cloud.id and cloud.auth of the configuration (see documentation, and above)
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
+- `autodiscover`: [Hash] Will be converted to YAML for the optional autodiscover section of the configuration (see documentation, and above)`
 - `logging`: [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
 - `systemd_beat_log_opts_override`: [String] Will overide the default `BEAT_LOG_OPTS=-e`. Required if using `logging` hash on systems running with systemd. required: Puppet 6.1+, Filebeat 7+,
 - `modules`: [Array] Will be converted to YAML to create the optional modules section of the filebeat config (see documentation)
@@ -276,16 +289,18 @@ Installs and configures filebeat.
 - `install_dir`: [String] Where filebeat should be installed (windows only)
 - `tmp_dir`: [String] Where filebeat should be temporarily downloaded to so it can be installed (windows only)
 - `shutdown_timeout`: [String] How long filebeat waits on shutdown for the publisher to finish sending events
-- `beat_name`: [String] The name of the beat shipper (default: hostname)
+- `beat_name`: [String] The name of the beat shipper (default: FQDN)
 - `tags`: [Array] A list of tags that will be included with each published transaction
 - `max_procs`: [Number] The maximum number of CPUs that can be simultaneously used
 - `fields`: [Hash] Optional fields that should be added to each event output
 - `fields_under_root`: [Boolean] If set to true, custom fields are stored in the top level instead of under fields
 - `disable_config_test`: [Boolean] If set to true, configuration tests won't be run on config files before writing them.
-- `processors`: [Hash] Processors that should be configured.
-- `inputs`: [Hash] Inputs that will be created. Commonly used to create inputs using hiera
+- `processors`: [Array] Processors that should be configured.
+- `monitoring`: [Hash] The monitoring.* components of the filebeat configuration.
+- `inputs`: [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
 - `setup`: [Hash] Setup that will be created. Commonly used to create setup using hiera
 - `xpack`: [Hash] XPack configuration to pass to filebeat
+- `extra_validate_options`: [String] Extra command line options to pass to the configuration validation command.
 
 ### Private Classes
 
@@ -366,6 +381,8 @@ to fully understand what these parameters do.
     [See above](#json-logs). (default: {})
   - `multiline`: [Hash] Options that control how Filebeat handles log messages that span multiple lines.
     [See above](#multiline-logs). (default: {})
+  - `host`: [String] Host and port used to read events for TCP or UDP plugin (default: localhost:9000)
+  - `max_message_size`: [String] The maximum size of the message received over TCP or UDP (default: undef)
 
 ## Limitations
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping

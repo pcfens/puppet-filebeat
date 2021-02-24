@@ -1,6 +1,6 @@
 {
   "name": "pcfens-filebeat",
-  "version": "4.2.0",
+  "version": "4.9.0",
   "author": "pcfens",
   "summary": "A module to install and manage the filebeat log shipper",
   "license": "Apache-2.0",
@@ -18,7 +18,7 @@
     },
     {
       "name": "puppetlabs/powershell",
-      "version_requirement": ">= 1.0.1 < 3.0.0"
+      "version_requirement": ">= 1.0.1 < 5.0.0"
     },
     {
       "name": "puppet/archive",
@@ -80,14 +80,17 @@
       "operatingsystemrelease": [
         "14.04",
         "16.04",
-        "18.04"
+        "18.04",
+        "20.04"
       ]
     },
     {
       "operatingsystem": "windows",
       "operatingsystemrelease": [
         "2012",
-        "2012 R2"
+        "2012 R2",
+        "2016",
+        "2019"
       ]
     },
     {
@@ -97,7 +100,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.0.0 < 7.0.0"
+      "version_requirement": ">= 4.0.0 < 8.0.0"
     }
   ],
   "tags": [
@@ -106,7 +109,7 @@
     "elasticsearch",
     "elastic"
   ],
-  "pdk-version": "1.15.0",
-  "template-url": "pdk-default#1.15.0",
-  "template-ref": "tags/1.15.0-0-g0bc522e"
+  "pdk-version": "1.18.1",
+  "template-url": "pdk-default#1.18.1",
+  "template-ref": "tags/1.18.1-0-g3d2e75c"
 }
