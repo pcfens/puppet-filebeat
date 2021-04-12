@@ -4,6 +4,7 @@
 #
 # @summary Set a bunch of default parameters
 class filebeat::params {
+  $manage_package           = true
   $service_ensure           = running
   $service_enable           = true
   $spool_size               = 2048
