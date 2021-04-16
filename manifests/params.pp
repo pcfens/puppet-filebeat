@@ -96,13 +96,13 @@ class filebeat::params {
 
     'FreeBSD': {
       $package_ensure    = present
-      $config_file       = '/usr/local/etc/filebeat.yml'
-      $config_dir        = '/usr/local/etc/filebeat.d'
+      $config_file       = '/usr/local/etc/beats/filebeat.yml'
+      $config_dir        = '/usr/local/etc/beats/filebeat.d'
       $config_file_owner = 'root'
       $config_file_group = 'wheel'
       $config_dir_owner  = 'root'
       $config_dir_group  = 'wheel'
-      $modules_dir       = '/usr/local/etc/filebeat.modules.d'
+      $modules_dir       = '/usr/local/etc/beats/filebeat.modules.d'
       $tmp_dir           = '/tmp'
       $service_provider  = undef
       $install_dir       = undef
