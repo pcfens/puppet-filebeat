@@ -2,7 +2,10 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.9.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.10.0...HEAD)
+
+## [v4.10.0](https://github.com/pcfens/puppet-filebeat/tree/v4.10.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.9.0...v4.10.0)
 
 - Add a parameter to skip managing the filebeat package [\#281](https://github.com/pcfens/puppet-filebeat/pull/281)
 - Improve FreeBSD Support [\#282](https://github.com/pcfens/puppet-filebeat/pull/282)
