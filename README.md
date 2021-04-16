@@ -4,27 +4,42 @@
 
 #### Table of Contents
 
-1. [Description](#description)
-2. [Setup - The basics of getting started with filebeat](#setup)
+- [puppet-filebeat](#puppet-filebeat)
+      - [Table of Contents](#table-of-contents)
+  - [Description](#description)
+  - [Setup](#setup)
     - [What filebeat affects](#what-filebeat-affects)
-    - [Setup requirements](#setup-requirements)
+    - [Upgrading to Filebeat 7.x](#upgrading-to-filebeat-7x)
+    - [Setup Requirements](#setup-requirements)
     - [Beginning with filebeat](#beginning-with-filebeat)
-3. [Usage - Configuration options and additional functionality](#usage)
+  - [Usage](#usage)
     - [Adding an Input](#adding-an-input)
       - [Multiline Logs](#multiline-logs)
-      - [JSON logs](#json-logs)
-    - [Inputs in hiera](#inputs-in-hiera)
+      - [JSON Logs](#json-logs)
+    - [Inputs in Hiera](#inputs-in-hiera)
     - [Usage on Windows](#usage-on-windows)
     - [Processors](#processors)
+      - [Processors in Hiera](#processors-in-hiera)
     - [Index Lifecycle Management](#index-lifecycle-management)
-4. [Reference](#reference)
+  - [Reference](#reference)
     - [Public Classes](#public-classes)
+      - [Class: `filebeat`](#class-filebeat)
     - [Private Classes](#private-classes)
+      - [Class: `filebeat::config`](#class-filebeatconfig)
+      - [Class: `filebeat::install`](#class-filebeatinstall)
+      - [Class: `filebeat::params`](#class-filebeatparams)
+      - [Class: `filebeat::repo`](#class-filebeatrepo)
+      - [Class: `filebeat::service`](#class-filebeatservice)
+      - [Class: `filebeat::install::linux`](#class-filebeatinstalllinux)
+      - [Class: `filebeat::install::windows`](#class-filebeatinstallwindows)
     - [Public Defines](#public-defines)
-5. [Limitations - OS compatibility, etc.](#limitations)
-    - [Pre-1.9.1 Ruby](#pre-191-ruby)
+      - [Define: `filebeat::input`](#define-filebeatinput)
+  - [Limitations](#limitations)
+    - [Generic template](#generic-template)
+    - [Debian Systems](#debian-systems)
     - [Using config_file](#using-config_file)
-6. [Development - Guide for contributing to the module](#development)
+    - [Logging on systems with Systemd and with version filebeat 7.0+ installed](#logging-on-systems-with-systemd-and-with-version-filebeat-70-installed)
+  - [Development](#development)
 
 ## Description
 
@@ -254,6 +269,7 @@ Installs and configures filebeat.
 - `package_ensure`: [String] The ensure parameter for the filebeat package If set to absent,
   inputs and processors passed as parameters are ignored and everything managed by
   puppet will be removed. (default: present)
+- `manage_package`: [Boolean] Whether ot not to manage the installation of the package (default: true)
 - `manage_repo`: [Boolean] Whether or not the upstream (elastic) repo should be configured or not (default: true)
 - `major_version`: [Enum] The major version of Filebeat to install. Should be either `'5'` or `'6'`. The default value is `'6'`, except
    for OpenBSD 6.3 and earlier, which has a default value of `'5'`.

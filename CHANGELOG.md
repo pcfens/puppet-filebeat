@@ -4,9 +4,10 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.9.0...HEAD)
 
+- Add a parameter to skip managing the filebeat package [\#281](https://github.com/pcfens/puppet-filebeat/pull/281)
+
 ## [v4.9.0](https://github.com/pcfens/puppet-filebeat/tree/v4.9.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.8.0...v4.9.0)
-
 
 - Make pipeline available in all inputs [\#275](https://github.com/pcfens/puppet-filebeat/pull/275)
 - Support autodiscovery [\#278](https://github.com/pcfens/puppet-filebeat/pull/278)
