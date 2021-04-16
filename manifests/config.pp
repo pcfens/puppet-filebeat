@@ -134,7 +134,10 @@ class filebeat::config {
     'FreeBSD'   : {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
-        default => '/usr/local/sbin/filebeat ${filebeat::extra_validate_options} -N -configtest -c %',
+        default => $major_version ? {
+          '5'     => "/usr/local/sbin/filebeat ${filebeat::extra_validate_options} -N -configtest -c %",
+          default => "/usr/local/sbin/filebeat ${filebeat::extra_validate_options} -c % test config",
+        },
       }
 
       file {'filebeat.yml':

@@ -92,7 +92,10 @@ define filebeat::input (
     'FreeBSD' : {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
-        default => '/usr/local/sbin/filebeat -N -configtest -c %',
+        default => $filebeat::major_version ? {
+          '5'     => "/usr/local/sbin/filebeat -N -configtest -c %",
+          default => "/usr/local/sbin/filebeat -c ${filebeat::config_file} test config",
+        },
       }
       file { "filebeat-${name}":
         ensure       => $ensure,
