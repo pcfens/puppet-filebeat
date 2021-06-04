@@ -110,6 +110,9 @@ class filebeat (
   String $systemd_override_dir                                        = $filebeat::params::systemd_override_dir,
   Optional[String] $extra_validate_options                            = undef,
   Hash $autodiscover                                                  = $filebeat::params::autodiscover,
+  Optional[String] $registry_path                                     = $filebeat::params::registry_path,
+  Optional[String] $registry_file_permissions                         = $filebeat::params::registry_file_permissions,
+  Optional[String] $registry_flush                                    = $filebeat::params::registry_flush,
 
 ) inherits filebeat::params {
 
