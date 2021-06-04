@@ -19,7 +19,6 @@ class filebeat::config {
 
   if versioncmp($major_version, '6') >= 0 {
     $filebeat_config_temp = delete_undef_values({
-      'shutdown_timeout'  => $filebeat::shutdown_timeout,
       'name'              => $filebeat::beat_name,
       'tags'              => $filebeat::tags,
       'max_procs'         => $filebeat::max_procs,
@@ -36,6 +35,11 @@ class filebeat::config {
         },
         'shutdown_timeout'   => $filebeat::shutdown_timeout,
         'modules'           => $filebeat::modules,
+        'registry'          => {
+          'path'             => $filebeat::registry_path,
+          'file_permissions' => $filebeat::registry_file_permissions,
+          'flush'            => $filebeat::registry_flush,
+        },
       },
       'http'              => $filebeat::http,
       'cloud'             => $filebeat::cloud,
