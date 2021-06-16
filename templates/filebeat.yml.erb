@@ -6,6 +6,7 @@ filebeat.publish_async: <%= @filebeat_config['filebeat']['publish_async'] %>
 filebeat.idle_timeout: <%= @filebeat_config['filebeat']['idle_timeout'] %>
 <% end -%>
 filebeat.config_dir: <%= @filebeat_config['filebeat']['config_dir'] %>
+filebeat.overwrite_pipelines: <%= @filebeat_config['filebeat']['overwrite_pipelines'] %>
 filebeat.shutdown_timeout: <%= @filebeat_config['filebeat']['shutdown_timeout'] %>
 filebeat.registry.path: <%= @filebeat_config['filebeat']['registry']['path'] %>
 filebeat.registry.file_permissions: <%= @filebeat_config['filebeat']['registry']['file_permissions'] %>
