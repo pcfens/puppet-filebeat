@@ -317,6 +317,7 @@ Installs and configures filebeat.
 - `setup`: [Hash] Setup that will be created. Commonly used to create setup using hiera
 - `xpack`: [Hash] XPack configuration to pass to filebeat
 - `extra_validate_options`: [String] Extra command line options to pass to the configuration validation command.
+- `overwrite_pipelines`: [Boolean] If set to true, filebeat will overwrite existing pipelines.
 
 ### Private Classes
 

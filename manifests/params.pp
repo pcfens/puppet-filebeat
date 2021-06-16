@@ -28,6 +28,7 @@ class filebeat::params {
   $autodiscover                   = {}
   $run_options                    = {}
   $modules                        = []
+  $overwrite_pipelines            = false
   $kernel_fail_message            = "${::kernel} is not supported by filebeat."
   $osfamily_fail_message          = "${::osfamily} is not supported by filebeat."
   $conf_template                  = "${module_name}/pure_hash.yml.erb"
