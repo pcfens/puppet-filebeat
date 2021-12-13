@@ -198,6 +198,11 @@
     <%- end -%>
   <%- end -%>
   fields_under_root: <%= @fields_under_root %>
+  ssl:
+    <%- @ssl.each_pair do |k, v| -%>
+    <%= k %>: <%= v %>
+    <%- end -%>
+  <%- end -%>
   <%- if @tags.length > 0 -%>
   tags:
     <%- @tags.each do |tag| -%>
