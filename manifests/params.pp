@@ -20,7 +20,6 @@ class filebeat::params {
   $enable_conf_modules            = false
   $fields                         = {}
   $fields_under_root              = false
-  $ssl                            = {}
   $http                           = {}
   $cloud                          = {}
   $outputs                        = {}
