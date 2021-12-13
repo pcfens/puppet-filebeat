@@ -43,6 +43,7 @@
 # @param max_procs [Integer] The maximum number of CPUs that can be simultaneously used
 # @param fields [Hash] Optional fields that should be added to each event output
 # @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
+# @param ssl [Hash] Optional fields set the ssl-configuration for input
 # @param processors [Array] Processors that will be added. Commonly used to create processors using hiera.
 # @param monitoring [Hash] The monitoring section of the configuration file.
 # @param inputs [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
@@ -93,6 +94,7 @@ class filebeat (
   Optional[Integer] $max_procs                                        = $filebeat::params::max_procs,
   Hash $fields                                                        = $filebeat::params::fields,
   Boolean $fields_under_root                                          = $filebeat::params::fields_under_root,
+  Hash $ssl                                                           = $filebeat::params::ssl,
   Boolean $disable_config_test                                        = $filebeat::params::disable_config_test,
   Array   $processors                                                 = [],
   Optional[Hash]  $monitoring                                         = undef,
