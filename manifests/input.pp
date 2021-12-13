@@ -21,6 +21,7 @@ define filebeat::input (
   String $input_type                       = 'log',
   Hash $fields                             = {},
   Boolean $fields_under_root               = $filebeat::fields_under_root,
+  Hash $ssl                                = {},
   Optional[String] $ignore_older           = undef,
   Optional[String] $close_older            = undef,
   String $doc_type                         = 'log',
