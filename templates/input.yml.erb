@@ -198,6 +198,7 @@
     <%- end -%>
   <%- end -%>
   fields_under_root: <%= @fields_under_root %>
+  <%- if @ssl.length > 0 -%>  
   ssl:
     <%- @ssl.each_pair do |k, v| -%>
     <%= k %>: <%= v %>
