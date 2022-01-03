@@ -137,6 +137,36 @@ class filebeat::config {
       }
     } # end Linux
 
+    'SunOS'   : {
+      $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
+        true    => undef,
+        default => '/opt/local/bin/filebeat test config -c %',
+      }
+
+      file {'filebeat.yml':
+        ensure       => $filebeat::file_ensure,
+        path         => $filebeat::config_file,
+        content      => template($filebeat::conf_template),
+        owner        => $filebeat::config_file_owner,
+        group        => $filebeat::config_file_group,
+        mode         => $filebeat::config_file_mode,
+        validate_cmd => $validate_cmd,
+        notify       => Service['filebeat'],
+        require      => File['filebeat-config-dir'],
+      }
+
+      file {'filebeat-config-dir':
+        ensure  => $filebeat::directory_ensure,
+        path    => $filebeat::config_dir,
+        owner   => $filebeat::config_dir_owner,
+        group   => $filebeat::config_dir_group,
+        mode    => $filebeat::config_dir_mode,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
+        force   => true,
+      }
+    } # end SunOS
+
     'FreeBSD'   : {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,

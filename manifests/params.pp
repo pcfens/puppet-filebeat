@@ -100,6 +100,21 @@ class filebeat::params {
       $url_arch        = undef
     }
 
+    'SunOS': {
+      $package_ensure    = present
+      $config_file       = '/opt/local/etc/beats/filebeat.yml'
+      $config_dir        = '/opt/local/etc/filebeat.d'
+      $config_file_owner = 'root'
+      $config_file_group = 'root'
+      $config_dir_owner  = 'root'
+      $config_dir_group  = 'root'
+      $modules_dir       = '/opt/local/etc/filebeat.modules.d'
+      $tmp_dir           = '/tmp'
+      $service_provider  = undef
+      $install_dir       = undef
+      $url_arch          = undef
+    }
+
     'FreeBSD': {
       $package_ensure    = present
       $config_file       = '/usr/local/etc/beats/filebeat.yml'
