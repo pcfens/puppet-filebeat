@@ -18,7 +18,7 @@ define filebeat::input (
   String $syslog_host                      = 'localhost:5140',
   Boolean $cri_parse_flags                 = false,
   String $encoding                         = 'plain',
-  String $input_type                       = 'log',
+  String $input_type                       = $filebeat::params::default_input_type,
   Hash $fields                             = {},
   Boolean $fields_under_root               = $filebeat::fields_under_root,
   Hash $ssl                                = {},
@@ -54,9 +54,12 @@ define filebeat::input (
   Optional[String] $max_message_size       = undef,
 ) {
 
-  $input_template = $filebeat::major_version ? {
-    '5'     => 'prospector.yml.erb',
-    default => 'input.yml.erb',
+  if versioncmp($facts['filebeat_version'], '7.16') > 0 {
+    $input_template = 'filestream.yml.erb'
+  } elsif versioncmp($facts['filebeat_version'], '6') > 0 {
+    $input_template = 'input.yml.erb'
+  } else {
+    $input_template = 'prospector.yml.erb'
   }
 
   if 'filebeat_version' in $facts and $facts['filebeat_version'] != false {

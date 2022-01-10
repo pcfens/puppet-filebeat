@@ -168,4 +168,10 @@ class filebeat::params {
       fail($kernel_fail_message)
     }
   }
+
+  if versioncmp($facts['filebeat_version'], '7.16') > 0 {
+    $default_input_type = 'filestream'
+  } else {
+    $default_input_type = 'log'
+  }
 }

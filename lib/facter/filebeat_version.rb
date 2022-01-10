@@ -1,6 +1,6 @@
 require 'facter'
 Facter.add('filebeat_version') do
-  confine 'kernel' => ['FreeBSD', 'OpenBSD', 'Linux', 'Windows']
+  confine 'kernel' => ['FreeBSD', 'OpenBSD', 'Linux', 'Windows', 'SunOS']
   if File.executable?('/usr/bin/filebeat')
     filebeat_version = Facter::Util::Resolution.exec('/usr/bin/filebeat version')
     if filebeat_version.empty?
@@ -10,6 +10,11 @@ Facter.add('filebeat_version') do
     filebeat_version = Facter::Util::Resolution.exec('/usr/local/bin/filebeat version')
     if filebeat_version.empty?
       filebeat_version = Facter::Util::Resolution.exec('/usr/local/bin/filebeat --version')
+    end
+  elsif File.executable?('/opt/local/bin/filebeat')
+    filebeat_version = Facter::Util::Resolution.exec('/opt/local/bin/filebeat version')
+    if filebeat_version.empty?
+      filebeat_version = Facter::Util::Resolution.exec('/opt/local/bin/filebeat --version')
     end
   elsif File.executable?('/usr/share/filebeat/bin/filebeat')
     filebeat_version = Facter::Util::Resolution.exec('/usr/share/filebeat/bin/filebeat --version')
