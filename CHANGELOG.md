@@ -4,6 +4,12 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.11.0...HEAD)
 
+- Add `filebeat.overwrite_pipelines` option [\#286](https://github.com/pcfens/puppet-filebeat/pull/286)
+- Fix autodiscover apply location [\#291](https://github.com/pcfens/puppet-filebeat/pull/291)
+- Add SSL support for inputs [\#295](https://github.com/pcfens/puppet-filebeat/pull/295)
+- Add support for Solaris [\#296](https://github.com/pcfens/puppet-filebeat/pull/296)
+- Add support for filestreams [\#297](https://github.com/pcfens/puppet-filebeat/pull/297)
+
 ## [v4.11.0](https://github.com/pcfens/puppet-filebeat/tree/v4.11.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.10.0...v4.11.0)
 
