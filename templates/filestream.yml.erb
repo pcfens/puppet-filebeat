@@ -4,6 +4,10 @@
 ---
 - type: <%= @input_type %>
   id: <%= @name %>
+  <%- if @input_type == 'syslog' -%>
+  protocol.<%= @syslog_protocol %>:
+    host: <%= @syslog_host %>
+  <%- end -%>
   paths:
   <%- @paths.each do |log_path| -%>
   - <%= log_path %>
