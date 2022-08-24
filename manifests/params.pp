@@ -73,7 +73,7 @@ class filebeat::params {
       $manage_repo = true
       $manage_apt  = true
       $filebeat_path = '/usr/share/filebeat/bin/filebeat'
-      $major_version = '7'
+      $major_version = '8'
     }
   }
   case $::kernel {
@@ -169,9 +169,13 @@ class filebeat::params {
     }
   }
 
-  if versioncmp($facts['filebeat_version'], '7.16') > 0 {
-    $default_input_type = 'filestream'
+  if Integer($major_version) < 8 {
+    if versioncmp($facts['filebeat_version'], '7.16') > 0 {
+      $default_input_type = 'filestream'
+    } else {
+      $default_input_type = 'log'
+    }
   } else {
-    $default_input_type = 'log'
+    $default_input_type = 'filestream'
   }
 }
