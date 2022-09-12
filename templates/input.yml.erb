@@ -24,6 +24,16 @@
   <%- elsif @input_type == 'syslog' -%>
   protocol.<%= @syslog_protocol %>:
     host: <%= @syslog_host %>
+  <%- elsif @input_type == 'journald' -%>
+  <%- if @seek -%>
+  seek: <%= @seek %>
+  <%- end -%>
+  <%- if @include_matches.length > 0 -%>
+  include_matches:
+    <%- @include_matches.each do |match| -%>
+    - <%= match %>
+    <%- end -%>
+  <%- end -%>
   <%- else -%>
   paths:
   <%- @paths.each do |log_path| -%>
@@ -84,17 +94,6 @@
   <%- if @force_close_files -%>
   force_close_files: <%= @force_close_files %>
   <%- end -%>
-<%- elsif @input_type == 'journald' -%>
-  <%- if @seek -%>
-  seek: <%= @seek %>
-  <%- end -%>
-  <%- if @include_matches.length > 0 -%>
-  include_matches:
-    <%- @include_matches.each do |match| -%>
-    - <%= match %>
-    <%- end -%>
-  <%- end -%>
-<%- end -%>
 
   <%- if @json.length > 0 -%>
   ### JSON configuration
