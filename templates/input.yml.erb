@@ -3,6 +3,9 @@
 <%- else -%>
 ---
 - type: <%= @input_type %>
+  <%- if @input_type =~ /(filestream|journald) -%>
+  id: <%= @name %>
+  <%- end -%>
   <%- if @input_type =~ /(tcp|udp)/ -%>
   host: <%= @host %>
   <%- if @max_message_size -%>
@@ -53,15 +56,25 @@
   <%- if @doc_type -%>
   document_type: <%= @doc_type %>
   <%- end -%>
-  <%- if @scan_frequency -%>
+<%- if @scan_frequency -%>
+  <%- if @input_type == 'filestream' -%>
+  prospector:
+     scanner:
+        check_interval: <%= @scan_frequency %>
+  <%- else -%>
   scan_frequency: <%= @scan_frequency %>
   <%- end -%>
+<%- end -%>
   <%- if @harvester_buffer_size -%>
   harvester_buffer_size: <%= @harvester_buffer_size %>
   <%- end -%>
-  <%- if @max_bytes -%>
+<%- if @max_bytes -%>
+  <%- if @input_type == 'filestream' -%>
+  message_max_bytes: <%= @max_bytes %>
+  <%- else -%>
   max_bytes: <%= @max_bytes %>
   <%- end -%>
+<%- end -%>
   <%- if @symlinks -%>
   symlinks: <%= @symlinks %>
   <%- end -%>
@@ -71,6 +84,17 @@
   <%- if @force_close_files -%>
   force_close_files: <%= @force_close_files %>
   <%- end -%>
+<%- elsif @input_type == 'journald' -%>
+  <%- if @seek -%>
+  seek: <%= @seek %>
+  <%- end -%>
+  <%- if @include_matches.length > 0 -%>
+  include_matches:
+    <%- @include_matches.each do |match| -%>
+    - <%= match %>
+    <%- end -%>
+  <%- end -%>
+<%- end -%>
 
   <%- if @json.length > 0 -%>
   ### JSON configuration
@@ -104,7 +128,26 @@
       <%- end -%>
   <%- end -%>
 
-  <%- if @multiline.length > 0 -%>
+<%- if @multiline.length > 0 -%>
+  <%- if @input_type == 'filestream' -%>
+  parsers:
+      - multiline:
+          <%- if @multiline['pattern'] -%>
+          pattern: '<%= @multiline['pattern'] %>'
+          <%- end -%>
+          <%- if @multiline['negate'] -%>
+          negate: <%= @multiline['negate'] %>
+          <%- end -%>
+          <%- if @multiline['match'] -%>
+          match: <%= @multiline['match'] %>
+          <%- end -%>
+          <%- if @multiline['max_lines'] -%>
+          max_lines: <%= @multiline['max_lines'] %>
+          <%- end -%>
+          <%- if @multiline['timeout'] -%>
+          timeout: <%= @multiline['timeout'] %>
+          <%- end -%>
+  <% else %>
   multiline:
     <%- if @multiline['pattern'] -%>
     pattern: '<%= @multiline['pattern'] %>'
@@ -122,6 +165,7 @@
     timeout: <%= @multiline['timeout'] %>
     <%- end -%>
   <%- end -%>
+<%- end -%>
   tail_files: <%= @tail_files %>
 
   # Experimental: If symlinks is enabled, symlinks are opened and harvested. The harvester is openening the
@@ -198,6 +242,14 @@
     <%- end -%>
   <%- end -%>
   fields_under_root: <%= @fields_under_root %>
+<%- if scope.function_versioncmp(@facts['filebeat_version', '7.5') > 0 -%>
+  <%- if @index -%>
+  index: <%= @index %>
+  <%- end -%>
+  <%- if @keep_null -%>
+  keep_null: <%= @keep_null %>
+  <%- end -%>
+<%- end -%>
 <%- if @ssl.length > 0 -%>
   ssl:
     <%- @ssl.each_pair do |k, v| -%>
