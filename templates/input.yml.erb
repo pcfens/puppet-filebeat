@@ -3,7 +3,7 @@
 <%- else -%>
 ---
 - type: <%= @input_type %>
-  <%- if @input_type =~ /(filestream|journald) -%>
+  <%- if @input_type =~ /(filestream|journald)/ -%>
   id: <%= @name %>
   <%- end -%>
   <%- if @input_type =~ /(tcp|udp)/ -%>
