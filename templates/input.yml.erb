@@ -241,7 +241,7 @@
     <%- end -%>
   <%- end -%>
   fields_under_root: <%= @fields_under_root %>
-<%- if scope.function_versioncmp(@facts['filebeat_version'], '7.5') > 0 -%>
+<%- if scope.function_versioncmp([@facts['filebeat_version'], '7.5']) > 0 -%>
   <%- if @index -%>
   index: <%= @index %>
   <%- end -%>
