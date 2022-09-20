@@ -51,19 +51,17 @@ define filebeat::input (
   Array $processors                        = [],
   Boolean $pure_array                      = false,
   String $host                             = 'localhost:9000',
+  Boolean $keep_null                       = false,
+  Array[String] $include_matches           = [],
+  Optional[Enum['head', 'tail', 'cursor']] $seek = undef,
   Optional[String] $max_message_size       = undef,
+  Optional[String] $index                  = undef,
 ) {
 
-  if Integer($filebeat::major_version) < 8 {
-    if versioncmp($facts['filebeat_version'], '7.16') > 0 {
-      $input_template = 'filestream.yml.erb'
-    } elsif versioncmp($facts['filebeat_version'], '6') > 0 {
-      $input_template = 'input.yml.erb'
-    } else {
-      $input_template = 'prospector.yml.erb'
-    }
+  if versioncmp($facts['filebeat_version'], '6') > 0 {
+    $input_template = 'input.yml.erb'
   } else {
-    $input_template = 'filestream.yml.erb'
+    $input_template = 'prospector.yml.erb'
   }
 
   if 'filebeat_version' in $facts and $facts['filebeat_version'] != false {
@@ -119,7 +117,7 @@ define filebeat::input (
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
         default => $filebeat::major_version ? {
-          '5'     => "/usr/local/sbin/filebeat -N -configtest -c %",
+          '5'     => '/usr/local/sbin/filebeat -N -configtest -c %',
           default => "/usr/local/sbin/filebeat -c ${filebeat::config_file} test config",
         },
       }

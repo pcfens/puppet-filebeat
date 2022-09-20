@@ -169,13 +169,10 @@ class filebeat::params {
     }
   }
 
-  if Integer($major_version) < 8 {
-    if versioncmp($facts['filebeat_version'], '7.16') > 0 {
-      $default_input_type = 'filestream'
-    } else {
-      $default_input_type = 'log'
-    }
-  } else {
+  # filestream input type added in 7.10, deprecated in 7.16
+  if versioncmp($facts['filebeat_version'], '7.10') > 0 {
     $default_input_type = 'filestream'
+  } else {
+    $default_input_type = 'log'
   }
 }
