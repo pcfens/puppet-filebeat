@@ -400,6 +400,10 @@ to fully understand what these parameters do.
     [See above](#multiline-logs). (default: {})
   - `host`: [String] Host and port used to read events for TCP or UDP plugin (default: localhost:9000)
   - `max_message_size`: [String] The maximum size of the message received over TCP or UDP (default: undef)
+  - `keep_null`: [Boolean] If this option is set to true, fields with null values will be published in the output document (default: undef)
+  - `include_matches`: [Array] Journald input only, A collection of filter expressions used to match fields. The format of the expression is field=value (default: [])
+  - `seek`: [Enum] Journald input only, The position to start reading the journal from (default: undef)
+  - `index`: [String] If present, this formatted string overrides the index for events from this input (for elasticsearch outputs), or sets the raw_index field of the event’s metadata (for other outputs) (default: undef)
 
 ## Limitations
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
