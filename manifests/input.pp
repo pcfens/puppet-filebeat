@@ -57,19 +57,19 @@ define filebeat::input (
   Optional[String] $max_message_size       = undef,
   Optional[String] $index                  = undef,
 ) {
-
-  if versioncmp($facts['filebeat_version'], '6') > 0 {
-    $input_template = 'input.yml.erb'
-  } else {
-    $input_template = 'prospector.yml.erb'
-  }
-
   if 'filebeat_version' in $facts and $facts['filebeat_version'] != false {
+    if versioncmp($facts['filebeat_version'], '6') > 0 {
+      $input_template = 'input.yml.erb'
+    } else {
+      $input_template = 'prospector.yml.erb'
+    }
+
     $skip_validation = versioncmp($facts['filebeat_version'], $filebeat::major_version) ? {
       -1      => true,
       default => false,
     }
   } else {
+    $input_template = 'input.yml.erb'
     $skip_validation = false
   }
 

@@ -249,12 +249,14 @@
     <%- end -%>
   <%- end -%>
   fields_under_root: <%= @fields_under_root %>
-<%- if scope.function_versioncmp([@facts['filebeat_version'], '7.5']) > 0 -%>
-  <%- if @index -%>
+<%- unless @facts['filebeat_version'] == false -%>
+  <%- if scope.function_versioncmp([@facts['filebeat_version'], '7.5']) > 0 -%>
+    <%- if @index -%>
   index: <%= @index %>
-  <%- end -%>
-  <%- if @keep_null -%>
+    <%- end -%>
+    <%- if @keep_null -%>
   keep_null: <%= @keep_null %>
+    <%- end -%>
   <%- end -%>
 <%- end -%>
 <%- if @ssl.length > 0 -%>
