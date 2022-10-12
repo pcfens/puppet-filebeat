@@ -130,23 +130,23 @@
 <%- if @multiline.length > 0 -%>
   <%- if @input_type == 'filestream' -%>
   parsers:
-      - multiline:
-          <%- if @multiline['pattern'] -%>
-          pattern: '<%= @multiline['pattern'] %>'
-          <%- end -%>
-          <%- if @multiline['negate'] -%>
-          negate: <%= @multiline['negate'] %>
-          <%- end -%>
-          <%- if @multiline['match'] -%>
-          match: <%= @multiline['match'] %>
-          <%- end -%>
-          <%- if @multiline['max_lines'] -%>
-          max_lines: <%= @multiline['max_lines'] %>
-          <%- end -%>
-          <%- if @multiline['timeout'] -%>
-          timeout: <%= @multiline['timeout'] %>
-          <%- end -%>
-  <% else %>
+    - multiline:
+        <%- if @multiline['pattern'] -%>
+        pattern: '<%= @multiline['pattern'] %>'
+        <%- end -%>
+        <%- if @multiline['negate'] -%>
+        negate: <%= @multiline['negate'] %>
+        <%- end -%>
+        <%- if @multiline['match'] -%>
+        match: <%= @multiline['match'] %>
+        <%- end -%>
+        <%- if @multiline['max_lines'] -%>
+        max_lines: <%= @multiline['max_lines'] %>
+        <%- end -%>
+        <%- if @multiline['timeout'] -%>
+        timeout: <%= @multiline['timeout'] %>
+        <%- end -%>
+  <%- else -%>
   multiline:
     <%- if @multiline['pattern'] -%>
     pattern: '<%= @multiline['pattern'] %>'
