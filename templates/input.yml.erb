@@ -172,14 +172,14 @@
   #symlinks: false
 
   <%- if @backoff -%>
-    <%- if @input_type == 'filestream' %>
+    <%- if @input_type == 'filestream' -%>
   backoff.init: <%= @backoff %>
     <%- else -%>
   backoff: <%= @backoff %>
     <%- end -%>
   <%- end -%>
   <%- if @max_backoff -%>
-    <% if @input_type == 'filestream' %>
+    <%- if @input_type == 'filestream' -%>
   backoff.max: <%= @max_backoff %>
     <%- else -%>
   max_backoff: <%= @max_backoff %>
