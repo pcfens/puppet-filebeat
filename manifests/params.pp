@@ -91,7 +91,7 @@ class filebeat::params {
       $install_dir     = undef
       case $::osfamily {
         'RedHat': {
-          $service_provider = 'redhat'
+          $service_provider = 'systemd'
         }
         default: {
           $service_provider = undef
