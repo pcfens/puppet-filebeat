@@ -15,7 +15,7 @@ class filebeat::service {
 
   #make sure puppet client version 6.1+ with filebeat version 7+, running on systemd
   if ( versioncmp( $major_version, '7'   ) >= 0 and
-    $::service_provider == 'systemd' ) {
+    $filebeat::service_provider == 'systemd' ) {
 
     if ( versioncmp( $::clientversion, '6.1' ) >= 0 ) {
 
