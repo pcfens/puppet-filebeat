@@ -2,8 +2,16 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.11.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.12.0...HEAD)
 
+## [v4.12.0](https://github.com/pcfens/puppet-filebeat/tree/v4.12.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.11.0...v4.12.0)
+
+- Various lint and bugfixes
+- Add filestream support [\#303](https://github.com/pcfens/puppet-filebeat/pull/303)
+- Add journald support [\#302](https://github.com/pcfens/puppet-filebeat/pull/302)
+- Add syslog support [\#301](https://github.com/pcfens/puppet-filebeat/pull/301)
+- Allow Filebeat 8 to be installed [\#300](https://github.com/pcfens/puppet-filebeat/pull/300)
 - Add `filebeat.overwrite_pipelines` option [\#286](https://github.com/pcfens/puppet-filebeat/pull/286)
 - Fix autodiscover apply location [\#291](https://github.com/pcfens/puppet-filebeat/pull/291)
 - Add SSL support for inputs [\#295](https://github.com/pcfens/puppet-filebeat/pull/295)
