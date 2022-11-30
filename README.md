@@ -294,6 +294,7 @@ Installs and configures filebeat.
 - `enable_conf_modules`: [Boolean] Should filebeat.config.modules be enabled
 - `modules_dir`: [String] The directory where module configurations should be defined (default: /etc/filebeat/modules.d)
 - `cloud`: [Hash] Will be converted to YAML for the optional cloud.id and cloud.auth of the configuration (see documentation, and above)
+- `queue`: [Hash] Will be converted to YAML for the optional queue.mem and queue.disk of the configuration (see documentation, and above)
 - `outputs`: [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 - `shipper`: [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 - `autodiscover`: [Hash] Will be converted to YAML for the optional autodiscover section of the configuration (see documentation, and above)`
