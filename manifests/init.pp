@@ -29,6 +29,7 @@
 # @param purge_conf_dir [Boolean] Should files in the input configuration directory not managed by puppet be automatically purged
 # @param http [Hash] A hash of the http section of configuration
 # @param cloud [Hash] Will be converted to YAML for the optional cloud of the configuration (see documentation, and above)
+# @param queue [Hash] Will be converted to YAML for the optional queue of the configuration (see documentation, and above)
 # @param outputs [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 # @param shipper [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
 # @param logging [Hash] Will be converted to YAML to create the optional logging section of the filebeat config (see documentation)
@@ -80,6 +81,7 @@ class filebeat (
   Boolean $enable_conf_modules                                        = $filebeat::params::enable_conf_modules,
   Hash    $http                                                       = $filebeat::params::http,
   Hash    $cloud                                                      = $filebeat::params::cloud,
+  Hash    $queue                                                      = $filebeat::params::queue,
   Hash    $outputs                                                    = $filebeat::params::outputs,
   Hash    $shipper                                                    = $filebeat::params::shipper,
   Hash    $logging                                                    = $filebeat::params::logging,

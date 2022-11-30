@@ -23,6 +23,7 @@ class filebeat::params {
   $ssl                            = {}
   $http                           = {}
   $cloud                          = {}
+  $queue                          = {}
   $outputs                        = {}
   $shipper                        = {}
   $logging                        = {}
