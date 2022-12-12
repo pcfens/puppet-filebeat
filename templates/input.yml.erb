@@ -54,10 +54,12 @@
     - '<%= exclude_line %>'
     <%- end -%>
   <%- end -%>
-  <%- if @exclude_files.length > 0 -%>
+  <%- if @input_type != 'filestream' -%>
+    <%- if @exclude_files.length > 0 -%>
   exclude_files:
-    <%- @exclude_files.each do |exclude_file| -%>
+      <%- @exclude_files.each do |exclude_file| -%>
     - <%= exclude_file %>
+      <%- end -%>
     <%- end -%>
   <%- end -%>
   <%- if @ignore_older -%>
@@ -66,11 +68,19 @@
   <%- if @doc_type -%>
   document_type: <%= @doc_type %>
   <%- end -%>
-<%- if @scan_frequency -%>
+<%- if @scan_frequency or @exclude_files -%>
   <%- if @input_type == 'filestream' -%>
   prospector:
      scanner:
+        <%- if @scan_frequency -%>
         check_interval: <%= @scan_frequency %>
+        <%- end -%>
+        <%- if @exclude_files.length > 0 -%>
+        exclude_files:
+          <%- @exclude_files.each do |exclude_file| -%>
+        - <%= exclude_file %>
+          <%- end -%>
+        <%- end -%>
   <%- else -%>
   scan_frequency: <%= @scan_frequency %>
   <%- end -%>
