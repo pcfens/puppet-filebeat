@@ -4,6 +4,8 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.12.0...HEAD)
 
+- rework SSL support to work.
+
 ## [v4.12.0](https://github.com/pcfens/puppet-filebeat/tree/v4.12.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.11.0...v4.12.0)
 
