@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe 'filebeat::repo' do
-  on_supported_os(facterversion: '2.4').each do |os, os_facts|
+  on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
       let(:pre_condition) { "class { 'filebeat': major_version => '#{major_version}' }" }

@@ -28,7 +28,7 @@ describe 'filebeat::input' do
       }'
   end
 
-  on_supported_os(facterversion: '2.4').each do |os, os_facts|
+  on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
 
@@ -80,7 +80,7 @@ describe 'filebeat::input' do
     end
   end
 
-  on_supported_os(facterversion: '2.4').each do |os, os_facts|
+  on_supported_os.each do |os, os_facts|
     context "with array input support on #{os}" do
       let(:facts) { os_facts }
 
