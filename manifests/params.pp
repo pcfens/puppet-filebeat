@@ -11,7 +11,7 @@ class filebeat::params {
   $idle_timeout                   = '5s'
   $publish_async                  = false
   $shutdown_timeout               = '0'
-  $beat_name                      = $::fqdn
+  $beat_name                      = $facts['networking']['fqdn']
   $tags                           = []
   $max_procs                      = undef
   $config_file_mode               = '0644'
@@ -31,8 +31,8 @@ class filebeat::params {
   $run_options                    = {}
   $modules                        = []
   $overwrite_pipelines            = false
-  $kernel_fail_message            = "${::kernel} is not supported by filebeat."
-  $osfamily_fail_message          = "${::osfamily} is not supported by filebeat."
+  $kernel_fail_message            = "${facts['kernel']} is not supported by filebeat."
+  $osfamily_fail_message          = "${facts['os']['family']} is not supported by filebeat."
   $conf_template                  = "${module_name}/pure_hash.yml.erb"
   $disable_config_test            = false
   $xpack                          = undef
@@ -77,7 +77,7 @@ class filebeat::params {
       $major_version = '8'
     }
   }
-  case $::kernel {
+  case $facts['kernel'] {
     'Linux'   : {
       $package_ensure    = present
       $config_file       = '/etc/filebeat/filebeat.yml'
@@ -90,7 +90,7 @@ class filebeat::params {
       # These parameters are ignored if/until tarball installs are supported in Linux
       $tmp_dir         = '/tmp'
       $install_dir     = undef
-      case $::osfamily {
+      case $facts['os']['family'] {
         'RedHat': {
           $service_provider = 'systemd'
         }
@@ -158,10 +158,10 @@ class filebeat::params {
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'
       $service_provider = undef
-      $url_arch         = $::architecture ? {
+      $url_arch         = $facts['os']['architecture'] ? {
         'x86'   => 'x86',
         'x64'   => 'x86_64',
-        default => fail("${::architecture} is not supported by filebeat."),
+        default => fail("${facts['os']['architecture']} is not supported by filebeat."),
       }
     }
 
