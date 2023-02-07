@@ -20,7 +20,7 @@ end
 describe 'filebeat class' do
   let(:pp) do
     <<-HEREDOC
-    if $::osfamily == 'Debian' {
+    if $facts['os']['family'] == 'Debian' {
       include ::apt
 
       package { 'apt-transport-https':

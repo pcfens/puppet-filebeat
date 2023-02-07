@@ -13,7 +13,7 @@ describe 'filebeat::repo' do
           case os_facts[:kernel]
           when 'Linux'
             it { is_expected.to compile } unless os_facts[:os]['family'] == 'Archlinux'
-            case os_facts[:osfamily]
+            case os_facts[:os]['family']
             when 'Debian'
               it {
                 is_expected.to contain_apt__source('beats').with(

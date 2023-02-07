@@ -7,7 +7,7 @@ class filebeat::repo {
   $debian_repo_url = "https://artifacts.elastic.co/packages/${filebeat::major_version}.x/apt"
   $yum_repo_url = "https://artifacts.elastic.co/packages/${filebeat::major_version}.x/yum"
 
-  case $::osfamily {
+  case $facts['os']['family'] {
     'Debian': {
       if $::filebeat::manage_apt == true {
         include ::apt
