@@ -7,5 +7,5 @@
 class filebeat::install::freebsd {
   # filebeat, heartbeat, metricbeat, packetbeat are all contained in a
   # single FreeBSD Package (see https://www.freshports.org/sysutils/beats/ )
-  ensure_packages (["beats${filebeat::major_version}"], {ensure => $filebeat::package_ensure})
+  ensure_packages (["beats${filebeat::major_version}"], { ensure => $filebeat::package_ensure })
 }

@@ -73,7 +73,7 @@ define filebeat::input (
     $skip_validation = false
   }
 
-  case $::kernel {
+  case $facts['kernel'] {
     'Linux', 'OpenBSD' : {
       $validate_cmd = ($filebeat::disable_config_test or $skip_validation) ? {
         true    => undef,
@@ -87,7 +87,7 @@ define filebeat::input (
         path         => "${filebeat::config_dir}/${name}.yml",
         owner        => 'root',
         group        => '0',
-        mode         => $::filebeat::config_file_mode,
+        mode         => $filebeat::config_file_mode,
         content      => template("${module_name}/${input_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
@@ -105,7 +105,7 @@ define filebeat::input (
         path         => "${filebeat::config_dir}/${name}.yml",
         owner        => 'root',
         group        => 'root',
-        mode         => $::filebeat::config_file_mode,
+        mode         => $filebeat::config_file_mode,
         content      => template("${module_name}/${input_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
@@ -126,7 +126,7 @@ define filebeat::input (
         path         => "${filebeat::config_dir}/${name}.yml",
         owner        => 'root',
         group        => 'wheel',
-        mode         => $::filebeat::config_file_mode,
+        mode         => $filebeat::config_file_mode,
         content      => template("${module_name}/${input_template}"),
         validate_cmd => $validate_cmd,
         notify       => Service['filebeat'],
@@ -159,6 +159,5 @@ define filebeat::input (
     default : {
       fail($filebeat::kernel_fail_message)
     }
-
   }
 }
