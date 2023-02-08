@@ -15,10 +15,8 @@ class filebeat::service {
 
   #make sure puppet client version 6.1+ with filebeat version 7+, running on systemd
   if ( versioncmp( $major_version, '7'   ) >= 0 and
-    $filebeat::service_provider == 'systemd' ) {
-
-    if ( versioncmp( $::clientversion, '6.1' ) >= 0 ) {
-
+  $filebeat::service_provider == 'systemd' ) {
+    if ( versioncmp( $clientversion, '6.1' ) >= 0 ) {
       unless $systemd_beat_log_opts_override == undef {
         $ensure_overide = 'present'
       } else {
@@ -38,9 +36,7 @@ class filebeat::service {
         require => File[$filebeat::systemd_override_dir],
         notify  => Service['filebeat'],
       }
-
     } else {
-
       unless $systemd_beat_log_opts_override == undef {
         $ensure_overide = 'present'
       } else {
@@ -48,7 +44,7 @@ class filebeat::service {
       }
 
       if !defined(File[$filebeat::systemd_override_dir]) {
-        file{$filebeat::systemd_override_dir:
+        file { $filebeat::systemd_override_dir:
           ensure => 'directory',
         }
       }
@@ -65,5 +61,4 @@ class filebeat::service {
       }
     }
   }
-
 }

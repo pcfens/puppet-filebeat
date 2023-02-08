@@ -64,8 +64,8 @@ class filebeat::params {
       $manage_apt  = false
       $filebeat_path = '/usr/local/bin/filebeat'
       # lint:ignore:only_variable_string
-      $major_version = versioncmp('6.3', $::kernelversion) < 0 ? {
-      # lint:endignore
+      $major_version = versioncmp('6.3', $facts['kernelversion']) < 0 ? {
+        # lint:endignore
         true    => '6',
         default => '5'
       }

@@ -20,13 +20,23 @@
 # @param service_ensure [String] The ensure parameter on the filebeat service (default: running)
 # @param service_enable [String] The enable parameter on the filebeat service (default: true)
 # @param repo_priority [Integer] Repository priority.  yum and apt supported (default: undef)
+# @param service_provider [String] The provider parameter on the filebeat service (default: on RedHat based systems use redhat, otherwise undefined)
 # @param spool_size [Integer] How large the spool should grow before being flushed to the network (default: 2048)
 # @param idle_timeout [String] How often the spooler should be flushed even if spool size isn't reached (default: 5s)
 # @param publish_async [Boolean] If set to true filebeat will publish while preparing the next batch of lines to send (defualt: false)
 # @param config_dir [String] The directory where inputs should be defined (default: /etc/filebeat/conf.d)
 # @param config_dir_mode [String] The unix permissions mode set on the configuration directory (default: 0755)
+# @param config_dir_owner [String] The owner of the configuration directory (default: root). Linux only.
+# @param config_dir_group [String] The group of the configuration directory (default: root). Linux only.
+# @param config_file [String] Where the configuration file managed by this module should be placed. If you think
+#  you might want to use this, read the [limitations](#using-config_file) first. Defaults to the location
+#  that filebeat expects for your operating system.
 # @param config_file_mode [String] The unix permissions mode set on configuration files (default: 0644)
+# @param config_file_owner [String] The owner of the configuration files, including inputs (default: root). Linux only.
+# @param config_file_group [String] The group of the configuration files, including inputs (default: root). Linux only.
 # @param purge_conf_dir [Boolean] Should files in the input configuration directory not managed by puppet be automatically purged
+# @param enable_conf_modules [Boolean] Should filebeat.config.modules be enabled
+# @param modules_dir [String] The directory where module configurations should be defined (default: /etc/filebeat/modules.d)
 # @param http [Hash] A hash of the http section of configuration
 # @param cloud [Hash] Will be converted to YAML for the optional cloud of the configuration (see documentation, and above)
 # @param queue [Hash] Will be converted to YAML for the optional queue of the configuration (see documentation, and above)
@@ -44,12 +54,12 @@
 # @param max_procs [Integer] The maximum number of CPUs that can be simultaneously used
 # @param fields [Hash] Optional fields that should be added to each event output
 # @param fields_under_root [Boolean] If set to true, custom fields are stored in the top level instead of under fields
+# @param disable_config_test [Boolean] If set to true, configuration tests won't be run on config files before writing them.
 # @param ssl [Hash] Optional fields set the ssl-configuration for input
 # @param processors [Array] Processors that will be added. Commonly used to create processors using hiera.
 # @param monitoring [Hash] The monitoring section of the configuration file.
 # @param inputs [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
 # @param setup [Hash] setup that will be created. Commonly used to create setup using hiera
-# @param inputs_merge [Boolean] Whether $inputs should merge all hiera sources, or use simple automatic parameter lookup
 # proxy_address [String] Proxy server to use for downloading files
 # @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
 # @param extra_validate_options [String] Extra command line options to pass to the configuration validation command
@@ -121,8 +131,7 @@ class filebeat (
   Boolean $overwrite_pipelines                                        = $filebeat::params::overwrite_pipelines,
 
 ) inherits filebeat::params {
-
-  include ::stdlib
+  include stdlib
 
   $real_download_url = $download_url ? {
     undef   => "https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-${package_ensure}-windows-${filebeat::params::url_arch}.zip",
@@ -151,21 +160,21 @@ class filebeat (
   # we remove as much as possible
   if $package_ensure == 'absent' {
     anchor { 'filebeat::begin': }
-    -> class { '::filebeat::config': }
-    -> class { '::filebeat::install': }
-    -> class { '::filebeat::service': }
+    -> class { 'filebeat::config': }
+    -> class { 'filebeat::install': }
+    -> class { 'filebeat::service': }
     -> anchor { 'filebeat::end': }
   } else {
     if !$manage_package {
       anchor { 'filebeat::begin': }
-      -> class { '::filebeat::config': }
-      -> class { '::filebeat::service': }
+      -> class { 'filebeat::config': }
+      -> class { 'filebeat::service': }
       -> anchor { 'filebeat::end': }
     } else {
       anchor { 'filebeat::begin': }
-      -> class { '::filebeat::install': }
-      -> class { '::filebeat::config': }
-      -> class { '::filebeat::service': }
+      -> class { 'filebeat::install': }
+      -> class { 'filebeat::config': }
+      -> class { 'filebeat::service': }
       -> anchor { 'filebeat::end': }
     }
   }

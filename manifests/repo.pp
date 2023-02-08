@@ -9,19 +9,19 @@ class filebeat::repo {
 
   case $facts['os']['family'] {
     'Debian': {
-      if $::filebeat::manage_apt == true {
-        include ::apt
+      if $filebeat::manage_apt == true {
+        include apt
       }
 
       Class['apt::update'] -> Package['filebeat']
 
-      if !defined(Apt::Source['beats']){
+      if !defined(Apt::Source['beats']) {
         apt::source { 'beats':
-          ensure   => $::filebeat::alternate_ensure,
+          ensure   => $filebeat::alternate_ensure,
           location => $debian_repo_url,
           release  => 'stable',
           repos    => 'main',
-          pin      => $::filebeat::repo_priority,
+          pin      => $filebeat::repo_priority,
           key      => {
             id     => '46095ACC8548582C1A2699A9D27D666CD88E42B4',
             source => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
@@ -30,14 +30,14 @@ class filebeat::repo {
       }
     }
     'RedHat', 'Linux': {
-      if !defined(Yumrepo['beats']){
+      if !defined(Yumrepo['beats']) {
         yumrepo { 'beats':
-          ensure   => $::filebeat::alternate_ensure,
+          ensure   => $filebeat::alternate_ensure,
           descr    => 'elastic beats repo',
           baseurl  => $yum_repo_url,
           gpgcheck => 1,
           gpgkey   => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
-          priority => $::filebeat::repo_priority,
+          priority => $filebeat::repo_priority,
           enabled  => 1,
           notify   => Exec['flush-yum-cache'],
         }
@@ -53,11 +53,11 @@ class filebeat::repo {
       exec { 'topbeat_suse_import_gpg':
         command => 'rpmkeys --import https://artifacts.elastic.co/GPG-KEY-elasticsearch',
         unless  => 'test $(rpm -qa gpg-pubkey | grep -i "D88E42B4" | wc -l) -eq 1 ',
-        notify  => [ Zypprepo['beats'] ],
+        notify  => [Zypprepo['beats']],
       }
-      if !defined(Zypprepo['beats']){
+      if !defined(Zypprepo['beats']) {
         zypprepo { 'beats':
-          ensure      => $::filebeat::alternate_ensure,
+          ensure      => $filebeat::alternate_ensure,
           baseurl     => $yum_repo_url,
           enabled     => 1,
           autorefresh => 1,
@@ -72,5 +72,4 @@ class filebeat::repo {
       fail($filebeat::osfamily_fail_message)
     }
   }
-
 }
