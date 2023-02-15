@@ -2,7 +2,18 @@ Changelog
 =========
 
 ## Unreleased
-[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.12.0...HEAD)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.13.0...HEAD)
+
+## [v4.13.0](https://github.com/pcfens/puppet-filebeat/tree/v4.13.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.12.0...v4.13.0)
+
+- Support the filebeat version 8 validation[\#318]- Support queue configuration [\#313](https://github.com/pcfens/puppet-filebeat/pull/318)
+- Support Windows 2016 [\#316](https://github.com/pcfens/puppet-filebeat/pull/316)
+- Support queue configuration [\#313](https://github.com/pcfens/puppet-filebeat/pull/313)
+- Support file exclusion with filestream [\#311](https://github.com/pcfens/puppet-filebeat/pull/311)
+- Replace legacy facts with structured facts [\#319](https://github.com/pcfens/puppet-filebeat/pull/319)
+- Fix tests [\#319](https://github.com/pcfens/puppet-filebeat/pull/319)
+- Update PDK [\#319](https://github.com/pcfens/puppet-filebeat/pull/319)
 
 ## [v4.12.0](https://github.com/pcfens/puppet-filebeat/tree/v4.12.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.11.0...v4.12.0)
