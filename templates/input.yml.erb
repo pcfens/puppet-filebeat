@@ -81,11 +81,19 @@
   document_type: <%= @doc_type %>
     <%- end -%>
   <%- end -%>
-  <%- if @scan_frequency -%>
+  <%- if @scan_frequency or @exclude_files -%>
     <%- if @input_type == 'filestream' -%>
   prospector:
      scanner:
+      <%- if @scan_frequency -%>
         check_interval: <%= @scan_frequency %>
+      <%- end -%>
+      <%- if @exclude_files.length > 0 -%>
+        exclude_files:
+        <%- @exclude_files.each do |exclude_file| -%>
+        - <%= exclude_file %>
+        <%- end -%>
+      <%- end -%>
     <%- else -%>
   scan_frequency: <%= @scan_frequency %>
     <%- end -%>
