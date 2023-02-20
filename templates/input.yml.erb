@@ -8,9 +8,15 @@
   <%- end -%>
   <%- if @input_type =~ /(tcp|udp)/ -%>
   host: <%= @host %>
-  <%- if @max_message_size -%>
+    <%- if @ssl.length > 0 -%>
+  ssl:
+      <%- @ssl.each_pair do |k, v| -%>
+    <%= k %>: <%= v %>
+      <%- end -%>
+    <%- end -%>
+    <%- if @max_message_size -%>
   max_message_size: <%= @max_message_size %>
-  <%- end -%>
+    <%- end -%>
   <%- elsif @input_type == 'docker' -%>
   containers:
     ids:
@@ -24,77 +30,76 @@
   <%- elsif @input_type == 'syslog' -%>
   protocol.<%= @syslog_protocol %>:
     host: <%= @syslog_host %>
-  <%- elsif @input_type == 'journald' -%>
-  <%- if @seek -%>
-  seek: <%= @seek %>
-  <%- end -%>
-  <%- if @include_matches.length > 0 -%>
-  include_matches:
-    <%- @include_matches.each do |match| -%>
-    - <%= match %>
-    <%- end -%>
-  <%- end -%>
-  <%- else -%>
-  paths:
-  <%- @paths.each do |log_path| -%>
-  - <%= log_path %>
-  <%- end -%>
-  <%- if @encoding -%>
-  encoding: <%= @encoding %>
-  <%- end -%>
-  <%- if @include_lines.length > 0 -%>
-  include_lines:
-    <%- @include_lines.each do |include_line| -%>
-    - '<%= include_line %>'
-    <%- end -%>
-  <%- end -%>
-  <%- if @exclude_lines.length > 0 -%>
-  exclude_lines:
-    <%- @exclude_lines.each do |exclude_line| -%>
-    - '<%= exclude_line %>'
-    <%- end -%>
-  <%- end -%>
-  <%- if @input_type != 'filestream' -%>
-    <%- if @exclude_files.length > 0 -%>
-  exclude_files:
-      <%- @exclude_files.each do |exclude_file| -%>
-    - <%= exclude_file %>
+    <%- if @ssl.length > 0 -%>
+    ssl:
+      <%- @ssl.each_pair do |k, v| -%>
+      <%= k %>: <%= v %>
       <%- end -%>
     <%- end -%>
-  <%- end -%>
-  <%- if @ignore_older -%>
+  <%- elsif @input_type == 'journald' -%>
+    <%- if @seek -%>
+  seek: <%= @seek %>
+    <%- end -%>
+    <%- if @include_matches.length > 0 -%>
+  include_matches:
+      <%- @include_matches.each do |match| -%>
+    - <%= match %>
+      <%- end -%>
+    <%- end -%>
+  <%- else -%>
+  paths:
+    <%- @paths.each do |log_path| -%>
+  - <%= log_path %>
+    <%- end -%>
+    <%- if @encoding -%>
+  encoding: <%= @encoding %>
+    <%- end -%>
+    <%- if @include_lines.length > 0 -%>
+  include_lines:
+      <%- @include_lines.each do |include_line| -%>
+    - '<%= include_line %>'
+      <%- end -%>
+    <%- end -%>
+    <%- if @exclude_lines.length > 0 -%>
+  exclude_lines:
+      <%- @exclude_lines.each do |exclude_line| -%>
+    - '<%= exclude_line %>'
+      <%- end -%>
+    <%- end -%>
+    <%- if @input_type != 'filestream' -%>
+      <%- if @exclude_files.length > 0 -%>
+  exclude_files:
+        <%- @exclude_files.each do |exclude_file| -%>
+    - <%= exclude_file %>
+        <%- end -%>
+      <%- end -%>
+    <%- end -%>
+    <%- if @ignore_older -%>
   ignore_older: <%= @ignore_older %>
-  <%- end -%>
-  <%- if @doc_type -%>
+    <%- end -%>
+    <%- if @doc_type -%>
   document_type: <%= @doc_type %>
+    <%- end -%>
   <%- end -%>
-<%- if @scan_frequency or @exclude_files -%>
-  <%- if @input_type == 'filestream' -%>
+  <%- if @scan_frequency -%>
+    <%- if @input_type == 'filestream' -%>
   prospector:
      scanner:
-        <%- if @scan_frequency -%>
         check_interval: <%= @scan_frequency %>
-        <%- end -%>
-        <%- if @exclude_files.length > 0 -%>
-        exclude_files:
-          <%- @exclude_files.each do |exclude_file| -%>
-        - <%= exclude_file %>
-          <%- end -%>
-        <%- end -%>
-  <%- else -%>
+    <%- else -%>
   scan_frequency: <%= @scan_frequency %>
+    <%- end -%>
   <%- end -%>
-<%- end -%>
   <%- if @harvester_buffer_size -%>
   harvester_buffer_size: <%= @harvester_buffer_size %>
   <%- end -%>
-<%- if @max_bytes -%>
-  <%- if @input_type == 'filestream' -%>
+  <%- if @max_bytes -%>
+    <%- if @input_type == 'filestream' -%>
   message_max_bytes: <%= @max_bytes %>
-  <%- else -%>
+    <%- else -%>
   max_bytes: <%= @max_bytes %>
+    <%- end -%>
   <%- end -%>
-<%- end -%>
   <%- if @symlinks -%>
   symlinks: <%= @symlinks %>
   <%- end -%>
@@ -104,15 +109,14 @@
   <%- if @force_close_files -%>
   force_close_files: <%= @force_close_files %>
   <%- end -%>
-
   <%- if @json.length > 0 -%>
-  ### JSON configuration
+  ###JSON configuration
   json:
       # Decode JSON options. Enable this if your logs are structured in JSON.
       # JSON key on which to apply the line filtering and multiline settings. This key
       # must be top level and its value must be string, otherwise it is ignored. If
       # no text key is defined, the line filtering and multiline features cannot be used.
-      <%- if @json['message_key'] != nil-%>
+      <%- if @json['message_key'] != nil -%>
       message_key: '<%= @json['message_key'] %>'
       <%- end -%>
 
@@ -136,9 +140,8 @@
       add_error_key: <%= @json['add_error_key'] %>
       <%- end -%>
   <%- end -%>
-
-<%- if @multiline.length > 0 -%>
-  <%- if @input_type == 'filestream' -%>
+  <%- if @multiline.length > 0 -%>
+    <%- if @input_type == 'filestream' -%>
   parsers:
     - multiline:
         <%- if @multiline['pattern'] -%>
@@ -156,25 +159,25 @@
         <%- if @multiline['timeout'] -%>
         timeout: <%= @multiline['timeout'] %>
         <%- end -%>
-  <%- else -%>
+    <%- else -%>
   multiline:
-    <%- if @multiline['pattern'] -%>
+      <%- if @multiline['pattern'] -%>
     pattern: '<%= @multiline['pattern'] %>'
-    <%- end -%>
-    <%- if @multiline['negate'] -%>
+      <%- end -%>
+      <%- if @multiline['negate'] -%>
     negate: <%= @multiline['negate'] %>
-    <%- end -%>
-    <%- if @multiline['match'] -%>
+      <%- end -%>
+      <%- if @multiline['match'] -%>
     match: <%= @multiline['match'] %>
-    <%- end -%>
-    <%- if @multiline['max_lines'] -%>
+      <%- end -%>
+      <%- if @multiline['max_lines'] -%>
     max_lines: <%= @multiline['max_lines'] %>
-    <%- end -%>
-    <%- if @multiline['timeout'] -%>
+      <%- end -%>
+      <%- if @multiline['timeout'] -%>
     timeout: <%= @multiline['timeout'] %>
+      <%- end -%>
     <%- end -%>
   <%- end -%>
-<%- end -%>
   tail_files: <%= @tail_files %>
 
   # Experimental: If symlinks is enabled, symlinks are opened and harvested. The harvester is openening the
@@ -246,12 +249,12 @@
   <%- if @close_timeout -%>
   close_timeout: <%= @close_timeout %>
   <%- end -%>
-  <%- end -%>
   <%- # Everything below this can be applied to any input. -%>
   <%- # https://www.elastic.co/guide/en/beats/filebeat/current/configuration-general-options.html#configuration-general -%>
   <%- if @pipeline -%>
   pipeline: <%= @pipeline %>
   <%- end -%>
+
   <%- if @fields.length > 0 -%>
   fields:
     <%- @fields.each_pair do |k, v| -%>
@@ -259,20 +262,14 @@
     <%- end -%>
   <%- end -%>
   fields_under_root: <%= @fields_under_root %>
-<%- unless @facts['filebeat_version'] == false -%>
-  <%- if scope.function_versioncmp([@facts['filebeat_version'], '7.5']) > 0 -%>
-    <%- if @index -%>
+  <%- unless @facts['filebeat_version'] == false -%>
+    <%- if scope.function_versioncmp([@facts['filebeat_version'], '7.5']) > 0 -%>
+      <%- if @index -%>
   index: <%= @index %>
-    <%- end -%>
-    <%- if @keep_null -%>
+      <%- end -%>
+      <%- if @keep_null -%>
   keep_null: <%= @keep_null %>
-    <%- end -%>
-  <%- end -%>
-<%- end -%>
-<%- if @ssl.length > 0 -%>
-  ssl:
-    <%- @ssl.each_pair do |k, v| -%>
-    <%= k %>: <%= v %>
+      <%- end -%>
     <%- end -%>
   <%- end -%>
   <%- if @tags.length > 0 -%>
