@@ -6,7 +6,7 @@
 class filebeat::config {
   $major_version = $filebeat::major_version
 
-  if has_key($filebeat::setup, 'ilm.policy') {
+  if 'ilm.policy' in $filebeat::setup {
     file { "${filebeat::config_dir}/ilm_policy.json":
       content => to_json({ 'policy' => $filebeat::setup['ilm.policy'] }),
       notify  => Service['filebeat'],
