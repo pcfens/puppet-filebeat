@@ -143,8 +143,11 @@ as documented in the filebeat [configuration documentation](https://www.elastic.
 #### JSON Logs
 
 Filebeat inputs (versions >= 5.0) can natively decode JSON objects if they are stored one per line. The `json`
-parameter accepts a hash containing `message_key`, `keys_under_root`, `overwrite_keys`, and `add_error_key`
-as documented in the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/5.5/configuration-filebeat-options.html#config-json).
+parameter accepts a hash containing `message_key`, `keys_under_root`, `overwrite_keys`, and `add_error_key`.
+
+Depending on the version, `expand_keys`, `document_id` and `ignore_decoding_error` may be supported as well.
+
+See the filebeat [configuration documentation](https://www.elastic.co/guide/en/beats/filebeat/7.11/filebeat-input-log.html#filebeat-input-log-config-json) for details.
 
 ### Inputs in Hiera
 
