@@ -98,6 +98,12 @@ filebeat:
           <%- if @json['add_error_key'] != nil -%>
           add_error_key: <%= @json['add_error_key'] %>
           <%- end -%>
+
+          # An optional configuration setting that specifies if JSON decoding errors should
+          # be logged or not. If set to true, errors will not be logged. The default is false.
+          <%- if @json['ignore_decoding_error'] != nil -%>
+          ignore_decoding_error: <%= @json['ignore_decoding_error'] %>
+          <%- end -%>
       <%- end -%>
 
       <%- if @multiline.length > 0 -%>
