@@ -1,6 +1,6 @@
 {
   "name": "pcfens-filebeat",
-  "version": "4.13.0",
+  "version": "4.14.0",
   "author": "pcfens",
   "summary": "A module to install and manage the filebeat log shipper",
   "license": "Apache-2.0",
@@ -10,11 +10,11 @@
   "dependencies": [
     {
       "name": "puppetlabs/stdlib",
-      "version_requirement": ">=4.13.0 < 9.0.0"
+      "version_requirement": ">=4.13.0 < 10.0.0"
     },
     {
       "name": "puppetlabs/apt",
-      "version_requirement": ">=2.0.0 < 9.0.0"
+      "version_requirement": ">=2.0.0 < 10.0.0"
     },
     {
       "name": "puppetlabs/powershell",
@@ -42,7 +42,8 @@
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
         "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
@@ -50,7 +51,8 @@
       "operatingsystemrelease": [
         "5",
         "6",
-        "7"
+        "7",
+        "8"
       ]
     },
     {
@@ -101,7 +103,7 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">= 4.0.0 < 8.0.0"
+      "version_requirement": ">= 4.0.0 < 9.0.0"
     }
   ],
   "tags": [

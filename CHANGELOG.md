@@ -4,6 +4,13 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.13.0...HEAD)
 
+## [v4.14.0](https://github.com/pcfens/puppet-filebeat/tree/v4.14.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.13.0...v4.14.0)
+
+- Template SSL Correction [\#322](https://github.com/pcfens/puppet-filebeat/pull/322)
+- Avoid deprecated has_ssl method [\#324](https://github.com/pcfens/puppet-filebeat/pull/324)
+- Add missing options to JSON decoding config [\#326](https://github.com/pcfens/puppet-filebeat/pull/326)
+
 ## [v4.13.0](https://github.com/pcfens/puppet-filebeat/tree/v4.13.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.12.0...v4.13.0)
 
