@@ -3,7 +3,9 @@
 # Manage the filebeat service
 #
 # @summary Manage the filebeat service
-class filebeat::service {
+class filebeat::service (
+  Boolean $manage_systemd_service_directory  = true,
+) {
   service { 'filebeat':
     ensure   => $filebeat::real_service_ensure,
     enable   => $filebeat::real_service_enable,
@@ -23,12 +25,14 @@ class filebeat::service {
         $ensure_overide = 'absent'
       }
 
-      ensure_resource('file',
-        $filebeat::systemd_override_dir,
-        {
-          ensure => 'directory',
-        }
-      )
+      if $manage_systemd_service_directory {
+        ensure_resource('file',
+          $filebeat::systemd_override_dir,
+          {
+            ensure => 'directory',
+          }
+        )
+      }
 
       file { "${filebeat::systemd_override_dir}/logging.conf":
         ensure  => $ensure_overide,
