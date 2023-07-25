@@ -299,6 +299,9 @@
   keep_null: <%= @keep_null %>
       <%- end -%>
     <%- end -%>
+    <%- if scope.function_versioncmp([@facts['filebeat_version'], '7.9']) > 0 -%>
+  publisher_pipeline.disable_host: <%= @publisher_pipeline_disable_host %>
+    <%- end -%>
   <%- end -%>
   <%- if @tags.length > 0 -%>
   tags:
