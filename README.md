@@ -408,7 +408,7 @@ to fully understand what these parameters do.
   - `include_matches`: [Array] Journald input only, A collection of filter expressions used to match fields. The format of the expression is field=value (default: [])
   - `seek`: [Enum] Journald input only, The position to start reading the journal from (default: undef)
   - `index`: [String] If present, this formatted string overrides the index for events from this input (for elasticsearch outputs), or sets the raw_index field of the event’s metadata (for other outputs) (default: undef)
-  - `publisher_pipeline_disable_host`: [Boolean] This disables the "host.name" attribute being added to events. See [filebeat input configuration reference] (https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-log.html#_publisher_pipeline_disable_host_13) (default: false)
+  - `publisher_pipeline_disable_host`: [Boolean] This disables the "host.name" attribute being added to events. See [filebeat input configuration reference](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-log.html#_publisher_pipeline_disable_host_13) (default: false)
 
 ## Limitations
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
