@@ -39,6 +39,7 @@
 # @param modules_dir [String] The directory where module configurations should be defined (default: /etc/filebeat/modules.d)
 # @param http [Hash] A hash of the http section of configuration
 # @param cloud [Hash] Will be converted to YAML for the optional cloud of the configuration (see documentation, and above)
+# @param features [Hash] Will be converted to YAML to create the optional features section of the filebeat config (see documentation)
 # @param queue [Hash] Will be converted to YAML for the optional queue of the configuration (see documentation, and above)
 # @param outputs [Hash] Will be converted to YAML for the required outputs section of the configuration (see documentation, and above)
 # @param shipper [Hash] Will be converted to YAML to create the optional shipper section of the filebeat config (see documentation)
@@ -91,6 +92,7 @@ class filebeat (
   Boolean $enable_conf_modules                                        = $filebeat::params::enable_conf_modules,
   Hash    $http                                                       = $filebeat::params::http,
   Hash    $cloud                                                      = $filebeat::params::cloud,
+  Hash    $features                                                   = $filebeat::params::features,
   Hash    $queue                                                      = $filebeat::params::queue,
   Hash    $outputs                                                    = $filebeat::params::outputs,
   Hash    $shipper                                                    = $filebeat::params::shipper,

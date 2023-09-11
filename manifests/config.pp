@@ -56,11 +56,19 @@ class filebeat::config {
     })
     # Add the 'xpack' section if supported (version >= 6.1.0) and not undef
     if $filebeat::xpack and versioncmp($filebeat::package_ensure, '6.1.0') >= 0 {
-      $filebeat_config = deep_merge($filebeat_config_temp, { 'xpack' => $filebeat::xpack })
+      $filebeat_config_xpack = deep_merge($filebeat_config_temp, { 'xpack' => $filebeat::xpack })
     }
     else {
-      $filebeat_config = $filebeat_config_temp
+      $filebeat_config_xpack = $filebeat_config_temp
     }
+    # Add the 'features' section if supported (version >= 8.7.0) and not undef
+    if $filebeat::features and versioncmp($filebeat::package_ensure, '8.7.0') >= 0 {
+      $filebeat_config = deep_merge($filebeat_config_xpack, { 'features' => $filebeat::features })
+    }
+    else {
+      $filebeat_config = $filebeat_config_xpack
+    }
+
   } else {
     $filebeat_config_temp = delete_undef_values({
         'shutdown_timeout'  => $filebeat::shutdown_timeout,
