@@ -14,7 +14,8 @@ Changelog
 ## [v4.13.0](https://github.com/pcfens/puppet-filebeat/tree/v4.13.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.12.0...v4.13.0)
 
-- Support the filebeat version 8 validation[\#318]- Support queue configuration [\#313](https://github.com/pcfens/puppet-filebeat/pull/318)
+- Support the filebeat version 8 validation[\#318](https://github.com/pcfens/puppet-filebeat/pull/318)
+- Support queue configuration [\#313](https://github.com/pcfens/puppet-filebeat/pull/313)
 - Support Windows 2016 [\#316](https://github.com/pcfens/puppet-filebeat/pull/316)
 - Support queue configuration [\#313](https://github.com/pcfens/puppet-filebeat/pull/313)
 - Support file exclusion with filestream [\#311](https://github.com/pcfens/puppet-filebeat/pull/311)
