@@ -78,6 +78,58 @@ describe 'filebeat::input' do
         }
       end
     end
+
+    context "with filestream input support on #{os}" do
+      let(:facts) { os_facts }
+
+      # Filestream
+      let(:title) { 'some-filestream' }
+
+      context "with take_over unset" do
+        let(:params) do
+          {
+            'input_type' => 'filestream',
+            'paths' => ['/var/log/foo.log'],
+          }
+        end
+
+        if os_facts[:kernel] == 'Linux'
+          it { is_expected.to compile }
+
+          it {
+            is_expected.to contain_file('filebeat-some-filestream').with(
+              notify: 'Service[filebeat]',
+            )
+            is_expected.to contain_file('filebeat-some-filestream').with_content(
+              %r{- type: filestream\n\s{2}id: some-filestream\n\s{2}paths:\n\s{2}- /var/log/foo.log},
+            )
+          }
+        end
+      end
+
+      context "with take_over => true" do
+        let(:params) do
+          {
+            'input_type' => 'filestream',
+            'paths' => ['/var/log/foo.log'],
+            'take_over' => true,
+          }
+        end
+
+        if os_facts[:kernel] == 'Linux'
+          it { is_expected.to compile }
+
+          it {
+            is_expected.to contain_file('filebeat-some-filestream').with(
+              notify: 'Service[filebeat]',
+            )
+            is_expected.to contain_file('filebeat-some-filestream').with_content(
+              %r{- type: filestream\n\s{2}id: some-filestream\n\s{2}take_over: true\n\s{2}paths:\n\s{2}- /var/log/foo.log},
+            )
+          }
+        end
+      end
+    end
   end
 
   on_supported_os.each do |os, os_facts|

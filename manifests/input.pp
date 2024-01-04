@@ -19,6 +19,7 @@ define filebeat::input (
   Boolean $cri_parse_flags                 = false,
   String $encoding                         = 'plain',
   String $input_type                       = $filebeat::params::default_input_type,
+  Optional[Boolean] $take_over             = undef,
   Hash $fields                             = {},
   Boolean $fields_under_root               = $filebeat::fields_under_root,
   Hash $ssl                                = {},

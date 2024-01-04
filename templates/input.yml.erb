@@ -6,6 +6,9 @@
   <%- if @input_type =~ /(filestream|journald)/ -%>
   id: <%= @name %>
   <%- end -%>
+  <%- if @input_type == 'filestream' && @take_over != nil && @take_over == true -%>
+  take_over: true
+  <%- end -%>
   <%- if @input_type =~ /(tcp|udp)/ -%>
   host: <%= @host %>
     <%- if @ssl.length > 0 -%>
@@ -84,14 +87,14 @@
   <%- if @scan_frequency or @exclude_files -%>
     <%- if @input_type == 'filestream' -%>
   prospector:
-     scanner:
+    scanner:
       <%- if @scan_frequency -%>
-        check_interval: <%= @scan_frequency %>
+      check_interval: <%= @scan_frequency %>
       <%- end -%>
       <%- if @exclude_files.length > 0 -%>
-        exclude_files:
+      exclude_files:
         <%- @exclude_files.each do |exclude_file| -%>
-        - <%= exclude_file %>
+      - <%= exclude_file %>
         <%- end -%>
       <%- end -%>
     <%- else -%>
