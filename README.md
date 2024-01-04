@@ -398,7 +398,8 @@ to fully understand what these parameters do.
   - `syslog_host`: [String] Host to listen for syslog messages (default: localhost:5140)
   - `exclude_files`: [Array] Files that match any regex in the list are excluded from filebeat (default: [])
   - `encoding`: [String] The file encoding. (default: plain)
-  - `input_type`: [String] where filebeat reads the log from (default:log)
+  - `input_type`: [String] where filebeat reads the log from (default: filestream)
+  - `take_over` : [Boolean] Optionally enable [`take_over`](https://www.elastic.co/guide/en/beats/filebeat/8.11/filebeat-input-filestream.html#filebeat-input-filestream-take-over) when switchting from the deprecated input type `log` to the new input type `filestream`. This avoids re-ingesting already logfiles Filebeat already read when switching to `filestream`. This feature requires Filebeat 8.x.
   - `fields`: [Hash] Optional fields to add information to the output (default: {})
   - `fields_under_root`: [Boolean] Should the `fields` parameter fields be stored at the top level of indexed documents.
   - `ignore_older`: [String] Files older than this field will be ignored by filebeat (default: ignore nothing)

@@ -68,7 +68,6 @@ class filebeat::config {
     else {
       $filebeat_config = $filebeat_config_xpack
     }
-
   } else {
     $filebeat_config_temp = delete_undef_values({
         'shutdown_timeout'  => $filebeat::shutdown_timeout,
