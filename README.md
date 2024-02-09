@@ -17,6 +17,7 @@
       - [Multiline Logs](#multiline-logs)
       - [JSON Logs](#json-logs)
     - [Inputs in Hiera](#inputs-in-hiera)
+    - [Usage of filebeat modules](#usage-of-filebeat-modules)
     - [Usage on Windows](#usage-on-windows)
     - [Processors](#processors)
       - [Processors in Hiera](#processors-in-hiera)
@@ -34,6 +35,7 @@
       - [Class: `filebeat::install::windows`](#class-filebeatinstallwindows)
     - [Public Defines](#public-defines)
       - [Define: `filebeat::input`](#define-filebeatinput)
+      - [Define: `filebeat::module`](#define-filebeatmodule)
   - [Limitations](#limitations)
     - [Generic template](#generic-template)
     - [Debian Systems](#debian-systems)
@@ -159,6 +161,35 @@ flag.
 `inputs` can be a Hash that will follow all the parameters listed on this documentation or an
 Array that will output as is to the input config file.
 
+### Usage of filebeat modules
+
+Filebeat ships with modules which contain pipelines and dashboards for common software. Filebeat needs to be setup to ship directly into elasticsearch that
+it's possible that filebeat will setup pipelines and dashboards automatically.
+
+If your setup includes logstash or some other service between filebeat and elasticsearch the following settings might not work as expected.
+
+The following should be a minimal example to get `filebeat::module::*` to create the required config and push pipeline and dashboards into your elasticsearch & kibana.
+
+```puppet
+class { 'filebeat::module::system':
+  syslog_enabled => true,
+  auth_enabled => true,
+}
+
+class { 'filebeat':
+  enable_conf_modules => true,
+  overwrite_pipelines => true,
+  setup => {
+    dashboards => {
+      enabled => true
+    },
+    kibana => {
+      host => 'http://kibana.example.com:5601',
+    }
+  }
+}
+```
+
 ### Usage on Windows
 
 When installing on Windows, this module will download the windows version of Filebeat from
@@ -278,6 +309,7 @@ filebeat::setup:
       - [Class: `filebeat::install::windows`](#class-filebeatinstallwindows)
     - [Public Defines](#public-defines)
       - [Define: `filebeat::input`](#define-filebeatinput)
+      - [Define: `filebeat::module`](#define-filebeatmodule)
   - [Limitations](#limitations)
     - [Generic template](#generic-template)
     - [Debian Systems](#debian-systems)
@@ -434,6 +466,14 @@ to fully understand what these parameters do.
   - `seek`: [Enum] Journald input only, The position to start reading the journal from (default: undef)
   - `index`: [String] If present, this formatted string overrides the index for events from this input (for elasticsearch outputs), or sets the raw_index field of the event’s metadata (for other outputs) (default: undef)
   - `publisher_pipeline_disable_host`: [Boolean] This disables the "host.name" attribute being added to events. See [filebeat input configuration reference](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-input-log.html#_publisher_pipeline_disable_host_13) (default: false)
+
+#### Define: `filebeat::module`
+
+Base resource used to implement filebeat module support in this puppet module and can be useful if you have custom filebeat modules.
+
+**Parameters for `filebeat::module`**
+  - `ensure`: The ensure parameter on the module configuration file. (default: present)
+  - `config`: [Hash] Full hash representation of the module configuration
 
 ## Limitations
 This module doesn't load the [elasticsearch index template](https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-getting-started.html#filebeat-template) into elasticsearch (required when shipping
