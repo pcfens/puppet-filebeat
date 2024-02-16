@@ -26,42 +26,55 @@ class filebeat::install::windows {
     }
   }
 
-  # Note: We can use archive for unzip and cleanup, thus removing the following two resources.
-  # However, this requires 7zip, which archive can install via chocolatey:
-  # https://github.com/voxpupuli/puppet-archive/blob/master/manifests/init.pp#L31
-  # I'm not choosing to impose those dependencies on anyone at this time...
-  archive { $zip_file:
-    source       => $filebeat::real_download_url,
-    cleanup      => false,
-    creates      => $version_file,
-    proxy_server => $filebeat::proxy_address,
-  }
+  if $filebeat::extract_method == 'shell' {
+    # Note: We can use archive for unzip and cleanup, thus removing the following two resources.
+    # However, this requires 7zip, which archive can install via chocolatey:
+    # https://github.com/voxpupuli/puppet-archive/blob/master/manifests/init.pp#L31
+    # I'm not choosing to impose those dependencies on anyone at this time...
+    archive { $zip_file:
+      source       => $filebeat::real_download_url,
+      cleanup      => false,
+      creates      => $version_file,
+      proxy_server => $filebeat::proxy_address,
+    }
 
-  # Core editions of Windows Server do not have a shell as such, so use the Shell.Application COM object doesn't work.
-  # Expand-Archive is a native powershell cmdlet which ships with Powershell 5, which in turn ships with Windows 10 and 
-  # Windows Server 2016 and newer.
-  if ( (versioncmp($facts['os']['release']['full'], '2016') >= 0)
-    or (versioncmp($facts['os']['release']['full'], '2000') < 0 and versioncmp($facts['os']['release']['full'], '10') >= 0) ) {
-    $unzip_command = "Expand-Archive ${zip_file} \"${filebeat::install_dir}\""
-  }
-  else {
-    $unzip_command = "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${zip_file}')).items(), 16)" # lint:ignore:140chars
-  }
+    # Core editions of Windows Server do not have a shell as such, so use the Shell.Application COM object doesn't work.
+    # Expand-Archive is a native powershell cmdlet which ships with Powershell 5, which in turn ships with Windows 10 and 
+    # Windows Server 2016 and newer.
+    if ( (versioncmp($facts['os']['release']['full'], '2016') >= 0)
+      or (versioncmp($facts['os']['release']['full'], '2000') < 0 and versioncmp($facts['os']['release']['full'], '10') >= 0) ) {
+      $unzip_command = "Expand-Archive ${zip_file} \"${filebeat::install_dir}\""
+    }
+    else {
+      $unzip_command = "\$sh=New-Object -COM Shell.Application;\$sh.namespace((Convert-Path '${filebeat::install_dir}')).Copyhere(\$sh.namespace((Convert-Path '${zip_file}')).items(), 16)" # lint:ignore:140chars
+    }
 
-  exec { "unzip ${filename}":
-    command => $unzip_command,
-    creates => $version_file,
-    require => [
-      File[$filebeat::install_dir],
-      Archive[$zip_file],
-    ],
-  }
+    exec { "unzip ${filename}":
+      command => $unzip_command,
+      creates => $version_file,
+      require => [
+        File[$filebeat::install_dir],
+        Archive[$zip_file],
+      ],
+    }
 
-  # Clean up after ourselves
-  file { $zip_file:
-    ensure  => absent,
-    backup  => false,
-    require => Exec["unzip ${filename}"],
+    # Clean up after ourselves
+    file { $zip_file:
+      ensure  => absent,
+      backup  => false,
+      require => Exec["unzip ${filename}"],
+      before  => Exec["stop service ${filename}"],
+    }
+  } else {
+    archive { $zip_file:
+      source       => $filebeat::real_download_url,
+      cleanup      => true,
+      extract      => true,
+      extract_path => $filebeat::install_dir,
+      creates      => $version_file,
+      proxy_server => $filebeat::proxy_address,
+      before       => Exec["stop service ${filename}"],
+    }
   }
 
   # You can't remove the old dir while the service has files locked...
@@ -69,7 +82,6 @@ class filebeat::install::windows {
     command => 'Set-Service -Name filebeat -Status Stopped',
     creates => $version_file,
     onlyif  => 'if(Get-WmiObject -Class Win32_Service -Filter "Name=\'filebeat\'") {exit 0} else {exit 1}',
-    require => Exec["unzip ${filename}"],
   }
 
   exec { "rename ${filename}":

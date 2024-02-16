@@ -131,6 +131,7 @@ class filebeat (
   Optional[String] $registry_file_permissions                         = $filebeat::params::registry_file_permissions,
   Optional[String] $registry_flush                                    = $filebeat::params::registry_flush,
   Boolean $overwrite_pipelines                                        = $filebeat::params::overwrite_pipelines,
+  Enum['shell', 'archive'] $extract_method                            = $filebeat::params::extract_method,
 
 ) inherits filebeat::params {
   include stdlib
