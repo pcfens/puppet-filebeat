@@ -91,6 +91,7 @@ class filebeat::params {
       # These parameters are ignored if/until tarball installs are supported in Linux
       $tmp_dir         = '/tmp'
       $install_dir     = undef
+      $seccomp_enable  = true
       case $facts['os']['family'] {
         'RedHat': {
           $service_provider = 'systemd'
@@ -115,6 +116,7 @@ class filebeat::params {
       $service_provider  = undef
       $install_dir       = undef
       $url_arch          = undef
+      $seccomp_enable    = false
     }
 
     'FreeBSD': {
@@ -130,6 +132,7 @@ class filebeat::params {
       $service_provider  = undef
       $install_dir       = undef
       $url_arch          = undef
+      $seccomp_enable    = false
     }
 
     'OpenBSD': {
@@ -140,11 +143,12 @@ class filebeat::params {
       $config_file_group = 'wheel'
       $config_dir_owner  = 'root'
       $config_dir_group  = 'wheel'
-      $modules_dir        = '/etc/filebeat/modules.d'
+      $modules_dir       = '/etc/filebeat/modules.d'
       $tmp_dir           = '/tmp'
       $service_provider  = undef
       $install_dir       = undef
       $url_arch          = undef
+      $seccomp_enable    = false
     }
 
     'Windows' : {
@@ -159,6 +163,7 @@ class filebeat::params {
       $install_dir      = 'C:/Program Files'
       $tmp_dir          = 'C:/Windows/Temp'
       $service_provider = undef
+      $seccomp_enable   = false
       $url_arch         = $facts['os']['architecture'] ? {
         'x86'   => 'x86',
         'x64'   => 'x86_64',
