@@ -22,7 +22,7 @@
     },
     {
       "name": "puppet/archive",
-      "version_requirement": ">= 0.5.0 < 7.0.0"
+      "version_requirement": ">= 0.5.0 < 8.0.0"
     },
     {
       "name": "puppetlabs/yumrepo_core",
