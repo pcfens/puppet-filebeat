@@ -185,11 +185,20 @@
         <%- if @multiline['match'] -%>
         match: <%= @multiline['match'] %>
         <%- end -%>
+        <%- if @multiline['flush_pattern'] -%>
+        flush_pattern: <%= @multiline['flush_pattern'] %>
+        <%- end -%>
         <%- if @multiline['max_lines'] -%>
         max_lines: <%= @multiline['max_lines'] %>
         <%- end -%>
+        <%- if @multiline['count_lines'] -%>
+        count_lines: <%= @multiline['count_lines'] %>
+        <%- end -%>
         <%- if @multiline['timeout'] -%>
         timeout: <%= @multiline['timeout'] %>
+        <%- end -%>
+        <%- if @multiline['skip_newline'] -%>
+        skip_newline: <%= @multiline['skip_newline'] %>
         <%- end -%>
     <%- else -%>
   multiline:
@@ -202,11 +211,20 @@
       <%- if @multiline['match'] -%>
     match: <%= @multiline['match'] %>
       <%- end -%>
+      <%- if @multiline['flush_pattern'] -%>
+    flush_pattern: <%= @multiline['flush_pattern'] %>
+      <%- end -%>
       <%- if @multiline['max_lines'] -%>
     max_lines: <%= @multiline['max_lines'] %>
       <%- end -%>
+      <%- if @multiline['count_lines'] -%>
+    count_lines: <%= @multiline['count_lines'] %>
+      <%- end -%>
       <%- if @multiline['timeout'] -%>
     timeout: <%= @multiline['timeout'] %>
+      <%- end -%>
+      <%- if @multiline['skip_newline'] -%>
+    skip_newline: <%= @multiline['skip_newline'] %>
       <%- end -%>
     <%- end -%>
   <%- end -%>
