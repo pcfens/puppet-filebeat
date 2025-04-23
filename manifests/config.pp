@@ -53,6 +53,7 @@ class filebeat::config {
         'processors'        => $filebeat::processors,
         'monitoring'        => $filebeat::monitoring,
         'setup'             => $setup,
+        'seccomp.enabled'   => $filebeat::seccomp_enable,
     })
     # Add the 'xpack' section if supported (version >= 6.1.0) and not undef
     if $filebeat::xpack and versioncmp($filebeat::package_ensure, '6.1.0') >= 0 {
