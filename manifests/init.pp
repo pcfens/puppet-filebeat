@@ -71,7 +71,7 @@ class filebeat (
   Boolean $manage_package                                             = $filebeat::params::manage_package,
   Boolean $manage_repo                                                = $filebeat::params::manage_repo,
   Boolean $manage_apt                                                 = $filebeat::params::manage_apt,
-  Enum['5','6', '7', '8'] $major_version                              = $filebeat::params::major_version,
+  Enum['5','6', '7', '8', '9'] $major_version                         = $filebeat::params::major_version,
   Variant[Boolean, Enum['stopped', 'running']] $service_ensure        = $filebeat::params::service_ensure,
   Boolean $service_enable                                             = $filebeat::params::service_enable,
   Optional[String]  $service_provider                                 = $filebeat::params::service_provider,
