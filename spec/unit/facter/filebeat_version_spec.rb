@@ -28,8 +28,8 @@ describe 'filebeat_version' do
       File.stubs(:exist?)
       File.expects(:exist?).with('c:\Program Files\Filebeat\filebeat.exe').returns false
     end
-    it 'returns false' do
-      expect(Facter.fact(:filebeat_version).value).to eq(false)
+    it 'returns nil' do
+      expect(Facter.fact(:filebeat_version).value).to eq(nil)
     end
   end
 end
