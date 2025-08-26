@@ -49,6 +49,7 @@ define filebeat::input (
   Array[String] $tags                      = [],
   Boolean $symlinks                        = false,
   Optional[String] $pipeline               = undef,
+  Array $parsers                           = [],
   Array $processors                        = [],
   Boolean $pure_array                      = false,
   String $host                             = 'localhost:9000',
