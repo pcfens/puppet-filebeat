@@ -1,6 +1,15 @@
 <%- if @pure_array -%>
 <%= scope['filebeat::inputs'].to_yaml() %>
 <%- else -%>
+<%- if @input_type == 'filestream'
+  parsers = @parsers
+  if @multiline != {}
+    parsers << {'multiline' => @multiline }
+  end
+  if @json != {}
+    parsers << {'ndjson' => @json }
+  end
+end -%>
 ---
 - type: <%= @input_type %>
   <%- if @input_type =~ /(filestream|journald)/ -%>
@@ -120,8 +129,8 @@
   <%- if @force_close_files -%>
   force_close_files: <%= @force_close_files %>
   <%- end -%>
-  <%- if @json.length > 0 -%>
-  ###JSON configuration
+  <%- if @json != {} && @input_type != 'filestream'-%>
+###JSON configuration
   json:
       # Decode JSON options. Enable this if your logs are structured in JSON.
       # JSON key on which to apply the line filtering and multiline settings. This key
@@ -172,35 +181,11 @@
       ignore_decoding_error: <%= @json['ignore_decoding_error'] %>
       <%- end -%>
   <%- end -%>
-  <%- if @multiline.length > 0 -%>
-    <%- if @input_type == 'filestream' -%>
+  <%- if parsers != [] -%>
   parsers:
-    - multiline:
-        <%- if @multiline['pattern'] -%>
-        pattern: '<%= @multiline['pattern'] %>'
-        <%- end -%>
-        <%- if @multiline['negate'] -%>
-        negate: <%= @multiline['negate'] %>
-        <%- end -%>
-        <%- if @multiline['match'] -%>
-        match: <%= @multiline['match'] %>
-        <%- end -%>
-        <%- if @multiline['flush_pattern'] -%>
-        flush_pattern: <%= @multiline['flush_pattern'] %>
-        <%- end -%>
-        <%- if @multiline['max_lines'] -%>
-        max_lines: <%= @multiline['max_lines'] %>
-        <%- end -%>
-        <%- if @multiline['count_lines'] -%>
-        count_lines: <%= @multiline['count_lines'] %>
-        <%- end -%>
-        <%- if @multiline['timeout'] -%>
-        timeout: <%= @multiline['timeout'] %>
-        <%- end -%>
-        <%- if @multiline['skip_newline'] -%>
-        skip_newline: <%= @multiline['skip_newline'] %>
-        <%- end -%>
-    <%- else -%>
+<%= parsers.to_yaml.lines.drop(1).join.gsub(/^/, '  ') %>
+  <%- end -%>
+  <%- if @multiline != {} && @input_type != 'filestream' -%>
   multiline:
       <%- if @multiline['pattern'] -%>
     pattern: '<%= @multiline['pattern'] %>'
@@ -227,7 +212,6 @@
     skip_newline: <%= @multiline['skip_newline'] %>
       <%- end -%>
     <%- end -%>
-  <%- end -%>
   tail_files: <%= @tail_files %>
 
   # Experimental: If symlinks is enabled, symlinks are opened and harvested. The harvester is openening the
