@@ -42,6 +42,7 @@ class filebeat::params {
   $registry_path                  = '/var/lib/filebeat'
   $registry_file_permissions      = '0600'
   $registry_flush                 = '0s'
+  $extract_method                 = 'shell'
 
   # These are irrelevant as long as the template is set based on the major_version parameter
   # if versioncmp('1.9.1', $::rubyversion) > 0 {
