@@ -61,6 +61,7 @@
 # @param monitoring [Hash] The monitoring section of the configuration file.
 # @param inputs [Hash] or [Array] Inputs that will be created. Commonly used to create inputs using hiera
 # @param setup [Hash] setup that will be created. Commonly used to create setup using hiera
+# @param seccomp_enable [Boolean] enable or disable seccomp. Default is enabled on Linux.
 # proxy_address [String] Proxy server to use for downloading files
 # @param xpack [Hash] Configuration items to export internal stats to a monitoring Elasticsearch cluster
 # @param extra_validate_options [String] Extra command line options to pass to the configuration validation command
@@ -114,6 +115,7 @@ class filebeat (
   Optional[Hash]  $monitoring                                         = undef,
   Variant[Hash, Array] $inputs                                        = {},
   Hash    $setup                                                      = {},
+  Boolean $seccomp_enable                                             = $filebeat::params::seccomp_enable,
   Array   $modules                                                    = [],
   Optional[Variant[Stdlib::HTTPUrl, Stdlib::HTTPSUrl]] $proxy_address = undef, # lint:ignore:140chars
   Stdlib::Absolutepath $filebeat_path                                 = $filebeat::params::filebeat_path,
