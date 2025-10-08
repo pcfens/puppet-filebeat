@@ -41,7 +41,7 @@ class filebeat::install::windows {
   # Expand-Archive is a native powershell cmdlet which ships with Powershell 5, which in turn ships with Windows 10 and 
   # Windows Server 2016 and newer.
   if ( (versioncmp($facts['os']['release']['full'], '2016') >= 0)
-    or (versioncmp($facts['os']['release']['full'], '2000') < 0 and versioncmp($facts['os']['release']['full'], '10') >= 0) ) {
+  or (versioncmp($facts['os']['release']['full'], '2000') < 0 and versioncmp($facts['os']['release']['full'], '10') >= 0) ) {
     $unzip_command = "Expand-Archive ${zip_file} \"${filebeat::install_dir}\""
   }
   else {

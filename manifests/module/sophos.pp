@@ -59,25 +59,25 @@ class filebeat::module::sophos (
 ) {
   filebeat::module { 'sophos':
     config => {
-      'xg' => delete_undef_values(
+      'xg'  => delete_undef_values(
         {
-          'enabled' => $xg_enabled,
-          'var.input' => $xg_input,
-          'var.paths' => $xg_paths,
+          'enabled'         => $xg_enabled,
+          'var.input'       => $xg_input,
+          'var.paths'       => $xg_paths,
           'var.syslog_host' => $xg_syslog_host,
           'var.syslog_port' => $xg_syslog_port,
-          'var.host_name' => $xg_host_name,
+          'var.host_name'   => $xg_host_name,
         }
       ),
       'utm' => delete_undef_values(
         {
-          'enabled' => $utm_enabled,
-          'var.input' => $utm_input,
-          'var.paths' => $utm_paths,
-          'var.syslog_host' => $utm_syslog_host,
-          'var.syslog_port' => $utm_syslog_port,
-          'var.tz_offset' => $utm_tz_offset,
-          'var.rsa_fields' => $utm_rsa_fields,
+          'enabled'             => $utm_enabled,
+          'var.input'           => $utm_input,
+          'var.paths'           => $utm_paths,
+          'var.syslog_host'     => $utm_syslog_host,
+          'var.syslog_port'     => $utm_syslog_port,
+          'var.tz_offset'       => $utm_tz_offset,
+          'var.rsa_fields'      => $utm_rsa_fields,
           'var.keep_raw_fields' => $utm_keep_raw_fields,
         }
       ),

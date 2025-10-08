@@ -85,7 +85,7 @@ describe 'filebeat::input' do
       # Filestream
       let(:title) { 'some-filestream' }
 
-      context "with take_over unset" do
+      context 'with take_over unset' do
         let(:params) do
           {
             'input_type' => 'filestream',
@@ -107,7 +107,7 @@ describe 'filebeat::input' do
         end
       end
 
-      context "with take_over => true" do
+      context 'with take_over => true' do
         let(:params) do
           {
             'input_type' => 'filestream',

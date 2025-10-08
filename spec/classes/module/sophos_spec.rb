@@ -7,23 +7,24 @@ describe 'filebeat::module::sophos' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-sophos').with_content(
       %r{- module: sophos\n\s{2}xg:\n\s{4}enabled: false\n\s{2}utm:\n\s{4}enabled: false\n\n},
-    )}
+    )
+    }
   end
 
   context 'on xg and utm enabled with paths' do
@@ -42,7 +43,7 @@ describe 'filebeat::module::sophos' do
 
     it {
       is_expected.to contain_file('filebeat-module-sophos').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: sophos
@@ -58,7 +59,7 @@ describe 'filebeat::module::sophos' do
     - "/var/log/utm.log"
 
 EOS
-    )
+      )
     }
   end
 
@@ -84,7 +85,7 @@ EOS
 
     it {
       is_expected.to contain_file('filebeat-module-sophos').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: sophos
@@ -104,7 +105,7 @@ EOS
     var.keep_raw_fields: true
 
 EOS
-    )
+      )
     }
   end
 end

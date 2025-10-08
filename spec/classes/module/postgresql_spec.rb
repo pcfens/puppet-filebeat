@@ -7,23 +7,24 @@ describe 'filebeat::module::postgresql' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-postgresql').with_content(
       %r{- module: postgresql\n\s{2}log:\n\s{4}enabled: false\n\n},
-    )}
+    )
+    }
   end
 
   context 'on log enabled with paths' do
@@ -38,7 +39,7 @@ describe 'filebeat::module::postgresql' do
 
     it {
       is_expected.to contain_file('filebeat-module-postgresql').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: postgresql
@@ -48,7 +49,7 @@ describe 'filebeat::module::postgresql' do
     - "/var/log/postgresql.log"
 
 EOS
-    )
+      )
     }
   end
 end

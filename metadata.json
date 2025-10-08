@@ -14,7 +14,7 @@
     },
     {
       "name": "puppetlabs/apt",
-      "version_requirement": ">=2.0.0 < 11.0.0"
+      "version_requirement": ">=11.0.0 < 12.0.0"
     },
     {
       "name": "puppetlabs/powershell",
@@ -22,7 +22,7 @@
     },
     {
       "name": "puppet/archive",
-      "version_requirement": ">= 0.5.0 < 8.0.0"
+      "version_requirement": ">= 0.5.0 < 9.0.0"
     },
     {
       "name": "puppetlabs/yumrepo_core",
@@ -112,7 +112,7 @@
     "elasticsearch",
     "elastic"
   ],
-  "pdk-version": "2.6.1",
-  "template-url": "pdk-default#2.7.1",
-  "template-ref": "tags/2.7.1-0-g9a16c87"
+  "pdk-version": "3.4.0",
+  "template-url": "pdk-default#3.4.0",
+  "template-ref": "tags/3.4.0-0-gd3cc13f"
 }
