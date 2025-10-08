@@ -7,23 +7,24 @@ describe 'filebeat::module::auditd' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-auditd').with_content(
       %r{- module: auditd\n\s{2}log:\n\s{4}enabled: false\n\n},
-    )}
+    )
+    }
   end
 
   context 'on log enabled with paths' do
@@ -38,7 +39,7 @@ describe 'filebeat::module::auditd' do
 
     it {
       is_expected.to contain_file('filebeat-module-auditd').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: auditd
@@ -48,7 +49,7 @@ describe 'filebeat::module::auditd' do
     - "/var/log/audit/audit.log"
 
 EOS
-    )
+      )
     }
   end
 end

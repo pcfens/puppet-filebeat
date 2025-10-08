@@ -7,23 +7,24 @@ describe 'filebeat::module::system' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-system').with_content(
       %r{- module: system\n\s{2}syslog:\n\s{4}enabled: false\n\s{2}auth:\n\s{4}enabled: false\n\n},
-    )}
+    )
+    }
   end
 
   context 'on log and slowlog enabled with paths' do
@@ -40,7 +41,7 @@ describe 'filebeat::module::system' do
 
     it {
       is_expected.to contain_file('filebeat-module-system').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: system
@@ -54,7 +55,7 @@ describe 'filebeat::module::system' do
     - "/var/log/auth.log"
 
 EOS
-    )
+      )
     }
   end
 end

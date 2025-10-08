@@ -7,23 +7,24 @@ describe 'filebeat::module::mysql' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-mysql').with_content(
       %r{- module: mysql\n\s{2}error:\n\s{4}enabled: false\n\s{2}slowlog:\n\s{4}enabled: false\n\n},
-    )}
+    )
+    }
   end
 
   context 'on error and slowlog enabled with paths' do
@@ -40,7 +41,7 @@ describe 'filebeat::module::mysql' do
 
     it {
       is_expected.to contain_file('filebeat-module-mysql').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: mysql
@@ -54,7 +55,7 @@ describe 'filebeat::module::mysql' do
     - "/var/log/mysql/slowlog.log"
 
 EOS
-    )
+      )
     }
   end
 end

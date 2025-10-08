@@ -7,23 +7,24 @@ describe 'filebeat::module::iptables' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-iptables').with_content(
       %r{- module: iptables\n\s{2}log:\n\s{4}enabled: false\n\n},
-    )}
+    )
+    }
   end
 
   context 'on iptables logfile' do
@@ -39,7 +40,7 @@ describe 'filebeat::module::iptables' do
 
     it {
       is_expected.to contain_file('filebeat-module-iptables').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: iptables
@@ -51,7 +52,7 @@ describe 'filebeat::module::iptables' do
     - "/var/log/iptables.log"
 
 EOS
-    )
+      )
     }
   end
 
@@ -63,7 +64,7 @@ EOS
         'log_syslog_host' => '0.0.0.0',
         'log_syslog_port' => 514,
         'log_tags' => [
-          "iptables"
+          'iptables',
         ]
       }
     end
@@ -72,7 +73,7 @@ EOS
 
     it {
       is_expected.to contain_file('filebeat-module-iptables').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: iptables
@@ -85,7 +86,7 @@ EOS
     - iptables
 
 EOS
-    )
+      )
     }
   end
 end

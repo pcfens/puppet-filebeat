@@ -7,23 +7,24 @@ describe 'filebeat::module::redis' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-redis').with_content(
       %r{- module: redis\n\s{2}log:\n\s{4}enabled: false\n\s{2}slowlog:\n\s{4}enabled: false\n\n},
-    )}
+    )
+    }
   end
 
   context 'on log and slowlog enabled with paths' do
@@ -41,7 +42,7 @@ describe 'filebeat::module::redis' do
 
     it {
       is_expected.to contain_file('filebeat-module-redis').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: redis
@@ -56,7 +57,7 @@ describe 'filebeat::module::redis' do
     var.password: password
 
 EOS
-    )
+      )
     }
   end
 end

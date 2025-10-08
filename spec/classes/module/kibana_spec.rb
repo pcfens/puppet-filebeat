@@ -7,23 +7,24 @@ describe 'filebeat::module::kibana' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-kibana').with_content(
       %r{- module: kibana\n\s{2}log:\n\s{4}enabled: false\n\s{2}audit:\n\s{4}enabled: false\n\n},
-    )}
+    )
+    }
   end
 
   context 'on log and audit enabled with paths' do
@@ -40,7 +41,7 @@ describe 'filebeat::module::kibana' do
 
     it {
       is_expected.to contain_file('filebeat-module-kibana').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: kibana
@@ -54,7 +55,7 @@ describe 'filebeat::module::kibana' do
     - "/var/log/kibana-audit.log"
 
 EOS
-    )
+      )
     }
   end
 end

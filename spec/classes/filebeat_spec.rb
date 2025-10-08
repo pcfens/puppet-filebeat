@@ -15,11 +15,16 @@ describe 'filebeat' do
 
       it { is_expected.to contain_class('filebeat') }
       it { is_expected.to contain_class('filebeat::params') }
-      it { is_expected.to contain_anchor('filebeat::begin') }
-      it { is_expected.to contain_anchor('filebeat::end') }
       it { is_expected.to contain_class('filebeat::install') }
       it { is_expected.to contain_class('filebeat::config') }
       it { is_expected.to contain_class('filebeat::service') }
+
+      # Test that classes are properly contained
+      it { is_expected.to contain_class('filebeat::install').that_comes_before('Class[filebeat::config]') }
+      it { is_expected.to contain_class('filebeat::config').that_comes_before('Class[filebeat::service]') }
+
+      # Test notification chain
+      it { is_expected.to contain_class('filebeat::config').that_notifies('Class[filebeat::service]') }
     end
   end
 end

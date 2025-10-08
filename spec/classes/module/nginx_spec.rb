@@ -7,23 +7,24 @@ describe 'filebeat::module::nginx' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-nginx').with_content(
       %r{- module: nginx\n\s{2}access:\n\s{4}enabled: false\n\s{2}error:\n\s{4}enabled: false\n\s{2}ingress_controller:\n\s{4}enabled: false\n\n},
-    )}
+    )
+    }
   end
 
   context 'on access, error and ingress_controller enabled with paths' do
@@ -42,7 +43,7 @@ describe 'filebeat::module::nginx' do
 
     it {
       is_expected.to contain_file('filebeat-module-nginx').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: nginx
@@ -60,7 +61,7 @@ describe 'filebeat::module::nginx' do
     - "/var/log/nginx/ingress_controller.log"
 
 EOS
-    )
+      )
     }
   end
 end

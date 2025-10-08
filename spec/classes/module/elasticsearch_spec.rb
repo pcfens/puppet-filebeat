@@ -7,23 +7,26 @@ describe 'filebeat::module::elasticsearch' do
     'include ::filebeat'
   end
 
-  let(:facts) { 
+  let(:facts) do
     {
-      :kernel => 'Linux',
-      :os => {
-        :family => 'Debian',
-        :name => 'Ubuntu',
+      kernel: 'Linux',
+      os: {
+        family: 'Debian',
+        name: 'Ubuntu',
       }
-    } 
-  }
-  
+    }
+  end
+
   context 'on default values' do
     it { is_expected.to compile.with_all_deps }
 
     it {
       is_expected.to contain_file('filebeat-module-elasticsearch').with_content(
+      # rubocop:disable Layout/LineLength
       %r{- module: elasticsearch\n\s{2}server:\n\s{4}enabled: false\n\s{2}gc:\n\s{4}enabled: false\n\s{2}audit:\n\s{4}enabled: false\n\s{2}deprecation:\n\s{4}enabled: false\n\s{2}slowlog:\n\s{4}enabled: false\n\n},
-    )}
+      # rubocop:enable Layout/LineLength
+    )
+    }
   end
 
   context 'on server,gc,audit,slowlog and deprecation enabled with paths' do
@@ -46,7 +49,7 @@ describe 'filebeat::module::elasticsearch' do
 
     it {
       is_expected.to contain_file('filebeat-module-elasticsearch').with_content(
-        <<-EOS
+        <<-EOS,
 ### Filebeat configuration managed by Puppet ###
 ---
 - module: elasticsearch
@@ -72,7 +75,7 @@ describe 'filebeat::module::elasticsearch' do
     - "/var/log/elasticsearch/*_search_slowlog.log"
 
 EOS
-    )
+      )
     }
   end
 end
