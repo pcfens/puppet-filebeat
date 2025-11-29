@@ -1,18 +1,18 @@
 <%- if @pure_array -%>
 <%= scope['filebeat::inputs'].to_yaml() %>
 <%- else -%>
-<%- if @input_type == 'filestream'
-  parsers = @parsers
-  if @multiline != {}
-    parsers << {'multiline' => @multiline }
-  end
-  if @json != {}
-    parsers << {'ndjson' => @json }
-  end
-end -%>
 ---
 - type: <%= @input_type %>
-  <%- if @input_type =~ /(filestream|journald)/ -%>
+  <%-
+   if @input_type =~ /(filestream|journald)/ 
+    parsers = @parsers
+    if @multiline != {}
+      parsers << {'multiline' => @multiline }
+    end
+    if @json != {}
+      parsers << {'ndjson' => @json }
+    end
+  -%>
   id: <%= @name %>
   <%- end -%>
   <%- if @input_type == 'filestream' && @take_over != nil && @take_over == true -%>
