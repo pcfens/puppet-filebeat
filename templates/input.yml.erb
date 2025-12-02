@@ -129,7 +129,7 @@
   <%- if @force_close_files -%>
   force_close_files: <%= @force_close_files %>
   <%- end -%>
-  <%- if @json != {} && @input_type != 'filestream'-%>
+  <%- if @json != {} && @input_type !~ /(filestream|journald)/ -%>
 ###JSON configuration
   json:
       # Decode JSON options. Enable this if your logs are structured in JSON.
@@ -185,7 +185,7 @@
   parsers:
 <%= parsers.to_yaml.lines.drop(1).join.gsub(/^/, '  ') %>
   <%- end -%>
-  <%- if @multiline != {} && @input_type != 'filestream' -%>
+  <%- if @multiline != {} && @input_type !~ /(filestream|journald)/ -%>
   multiline:
       <%- if @multiline['pattern'] -%>
     pattern: '<%= @multiline['pattern'] %>'
