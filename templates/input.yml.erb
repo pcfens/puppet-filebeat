@@ -54,8 +54,9 @@
     <%- end -%>
     <%- if @include_matches.length > 0 -%>
   include_matches:
+    match:
       <%- @include_matches.each do |match| -%>
-    - <%= match %>
+      - <%= match %>
       <%- end -%>
     <%- end -%>
   <%- else -%>
