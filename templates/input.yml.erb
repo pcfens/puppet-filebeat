@@ -52,11 +52,20 @@
     <%- if @seek -%>
   seek: <%= @seek %>
     <%- end -%>
+    <%- if @save_remote_hostname -%>
+  save_remote_hostname: <%= @save_remote_hostname %>
+    <%- end -%>
     <%- if @include_matches.length > 0 -%>
   include_matches:
     match:
       <%- @include_matches.each do |match| -%>
       - <%= match %>
+      <%- end -%>
+    <%- end -%>
+    <%- if @paths.length > 0 -%>
+  paths:
+      <%- @paths.each do |log_path| -%>
+    - <%= log_path %>
       <%- end -%>
     <%- end -%>
   <%- else -%>
