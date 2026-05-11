@@ -75,7 +75,7 @@ class filebeat::params {
       $manage_repo = true
       $manage_apt  = true
       $filebeat_path = '/usr/share/filebeat/bin/filebeat'
-      $major_version = '8'
+      $major_version = '9'
     }
   }
   case $facts['kernel'] {

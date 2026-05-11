@@ -3,8 +3,20 @@
 <%- else -%>
 ---
 - type: <%= @input_type %>
-  <%- if @input_type =~ /(filestream|journald)/ -%>
+  <%-
+   if @input_type =~ /(filestream|journald)/ 
+    parsers = @parsers
+    if @multiline != {}
+      parsers << {'multiline' => @multiline }
+    end
+    if @json != {}
+      parsers << {'ndjson' => @json }
+    end
+  -%>
   id: <%= @name %>
+  <%- end -%>
+  <%- if @input_type == 'filestream' && @take_over != nil && @take_over == true -%>
+  take_over: true
   <%- end -%>
   <%- if @input_type =~ /(tcp|udp)/ -%>
   host: <%= @host %>
@@ -42,8 +54,9 @@
     <%- end -%>
     <%- if @include_matches.length > 0 -%>
   include_matches:
+    match:
       <%- @include_matches.each do |match| -%>
-    - <%= match %>
+      - <%= match %>
       <%- end -%>
     <%- end -%>
   <%- else -%>
@@ -84,14 +97,14 @@
   <%- if @scan_frequency or @exclude_files -%>
     <%- if @input_type == 'filestream' -%>
   prospector:
-     scanner:
+    scanner:
       <%- if @scan_frequency -%>
-        check_interval: <%= @scan_frequency %>
+      check_interval: <%= @scan_frequency %>
       <%- end -%>
       <%- if @exclude_files.length > 0 -%>
-        exclude_files:
+      exclude_files:
         <%- @exclude_files.each do |exclude_file| -%>
-        - <%= exclude_file %>
+      - <%= exclude_file %>
         <%- end -%>
       <%- end -%>
     <%- else -%>
@@ -117,8 +130,8 @@
   <%- if @force_close_files -%>
   force_close_files: <%= @force_close_files %>
   <%- end -%>
-  <%- if @json.length > 0 -%>
-  ###JSON configuration
+  <%- if @json != {} && @input_type !~ /(filestream|journald)/ -%>
+###JSON configuration
   json:
       # Decode JSON options. Enable this if your logs are structured in JSON.
       # JSON key on which to apply the line filtering and multiline settings. This key
@@ -169,26 +182,11 @@
       ignore_decoding_error: <%= @json['ignore_decoding_error'] %>
       <%- end -%>
   <%- end -%>
-  <%- if @multiline.length > 0 -%>
-    <%- if @input_type == 'filestream' -%>
+  <%- if parsers != [] -%>
   parsers:
-    - multiline:
-        <%- if @multiline['pattern'] -%>
-        pattern: '<%= @multiline['pattern'] %>'
-        <%- end -%>
-        <%- if @multiline['negate'] -%>
-        negate: <%= @multiline['negate'] %>
-        <%- end -%>
-        <%- if @multiline['match'] -%>
-        match: <%= @multiline['match'] %>
-        <%- end -%>
-        <%- if @multiline['max_lines'] -%>
-        max_lines: <%= @multiline['max_lines'] %>
-        <%- end -%>
-        <%- if @multiline['timeout'] -%>
-        timeout: <%= @multiline['timeout'] %>
-        <%- end -%>
-    <%- else -%>
+<%= parsers.to_yaml.lines.drop(1).join.gsub(/^/, '  ') %>
+  <%- end -%>
+  <%- if @multiline != {} && @input_type !~ /(filestream|journald)/ -%>
   multiline:
       <%- if @multiline['pattern'] -%>
     pattern: '<%= @multiline['pattern'] %>'
@@ -199,14 +197,22 @@
       <%- if @multiline['match'] -%>
     match: <%= @multiline['match'] %>
       <%- end -%>
+      <%- if @multiline['flush_pattern'] -%>
+    flush_pattern: <%= @multiline['flush_pattern'] %>
+      <%- end -%>
       <%- if @multiline['max_lines'] -%>
     max_lines: <%= @multiline['max_lines'] %>
+      <%- end -%>
+      <%- if @multiline['count_lines'] -%>
+    count_lines: <%= @multiline['count_lines'] %>
       <%- end -%>
       <%- if @multiline['timeout'] -%>
     timeout: <%= @multiline['timeout'] %>
       <%- end -%>
+      <%- if @multiline['skip_newline'] -%>
+    skip_newline: <%= @multiline['skip_newline'] %>
+      <%- end -%>
     <%- end -%>
-  <%- end -%>
   tail_files: <%= @tail_files %>
 
   # Experimental: If symlinks is enabled, symlinks are opened and harvested. The harvester is openening the

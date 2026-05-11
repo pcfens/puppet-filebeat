@@ -68,7 +68,6 @@ class filebeat::config {
     else {
       $filebeat_config = $filebeat_config_xpack
     }
-
   } else {
     $filebeat_config_temp = delete_undef_values({
         'shutdown_timeout'  => $filebeat::shutdown_timeout,
@@ -144,6 +143,19 @@ class filebeat::config {
         force   => true,
         notify  => Service['filebeat'],
       }
+
+      file { 'filebeat-modules-dir':
+        ensure  => $filebeat::directory_ensure,
+        path    => $filebeat::modules_dir,
+        owner   => $filebeat::config_dir_owner,
+        group   => $filebeat::config_dir_group,
+        mode    => $filebeat::config_dir_mode,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
+        force   => true,
+        notify  => Service['filebeat'],
+        require => File['filebeat-config-dir'],
+      }
     } # end Linux
 
     'SunOS'   : {
@@ -173,6 +185,18 @@ class filebeat::config {
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
         force   => true,
+      }
+
+      file { 'filebeat-modules-dir':
+        ensure  => $filebeat::directory_ensure,
+        path    => $filebeat::modules_dir,
+        owner   => $filebeat::config_dir_owner,
+        group   => $filebeat::config_dir_group,
+        mode    => $filebeat::config_dir_mode,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
+        force   => true,
+        require => File['filebeat-config-dir'],
       }
     } # end SunOS
 
@@ -208,6 +232,19 @@ class filebeat::config {
         force   => true,
         notify  => Service['filebeat'],
       }
+
+      file { 'filebeat-modules-dir':
+        ensure  => $filebeat::directory_ensure,
+        path    => $filebeat::modules_dir,
+        owner   => $filebeat::config_dir_owner,
+        group   => $filebeat::config_dir_group,
+        mode    => $filebeat::config_dir_mode,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
+        force   => true,
+        notify  => Service['filebeat'],
+        require => File['filebeat-config-dir'],
+      }
     } # end FreeBSD
 
     'OpenBSD'   : {
@@ -242,6 +279,19 @@ class filebeat::config {
         force   => true,
         notify  => Service['filebeat'],
       }
+
+      file { 'filebeat-modules-dir':
+        ensure  => $filebeat::directory_ensure,
+        path    => $filebeat::modules_dir,
+        owner   => $filebeat::config_dir_owner,
+        group   => $filebeat::config_dir_group,
+        mode    => $filebeat::config_dir_mode,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
+        force   => true,
+        notify  => Service['filebeat'],
+        require => File['filebeat-config-dir'],
+      }
     } # end OpenBSD
 
     'Windows' : {
@@ -271,6 +321,15 @@ class filebeat::config {
         recurse => $filebeat::purge_conf_dir,
         purge   => $filebeat::purge_conf_dir,
         force   => true,
+      }
+
+      file { 'filebeat-modules-dir':
+        ensure  => $filebeat::directory_ensure,
+        path    => $filebeat::modules_dir,
+        recurse => $filebeat::purge_conf_dir,
+        purge   => $filebeat::purge_conf_dir,
+        force   => true,
+        require => File['filebeat-config-dir'],
       }
     } # end Windows
 
