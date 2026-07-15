@@ -111,6 +111,9 @@
         <%- end -%>
       <%- end -%>
     <%- else -%>
+  <%- if @figureprint_disable -%>
+  file_identity.native: ~
+  <%- end -%>
   scan_frequency: <%= @scan_frequency %>
     <%- end -%>
   <%- end -%>
