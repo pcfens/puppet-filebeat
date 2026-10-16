@@ -108,7 +108,8 @@
 #   Close file handles as soon as EOF is reached (default: false)
 #
 # @param clean_inactive
-#   Remove state for files that haven't been modified for this duration (default: 0)
+#   Remove state for files that haven't been modified for this duration. Not rendered
+#   unless set, so Filebeat's own default applies (disabled for both log and filestream).
 #
 # @param clean_removed
 #   Remove state for files that have been removed from disk (default: true)
@@ -204,7 +205,7 @@ define filebeat::input (
   Boolean $close_renamed                   = false,
   Boolean $close_removed                   = true,
   Boolean $close_eof                       = false,
-  Variant[String, Integer] $clean_inactive = 0,
+  Optional[Variant[String, Integer]] $clean_inactive = undef,
   Boolean $clean_removed                   = true,
   Variant[Integer,String] $close_timeout   = 0,
   Boolean $force_close_files               = false,

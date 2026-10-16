@@ -129,6 +129,41 @@ describe 'filebeat::input' do
           }
         end
       end
+
+      context 'with clean_inactive unset' do
+        let(:params) do
+          {
+            'input_type' => 'filestream',
+            'paths' => ['/var/log/foo.log'],
+          }
+        end
+
+        if os_facts[:kernel] == 'Linux'
+          it { is_expected.to compile }
+
+          it {
+            is_expected.to contain_file('filebeat-some-filestream').without_content(%r{^\s*clean_inactive:})
+          }
+        end
+      end
+
+      context 'with clean_inactive => 72h' do
+        let(:params) do
+          {
+            'input_type' => 'filestream',
+            'paths' => ['/var/log/foo.log'],
+            'clean_inactive' => '72h',
+          }
+        end
+
+        if os_facts[:kernel] == 'Linux'
+          it { is_expected.to compile }
+
+          it {
+            is_expected.to contain_file('filebeat-some-filestream').with_content(%r{^\s{2}clean_inactive: 72h$})
+          }
+        end
+      end
     end
   end
 
