@@ -4,6 +4,18 @@ Changelog
 ## Unreleased
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.13.0...HEAD)
 
+## [v4.15.0](https://github.com/pcfens/puppet-filebeat/tree/v4.15.0)
+[Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.14.0...v4.15.0)
+
+- Add `publisher_pipeline.disable_host` flag to input template [\#331](https://github.com/pcfens/puppet-filebeat/pull/331)
+- Add support for `features` config section [\#334](https://github.com/pcfens/puppet-filebeat/pull/334)
+- Add support for setting `take_over` [\#341](https://github.com/pcfens/puppet-filebeat/pull/341)
+- Add module config generators for: apache, auditd, elasticsearch, iptables, kibana, logstash, mysql, nginx, postgresql, 
+  rabbitmq, redis, sophos, system
+- Update various dependencies
+- Support filebeat v9.x [\#351](https://github.com/pcfens/puppet-filebeat/pull/351)
+- Add parsers parameter [\#353](https://github.com/pcfens/puppet-filebeat/pull/353)
+
 ## [v4.14.0](https://github.com/pcfens/puppet-filebeat/tree/v4.14.0)
 [Full Changelog](https://github.com/pcfens/puppet-filebeat/compare/v4.13.0...v4.14.0)
 
