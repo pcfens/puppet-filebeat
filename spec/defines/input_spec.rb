@@ -79,6 +79,84 @@ describe 'filebeat::input' do
       end
     end
 
+    context "with container input support on #{os}" do
+      let(:facts) { os_facts }
+      let(:title) { 'some-container' }
+
+      context 'with defaults' do
+        let(:params) do
+          {
+            'input_type' => 'container',
+            'paths' => ['/var/lib/docker/containers/*/*.log'],
+          }
+        end
+
+        if os_facts[:kernel] == 'Linux'
+          it { is_expected.to compile }
+
+          it {
+            is_expected.to contain_file('filebeat-some-container').with(
+              notify: 'Service[filebeat]',
+            )
+            is_expected.to contain_file('filebeat-some-container').with_content(
+              %r{- type: container\n\s{2}paths:\n\s{2}- /var/lib/docker/containers/\*/\*.log\n\s{2}stream: all\n},
+            )
+            is_expected.to contain_file('filebeat-some-container').without_content(%r{^\s*format:})
+            is_expected.to contain_file('filebeat-some-container').without_content(%r{^\s*id:})
+          }
+
+          it 'renders valid YAML' do
+            content = catalogue.resource('file', 'filebeat-some-container').send(:parameters)[:content]
+            input = YAML.safe_load(content).first
+            expect(input).to include(
+              'type' => 'container',
+              'paths' => ['/var/lib/docker/containers/*/*.log'],
+              'stream' => 'all',
+            )
+            expect(input).not_to include('format', 'containers')
+          end
+        end
+      end
+
+      context 'with stream and format set' do
+        let(:params) do
+          {
+            'input_type' => 'container',
+            'paths' => ['/var/log/containers/*.log'],
+            'containers_stream' => 'stdout',
+            'container_format' => 'cri',
+          }
+        end
+
+        if os_facts[:kernel] == 'Linux'
+          it { is_expected.to compile }
+
+          it 'renders valid YAML with stream and format' do
+            content = catalogue.resource('file', 'filebeat-some-container').send(:parameters)[:content]
+            input = YAML.safe_load(content).first
+            expect(input).to include(
+              'type' => 'container',
+              'paths' => ['/var/log/containers/*.log'],
+              'stream' => 'stdout',
+              'format' => 'cri',
+            )
+          end
+        end
+      end
+
+      context 'with an invalid format' do
+        let(:params) do
+          {
+            'input_type' => 'container',
+            'paths' => ['/var/log/containers/*.log'],
+            'container_format' => 'json',
+          }
+        end
+
+        it { is_expected.to compile.and_raise_error(%r{container_format}) }
+      end
+    end
+
     context "with filestream input support on #{os}" do
       let(:facts) { os_facts }
 

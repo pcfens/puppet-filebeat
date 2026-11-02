@@ -64,6 +64,12 @@
     <%- @paths.each do |log_path| -%>
   - <%= log_path %>
     <%- end -%>
+    <%- if @input_type == 'container' -%>
+  stream: <%= @containers_stream %>
+      <%- if @container_format -%>
+  format: <%= @container_format %>
+      <%- end -%>
+    <%- end -%>
     <%- if @encoding -%>
   encoding: <%= @encoding %>
     <%- end -%>
