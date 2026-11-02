@@ -17,6 +17,14 @@
 #     containers_path => '/var/lib/docker/containers',
 #   }
 #
+# @example Container input
+#   filebeat::input { 'container-logs':
+#     input_type        => 'container',
+#     paths             => ['/var/log/containers/*.log'],
+#     containers_stream => 'stdout',
+#     container_format  => 'cri',
+#   }
+#
 # @param ensure
 #   Whether the input should be present or absent (default: present)
 #
@@ -33,7 +41,12 @@
 #   Path to the container logs directory (default: /var/lib/docker/containers)
 #
 # @param containers_stream
-#   Stream to read from containers: all, stdout, or stderr (default: all)
+#   Stream to read from containers: all, stdout, or stderr (default: all).
+#   Used by both the docker and container input types.
+#
+# @param container_format
+#   If input_type is container, the format used to read the log files: auto, docker or cri.
+#   Not rendered unless set, so Filebeat's own default (auto) applies.
 #
 # @param combine_partial
 #   Whether to combine partial messages from containers (default: false)
@@ -181,6 +194,7 @@ define filebeat::input (
   Array[String] $containers_ids            = ["'*'"],
   String $containers_path                  = '/var/lib/docker/containers',
   String $containers_stream                = 'all',
+  Optional[Enum['auto', 'docker', 'cri']] $container_format = undef,
   Boolean $combine_partial                 = false,
   Enum['tcp', 'udp'] $syslog_protocol      = 'udp',
   String $syslog_host                      = 'localhost:5140',
