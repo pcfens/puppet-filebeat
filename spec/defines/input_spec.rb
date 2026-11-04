@@ -51,6 +51,7 @@ describe 'filebeat::input' do
         is_expected.to contain_file('filebeat-test-logs').with(
           notify: 'Service[filebeat]',
         )
+        is_expected.to contain_file('filebeat-test-logs').without_content(%r{^\s*parsers:})
       }
     end
 
@@ -102,6 +103,7 @@ describe 'filebeat::input' do
               %r{- type: container\n\s{2}paths:\n\s{2}- /var/lib/docker/containers/\*/\*.log\n\s{2}stream: all\n},
             )
             is_expected.to contain_file('filebeat-some-container').without_content(%r{^\s*format:})
+            is_expected.to contain_file('filebeat-some-container').without_content(%r{^\s*parsers:})
             is_expected.to contain_file('filebeat-some-container').without_content(%r{^\s*id:})
           }
 
@@ -205,6 +207,41 @@ describe 'filebeat::input' do
               %r{- type: filestream\n\s{2}id: some-filestream\n\s{2}take_over: true\n\s{2}paths:\n\s{2}- /var/log/foo.log},
             )
           }
+        end
+      end
+
+      context 'with parsers unset' do
+        let(:params) do
+          {
+            'input_type' => 'filestream',
+            'paths' => ['/var/log/foo.log'],
+          }
+        end
+
+        if os_facts[:kernel] == 'Linux'
+          it {
+            is_expected.to contain_file('filebeat-some-filestream').without_content(%r{^\s*parsers:})
+          }
+        end
+      end
+
+      context 'with multiline and json set' do
+        let(:params) do
+          {
+            'input_type' => 'filestream',
+            'paths' => ['/var/log/foo.log'],
+            'multiline' => { 'pattern' => '^\[' },
+            'json' => { 'keys_under_root' => true },
+          }
+        end
+
+        if os_facts[:kernel] == 'Linux'
+          it 'renders them as parsers' do
+            content = catalogue.resource('file', 'filebeat-some-filestream').send(:parameters)[:content]
+            expect(YAML.safe_load(content).first['parsers']).to eq(
+              [{ 'multiline' => { 'pattern' => '^\[' } }, { 'ndjson' => { 'keys_under_root' => true } }],
+            )
+          end
         end
       end
 

@@ -4,8 +4,9 @@
 ---
 - type: <%= @input_type %>
   <%-
+   parsers = []
    if @input_type =~ /(filestream|journald)/ 
-    parsers = @parsers
+    parsers = @parsers.dup
     if @multiline != {}
       parsers << {'multiline' => @multiline }
     end
