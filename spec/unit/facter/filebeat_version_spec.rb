@@ -8,9 +8,9 @@ describe 'filebeat_version' do
   context 'when on a Linux host' do
     before :each do
       File.stubs(:executable?)
-      Facter::Util::Resolution.stubs(:exec)
+      Facter::Core::Execution.stubs(:execute)
       File.expects(:executable?).with('/usr/share/filebeat/bin/filebeat').returns true
-      Facter::Util::Resolution.stubs(:exec).with('/usr/share/filebeat/bin/filebeat --version').returns('filebeat version 5.1.1 (amd64), libbeat 5.1.1')
+      Facter::Core::Execution.stubs(:execute).with('/usr/share/filebeat/bin/filebeat --version').returns('filebeat version 5.1.1 (amd64), libbeat 5.1.1')
     end
     it 'returns the correct version' do
       expect(Facter.fact(:filebeat_version).value).to eq('5.1.1')
@@ -20,7 +20,7 @@ describe 'filebeat_version' do
   context 'when the filebeat package is not installed' do
     before :each do
       File.stubs(:executable?)
-      Facter::Util::Resolution.stubs(:exec)
+      Facter::Core::Execution.stubs(:execute)
       File.expects(:executable?).with('/usr/bin/filebeat').returns false
       File.expects(:executable?).with('/usr/local/bin/filebeat').returns false
       File.expects(:executable?).with('/usr/share/filebeat/bin/filebeat').returns false
