@@ -44,6 +44,7 @@ class filebeat::repo {
             release  => 'stable',
             repos    => 'main',
             pin      => $filebeat::repo_priority,
+            keyring  => '/etc/apt/keyrings/elastic-archive-keyring.gpg',
             require  => Exec['import-elastic-gpg-key'],
             notify   => Exec['apt_update'],
           }
