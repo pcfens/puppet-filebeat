@@ -15,17 +15,54 @@ class filebeat::repo {
 
       Class['apt::update'] -> Package['filebeat']
 
-      if !defined(Apt::Source['beats']) {
-        apt::source { 'beats':
-          ensure   => $filebeat::alternate_ensure,
-          location => $debian_repo_url,
-          release  => 'stable',
-          repos    => 'main',
-          pin      => $filebeat::repo_priority,
-          key      => {
-            name   => 'elastic-archive-keyring.gpg',
-            source => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
-          },
+      # For version 9.x, use explicit GPG key import to /etc/apt/keyrings
+      # Older versions use the apt::source key management
+      if $filebeat::major_version == '9' {
+        # Ensure the keyrings directory exists
+        if !defined(File['/etc/apt/keyrings']) {
+          file { '/etc/apt/keyrings':
+            ensure => directory,
+            mode   => '0755',
+          }
+        }
+
+        # Import Elastic GPG key
+        if !defined(Exec['import-elastic-gpg-key']) {
+          exec { 'import-elastic-gpg-key':
+            command => 'wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | gpg --dearmor > /etc/apt/keyrings/elastic-archive-keyring.gpg',
+            unless  => 'test -f /etc/apt/keyrings/elastic-archive-keyring.gpg && gpg --dry-run --quiet --import --import-options import-show /etc/apt/keyrings/elastic-archive-keyring.gpg 2>&1 | grep -q D88E42B4',
+            path    => ['/bin', '/usr/bin', '/sbin', '/usr/sbin'],
+            require => File['/etc/apt/keyrings'],
+            notify  => Exec['apt_update'],
+          }
+        }
+
+        if !defined(Apt::Source['beats']) {
+          apt::source { 'beats':
+            ensure   => $filebeat::alternate_ensure,
+            location => $debian_repo_url,
+            release  => 'stable',
+            repos    => 'main',
+            pin      => $filebeat::repo_priority,
+            keyring  => '/etc/apt/keyrings/elastic-archive-keyring.gpg',
+            require  => Exec['import-elastic-gpg-key'],
+            notify   => Exec['apt_update'],
+          }
+        }
+      } else {
+        # For versions < 9, use standard apt::source key management
+        if !defined(Apt::Source['beats']) {
+          apt::source { 'beats':
+            ensure   => $filebeat::alternate_ensure,
+            location => $debian_repo_url,
+            release  => 'stable',
+            repos    => 'main',
+            pin      => $filebeat::repo_priority,
+            key      => {
+              name   => 'elastic-archive-keyring.gpg',
+              source => 'https://artifacts.elastic.co/GPG-KEY-elasticsearch',
+            },
+          }
         }
       }
     }
